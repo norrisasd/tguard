@@ -36,7 +36,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item has-treeview">
-                <a href="#" target="_blank" class="nav-link">
+                <a href="tasksearch" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Task Search</p>
                 </a>
