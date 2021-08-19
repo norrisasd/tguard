@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Task Guard</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Maui Snorkeling Lani Kai</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="icon" href="dist/img/TURTLE.png">
@@ -42,6 +45,7 @@
         <!-- Notifications Dropdown Menu -->
         <li>
           <a class="nav-link" href="#" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+<<<<<<< HEAD
 sagittis lacus vel augue laoreet rutrum faucibus.">
             <i class="fas fa-user"></i><i class="fa fa-caret-down" aria-hidden="true"></i>
           </a>
@@ -88,6 +92,7 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
       </section>
     </div>
   </div>
+<<<<<<< HEAD
   <!-- jQuery -->
   <script src="plugins/jquery/jquery.min.js"></script>
   <!-- jQuery UI 1.11.4 -->
@@ -96,18 +101,18 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
   <!-- Bootstrap 4 -->
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- DataTables  & Plugins -->
-  <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
-  <script src="../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-  <script src="../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-  <script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-  <script src="../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-  <script src="../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-  <script src="../plugins/jszip/jszip.min.js"></script>
-  <script src="../plugins/pdfmake/pdfmake.min.js"></script>
-  <script src="../plugins/pdfmake/vfs_fonts.js"></script>
-  <script src="../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-  <script src="../plugins/datatables-buttons/js/buttons.print.min.js"></script>
-  <script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+  <script src="./plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="./plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="./plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="./plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <script src="./plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="./plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+  <script src="./plugins/jszip/jszip.min.js"></script>
+  <script src="./plugins/pdfmake/pdfmake.min.js"></script>
+  <script src="./plugins/pdfmake/vfs_fonts.js"></script>
+  <script src="./plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+  <script src="./plugins/datatables-buttons/js/buttons.print.min.js"></script>
+  <script src="./plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
   <!-- AdminLTE App -->
   <script src="dist/js/adminlte.js"></script>
   <script>
@@ -133,4 +138,49 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
   </script>
 </body>
 
+</html>
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="../plugins/jszip/jszip.min.js"></script>
+<script src="../plugins/pdfmake/pdfmake.min.js"></script>
+<script src="../plugins/pdfmake/vfs_fonts.js"></script>
+<script src="../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+  $('[data-toggle="popover"]').popover();
+
+  $(function(){
+  $('#dataTable').DataTable({
+    "oLanguage": {
+      "sLengthMenu": "Show Entries _MENU_",
+    },
+      dom: "<'row d-flex flex-row align-items-end'>tr<'row d-flex flex-row align-items-end'<'col-md-8'l><'col-sm-2'i><'col-md-2'p>>",
+      "pageLength":10,
+      "paging": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+      "buttons": ["excel", "pdf", "print"]
+    }).buttons().container().appendTo('#beforeLD');
+});
+</script>
+</body>
 </html>
