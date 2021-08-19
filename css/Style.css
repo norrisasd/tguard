@@ -1,0 +1,21 @@
+body{
+    background-color: lightgray;
+}
+.has-treeview{
+    padding-left:4%;
+}
+.nav-item >a{
+    color:lightgray!important;
+}
+.nav-item > a:hover {
+    color: white !important;
+}
+.main-sidebar { background-color: #051842 !important }
+.sidebar{
+    border:0;
+    overflow-x:hidden
+}
+.sidebar-title > span{
+    margin:0;
+    padding:0;
+}
