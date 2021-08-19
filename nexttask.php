@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Maui Snorkeling Lani Kai</title>
+  <title>Task Guard</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="icon" href="dist/img/TURTLE.png">
@@ -37,7 +37,7 @@
           <a href="../index.php" class="nav-link">Home</a>
         </li> -->
       </ul>
-
+      <h4 style="margin-top:.5%;"><b>Reports / Task Search</b></h4>
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <!-- Navbar Search -->
