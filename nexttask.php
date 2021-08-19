@@ -1,5 +1,5 @@
 <?php
-  require_once './php/functions.php';
+  require_once './functions.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,7 +70,7 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <form method="get"  action="" onsubmit="return addTask();">
+                  <form method="get" id="addTaskForm"  action="" onsubmit="return addTask();">
                   <div class="modal-body">
                       <div class="form-group">
                         <label for="inputTask">Task Name</label>
@@ -115,24 +115,6 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
                   </tr>
                 </thead>
                 <tbody id="searchTable">
-                  <tr>
-                    <th><input type="checkbox" name="checkbox" id="inputCheckbox"></th>
-                    <td>Lorem Ipsum</td>
-                    <td>John Doe</td>
-                    <td>Lorem Ipsum</td>
-                    <td>8/19/21 11:17 PM</td>
-                    <td>8/19/21 11:30 PM</td>
-                    <td>n mins</td>
-                    <td>
-                      <button type="button" class="btn btn-primary">Start
-                      </button>
-                    </td>
-                    <td><button type="button" class="btn btn-success">Pause
-                      </button></td>
-                    <td>
-                      <button type="button" class="btn btn-danger">Stop</button>
-                    </td>
-                  </tr>
                 </tbody>
                 <tfoot>
                   <tr>
@@ -191,8 +173,8 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
     $.widget.bridge('uibutton', $.ui.button);
     $('[data-toggle="popover"]').popover();
 
-    $(function() {
-      $('#dataTable').DataTable({
+
+      var dt = $('#dataTable').DataTable({
         "oLanguage": {
           "sLengthMenu": "Show Entries _MENU_",
         },
@@ -205,21 +187,39 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
         "autoWidth": false,
         "responsive": true,
       });
-    });
+      refreshTable();
+    function checkID(value){
+      toastr.error(value);
+    }
     function refreshTable(){
       $.ajax({
         type:'get',
-        url:'./php/main.php',
+        url:'./main.php',
         data:{
-          taskname:taskname,
-          clientid:clientid,
-          notes:notes
+          getTaskByUser:'true'
         },
         success:function(response){
-          if(response=='Task Created')
-            toastr.success(response);
-          else{
-            toastr.error(response);
+          var btnStart= '<button type="button" class="btn btn-primary" onclick="refreshTable()">Start</button>';
+          var btnPause='<button type="button" class="btn btn-success">Pause</button>';
+          var btnStop='<button type="button" class="btn btn-danger">Stop</button>';
+          data = JSON.parse(response);
+          dt.clear().draw();
+          for(var da in data){
+            btnStart= '<button type="button" class="btn btn-primary" value="'+data[da].callback_id+'">Start</button>';
+            btnPause='<button type="button" class="btn btn-success" value="'+data[da].callback_id+'">Pause</button>';
+            btnStop='<button type="button" class="btn btn-danger" value="'+data[da].callback_id+'">Stop</button>';
+            dt.row.add([
+              data[da].callback_id,
+              data[da].TaskName,
+              data[da].client_name,
+              data[da].Notes,
+              data[da].TimeSpent,
+              data[da].TimeSpent,
+              data[da].TimeSpent,
+              btnStart,
+              btnPause,
+              btnStop,
+            ]).draw();
           }
         }
       });
@@ -227,19 +227,23 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
     }
     function addTask(){
       taskname= $("#inputTaskName").val();
-      clientid=$("#inputClientID").val();
+      clientname=$("#inputClientID").val();
       notes=$("#inputNotes").val();
       $.ajax({
         type:'get',
-        url:'./php/main.php',
+        url:'./main.php',
         data:{
           taskname:taskname,
-          clientid:clientid,
+          clientname:clientname,
           notes:notes
         },
         success:function(response){
-          if(response=='Task Created')
+          if(response=='Task Created'){
             toastr.success(response);
+            document.getElementById("addTaskForm").reset();
+            $(".modal").modal("hide");
+          }
+
           else{
             toastr.error(response);
           }
