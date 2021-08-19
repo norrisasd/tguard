@@ -1,6 +1,8 @@
+<?php
+  require_once './php/functions.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,13 +14,15 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- DataTables -->
-  <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="./plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="./plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="./plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <!-- CUSTOM CSS -->
   <link rel="stylesheet" href="css/Style.css">
+  <!-- toastr -->
+  <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -66,26 +70,29 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
+                  <form method="get"  action="" onsubmit="return addTask();">
                   <div class="modal-body">
-                    <form action="" method="post">
                       <div class="form-group">
                         <label for="inputTask">Task Name</label>
-                        <input type="text" class="form-control" id="inputTask" placeholder="" required>
+                        <input type="text" class="form-control" id="inputTaskName" placeholder="" required/>
                       </div>
                       <div class="form-group">
                         <label for="inputClient">Client Name</label>
-                        <input type="text" class="form-control" id="inputClient" placeholder="John Doe" required>
+                        <select class="form-control" id="inputClientID" required>
+                          <option value="" selected hidden>Select Client</option>
+                          <?php displayAllClients()?>
+                        </select>
                       </div>
                       <div class="form-group">
                         <label for="inputNotes">Notes</label>
-                        <input type="text" class="form-control" id="inputNotes">
+                        <textarea type="text" class="form-control" id="inputNotes"></textarea>
                       </div>
-                    </form>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary" >Save</button>
                   </div>
+                  </form>
                 </div>
               </div>
             </div>
@@ -127,6 +134,20 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
                     </td>
                   </tr>
                 </tbody>
+                <tfoot>
+                  <tr>
+                  <th></th>
+                    <th>Task Name</th>
+                    <th>Client Name</th>
+                    <th>Notes</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Time Spent</th>
+                    <th></th>
+                    <th></th>
+                    <th></th> 
+                  </tr>
+                </tfoot>
               </table>
             </div>
           </div>
@@ -146,21 +167,27 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
   <!-- Bootstrap 4 -->
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- DataTables  & Plugins -->
-  <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
-  <script src="../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-  <script src="../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-  <script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-  <script src="../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-  <script src="../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-  <script src="../plugins/jszip/jszip.min.js"></script>
-  <script src="../plugins/pdfmake/pdfmake.min.js"></script>
-  <script src="../plugins/pdfmake/vfs_fonts.js"></script>
-  <script src="../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-  <script src="../plugins/datatables-buttons/js/buttons.print.min.js"></script>
-  <script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+  <script src="./plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="./plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="./plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="./plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <script src="./plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="./plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+  <script src="./plugins/jszip/jszip.min.js"></script>
+  <script src="./plugins/pdfmake/pdfmake.min.js"></script>
+  <script src="./plugins/pdfmake/vfs_fonts.js"></script>
+  <script src="./plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+  <script src="./plugins/datatables-buttons/js/buttons.print.min.js"></script>
+  <script src="./plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+  
+  <!-- TOASTR -->
+  <script src="plugins/toastr/toastr.min.js"></script>
   <!-- AdminLTE App -->
   <script src="dist/js/adminlte.js"></script>
   <script>
+    toastr.options.progressBar = true;
+    toastr.options.preventDuplicates = true;
+    toastr.options.closeButton = true;
     $.widget.bridge('uibutton', $.ui.button);
     $('[data-toggle="popover"]').popover();
 
@@ -169,7 +196,7 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
         "oLanguage": {
           "sLengthMenu": "Show Entries _MENU_",
         },
-        dom: "<'row d-flex flex-row align-items-end'>tr<'row d-flex flex-row align-items-end'<'col-md-8'l><'col-sm-2'i><'col-md-2'p>>",
+        dom: "<'row d-flex flex-row align-items-end'>tr<'row d-flex flex-row align-items-end'<'col-md-6'l><'col-sm-2'i><'col-md-4'p>>",
         "pageLength": 10,
         "paging": true,
         "searching": true,
@@ -177,9 +204,49 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
         "info": true,
         "autoWidth": false,
         "responsive": true,
-        "buttons": ["excel", "pdf", "print"]
-      }).buttons().container().appendTo('#beforeLD');
+      });
     });
+    function refreshTable(){
+      $.ajax({
+        type:'get',
+        url:'./php/main.php',
+        data:{
+          taskname:taskname,
+          clientid:clientid,
+          notes:notes
+        },
+        success:function(response){
+          if(response=='Task Created')
+            toastr.success(response);
+          else{
+            toastr.error(response);
+          }
+        }
+      });
+      return false;
+    }
+    function addTask(){
+      taskname= $("#inputTaskName").val();
+      clientid=$("#inputClientID").val();
+      notes=$("#inputNotes").val();
+      $.ajax({
+        type:'get',
+        url:'./php/main.php',
+        data:{
+          taskname:taskname,
+          clientid:clientid,
+          notes:notes
+        },
+        success:function(response){
+          if(response=='Task Created')
+            toastr.success(response);
+          else{
+            toastr.error(response);
+          }
+        }
+      });
+      return false;
+    }
   </script>
 </body>
 
