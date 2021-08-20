@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="./plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="./plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -65,18 +67,26 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
                         <div class="row">
                             <div class="col-auto">
                                 <label for="clientName">Client Name</label>
-                                <select id="clientName" class="form-control" onchange="" style="margin-right:0.5%;width:150px">
+                                <select id="clientName" class="form-control" onchange="searchTable()" style="margin-right:0.5%;width:150px">
                                     <option value="" selected>Select</option>
                                     <?php displayAllClients()?>
                                 </select>
                             </div>
                             <div class="col-auto">
                                 <label for="startDate">Start Date</label>
-                                <input type="date" class="form-control" id="startDate" onchange="searchBy('')" value="" style="margin-right:0.5%;width:170px">
+                                <input type="date" class="form-control" id="startDate" onchange="searchTable()" value="" style="margin-right:0.5%;width:170px">
                             </div>
                             <div class="col-auto">
                                 <label for="endDate">End Date</label>
-                                <input type="date" class="form-control" id="endDate" onchange="searchBy('')" value="" style="margin-right:0.5%;width:170px">
+                                <input type="date" class="form-control" id="endDate" onchange="searchTable()" value="" style="margin-right:0.5%;width:170px">
+                            </div>
+                            <div class="col-auto">
+                                <label for="endDate">Time Spent (hr:mn)</label>
+                                <div class="d-flex">
+                                    <input type="number" class="form-control" id="timeHr" placeholder="hr" onchange="searchTable()" value="" style="margin-right:0.5%;width:85px">
+                                    <input type="number" class="form-control" id="timeMn" placeholder="mn" min="0" max="60" onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;searchTable()"  value="" style="margin-right:0.5%;width:85px">
+                                </div>
+                                
                             </div>
                             <div class="col-auto">
                                 <label for="actDate">Activity Date (Date Range)</label>
@@ -104,19 +114,6 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
                                 <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Export All Data shown in the Table" aria-hidden="true"></i>
                             </div>
                         </div>
-                        <div class="row" style="margin-top:1%; margin-bottom: 1%">
-                            <div class="col-auto" style="margin-left:0.8%;padding-top:0.5%">
-                                <input type="checkbox" value="" id="selectAll" style="margin:5px 0.3%" onclick="selectAll(this)">
-                            </div>
-                            <span style="padding-top :0.5%">Select All</span>
-                            <div class="col-auto">
-                                <button type="button" class="btn btn-primary" style="margin-bottom:5px;margin-left:0.5%;" onclick="checkSend()">Send</button>
-                            </div>
-                            <div class="col-auto">
-                                <button type="button" class="btn btn-success" style="margin-bottom:5px;margin-left:0.3%;margin-right:1%" onclick="exportDataModal()">Export</button>
-                            </div>
-
-                        </div>
                         <table id="dataTable" class="table table-bordered table-hover" style="height:100%;background-color:white">
                             <thead>
                                 <tr>
@@ -124,21 +121,12 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
                                     <th>Task Name</th>
                                     <th>Client Name</th>
                                     <th>Notes</th>
-                                    <th>Start Time</th>
-                                    <th>End Time</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
                                     <th>Time Spent</th>
                                 </tr>
                             </thead>
-                            <tbody id="searchTable">
-                                <tr>
-                                    <th><input type="checkbox" name="checkbox" id="inputCheckbox"></th>
-                                    <td>Lorem Ipsum</td>
-                                    <td>John Doe</td>
-                                    <td>Lorem Ipsum</td>
-                                    <td>8/19/21 11:17 PM</td>
-                                    <td>8/19/21 11:30 PM</td>
-                                    <td>n mins</td>
-                                </tr>
+                            <tbody>
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -155,7 +143,6 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
                     </div>
                 </div>
             </section>
-
         </div>
     </div>
     </section>
@@ -181,72 +168,17 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
   <script src="./plugins/datatables-buttons/js/buttons.html5.min.js"></script>
   <script src="./plugins/datatables-buttons/js/buttons.print.min.js"></script>
   <script src="./plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-  
+  <!-- InputMask -->
+  <script src="./plugins/popper/popper.js"></script>
+  <script src="./plugins/moment/moment.min.js"></script>
+  <script src="./plugins/inputmask/jquery.inputmask.min.js"></script>
+  <!-- date-range-picker -->
+  <script src="./plugins/daterangepicker/daterangepicker.js"></script>
   <!-- TOASTR -->
   <script src="plugins/toastr/toastr.min.js"></script>
   <!-- AdminLTE App -->
   <script src="dist/js/adminlte.js"></script>
-  <script>
-    toastr.options.progressBar = true;
-    toastr.options.preventDuplicates = true;
-    toastr.options.closeButton = true;
-    $.widget.bridge('uibutton', $.ui.button);
-    $('[data-toggle="popover"]').popover();
-
-
-      var dt = $('#dataTable').DataTable({
-        "oLanguage": {
-          "sLengthMenu": "Show Entries _MENU_",
-        },
-        dom: "<'row d-flex flex-row align-items-end'>tr<'row d-flex flex-row align-items-end'<'col-md-6'l><'col-sm-2'i><'col-md-4'p>>",
-        "pageLength": 10,
-        "paging": true,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-      });
-      refreshTable();
-    function checkID(value){
-      toastr.error(value);
-    }
-    function refreshTable(){
-      $.ajax({
-        type:'get',
-        url:'./main.php',
-        data:{
-          getTaskByUser:'true'
-        },
-        success:function(response){
-        //   var btnStart= '<button type="button" class="btn btn-primary" onclick="refreshTable()">Start</button>';
-        //   var btnPause='<button type="button" class="btn btn-success">Pause</button>';
-        //   var btnStop='<button type="button" class="btn btn-danger">Stop</button>';
-          data = JSON.parse(response);
-          dt.clear().draw();
-          for(var da in data){
-            // btnStart= '<button type="button" class="btn btn-primary" value="'+data[da].callback_id+'">Start</button>';
-            // btnPause='<button type="button" class="btn btn-success" value="'+data[da].callback_id+'">Pause</button>';
-            // btnStop='<button type="button" class="btn btn-danger" value="'+data[da].callback_id+'">Stop</button>';
-            dt.row.add([
-              data[da].callback_id,
-              data[da].TaskName,
-              data[da].client_name,
-              data[da].Notes,
-              data[da].TimeSpent,
-              data[da].TimeSpent,
-              data[da].TimeSpent,
-            //   btnStart,
-            //   btnPause,
-            //   btnStop,
-            ]).draw();
-          }
-        }
-      });
-      return false;
-    }
-  
-  </script>
+  <script src="js/TaskSearchFunctions.js"></script>
 </body>
 
 </html>

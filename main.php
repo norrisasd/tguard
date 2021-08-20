@@ -22,5 +22,28 @@
             $result=json_encode($result);
         }
     }
+    if(isset($_GET['searchClientName']) || isset($_GET['searchStartDate']) || isset($_GET['searchEndDate']) || isset($_GET['searchTime'])){
+        $cname=$_GET['searchClientName'];
+        $sdate=$_GET['searchStartDate'];
+        $edate=$_GET['searchEndDate'];
+        $time = $_GET['searchTime'];
+        $cname = $cname==""?"":"AND client_name ='".$cname."'";
+        $sdate = $sdate==""?"":"AND DateStarted='".$sdate."'";
+        $edate = $edate==""?"":"AND DateEnded='".$edate."'";
+        $time = $time=="00:00"?"":"AND TimeSpent='".$time."'";
+        $query="SELECT * FROM callback WHERE status = 0 $cname $sdate $edate $time";
+        $result=mysqli_query($dbConnection,$query);
+        if($result){
+            if(mysqli_num_rows($result)>0){
+                $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
+                $result=json_encode($result);
+            }else{
+                $result="";
+            }
+        }else{
+            $result="";
+        }
+        
+    }
     echo $result;
 ?>
