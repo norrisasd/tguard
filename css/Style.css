@@ -11,6 +11,7 @@ body{
     color: white !important;
 }
 .main-sidebar { background-color: #051842 !important }
+
 .sidebar{
     border:0;
     overflow-x:hidden
@@ -18,4 +19,50 @@ body{
 .sidebar-title > span{
     margin:0;
     padding:0;
+}
+
+
+/* Task Board*/
+.cardTask{
+    padding: 20px;
+    border-radius: 3px;
+    margin-bottom: 30px;
+    background-color: #fff;
+}
+
+.taskList {
+    min-height: 40px;
+    margin-bottom: 0
+}
+
+
+.taskList li {
+    background-color: #fff;
+    border: 1px solid rgba(121, 121, 121, .2);
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 3px
+}
+
+.taskList .checkbox {
+    margin-left: 20px;
+    margin-top: 5px
+}
+.taskList li:last-of-type {
+    margin-bottom: 0
+}
+
+.taskList a {
+    font-size: 13px
+}
+
+
+
+.text-muted {
+    color: #98a6ad!important;
+}
+
+.thumb-sm {
+    height: 36px;
+    width: 36px;
 }
