@@ -23,6 +23,8 @@ require_once './functions.php';
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <!-- CUSTOM CSS -->
   <link rel="stylesheet" href="css/Style.css">
+  <!-- toastr -->
+  <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -252,31 +254,11 @@ require_once './functions.php';
   <script src="./plugins/datatables-buttons/js/buttons.html5.min.js"></script>
   <script src="./plugins/datatables-buttons/js/buttons.print.min.js"></script>
   <script src="./plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+   <!-- TOASTR -->
+   <script src="plugins/toastr/toastr.min.js"></script>
   <!-- AdminLTE App -->
   <script src="dist/js/adminlte.js"></script>
-  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-
-  <script>
-    $.widget.bridge('uibutton', $.ui.button);
-    $('[data-toggle="popover"]').popover();
-
-    $(function() {
-      $('#dataTable').DataTable({
-        "oLanguage": {
-          "sLengthMenu": "Show Entries _MENU_",
-        },
-        dom: "<'row d-flex flex-row align-items-end'>tr<'row d-flex flex-row align-items-end'<'col-md-8'l><'col-sm-2'i><'col-md-2'p>>",
-        "pageLength": 10,
-        "paging": true,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-        "buttons": ["excel", "pdf", "print"]
-      }).buttons().container().appendTo('#beforeLD');
-    });
-  </script>
+  <script src="js/DashboardFunctions.js"></script>
 </body>
 
 </html>

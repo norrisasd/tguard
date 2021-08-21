@@ -9,6 +9,16 @@ body{
 }
 .nav-item > a:hover {
     color: white !important;
+    
+}
+/* retain color if button is active and hovered */
+.nav-item > .active:hover {
+    color: #051842 !important;
+}
+/* button active background color and text color */
+.nav-item > .active {
+    color: #051842 !important;
+    background-color:lightgray!important;
 }
 .main-sidebar { background-color: #051842 !important }
 

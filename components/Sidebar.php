@@ -1,6 +1,6 @@
 <div class="sidebar">
   <div class="sidebar-title">
-    <a href="../" class="brand-link text-center">
+    <a href="./" class="brand-link text-center">
       <img src="dist/img/logo.png" alt="Logo" class="brand-image elevation-3">
       <span class="brand-text font-weight-bold text-light">TaskGuard</span>
     </a>
@@ -11,7 +11,7 @@
       <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
       <li class="nav-item menu-open">
-        <a href="#" class="nav-link active">
+        <a href="./" class="nav-link active">
           <i class="nav-icon fas fa-tachometer-alt"></i>
           <p>
             Dashboard
@@ -19,24 +19,24 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="pages/client" class="nav-link">
+        <a href="#" class="nav-link">
           <i class="nav-icon fas fa-chart-bar"></i>
           <p>
             Reports
           </p>
-          <i class="right fas fa-angle-left"></i>
+          <!-- <i class="right fas fa-angle-left"></i> -->
         </a>
-        <ul class="nav nav-treeview">
+        <!-- <ul class="nav nav-treeview">
           <li class="nav-item has-treeview">
             <a href="tasksearch" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>Task Search</p>
             </a>
           </li>
-        </ul>
+        </ul> -->
       </li>
       <li class="nav-item menu-open">
-        <a href="#" class="nav-link">
+        <a href="tasklist" class="nav-link">
           <i class="nav-icon fa fa-tasks"></i>
           <p>
             Task List
