@@ -48,5 +48,24 @@
         }
         
     }
+
+    if(isset($_GET['displayUpcoming'])){
+        $query="SELECT * FROM callback WHERE DateStarted is NULL";
+        $result=mysqli_query($dbConnection,$query);
+        if(mysqli_num_rows($result)>0){
+            $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
+            $result=json_encode($result);
+        }
+    }
+
+    if(isset($_GET['displayProgress'])){
+        $query="SELECT * FROM callback WHERE DateStarted is not NULL";
+        $result=mysqli_query($dbConnection,$query);
+        if(mysqli_num_rows($result)>0){
+            $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
+            $result=json_encode($result);
+        }
+    }
+
     echo $result;
 ?>

@@ -1,6 +1,26 @@
 toastr.options.progressBar = true;
 toastr.options.preventDuplicates = true;
 toastr.options.closeButton = true;
+displayUpcomingTask();  
+displayInProgress();
+$("#btnPlay").click(function() {
+  $("#btnPlay").attr("disabled", true);
+  $(".modal").modal("hide");
+  toastr.success("Task started");
+});
+$("#btnPause").click(function() {
+  $("#btnPause").attr("disabled", true);
+  $("#btnPlay").attr("disabled", false);
+  $(".modal").modal("hide");
+  toastr.success("Task paused");
+});
+$("#btnStop").click(function() {
+  $("#btnPlay").attr("disabled", true);
+  $("#btnPause").attr("disabled", true);
+  $("#btnStop").attr("disabled", true);
+  $(".modal").modal("hide");
+  toastr.success("Task stopped");
+});
 $.widget.bridge('uibutton', $.ui.button);
 $('[data-toggle="popover"]').popover();
   var dt = $('#dataTable').DataTable({
@@ -60,6 +80,8 @@ function addTask(){
   taskname= $("#inputTaskName").val();
   clientname=$("#inputClientID").val();
   notes=$("#inputNotes").val();
+
+  
   $.ajax({
     type:'get',
     url:'./main.php',
@@ -73,7 +95,7 @@ function addTask(){
         toastr.success(response);
         document.getElementById("addTaskForm").reset();
         $(".modal").modal("hide");
-        refreshTable();
+        displayUpcomingTask();
       }
       else{
         toastr.error(response);
@@ -82,3 +104,81 @@ function addTask(){
   });
   return false;
 }
+  function displayUpcomingTask(){
+    let content = '';
+    $.ajax({
+      type:'get',
+      url:'./main.php',
+      data:{
+        displayUpcoming:true
+      },
+      success:function(response){
+        result = JSON.parse(response);
+        $.each(result, function(key, item) {
+          let str = JSON.stringify(item);
+          content+=`<li class="task-warning ui-sortable-handle" id="task1">
+          <div class="checkbox checkbox-custom checkbox-single float-right">
+            <input type="checkbox" aria-label="Single checkbox Two">
+            <label></label>
+          </div>
+          <b>`+item.TaskName+`</b>
+          <div class="clearfix"></div>
+          `+item.Notes+`
+          <div class="mt-3">
+            <p class="float-right">
+              <button class="btn btn-success btn-sm waves-effect waves-light" onclick='taskInfo(`+str+`)' data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="fas fa-eye"></i></button>
+            </p>
+            <p class="mb-2">Client:
+              <span><i>`+item.client_name+`</i></span>
+            </p>
+          </div>
+        </li>`;
+        });
+        $("#upcoming ul").html(content);
+      }
+    });
+    return false;
+  }
+  function displayInProgress(){
+    let content = '';
+    $.ajax({
+      type:'get',
+      url:'./main.php',
+      data:{
+        displayProgress:true
+      },
+      success:function(response){
+        result = JSON.parse(response);
+        $.each(result, function(key, item) {
+          let str = JSON.stringify(item);
+          content+=`<li class="task-warning ui-sortable-handle" id="task1">
+          <div class="checkbox checkbox-custom checkbox-single float-right">
+            <input type="checkbox" aria-label="Single checkbox Two">
+            <label></label>
+          </div>
+          <b>`+item.TaskName+`</b>
+          <div class="clearfix"></div>
+          `+item.Notes+`
+          <div class="mt-3">
+            <p class="float-right">
+              <button class="btn btn-success btn-sm waves-effect waves-light" onclick='taskInfo(`+str+`)' data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="fas fa-eye"></i></button>
+            </p>
+            <p class="mb-2">Client:
+              <span><i>`+item.client_name+`</i></span>
+            </p>
+          </div>
+        </li>`;
+        });
+        $("#inProgress ul").html(content);
+      }
+    });
+    return false;
+  }
+
+  function taskInfo(data){
+    $("#inputDescription2").val(data.Notes);
+    $("#modalTaskName").html(data.TaskName);
+    $("#modalStartDate").html(data.DateStarted==null?"---":data.DateStarted);
+    $("#modalEndDate").html(data.DateEnded==null?"---":data.DateEnded);
+    $("#modalTimeSpent").html(data.TimeSpent.match("00:00:00")?"---":data.TimeSpent);
+  }
