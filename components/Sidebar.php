@@ -1,7 +1,7 @@
 <div class="sidebar">
   <div class="sidebar-title">
-    <a href="./" class="brand-link text-center">
-      <img src="dist/img/logo.png" alt="Logo" class="brand-image elevation-3">
+    <a href="./" class="brand-link text-left">
+      <img src="dist/img/logo.png" alt="Logo" style="height: 60px;">
       <span class="brand-text font-weight-bold text-light">TaskGuard</span>
     </a>
   </div>
@@ -26,14 +26,7 @@
           </p>
           <!-- <i class="right fas fa-angle-left"></i> -->
         </a>
-        <!-- <ul class="nav nav-treeview">
-          <li class="nav-item has-treeview">
-            <a href="tasksearch" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Task Search</p>
-            </a>
-          </li>
-        </ul> -->
+        
       </li>
       <li class="nav-item menu-open">
         <a href="tasklist" class="nav-link">

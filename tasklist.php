@@ -1,5 +1,5 @@
 <?php
-  require_once './functions.php';
+require_once './functions.php';
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +11,8 @@
     <title>Task Guard</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="icon" href="dist/img/TURTLE.png">
+    <?php include("./components/icon.php"); ?>
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
@@ -41,18 +42,8 @@
           <a href="../index.php" class="nav-link">Home</a>
         </li> -->
             </ul>
-            <h4 style="margin-top:.5%;"><b>Task List</b></h4>
+            <h4 style="margin-top:.5%;">Task List</h4>
             <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Navbar Search -->
-                <!-- Notifications Dropdown Menu -->
-                <li>
-                    <a class="nav-link" href="#" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
-sagittis lacus vel augue laoreet rutrum faucibus.">
-                        <i class="fas fa-user"></i><i class="fa fa-caret-down" aria-hidden="true"></i>
-                    </a>
-                </li>
-            </ul>
         </nav>
         <aside class="main-sidebar sidebar-primary elevation-4">
             <?php include("./components/Sidebar.php"); ?>
@@ -69,7 +60,7 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
                                 <label for="clientName">Client Name</label>
                                 <select id="clientName" class="form-control" onchange="searchTable()" style="margin-right:0.5%;width:150px">
                                     <option value="" selected>Select</option>
-                                    <?php displayAllClients()?>
+                                    <?php displayAllClients() ?>
                                 </select>
                             </div>
                             <div class="col-auto">
@@ -84,9 +75,9 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
                                 <label for="endDate">Time Spent (hr:mn)</label>
                                 <div class="d-flex">
                                     <input type="number" class="form-control" id="timeHr" placeholder="hr" onchange="searchTable()" value="" style="margin-right:0.5%;width:85px">
-                                    <input type="number" class="form-control" id="timeMn" placeholder="mn" min="0" max="60" onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;searchTable()"  value="" style="margin-right:0.5%;width:85px">
+                                    <input type="number" class="form-control" id="timeMn" placeholder="mn" min="0" max="60" onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;searchTable()" value="" style="margin-right:0.5%;width:85px">
                                 </div>
-                                
+
                             </div>
                             <div class="col-auto">
                                 <label for="actDate">Activity Date (Date Range)</label>
@@ -148,37 +139,37 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
     </section>
     </div>
     </div>
-   <!-- jQuery -->
-  <script src="plugins/jquery/jquery.min.js"></script>
-  <!-- jQuery UI 1.11.4 -->
-  <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-  <!-- Bootstrap 4 -->
-  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- DataTables  & Plugins -->
-  <script src="./plugins/datatables/jquery.dataTables.min.js"></script>
-  <script src="./plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-  <script src="./plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-  <script src="./plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-  <script src="./plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-  <script src="./plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-  <script src="./plugins/jszip/jszip.min.js"></script>
-  <script src="./plugins/pdfmake/pdfmake.min.js"></script>
-  <script src="./plugins/pdfmake/vfs_fonts.js"></script>
-  <script src="./plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-  <script src="./plugins/datatables-buttons/js/buttons.print.min.js"></script>
-  <script src="./plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-  <!-- InputMask -->
-  <script src="./plugins/popper/popper.js"></script>
-  <script src="./plugins/moment/moment.min.js"></script>
-  <script src="./plugins/inputmask/jquery.inputmask.min.js"></script>
-  <!-- date-range-picker -->
-  <script src="./plugins/daterangepicker/daterangepicker.js"></script>
-  <!-- TOASTR -->
-  <script src="plugins/toastr/toastr.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="dist/js/adminlte.js"></script>
-  <script src="js/TaskListFunctions.js"></script>
+    <!-- jQuery -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <!-- Bootstrap 4 -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="./plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="./plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="./plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="./plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="./plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="./plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="./plugins/jszip/jszip.min.js"></script>
+    <script src="./plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="./plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="./plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="./plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="./plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <!-- InputMask -->
+    <script src="./plugins/popper/popper.js"></script>
+    <script src="./plugins/moment/moment.min.js"></script>
+    <script src="./plugins/inputmask/jquery.inputmask.min.js"></script>
+    <!-- date-range-picker -->
+    <script src="./plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- TOASTR -->
+    <script src="plugins/toastr/toastr.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.js"></script>
+    <script src="js/TaskListFunctions.js"></script>
 </body>
 
 </html>
