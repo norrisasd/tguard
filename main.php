@@ -22,16 +22,19 @@
             $result=json_encode($result);
         }
     }
-    if(isset($_GET['searchClientName']) || isset($_GET['searchStartDate']) || isset($_GET['searchEndDate']) || isset($_GET['searchTime'])){
+    if(isset($_GET['searchClientName']) || isset($_GET['searchStartDate']) || isset($_GET['searchEndDate']) || isset($_GET['searchTime']) || isset($GET['startDate'])){
         $cname=$_GET['searchClientName'];
         $sdate=$_GET['searchStartDate'];
         $edate=$_GET['searchEndDate'];
         $time = $_GET['searchTime'];
+        $bsdate=$_GET['startDate'];
+        $bedate=$_GET['endDate'];
         $cname = $cname==""?"":"AND client_name ='".$cname."'";
         $sdate = $sdate==""?"":"AND DateStarted='".$sdate."'";
         $edate = $edate==""?"":"AND DateEnded='".$edate."'";
         $time = $time=="00:00"?"":"AND TimeSpent='".$time."'";
-        $query="SELECT * FROM callback WHERE status = 0 $cname $sdate $edate $time";
+        $betweenDate=$bsdate==''?'':"AND (('$bsdate' between DateStarted and DateEnded) or ('$bedate' between DateStarted and DateEnded) or ('$bsdate' <= DateStarted and '$bedate' >= DateEnded))";
+        $query="SELECT * FROM callback WHERE status = 0 $cname $sdate $edate $time $betweenDate";
         $result=mysqli_query($dbConnection,$query);
         if($result){
             if(mysqli_num_rows($result)>0){
@@ -41,7 +44,7 @@
                 $result="";
             }
         }else{
-            $result="";
+            $result=mysqli_error($dbConnection);
         }
         
     }
