@@ -30,42 +30,49 @@ require_once './functions.php';
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+
   <div class="wrapper">
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-      <!-- Left navbar links -->
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" data-widget="pushmenu" href="#" role="button" style="color:black!important"><i class="fas fa-bars"></i></a>
-        </li>
-        <!-- <li class="nav-item d-none d-sm-inline-block">
+    <!-- Preloader -->
+    <div class="preloader flex-column justify-content-center align-items-center">
+      <img class="animation__shake" src="dist/img/logo.png" alt="AdminLogo" height="100" width="100">
+    </div>
+  </div>
+
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button" style="color:black!important"><i class="fas fa-bars"></i></a>
+      </li>
+      <!-- <li class="nav-item d-none d-sm-inline-block">
           <a href="../index.php" class="nav-link">Home</a>
         </li> -->
-      </ul>
-      <h4 style="margin-top:.5%;">Dashboard</h4>
-      <!-- Right navbar links -->
-      <ul class="navbar-nav ml-auto">
-        <!-- Navbar Search -->
-        <!-- Notifications Dropdown Menu -->
-      </ul>
-    </nav>
-    <aside class="main-sidebar sidebar-primary elevation-4">
-      <?php include("./components/Sidebar.php"); ?>
-    </aside>
-    <div class="content-wrapper">
-      <section class="content">
-        <div class="content-fluid" style="padding:1%; padding-top: 2%">
-          <div class="row">
-            <div class="col">
-              <h3><b>Welcome back,<br> Agent Joe</b></h3>
-            </div>
-            <div class="col">
-              <p class="float-right">
-                <br>
-                <button type="button" style="padding-left:50px; padding-right:50px" class="btn btn-primary btn-width" data-toggle="modal" data-target="#addModal">Add</button>
-              </p>
-            </div>
+    </ul>
+    <h4 style="margin-top:.5%;">Dashboard</h4>
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Navbar Search -->
+      <!-- Notifications Dropdown Menu -->
+    </ul>
+  </nav>
+  <aside class="main-sidebar sidebar-primary elevation-4">
+    <?php include("./components/Sidebar.php"); ?>
+  </aside>
+  <div class="content-wrapper">
+    <section class="content">
+      <div class="content-fluid" style="padding:1%; padding-top: 2%">
+        <div class="row">
+          <div class="col">
+            <h3><b>Welcome back,<br> Agent Joe</b></h3>
+          </div>
+          <div class="col">
+            <p class="float-right">
+              <br>
+              <button type="button" style="padding-left:50px; padding-right:50px" class="btn btn-primary btn-width" data-toggle="modal" data-target="#addModal">Add</button>
+            </p>
           </div>
         </div>
+
         <!-- Task Board Starts -->
         <div class="content-fluid" style="padding:1%; padding-top:0%" id="mainContent">
           <div class="row">
@@ -124,8 +131,9 @@ require_once './functions.php';
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
+  </div>
   </div>
 
 
@@ -240,7 +248,7 @@ require_once './functions.php';
                 <div class="col">
                   <div class="form-group">
                     <label for="inputFile">Attachments: </label><br>
-                    
+
                     <div>
                       <form action="/file-upload">
                         <div class="fallback center-block">

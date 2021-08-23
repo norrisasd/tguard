@@ -12,6 +12,21 @@ body{
     color: white !important;
     
 }
+
+a {
+    color: #98a6ad;
+    text-decoration: none;
+}
+
+a:hover {
+    color:#fff; 
+    text-decoration:none; 
+    cursor:pointer;  
+}
+
+
+
+
 /* retain color if button is active and hovered */
 .nav-item > .active:hover {
     color: #051842 !important;
