@@ -10,7 +10,8 @@ require_once './functions.php';
   <title>Task Guard</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="icon" href="dist/img/logo.png">
+  <!-- Icons -->
+  <?php include("./components/icon.php"); ?>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
   <!-- Font Awesome -->
@@ -25,6 +26,7 @@ require_once './functions.php';
   <link rel="stylesheet" href="css/Style.css">
   <!-- toastr -->
   <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+  <link rel="stylesheet" href="plugins/dropzone/min/dropzone.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -100,7 +102,7 @@ require_once './functions.php';
                     Short Description
                     <div class="mt-3">
                       <p class="float-right">
-                        <button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-success btn-sm waves-effe xct waves-light" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-eye"></i></button>
                       </p>
                       <p class="mb-2">Client:
                         <span><i>Petey Cruiser</i></span>
@@ -193,8 +195,8 @@ require_once './functions.php';
               </select>
             </div>
             <div class="form-group">
-              <label for="inputNotes">Notes</label>
-              <textarea type="text" class="form-control" id="inputNotes"></textarea>
+              <label for="inputDescription">Description</label>
+              <textarea type="text" class="form-control" id="inputDescription"></textarea>
             </div>
             <div class="form-horizontal">
 
@@ -222,16 +224,82 @@ require_once './functions.php';
         <form method="get" id="viewTask" action="">
           <div class="modal-body">
             <div class="container-fluid">
-              
+              <div class="row">
+                <div class="col">
+                  <h6><b>Start Date:</b><br>
+                    June 8, 2021 at 11:00 PM</h6>
+                </div>
+                <div class="col">
+                  <h6><b>End Date:</b> <br>
+                    June 8, 2021 at 11:00 PM</h6>
+                </div>
+                <div class="col">
+                  <h6><b>Time Spent:</b> <br>
+                    18 mins</h6>
+
+                </div>
+                <div class="col">
+                  <div class="float-right">
+                    <button type="button" class="btn btn-outline-success btn-sm" style="margin-right: 2px;" id="btnPlay"><i class="fas fa-play"></i></button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm" style="margin-right: 2px;" id="btnPause"><i class="fas fa-pause"></i></button>
+                    <button type="button" class="btn btn-outline-danger btn-sm" id="btnStop"><i class="fas fa-stop"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <hr class="mt-2 mb-3" />
+                  <div class="form-group">
+                    <label for="inputDescription2">Description: </label>
+                    <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="inputSubTasks">Sub-Tasks: </label>
+                    <textarea type="text" class="form-control" id="inputSubTasks"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="inputComments">Comments: </label>
+                    <textarea type="text" class="form-control" id="inputComments">Lorem Ipsum Lorem Ipsum</textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="inputFile">Attachments: </label><br>
+                    
+                    <div>
+                      <form action="/file-upload">
+                        <div class="fallback center-block">
+                          <input class="form-control" id="file" name="file" type="file" multiple />
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+
           </div>
           <div class="modal-footer">
+            <button type="button" class="btn btn-danger mr-auto">Delete</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Save</button>
           </div>
-        </form>
+
+
       </div>
+      </form>
     </div>
+  </div>
   </div>
 
   <!-- jQuery -->
@@ -254,11 +322,40 @@ require_once './functions.php';
   <script src="./plugins/datatables-buttons/js/buttons.html5.min.js"></script>
   <script src="./plugins/datatables-buttons/js/buttons.print.min.js"></script>
   <script src="./plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-   <!-- TOASTR -->
-   <script src="plugins/toastr/toastr.min.js"></script>
+  <script src="./plugins/dropzone/min/dropzone.min.js"></script>
+  <!-- TOASTR -->
+  <script src="plugins/toastr/toastr.min.js"></script>
   <!-- AdminLTE App -->
   <script src="dist/js/adminlte.js"></script>
   <script src="js/DashboardFunctions.js"></script>
+
+
+  <script>
+    //Buttons
+
+    $("#btnPlay").click(function() {
+      $("#btnPlay").attr("disabled", true);
+      $(".modal").modal("hide");
+      toastr.success("Task started");
+    });
+
+    $("#btnPause").click(function() {
+      $("#btnPause").attr("disabled", true);
+      $("#btnPlay").attr("disabled", false);
+      $(".modal").modal("hide");
+      toastr.success("Task paused");
+    });
+
+    $("#btnStop").click(function() {
+      $("#btnPlay").attr("disabled", true);
+      $("#btnPause").attr("disabled", true);
+      $("#btnStop").attr("disabled", true);
+      $(".modal").modal("hide");
+      toastr.success("Task stopped");
+    });
+  </script>
+
+
 </body>
 
 </html>
