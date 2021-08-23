@@ -72,95 +72,62 @@ require_once './functions.php';
             </p>
           </div>
         </div>
-      </div>
-      <!-- Task Board Starts -->
-      <div class="content-fluid" style="padding:1%; padding-top:0%">
-        <div class="row">
-          <div class="col">
-            <div class="card-box cardTask">
-              <!-- Upcoming Task-->
-              <h5><b>Upcoming</b></h5>
-              <p class="text-muted m-b-30 font-13">Your awesome text goes here. Your awesome text goes here.</p>
-              <ul class="sortable-list taskList list-unstyled ui-sortable" id="upcoming">
-                <li class="task-warning ui-sortable-handle" id="task1">
-                  <div class="checkbox checkbox-custom checkbox-single float-right">
-                    <input type="checkbox" aria-label="Single checkbox Two">
-                    <label></label>
-                  </div>
-                  <b>Name of Task</b>
-                  <div class="clearfix"></div>
-                  Short Description
-                  <div class="mt-3">
-                    <p class="float-right">
-                      <button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-eye"></i></button>
-                    </p>
-                    <p class="mb-2">Client:
-                      <span><i>Petey Cruiser</i></span>
-                    </p>
-                  </div>
-                </li>
-                <li class="task-warning ui-sortable-handle" id="task1">
-                  <div class="checkbox checkbox-custom checkbox-single float-right">
-                    <input type="checkbox" aria-label="Single checkbox Two">
-                    <label></label>
-                  </div>
-                  <b>Name of Task</b>
-                  <div class="clearfix"></div>
-                  Short Description
-                  <div class="mt-3">
-                    <p class="float-right">
-                      <button class="btn btn-success btn-sm waves-effe xct waves-light" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-eye"></i></button>
-                    </p>
-                    <p class="mb-2">Client:
-                      <span><i>Petey Cruiser</i></span>
-                    </p>
-                  </div>
-                </li>
-              </ul>
-            </div>
 
-          </div>
-          <div class="col">
-            <div class="card-box cardTask">
-              <!-- In Progress-->
-              <h5><b>In Progress</b></h5>
-              <p class="text-muted m-b-30 font-13">Your awesome text goes here. Your awesome text goes here.</p>
-              <ul class="sortable-list taskList list-unstyled ui-sortable" id="inprogress">
-                <li class="task-warning ui-sortable-handle" id="task1">
-                  <div class="checkbox checkbox-custom checkbox-single float-right">
-                    <input type="checkbox" aria-label="Single checkbox Two">
-                    <label></label>
-                  </div>
-                  <b>Name of Task</b>
-                  <div class="clearfix"></div>
-                  Short Description
-                  <div class="mt-3">
-                    <p class="float-right">
-                      <button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-eye"></i></button>
-                    </p>
-                    <p class="mb-2">Client:
-                      <span><i>Petey Cruiser</i></span>
-                    </p>
-                  </div>
-                </li>
-                <li class="task-warning ui-sortable-handle" id="task1">
-                  <div class="checkbox checkbox-custom checkbox-single float-right">
-                    <input type="checkbox" aria-label="Single checkbox Two">
-                    <label></label>
-                  </div>
-                  <b>Name of Task</b>
-                  <div class="clearfix"></div>
-                  Short Description
-                  <div class="mt-3">
-                    <p class="float-right">
-                      <button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-eye"></i></button>
-                    </p>
-                    <p class="mb-2">Client:
-                      <span><i>Petey Cruiser</i></span>
-                    </p>
-                  </div>
-                </li>
-              </ul>
+        <!-- Task Board Starts -->
+        <div class="content-fluid" style="padding:1%; padding-top:0%" id="mainContent">
+          <div class="row">
+            <div class="col">
+              <div class="card-box cardTask" id="upcoming">
+                <!-- Upcoming Task-->
+                <h5><b>Upcoming</b></h5>
+                <p class="text-muted m-b-30 font-13">Your awesome text goes here. Your awesome text goes here.</p>
+                <ul class="sortable-list taskList list-unstyled ui-sortable" >
+                </ul>
+              </div>
+
+            </div>
+            <div class="col">
+              <div class="card-box cardTask" id="inProgress">
+                <!-- In Progress-->
+                <h5><b>In Progress</b></h5>
+                <p class="text-muted m-b-30 font-13">Your awesome text goes here. Your awesome text goes here.</p>
+                <ul class="sortable-list taskList list-unstyled ui-sortable">
+                  <li class="task-warning ui-sortable-handle" id="task1">
+                    <div class="checkbox checkbox-custom checkbox-single float-right">
+                      <input type="checkbox" aria-label="Single checkbox Two">
+                      <label></label>
+                    </div>
+                    <b>Name of Task</b>
+                    <div class="clearfix"></div>
+                    Short Description
+                    <div class="mt-3">
+                      <p class="float-right">
+                        <button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-eye"></i></button>
+                      </p>
+                      <p class="mb-2">Client:
+                        <span><i>Petey Cruiser</i></span>
+                      </p>
+                    </div>
+                  </li>
+                  <li class="task-warning ui-sortable-handle" id="task1">
+                    <div class="checkbox checkbox-custom checkbox-single float-right">
+                      <input type="checkbox" aria-label="Single checkbox Two">
+                      <label></label>
+                    </div>
+                    <b>Name of Task</b>
+                    <div class="clearfix"></div>
+                    Short Description
+                    <div class="mt-3">
+                      <p class="float-right">
+                        <button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-eye"></i></button>
+                      </p>
+                      <p class="mb-2">Client:
+                        <span><i>Petey Cruiser</i></span>
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -193,17 +160,16 @@ require_once './functions.php';
                 <?php displayAllClients() ?>
               </select>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="inputTask">Kind of Task</label>
               <select class="form-control" id="inputTask" required>
                 <option value="0">Upcoming</option>
                 <option value="1">In Progress</option>
-
               </select>
-            </div>
+            </div> -->
             <div class="form-group">
-              <label for="inputDescription">Description</label>
-              <textarea type="text" class="form-control" id="inputDescription"></textarea>
+              <label for="inputDescription">Notes</label>
+              <textarea type="text" class="form-control" id="inputNotes"></textarea>
             </div>
             <div class="form-horizontal">
 
@@ -223,7 +189,7 @@ require_once './functions.php';
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Title of Task</h5>
+          <h5 class="modal-title" id="modalTaskName">Title of Task</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -233,16 +199,16 @@ require_once './functions.php';
             <div class="container-fluid">
               <div class="row">
                 <div class="col">
-                  <h6><b>Start Date:</b><br>
-                    June 8, 2021 at 11:00 PM</h6>
+                  <p><b>Start Date:</b></p><br>
+                  <h6 id="modalStartDate">June 8, 2021 at 11:00 PM</h6>
                 </div>
                 <div class="col">
-                  <h6><b>End Date:</b> <br>
-                    June 8, 2021 at 11:00 PM</h6>
+                  <p><b>End Date:</b></p> <br>
+                  <h6 id="modalEndDate">June 8, 2021 at 11:00 PM</h6>
                 </div>
                 <div class="col">
-                  <h6><b>Time Spent:</b> <br>
-                    18 mins</h6>
+                <p><b>Time Spent:</b></p> <br>
+                  <h6 id="modalTimeSpent">18 mins</h6>
 
                 </div>
                 <div class="col">
@@ -340,26 +306,7 @@ require_once './functions.php';
   <script>
     //Buttons
 
-    $("#btnPlay").click(function() {
-      $("#btnPlay").attr("disabled", true);
-      $(".modal").modal("hide");
-      toastr.success("Task started");
-    });
-
-    $("#btnPause").click(function() {
-      $("#btnPause").attr("disabled", true);
-      $("#btnPlay").attr("disabled", false);
-      $(".modal").modal("hide");
-      toastr.success("Task paused");
-    });
-
-    $("#btnStop").click(function() {
-      $("#btnPlay").attr("disabled", true);
-      $("#btnPause").attr("disabled", true);
-      $("#btnStop").attr("disabled", true);
-      $(".modal").modal("hide");
-      toastr.success("Task stopped");
-    });
+    
   </script>
 
 
