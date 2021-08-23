@@ -1,3 +1,4 @@
+
 body{
     background-color: lightgray;
 }
@@ -66,8 +67,6 @@ body{
     font-size: 13px
 }
 
-
-
 .text-muted {
     color: #98a6ad!important;
 }
@@ -76,3 +75,28 @@ body{
     height: 36px;
     width: 36px;
 }
+
+.inputDrop {
+    background: white;
+    border-radius: 5px;
+    border: 2px dashed rgb(0, 135, 247);
+    border-image: none;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input#file {
+    display: inline-block;
+    width: 100%;
+    padding: 120px 0 0 0;
+    height: 100px;
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: url('../dist/img/cloud.png') center center no-repeat #fff;
+    border-radius: 5px;
+    background-size: 90px 90px;
+  }
+
