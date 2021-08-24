@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,11 +8,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
     <link rel="stylesheet" href="./css/main.css">
-
-    <!-- jquery -->
-    <script src="plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
@@ -25,9 +19,7 @@
         </div>
         <div class="row">
             <div class="col-md-4 offset-md-4 form login-form">
-
-                <form accept-charset="UTF-8" class="form-signin" role="form" action="" method="post" onsubmit="return setLogin();">
-
+                <form class="form-signin" role="form" action="" method="get" onsubmit="return setLogin();">
                     <div class="form-label-group">
                         <h5><b>Login</b></h5>
 
@@ -74,7 +66,7 @@
                     <iframe src="./pages/TermsAndConditions" id="agreement" title="Terms And Conditions" style="height:500px;width:100%"></iframe>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="acceptBtn" onclick="updateStatus()">I Accept</button>
+                    <button type="button" class="btn btn-primary" id="acceptBtn">I Accept</button>
                 </div>
             </div>
         </div>
@@ -98,18 +90,18 @@
                         <div class="form-group">
                             <label for="email"><b>Email address</b></label>
                             <input type="email" class="form-control" id="email" placeholder="Enter email">
-                            <button type="button" class="btn btn-outline-primary btn-sm float-right" id="vfBtn" onclick="verifyEmail()" style="margin:2%">Check Email</button>
+                            <button type="button" class="btn btn-outline-primary btn-sm float-right" id="vfBtn" style="margin:2%">Check Email</button>
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="code"><b>Email Verification Code (6 digits)</b></label>
                             <input type="number" class="form-control" id="code" placeholder="123456" min="100000" max="999999">
-                            <button type="button" class="btn btn-outline-primary btn-sm float-right" id="cdBtn" onclick="generateCode()" style="margin:2%" disabled>Send Code</button>
+                            <button type="button" class="btn btn-outline-primary btn-sm float-right" id="cdBtn" style="margin:2%" disabled>Send Code</button>
                         </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="submitBtn" value="" onclick="verify()">Verify</button>
+                    <button type="button" class="btn btn-primary" id="submitBtn" value="" >Verify</button>
                 </div>
                 </form>
             </div>
@@ -132,12 +124,16 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="changeBtn" onclick="changePass()">Change Password</button>
+                    <button type="button" class="btn btn-primary" id="changeBtn">Change Password</button>
                 </div>
             </div>
         </div>
     </div>
 </body>
+<!-- jquery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="plugins/toastr/toastr.min.js"></script>
-
+<script src="js/LoginFunctions.js"></script>
 </html>
