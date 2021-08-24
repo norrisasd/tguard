@@ -1,5 +1,5 @@
 <?php
-require_once './functions.php';
+require_once '../functions.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,22 +11,22 @@ require_once './functions.php';
 
   <!-- Google Font: Source Sans Pro -->
   <!-- Icons -->
-  <?php include("./components/icon.php"); ?>
+  <link rel="icon" href="../dist/img/logo.png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
   <!-- DataTables -->
-  <link rel="stylesheet" href="./plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="./plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="./plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../dist/css/adminlte.min.css">
   <!-- CUSTOM CSS -->
-  <link rel="stylesheet" href="css/Style.css">
+  <link rel="stylesheet" href="../css/Style.css">
   <!-- toastr -->
-  <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
-  <link rel="stylesheet" href="plugins/dropzone/min/dropzone.min.css">
+  <link rel="stylesheet" href="../plugins/toastr/toastr.min.css">
+  <link rel="stylesheet" href="../plugins/dropzone/min/dropzone.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -34,7 +34,7 @@ require_once './functions.php';
   <div class="wrapper">
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="dist/img/logo.png" alt="AdminLogo" height="100" width="100">
+      <img class="animation__shake" src="../dist/img/logo.png" alt="AdminLogo" height="100" width="100">
     </div>
   </div>
 
@@ -56,7 +56,7 @@ require_once './functions.php';
     </ul>
   </nav>
   <aside class="main-sidebar sidebar-primary elevation-4">
-    <?php include("./components/Sidebar.php"); ?>
+    <?php include("components/SidebarAdmin.php"); ?>
   </aside>
   <div class="content-wrapper">
     <section class="content">
@@ -64,7 +64,7 @@ require_once './functions.php';
         <div class="row">
           <div class="col">
             <div class="float-left" style="padding-left:15px;">
-              <h3><b>Welcome back,<br> Agent Joe</b></h3>
+              <h3><b>Welcome back,<br> Admin</b></h3>
 
             </div>
           </div>
@@ -163,19 +163,16 @@ require_once './functions.php';
                 <?php displayAllClients() ?>
               </select>
             </div>
-            <!-- <div class="form-group">
-              <label for="inputTask">Kind of Task</label>
-              <select class="form-control" id="inputTask" required>
-                <option value="0">Upcoming</option>
-                <option value="1">In Progress</option>
+            <div class="form-group">
+              <label for="inputAgent">Agent Name</label>
+              <select class="form-control" id="inputAgentID" required>
+                <option value="" selected hidden>Select Agent</option>
+                <?php //displayAllAgents() ?>
               </select>
-            </div> -->
+            </div>
             <div class="form-group">
               <label for="inputDescription">Notes</label>
               <textarea type="text" class="form-control" id="inputNotes"></textarea>
-            </div>
-            <div class="form-horizontal">
-
             </div>
           </div>
           <div class="modal-footer">
@@ -212,6 +209,7 @@ require_once './functions.php';
                 <div class="col">
                   <label for="modalTimeSpent">Time Spent: </label>
                   <p id="modalTimeSpent">18 mins</p>
+
                 </div>
                 <div class="col">
                   <div class="float-right">
@@ -221,11 +219,17 @@ require_once './functions.php';
                   </div>
                 </div>
               </div>
-              <div class="row">
+              <div class="row justify-content-start">
                 <div class="col">
-                <label for="modalClient">Client: </label>
+                  <label for="modalClient">Client: </label>
                   <p id="modalClient">Agrisoft</p>
                 </div>
+                <div class="col">
+                  <label for="modalAgent">Agent: </label>
+                  <p id="modalAgent">John Doe</p>
+                </div>
+                <div class="col"></div>
+                <div class="col"></div>
               </div>
               <div class="row">
                 <div class="col">
@@ -284,31 +288,31 @@ require_once './functions.php';
   </div>
 
   <!-- jQuery -->
-  <script src="plugins/jquery/jquery.min.js"></script>
+  <script src="../plugins/jquery/jquery.min.js"></script>
   <!-- jQuery UI 1.11.4 -->
-  <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+  <script src="../plugins/jquery-ui/jquery-ui.min.js"></script>
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
   <!-- Bootstrap 4 -->
-  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- DataTables  & Plugins -->
-  <script src="./plugins/datatables/jquery.dataTables.min.js"></script>
-  <script src="./plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-  <script src="./plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-  <script src="./plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-  <script src="./plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-  <script src="./plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-  <script src="./plugins/jszip/jszip.min.js"></script>
-  <script src="./plugins/pdfmake/pdfmake.min.js"></script>
-  <script src="./plugins/pdfmake/vfs_fonts.js"></script>
-  <script src="./plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-  <script src="./plugins/datatables-buttons/js/buttons.print.min.js"></script>
-  <script src="./plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-  <script src="./plugins/dropzone/min/dropzone.min.js"></script>
+  <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <script src="../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+  <script src="../plugins/jszip/jszip.min.js"></script>
+  <script src="../plugins/pdfmake/pdfmake.min.js"></script>
+  <script src="../plugins/pdfmake/vfs_fonts.js"></script>
+  <script src="../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+  <script src="../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+  <script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+  <script src="../plugins/dropzone/min/dropzone.min.js"></script>
   <!-- TOASTR -->
-  <script src="plugins/toastr/toastr.min.js"></script>
+  <script src="../plugins/toastr/toastr.min.js"></script>
   <!-- AdminLTE App -->
-  <script src="dist/js/adminlte.js"></script>
-  <script src="js/DashboardFunctions.js"></script>
+  <script src="../dist/js/adminlte.js"></script>
+  <script src="../js/DashboardFunctions.js"></script>
 
 
   <script>

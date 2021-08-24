@@ -177,7 +177,7 @@ function addTask(){
 
   function taskInfo(data){
     $("#inputDescription2").val(data.Notes);
-    $("#modalTaskName").html(data.TaskName);
+    $("#modalTaskName").html(data.TaskName); 
     $("#modalStartDate").html(data.DateStarted==null?"---":data.DateStarted);
     $("#modalEndDate").html(data.DateEnded==null?"---":data.DateEnded);
     $("#modalTimeSpent").html(data.TimeSpent.match("00:00:00")?"---":data.TimeSpent);

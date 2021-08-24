@@ -32,16 +32,6 @@
           <p>
             Reports
           </p>
-          <!-- <i class="right fas fa-angle-left"></i> -->
-        </a>
-
-      </li>
-      <li class="nav-item menu-open">
-        <a href="tasklist" class="nav-link">
-          <i class="nav-icon fa fa-tasks"></i>
-          <p>
-            Task List
-          </p>
         </a>
       </li>
       <li class="nav-item">
