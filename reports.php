@@ -58,35 +58,35 @@ require_once './functions.php';
                         <div class="row align-items-start">
                             <div class="col">
                                 <label for="clientName">Client Name</label>
-                                <select id="clientName" class="form-control" onchange="searchTable()" style="margin-right:0.5%;">
+                                <select id="clientName" class="form-control" style="margin-right:0.5%;">
                                     <option value="" selected>Select</option>
                                     <?php displayAllClients() ?>
                                 </select>
                             </div>
                             <div class="col">
                                 <label for="startDate">Start Date</label>
-                                <input type="date" class="form-control" id="startDate" onchange="searchTable()" value="" style="margin-right:0.5%;">
+                                <input type="date" class="form-control" id="startDate" value="" style="margin-right:0.5%;">
                             </div>
                             <div class="col">
                                 <label for="endDate">End Date</label>
-                                <input type="date" class="form-control" id="endDate" onchange="searchTable()" value="" style="margin-right:0.5%;">
+                                <input type="date" class="form-control" id="endDate" value="" style="margin-right:0.5%;">
                             </div>
                             <div class="col">
                                 <label for="endDate">Time Spent (hr:mn)</label>
                                 <div class="d-flex">
-                                    <input type="number" class="form-control" id="timeHr" placeholder="hr" onchange="searchTable()" value="" style="margin-right:0.5%;">
-                                    <input type="number" class="form-control" id="timeMn" placeholder="mn" min="0" max="60" onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;searchTable()" value="" style="margin-right:0.5%;">
+                                    <input type="number" class="form-control" id="timeHr" placeholder="hr"  value="" style="margin-right:0.5%;">
+                                    <input type="number" class="form-control" id="timeMn" placeholder="mn" min="0" max="60" onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;" value="" style="margin-right:0.5%;">
                                 </div>
                             </div>
                             <div class="col">
                                 <label for="actDate">Task Date (Date Range)</label>
                                 <!-- Start Date -->
-                                <input type="text" class="form-control" id="actDate" value="" style="margin-right:0.5%;background:white;" onchange="searchTable()" readonly>
+                                <input type="text" class="form-control" id="actDate" value="" style="margin-right:0.5%;background:white;" readonly>
                             </div>
                         </div>
                         <div class="row justify-content-end">
                             <div class="col-auto" style="margin-top: 2.5%;">
-                                <button type="button" class="btn btn-primary" style="padding-left:35px; padding-right:35px;">
+                                <button type="button" class="btn btn-primary" onclick="searchTable()" style="padding-left:35px; padding-right:35px;">
                                     Search
                                 </button>
                             </div>

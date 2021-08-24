@@ -20,7 +20,7 @@
 
     //DISPLAY ALL TASK
     if(isset($_GET['getTaskByUser'])){
-        $query="SELECT * FROM callback WHERE user_id = $user_id";
+        $query="SELECT callback.*,SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) as total_time FROM `callback`,timerecord WHERE callback.user_id=$user_id AND callback.callback_id=timerecord.callback_id GROUP BY callback.callback_id;";
         $result=mysqli_query($dbConnection,$query);
         if(mysqli_num_rows($result)>0){
             $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -41,7 +41,7 @@
         $edate = $edate==""?"":"AND DateEnded='".$edate."'";
         $time = $time=="00:00"?"":"AND TimeSpent='".$time."'";
         $betweenDate=$bsdate==''?'':"AND (('$bsdate' between DateStarted and DateEnded) or ('$bedate' between DateStarted and DateEnded) or ('$bsdate' <= DateStarted and '$bedate' >= DateEnded))";
-        $query="SELECT * FROM callback WHERE status = 0 AND user_id = $user_id $cname $sdate $edate $time $betweenDate";
+        $query="SELECT callback.*,SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) as total_time FROM `callback`,timerecord WHERE callback.user_id=$user_id AND callback.callback_id=timerecord.callback_id $cname $sdate $edate $time $betweenDate GROUP BY callback.callback_id;";
         $result=mysqli_query($dbConnection,$query);
         if($result){
             if(mysqli_num_rows($result)>0){

@@ -1,5 +1,6 @@
 <?php
 require_once './functions.php';
+$userinfo = $_SESSION['userInfo'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,7 +65,7 @@ require_once './functions.php';
         <div class="row">
           <div class="col">
             <div class="float-left" style="padding-left:15px;">
-              <h3><b>Welcome back,<br> Agent Joe</b></h3>
+              <h3><b>Welcome back,<br> <?php echo $userinfo['name']?></b></h3>
 
             </div>
           </div>
@@ -95,40 +96,6 @@ require_once './functions.php';
                 <h5><b>In Progress</b></h5>
                 <p class="text-muted m-b-30 font-13">You currently have n no. of in progress tasks</p>
                 <ul class="sortable-list taskList list-unstyled ui-sortable">
-                  <li class="task-warning ui-sortable-handle" id="task1">
-                    <div class="checkbox checkbox-custom checkbox-single float-right">
-                      <input type="checkbox" aria-label="Single checkbox Two">
-                      <label></label>
-                    </div>
-                    <b>Name of Task</b>
-                    <div class="clearfix"></div>
-                    Short Description
-                    <div class="mt-3">
-                      <p class="float-right">
-                        <button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-eye"></i></button>
-                      </p>
-                      <p class="mb-2">Client:
-                        <span><i>Petey Cruiser</i></span>
-                      </p>
-                    </div>
-                  </li>
-                  <li class="task-warning ui-sortable-handle" id="task1">
-                    <div class="checkbox checkbox-custom checkbox-single float-right">
-                      <input type="checkbox" aria-label="Single checkbox Two">
-                      <label></label>
-                    </div>
-                    <b>Name of Task</b>
-                    <div class="clearfix"></div>
-                    Short Description
-                    <div class="mt-3">
-                      <p class="float-right">
-                        <button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-eye"></i></button>
-                      </p>
-                      <p class="mb-2">Client:
-                        <span><i>Petey Cruiser</i></span>
-                      </p>
-                    </div>
-                  </li>
                 </ul>
               </div>
             </div>
@@ -203,15 +170,16 @@ require_once './functions.php';
               <div class="row">
                 <div class="col">
                   <label for="modalStartDate">Start Date: </label>
-                  <p id="modalStartDate">June 8, 2021 at 11:00 PM</p>
+                  <p id="modalStartDate">---</p>
                 </div>
                 <div class="col">
                   <label for="modalEndDate">End Date: </label>
-                  <p id="modalEndDate">June 8, 2021 at 11:00 PM</p>
+                  <p id="modalEndDate">---</p>
                 </div>
                 <div class="col">
                   <label for="modalTimeSpent">Time Spent: </label>
-                  <p id="modalTimeSpent">18 mins</p>
+                  <p id="modalTimeSpent">---</p>
+
                 </div>
                 <div class="col">
                   <div class="float-right">
@@ -223,16 +191,10 @@ require_once './functions.php';
               </div>
               <div class="row">
                 <div class="col">
-                <label for="modalClient">Client: </label>
-                  <p id="modalClient">Agrisoft</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col">
                   <hr class="mt-2 mb-3" />
                   <div class="form-group">
                     <label for="inputDescription2">Notes: </label>
-                    <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
+                    <textarea type="text" class="form-control" id="inputDescription2"></textarea>
                   </div>
                 </div>
               </div>
@@ -248,7 +210,7 @@ require_once './functions.php';
                 <div class="col">
                   <div class="form-group">
                     <label for="inputComments">Comments: </label>
-                    <textarea type="text" class="form-control" id="inputComments">Lorem Ipsum Lorem Ipsum</textarea>
+                    <textarea type="text" class="form-control" id="inputComments"></textarea>
                   </div>
                 </div>
               </div>
@@ -275,8 +237,6 @@ require_once './functions.php';
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Save</button>
           </div>
-
-
       </div>
       </form>
     </div>

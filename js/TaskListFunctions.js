@@ -85,9 +85,9 @@
           data = JSON.parse(response);
           dt.clear().draw();
           for(var da in data){
-            time = data[da].TimeSpent;
+            time = data[da].total_time;
             const timeArr=time.split(":");
-            time = timeArr[0]+"hrs "+timeArr[1]+"mins";
+            time = timeArr[0]+"hrs "+timeArr[1]+"mins "+timeArr[2]+"sec";
             dt.row.add([
               cb,
               data[da].TaskName,
@@ -128,9 +128,9 @@
                     data = JSON.parse(response);
                       dt.clear().draw();
                       for(var da in data){
-                        time = data[da].TimeSpent;
+                        time = data[da].total_time;
                         const timeArr=time.split(":");
-                        time = timeArr[0]+"hrs "+timeArr[1]+"mins";
+                        time = timeArr[0]+"hrs "+timeArr[1]+"mins "+timeArr[2]+"sec";
                         dt.row.add([
                           cb,
                           data[da].TaskName,

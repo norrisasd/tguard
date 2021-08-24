@@ -4,15 +4,46 @@ toastr.options.closeButton = true;
 displayUpcomingTask();  
 displayInProgress();
 $("#btnPlay").click(function() {
-  $("#btnPlay").attr("disabled", true);
-  $(".modal").modal("hide");
-  toastr.success("Task started");
+  $.ajax({
+    type:'get',
+    url:'./main.php',
+    data:{
+      btnPlay:true,
+      cb_id:this.value,
+    },
+    success:function(response){
+      if(response == 'updated'){
+        $(".modal").modal("hide");
+        toastr.success("Task started");
+        displayInProgress();
+        displayUpcomingTask();
+      }else{
+        toastr.error("There was an error!");
+      }
+      
+    }
+  });
 });
-$("#btnPause").click(function() {
-  $("#btnPause").attr("disabled", true);
-  $("#btnPlay").attr("disabled", false);
-  $(".modal").modal("hide");
-  toastr.success("Task paused");
+$("#btnPause").click(function(){
+  $.ajax({
+    type:'get',
+    url:'./main.php',
+    data:{
+      btnPause:true,
+      cb_id:this.value,
+    },
+    success:function(response){
+      if(response == 'updated'){
+        $(".modal").modal("hide");
+        toastr.success("Task Paused");
+        displayInProgress();
+        displayUpcomingTask();
+      }else{
+        toastr.error("There was an error!");
+      }
+      
+    }
+  });
 });
 $("#btnStop").click(function() {
   $("#btnPlay").attr("disabled", true);
@@ -113,6 +144,10 @@ function addTask(){
         displayUpcoming:true
       },
       success:function(response){
+        if(response ==''){
+          $("#upcoming ul").html(content);
+          return false;
+        }
         result = JSON.parse(response);
         $.each(result, function(key, item) {
           let str = JSON.stringify(item);
@@ -174,11 +209,43 @@ function addTask(){
     });
     return false;
   }
-
+  
   function taskInfo(data){
+    if(data.DateStarted == null){
+      $("#btnPause").prop('disabled', true);
+      $("#btnStop").prop('disabled', true);
+    }
+    setButtonForProgress(data.callback_id);
+    $("#btnPlay").val(data.callback_id);
+    $("#btnPause").val(data.callback_id);
+    $("#btnStop").val(data.callback_id);
     $("#inputDescription2").val(data.Notes);
-    $("#modalTaskName").html(data.TaskName); 
+    $("#modalTaskName").html(data.TaskName);
     $("#modalStartDate").html(data.DateStarted==null?"---":data.DateStarted);
     $("#modalEndDate").html(data.DateEnded==null?"---":data.DateEnded);
-    $("#modalTimeSpent").html(data.TimeSpent.match("00:00:00")?"---":data.TimeSpent);
+    $("#modalTimeSpent").html(data.total_time.match("00:00:00")?"---":data.total_time);
+  }
+  function setButtonForProgress(cb_id){
+    let retval;
+    $.ajax({
+      type:'get',
+      url:'./main.php',
+      data:{
+        getTimeStatus:true,
+        cb_id:cb_id
+      },
+      success:function(response){
+        result = JSON.parse(response);
+        if(result.status==1){
+          $("#btnPlay").prop('disabled', false);
+          $("#btnPause").prop('disabled', true);
+          $("#btnStop").prop('disabled', true);
+        }else{
+          $("#btnPlay").prop('disabled', true);
+          $("#btnPause").prop('disabled', false);
+          $("#btnStop").prop('disabled', true);
+        }
+      }
+    });
+
   }
