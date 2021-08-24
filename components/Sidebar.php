@@ -27,7 +27,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="report" class="nav-link">
+        <a href="reports" class="nav-link">
           <i class="nav-icon fas fa-chart-bar"></i>
           <p>
             Reports

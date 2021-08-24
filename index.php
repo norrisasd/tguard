@@ -63,10 +63,13 @@ require_once './functions.php';
       <div class="content-fluid" style="padding:1%; padding-top: 2%">
         <div class="row">
           <div class="col">
-            <h3><b>Welcome back,<br> Agent Joe</b></h3>
+            <div class="float-left" style="padding-left:15px;">
+              <h3><b>Welcome back,<br> Agent Joe</b></h3>
+
+            </div>
           </div>
           <div class="col">
-            <p class="float-right">
+            <p class="float-right" style="padding-right:10px;">
               <br>
               <button type="button" style="padding-left:50px; padding-right:50px" class="btn btn-primary btn-width" data-toggle="modal" data-target="#addModal">Add</button>
             </p>
@@ -81,7 +84,7 @@ require_once './functions.php';
                 <!-- Upcoming Task-->
                 <h5><b>Upcoming</b></h5>
                 <p class="text-muted m-b-30 font-13">Your awesome text goes here. Your awesome text goes here.</p>
-                <ul class="sortable-list taskList list-unstyled ui-sortable" >
+                <ul class="sortable-list taskList list-unstyled ui-sortable">
                 </ul>
               </div>
 
@@ -199,16 +202,16 @@ require_once './functions.php';
             <div class="container-fluid">
               <div class="row">
                 <div class="col">
-                  <p><b>Start Date:</b></p><br>
-                  <h6 id="modalStartDate">June 8, 2021 at 11:00 PM</h6>
+                  <label for="modalStartDate">Start Date: </label>
+                  <p id="modalStartDate">June 8, 2021 at 11:00 PM</p>
                 </div>
                 <div class="col">
-                  <p><b>End Date:</b></p> <br>
-                  <h6 id="modalEndDate">June 8, 2021 at 11:00 PM</h6>
+                  <label for="modalEndDate">End Date: </label>
+                  <p id="modalEndDate">June 8, 2021 at 11:00 PM</p>
                 </div>
                 <div class="col">
-                <p><b>Time Spent:</b></p> <br>
-                  <h6 id="modalTimeSpent">18 mins</h6>
+                  <label for="modalTimeSpent">Time Spent: </label>
+                  <p id="modalTimeSpent">18 mins</p>
 
                 </div>
                 <div class="col">
@@ -305,8 +308,6 @@ require_once './functions.php';
 
   <script>
     //Buttons
-
-    
   </script>
 
 

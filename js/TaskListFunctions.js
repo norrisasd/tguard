@@ -1,8 +1,8 @@
     //SIDEBAR ACTIVE BUTTON
     $(".mt-2 ul li").removeClass("menu-open");
     $(".mt-2 ul li a").removeClass("active");
-    $(".mt-2 ul li:nth-child(4)").addClass("menu-open");
-    $(".mt-2 ul li:nth-child(4) a").addClass("active");
+    $(".mt-2 ul li:nth-child(3)").addClass("menu-open");
+    $(".mt-2 ul li:nth-child(3) a").addClass("active");
     //---------------------------------------------
     toastr.options.progressBar = true;
     toastr.options.preventDuplicates = true;
