@@ -1,5 +1,5 @@
 <?php
-  require_once './functions.php';
+require_once './functions.php';
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +11,7 @@
     <title>Task Guard</title>
     <?php include("./components/icon.php"); ?>
     <!-- Google Font: Source Sans Pro -->
-   
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
@@ -65,33 +65,40 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
             <section class="content">
                 <div class="container-fluid">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-auto">
+                        <div class="row align-items-start">
+                            <div class="col">
                                 <label for="clientName">Client Name</label>
-                                <select id="clientName" class="form-control" onchange="searchTable()" style="margin-right:0.5%;width:150px">
+                                <select id="clientName" class="form-control" onchange="searchTable()" style="margin-right:0.5%;">
                                     <option value="" selected>Select</option>
-                                    <?php displayAllClients()?>
+                                    <?php displayAllClients() ?>
                                 </select>
                             </div>
-                            <div class="col-auto">
+                            <div class="col">
                                 <label for="startDate">Start Date</label>
-                                <input type="date" class="form-control" id="startDate" onchange="searchTable()" value="" style="margin-right:0.5%;width:170px">
+                                <input type="date" class="form-control" id="startDate" onchange="searchTable()" value="" style="margin-right:0.5%;">
                             </div>
-                            <div class="col-auto">
+                            <div class="col">
                                 <label for="endDate">End Date</label>
-                                <input type="date" class="form-control" id="endDate" onchange="searchTable()" value="" style="margin-right:0.5%;width:170px">
+                                <input type="date" class="form-control" id="endDate" onchange="searchTable()" value="" style="margin-right:0.5%;">
                             </div>
-                            <div class="col-auto">
+                            <div class="col">
                                 <label for="endDate">Time Spent (hr:mn)</label>
                                 <div class="d-flex">
-                                    <input type="number" class="form-control" id="timeHr" placeholder="hr" onchange="searchTable()" value="" style="margin-right:0.5%;width:85px">
-                                    <input type="number" class="form-control" id="timeMn" placeholder="mn" min="0" max="60" onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;searchTable()"  value="" style="margin-right:0.5%;width:85px">
+                                    <input type="number" class="form-control" id="timeHr" placeholder="hr" onchange="searchTable()" value="" style="margin-right:0.5%;">
+                                    <input type="number" class="form-control" id="timeMn" placeholder="mn" min="0" max="60" onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;searchTable()" value="" style="margin-right:0.5%;">
                                 </div>
                             </div>
-                            <div class="col-auto">
+                            <div class="col">
                                 <label for="actDate">Task Date (Date Range)</label>
                                 <!-- Start Date -->
-                                <input type="text" class="form-control" id="actDate" value="" style="margin-right:0.5%;background:white;width:200px" onchange="searchTable()" readonly>
+                                <input type="text" class="form-control" id="actDate" value="" style="margin-right:0.5%;background:white;" onchange="searchTable()" readonly>
+                            </div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="col-auto" style="margin-top: 2.5%;">
+                                <button type="button" class="btn btn-primary" style="padding-left:35px; padding-right:35px;">
+                                    Search
+                                </button>
                             </div>
                             <div class="col-auto" style="margin-top: 2.5%;">
                                 <div class="btn-group dropright">
@@ -109,7 +116,9 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
                                     </div>
                                 </div>
                             </div>
+
                         </div>
+                        <!-- Table Starts-->
                         <div class="row" style="margin-top:1%">
                             <div class="col-auto" id="beforeLD" style="margin-right:1%;">
                                 <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Export All Data shown in the Table" aria-hidden="true"></i>
@@ -121,7 +130,8 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
                         <table id="dataTable" class="table table-bordered table-hover" style="height:100%;background-color:white">
                             <thead>
                                 <tr>
-                                    <th class="text-center"></th></th>
+                                    <th class="text-center"></th>
+                                    </th>
                                     <th>Task Name</th>
                                     <th>Client Name</th>
                                     <th>Notes</th>
@@ -152,38 +162,38 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
     </section>
     </div>
     </div>
-   <!-- jQuery -->
-  <script src="plugins/jquery/jquery.min.js"></script>
-  <!-- jQuery UI 1.11.4 -->
-  <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-  <!-- Bootstrap 4 -->
-  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- DataTables  & Plugins -->
-  <script src="./plugins/datatables/jquery.dataTables.min.js"></script>
-  <script src="./plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-  <script src="./plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-  <script src="./plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-  <script src="./plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-  <script src="./plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-  <script src="./plugins/jszip/jszip.min.js"></script>
-  <script src="./plugins/pdfmake/pdfmake.min.js"></script>
-  <script src="./plugins/pdfmake/vfs_fonts.js"></script>
-  <script src="./plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-  <script src="./plugins/datatables-buttons/js/buttons.print.min.js"></script>
-  <script src="./plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-  <script src="./plugins/datatables-select/js/dataTables.select.min.js"></script>
-  <!-- InputMask -->
-  <script src="./plugins/popper/popper.js"></script>
-  <script src="./plugins/moment/moment.min.js"></script>
-  <script src="./plugins/inputmask/jquery.inputmask.min.js"></script>
-  <!-- date-range-picker -->
-  <script src="./plugins/daterangepicker/daterangepicker.js"></script>
-  <!-- TOASTR -->
-  <script src="plugins/toastr/toastr.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="dist/js/adminlte.js"></script>
-  <script src="js/TaskListFunctions.js"></script>
+    <!-- jQuery -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <!-- Bootstrap 4 -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="./plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="./plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="./plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="./plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="./plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="./plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="./plugins/jszip/jszip.min.js"></script>
+    <script src="./plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="./plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="./plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="./plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="./plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="./plugins/datatables-select/js/dataTables.select.min.js"></script>
+    <!-- InputMask -->
+    <script src="./plugins/popper/popper.js"></script>
+    <script src="./plugins/moment/moment.min.js"></script>
+    <script src="./plugins/inputmask/jquery.inputmask.min.js"></script>
+    <!-- date-range-picker -->
+    <script src="./plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- TOASTR -->
+    <script src="plugins/toastr/toastr.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.js"></script>
+    <script src="js/TaskListFunctions.js"></script>
 </body>
 
 </html>

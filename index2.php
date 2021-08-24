@@ -56,7 +56,7 @@ require_once './functions.php';
     </ul>
   </nav>
   <aside class="main-sidebar sidebar-primary elevation-4">
-    <?php include("./components/Sidebar.php"); ?>
+    <?php include("./admin/components/Sidebar.php"); ?>
   </aside>
   <div class="content-wrapper">
     <section class="content">
@@ -64,7 +64,7 @@ require_once './functions.php';
         <div class="row">
           <div class="col">
             <div class="float-left" style="padding-left:15px;">
-              <h3><b>Welcome back,<br> Agent Joe</b></h3>
+              <h3><b>Welcome back,<br> Admin</b></h3>
 
             </div>
           </div>

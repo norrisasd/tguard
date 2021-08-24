@@ -1,7 +1,7 @@
 <div class="sidebar">
   <div class="sidebar-title">
     <a href="./" class="brand-link text-left">
-      <img src="dist/img/logo.png" alt="Logo" style="height: 60px;">
+      <img src="" alt="Logo" style="height: 60px;">
       <span class="brand-text font-weight-bold text-light">TaskGuard</span>
     </a>
   </div>
@@ -12,10 +12,10 @@
                with font-awesome or any other icon font library -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="" class="d-block" >Alexander Pierce</a>
+          <a href="" class="d-block" >Admin</a>
         </div>
       </div>
       <li class="nav-item menu-open">
@@ -35,6 +35,14 @@
           <!-- <i class="right fas fa-angle-left"></i> -->
         </a>
 
+      </li>
+      <li class="nav-item menu-open">
+        <a href="tasklist" class="nav-link">
+          <i class="nav-icon fa fa-tasks"></i>
+          <p>
+            Task List
+          </p>
+        </a>
       </li>
       <li class="nav-item">
         <a href="php/logout" class="nav-link">
