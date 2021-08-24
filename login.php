@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
     <link rel="stylesheet" href="./css/main.css">
+
     <!-- jquery -->
     <script src="plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
@@ -64,7 +65,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">USER AGREEMENT</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">User Agreement</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -82,22 +83,28 @@
     <div class="modal fade" id="emailSending" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Verify Email</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <div class="modal-body">
-                    <h3>EMAIL VERIFICATION</h3>
                     <form id="emailVerificationForm">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Username</label>
+                            <label for="verUsername"><b>Username</b></label>
                             <input type="text" class="form-control" id="verUsername" placeholder="Enter Username">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
+                            <label for="email"><b>Email address</b></label>
                             <input type="email" class="form-control" id="email" placeholder="Enter email">
-                            <button type="button" class="btn btn-outline-primary" id="vfBtn" onclick="verifyEmail()" style="margin:1%">Check</button>
+                            <button type="button" class="btn btn-outline-primary btn-sm float-right" id="vfBtn" onclick="verifyEmail()" style="margin:2%">Check Email</button>
                         </div>
+                        <br>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Email Verification Code (6 digits)</label>
+                            <label for="code"><b>Email Verification Code (6 digits)</b></label>
                             <input type="number" class="form-control" id="code" placeholder="123456" min="100000" max="999999">
-                            <button type="button" class="btn btn-outline-primary" id="cdBtn" onclick="generateCode()" style="margin:1%" disabled>Send Code</button>
+                            <button type="button" class="btn btn-outline-primary btn-sm float-right" id="cdBtn" onclick="generateCode()" style="margin:2%" disabled>Send Code</button>
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -108,12 +115,12 @@
             </div>
         </div>
     </div>
-    
+
     <div class="modal fade" id="changePass" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
-                    CHANGE PASS
+                    Change Password
                     <div class="form-group">
                         <label for="exampleInputEmail1">New Password</label>
                         <input type="password" class="form-control" id="changePassw" placeholder="Enter Username">
