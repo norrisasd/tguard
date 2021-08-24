@@ -32,9 +32,7 @@
           <p>
             Reports
           </p>
-          <!-- <i class="right fas fa-angle-left"></i> -->
         </a>
-
       </li>
       <li class="nav-item">
         <a href="php/logout" class="nav-link">

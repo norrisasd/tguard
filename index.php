@@ -145,7 +145,7 @@ require_once './functions.php';
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Task Guard</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -212,7 +212,6 @@ require_once './functions.php';
                 <div class="col">
                   <label for="modalTimeSpent">Time Spent: </label>
                   <p id="modalTimeSpent">18 mins</p>
-
                 </div>
                 <div class="col">
                   <div class="float-right">
@@ -220,6 +219,12 @@ require_once './functions.php';
                     <button type="button" class="btn btn-outline-secondary btn-sm" style="margin-right: 2px;" id="btnPause"><i class="fas fa-pause"></i></button>
                     <button type="button" class="btn btn-outline-danger btn-sm" id="btnStop"><i class="fas fa-stop"></i></button>
                   </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                <label for="modalClient">Client: </label>
+                  <p id="modalClient">Agrisoft</p>
                 </div>
               </div>
               <div class="row">
