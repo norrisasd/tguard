@@ -65,7 +65,7 @@ $userinfo = $_SESSION['userInfo'];
         <div class="row">
           <div class="col">
             <div class="float-left" style="padding-left:15px;">
-              <h3><b>Welcome back,<br> <?php echo $userinfo['name']?></b></h3>
+              <h3><b>Welcome back,<br> <?php echo $userinfo['name'] ?></b></h3>
 
             </div>
           </div>
@@ -167,7 +167,7 @@ $userinfo = $_SESSION['userInfo'];
         <form method="get" id="viewTask" action="">
           <div class="modal-body">
             <div class="container-fluid">
-              <div class="row">
+              <div class="row" >
                 <div class="col">
                   <label for="modalStartDate">Start Date: </label>
                   <p id="modalStartDate">---</p>
@@ -187,6 +187,11 @@ $userinfo = $_SESSION['userInfo'];
                     <button type="button" class="btn btn-outline-secondary btn-sm" style="margin-right: 2px;" id="btnPause"><i class="fas fa-pause"></i></button>
                     <button type="button" class="btn btn-outline-danger btn-sm" id="btnStop"><i class="fas fa-stop"></i></button>
                   </div>
+                </div>
+              </div>
+              <div class="row justify-content-end" style="margin-bottom: 1%;">
+                <div class="col-auto">
+                  <button type="button" class="btn btn-primary mr-auto" id="btnFinish" style="min-width: 102px;" >Finish</button>
                 </div>
               </div>
               <div class="row">
@@ -234,7 +239,6 @@ $userinfo = $_SESSION['userInfo'];
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" id="btnDelete">Delete</button>
-            <button type="button" class="btn btn-primary mr-auto" id="btnFinish">Finish</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
           </div>

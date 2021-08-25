@@ -167,7 +167,8 @@ require_once '../functions.php';
               <label for="inputAgent">Agent Name</label>
               <select class="form-control" id="inputAgentID" required>
                 <option value="" selected hidden>Select Agent</option>
-                <?php //displayAllAgents() ?>
+                <?php //displayAllAgents() 
+                ?>
               </select>
             </div>
             <div class="form-group">
@@ -219,7 +220,7 @@ require_once '../functions.php';
                   </div>
                 </div>
               </div>
-              <div class="row justify-content-start">
+              <div class="row">
                 <div class="col">
                   <label for="modalClient">Client: </label>
                   <p id="modalClient">Agrisoft</p>
@@ -228,8 +229,11 @@ require_once '../functions.php';
                   <label for="modalAgent">Agent: </label>
                   <p id="modalAgent">John Doe</p>
                 </div>
-                <div class="col"></div>
-                <div class="col"></div>
+                <div class="col ">
+                  <div class="float-right">
+                    <button type="button" class="btn btn-primary mr-auto" id="btnFinish" style="min-width: 102px;">Finish</button>
+                  </div>
+                </div>
               </div>
               <div class="row">
                 <div class="col">
