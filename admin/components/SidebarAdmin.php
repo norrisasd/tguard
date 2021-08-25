@@ -19,7 +19,7 @@
         </div>
       </div>
       <li class="nav-item menu-open">
-        <a href="./index2" class="nav-link active">
+        <a href="./index" class="nav-link active">
           <i class="nav-icon fas fa-tachometer-alt"></i>
           <p>
             Dashboard
@@ -81,7 +81,7 @@
       </li>
       </li>
       <li class="nav-item">
-        <a href="php/logout" class="nav-link">
+        <a href="../php/logout" class="nav-link">
           <i class="nav-icon fas fa-sign-out-alt"></i>
           <p>
             Logout
