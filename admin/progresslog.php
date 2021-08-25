@@ -56,37 +56,49 @@ require_once '../functions.php';
             <section class="content">
                 <div class="container-fluid">
                     <div class="card-body">
-                       
+
                         <!-- Table Starts -->
-                        
+
                         <table id="dataTable" class="table table-bordered table-hover" style="height:100%;background-color:white">
                             <thead>
                                 <tr>
                                     <th class="text-center"></th>
-                                    </th>
+                                    <th>Agent Name</th>
                                     <th>Task Name</th>
                                     <th>Client Name</th>
                                     <th>Notes</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
                                     <th>Time Spent</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <td class="text-center"></td>
+                                <td>Norris Hipolito</td>
+                                <td>Finish Task Guard</td>
+                                <td>John Doe</td>
+                                <td>Lorem Ipsum</td>
+                                <td>June 20, 2021 at 2:30 AM</td>
+                                <td>June 20, 2021 at 2:30 PM</td>
+                                <td>12 hrs</td>
+                                <td> <button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-eye"></i></button>
+                                </td>
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th></th>
+                                    <th>Agent Name</th>
                                     <th>Task Name</th>
                                     <th>Client Name</th>
                                     <th>Notes</th>
                                     <th>Start Time</th>
                                     <th>End Time</th>
                                     <th>Time Spent</th>
+                                    <th></th>
                                 </tr>
                             </tfoot>
                         </table>
-
                     </div>
                 </div>
             </section>
@@ -95,6 +107,110 @@ require_once '../functions.php';
     </section>
     </div>
     </div>
+
+    <!-- Modal for the View -->
+    <div class="modal fade bd-example-modal-lg" id="" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTaskName">Title of Task</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="get" id="viewTask" action="">
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="modalStartDate">Start Date: </label>
+                                    <p id="modalStartDate">June 8, 2021 at 11:00 PM</p>
+                                </div>
+                                <div class="col">
+                                    <label for="modalEndDate">End Date: </label>
+                                    <p id="modalEndDate">June 8, 2021 at 11:00 PM</p>
+                                </div>
+                                <div class="col">
+                                    <label for="modalTimeSpent">Time Spent: </label>
+                                    <p id="modalTimeSpent">18 mins</p>
+
+                                </div>
+                                <div class="col">
+                                    <div class="float-right">
+                                        <button type="button" class="btn btn-outline-success btn-sm" style="margin-right: 2px;" id="btnPlay"><i class="fas fa-play"></i></button>
+                                        <button type="button" class="btn btn-outline-secondary btn-sm" style="margin-right: 2px;" id="btnPause"><i class="fas fa-pause"></i></button>
+                                        <button type="button" class="btn btn-outline-danger btn-sm" id="btnStop"><i class="fas fa-stop"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-start">
+                                <div class="col">
+                                    <label for="modalClient">Client: </label>
+                                    <p id="modalClient">Agrisoft</p>
+                                </div>
+                                <div class="col">
+                                    <label for="modalAgent">Agent: </label>
+                                    <p id="modalAgent">John Doe</p>
+                                </div>
+                                <div class="col"></div>
+                                <div class="col"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <hr class="mt-2 mb-3" />
+                                    <div class="form-group">
+                                        <label for="inputDescription2">Notes: </label>
+                                        <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="inputSubTasks">Sub-Tasks: </label>
+                                        <textarea type="text" class="form-control" id="inputSubTasks"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="inputComments">Comments: </label>
+                                        <textarea type="text" class="form-control" id="inputComments">Lorem Ipsum Lorem Ipsum</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- This entire row can be commented -->
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="inputFile">Attachments: </label><br>
+                                        <div>
+                                            <form action="/file-upload">
+                                                <div class="fallback center-block">
+                                                    <input class="form-control" id="file" name="file" type="file" multiple />
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger mr-auto">Delete</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+
+
+            </div>
+            </form>
+        </div>
+    </div>
+
+
     <!-- jQuery -->
     <script src="../plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
