@@ -3,55 +3,6 @@ toastr.options.preventDuplicates = true;
 toastr.options.closeButton = true;
 displayUpcomingTask();  
 displayInProgress();
-$("#btnPlay").click(function() {
-  $.ajax({
-    type:'get',
-    url:'./main.php',
-    data:{
-      btnPlay:true,
-      cb_id:this.value,
-    },
-    success:function(response){
-      if(response == 'updated'){
-        $(".modal").modal("hide");
-        toastr.success("Task started");
-        displayInProgress();
-        displayUpcomingTask();
-      }else{
-        toastr.error("There was an error!");
-      }
-      
-    }
-  });
-});
-$("#btnPause").click(function(){
-  $.ajax({
-    type:'get',
-    url:'./main.php',
-    data:{
-      btnPause:true,
-      cb_id:this.value,
-    },
-    success:function(response){
-      if(response == 'updated'){
-        $(".modal").modal("hide");
-        toastr.success("Task Paused");
-        displayInProgress();
-        displayUpcomingTask();
-      }else{
-        toastr.error("There was an error!");
-      }
-      
-    }
-  });
-});
-$("#btnStop").click(function() {
-  $("#btnPlay").attr("disabled", true);
-  $("#btnPause").attr("disabled", true);
-  $("#btnStop").attr("disabled", true);
-  $(".modal").modal("hide");
-  toastr.success("Task stopped");
-});
 $.widget.bridge('uibutton', $.ui.button);
 $('[data-toggle="popover"]').popover();
   var dt = $('#dataTable').DataTable({
@@ -183,6 +134,10 @@ function addTask(){
         displayProgress:true
       },
       success:function(response){
+        if(response ==''){
+          $("#inProgress ul").html(content);
+          return false;
+        }
         result = JSON.parse(response);
         $.each(result, function(key, item) {
           let str = JSON.stringify(item);
@@ -211,14 +166,20 @@ function addTask(){
   }
   
   function taskInfo(data){
+    if(data.total_time == null){
+      data.total_time='';
+    }
     if(data.DateStarted == null){
       $("#btnPause").prop('disabled', true);
       $("#btnStop").prop('disabled', true);
+      $("#btnFinish").prop('disabled', true);
     }
     setButtonForProgress(data.callback_id);
     $("#btnPlay").val(data.callback_id);
     $("#btnPause").val(data.callback_id);
     $("#btnStop").val(data.callback_id);
+    $("#btnDelete").val(data.callback_id);
+    $("#btnFinish").val(data.callback_id);
     $("#inputDescription2").val(data.Notes);
     $("#modalTaskName").html(data.TaskName);
     $("#modalStartDate").html(data.DateStarted==null?"---":data.DateStarted);
@@ -235,6 +196,11 @@ function addTask(){
         cb_id:cb_id
       },
       success:function(response){
+        
+        if(response == ''){
+          $("#btnPlay").prop('disabled', false);
+          return false;
+        }
         result = JSON.parse(response);
         if(result.status==1){
           $("#btnPlay").prop('disabled', false);
@@ -243,9 +209,121 @@ function addTask(){
         }else{
           $("#btnPlay").prop('disabled', true);
           $("#btnPause").prop('disabled', false);
-          $("#btnStop").prop('disabled', true);
+          $("#btnStop").prop('disabled', false);
+          $("#btnFinish").prop('disabled', false);
         }
       }
     });
 
   }
+  $("#btnPlay").click(function() {
+    $.ajax({
+      type:'get',
+      url:'./main.php',
+      data:{
+        btnPlay:true,
+        cb_id:this.value,
+      },
+      success:function(response){
+        if(response == 'updated'){
+          $(".modal").modal("hide");
+          toastr.success("Task started");
+          displayInProgress();
+          displayUpcomingTask();
+        }else{
+          toastr.error("There was an error!");
+        }
+        
+      }
+    });
+  });
+  $("#btnPause").click(function(){
+    $.ajax({
+      type:'get',
+      url:'./main.php',
+      data:{
+        btnPause:true,
+        cb_id:this.value,
+      },
+      success:function(response){
+        if(response == 'updated'){
+          $(".modal").modal("hide");
+          toastr.success("Task Paused");
+          displayInProgress();
+          displayUpcomingTask();
+        }else{
+          toastr.error("There was an error!");
+        }
+        
+      }
+    });
+  });
+  $("#btnStop").click(function() {
+    if(confirm("Are you sure you want to stop and reset this task?")){
+      $.ajax({
+        type:'get',
+        url:'./main.php',
+        data:{
+          btnStop:true,
+          cb_id:this.value,
+        },
+        success:function(response){
+          if(response == 'stopped'){
+            $(".modal").modal("hide");
+            toastr.success("Task Stopped");
+            displayInProgress();
+            displayUpcomingTask();
+          }else{
+            toastr.error("There was an error!");
+          }
+          
+        }
+      });
+    }
+  });
+  $("#btnDelete").click(function() {
+    if(confirm("Are you sure you want to delete this task?")){
+      $.ajax({
+        type:'get',
+        url:'./main.php',
+        data:{
+          btnDelete:true,
+          cb_id:this.value,
+        },
+        success:function(response){
+          if(response == 'deleted'){
+            $(".modal").modal("hide");
+            toastr.success("Task Deleted");
+            displayInProgress();
+            displayUpcomingTask();
+          }else{
+            toastr.error("There was an error!");
+          }
+          
+        }
+      });
+    }
+    
+  });
+  $("#btnFinish").click(function() {
+    $.ajax({
+      type:'get',
+      url:'./main.php',
+      data:{
+        btnFinish:true,
+        cb_id:this.value,
+      },
+      success:function(response){
+        if(response == 'updated'){
+          $(".modal").modal("hide");
+          toastr.success("Task Finish!");
+          displayInProgress();
+          displayUpcomingTask();
+        }else{
+          toastr.error(response);
+        }
+        
+      }
+    });
+    
+  });

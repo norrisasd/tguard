@@ -68,7 +68,7 @@
     }
 
     if(isset($_GET['displayProgress'])){
-        $query="SELECT callback.*,SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) as total_time FROM `callback`,timerecord WHERE callback.DateStarted is not NULL AND callback.callback_id=timerecord.callback_id GROUP BY callback.callback_id;";
+        $query="SELECT callback.*,SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) as total_time FROM `callback`,timerecord WHERE callback.status=0 AND callback.DateStarted is not NULL AND callback.callback_id=timerecord.callback_id GROUP BY callback.callback_id;";
         $result=mysqli_query($dbConnection,$query);
         if(mysqli_num_rows($result)>0){
             $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -112,6 +112,59 @@
 
         }else{
             $result = '';
+        }
+    }
+
+    if(isset($_GET['btnDelete'])){
+        $cb_id = $_GET['cb_id'];
+        $query = "DELETE FROM `callback` WHERE callback_id = $cb_id ";
+        $result = mysqli_query($dbConnection,$query);
+        if($result){
+            $query = "DELETE FROM `timerecord` WHERE callback_id = $cb_id ";
+            $result = mysqli_query($dbConnection,$query);
+            if($result){
+                $result = 'deleted';
+            }else{
+                $result= '';
+            }
+            
+        }else{
+            $result = '';
+        }
+    }
+
+    if(isset($_GET['btnStop'])){
+        $cb_id = $_GET['cb_id'];
+        $query = "UPDATE `callback` set DateStarted = NULL WHERE callback_id = $cb_id ";
+        $result = mysqli_query($dbConnection,$query);
+        if($result){
+            $query = "DELETE FROM `timerecord` WHERE callback_id = $cb_id ";
+            $result = mysqli_query($dbConnection,$query);
+            if($result){
+                $result = 'stopped';
+            }else{
+                $result= '';
+            }
+            
+        }else{
+            $result = '';
+        }
+    }
+    if(isset($_GET['btnFinish'])){
+        $cb_id = $_GET['cb_id'];
+        $query = "UPDATE `callback` SET status = 1, DateEnded = CURDATE() WHERE callback_id = $cb_id";
+        $result = mysqli_query($dbConnection,$query);
+        if($result){
+            $query = "UPDATE `timerecord` SET status = 1 WHERE callback_id = $cb_id and status = 0 ";
+            $result = mysqli_query($dbConnection,$query);
+            if($result){
+                $result = 'updated';
+            }else{
+                $result= mysqli_error($dbConnection);
+            }
+            
+        }else{
+            $result = mysqli_error($dbConnection);
         }
     }
 
