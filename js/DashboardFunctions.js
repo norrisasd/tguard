@@ -109,7 +109,7 @@ function addTask(){
           </div>
           <b>`+item.TaskName+`</b>
           <div class="clearfix"></div>
-          `+item.Notes+`
+          `+nl2br(item.Notes)+`
           <div class="mt-3">
             <p class="float-right">
               <button class="btn btn-success btn-sm waves-effect waves-light" onclick='taskInfo(`+str+`)' data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="fas fa-eye"></i></button>
@@ -148,7 +148,7 @@ function addTask(){
           </div>
           <b>`+item.TaskName+`</b>
           <div class="clearfix"></div>
-          `+item.Notes+`
+          `+nl2br(item.Notes)+`
           <div class="mt-3">
             <p class="float-right">
               <button class="btn btn-success btn-sm waves-effect waves-light" onclick='taskInfo(`+str+`)' data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="fas fa-eye"></i></button>
@@ -164,7 +164,6 @@ function addTask(){
     });
     return false;
   }
-  
   function taskInfo(data){
     if(data.total_time == null){
       data.total_time='';
@@ -180,14 +179,16 @@ function addTask(){
     $("#btnStop").val(data.callback_id);
     $("#btnDelete").val(data.callback_id);
     $("#btnFinish").val(data.callback_id);
+    $("#btnSave").val(data.callback_id);
     $("#inputDescription2").val(data.Notes);
     $("#modalTaskName").html(data.TaskName);
     $("#modalStartDate").html(data.DateStarted==null?"---":data.DateStarted);
     $("#modalEndDate").html(data.DateEnded==null?"---":data.DateEnded);
     $("#modalTimeSpent").html(data.total_time.match("00:00:00")?"---":data.total_time);
+    $("#inputSubTasks").val(data.sub_task);
+    $("#inputComments").val(data.comments);
   }
   function setButtonForProgress(cb_id){
-    let retval;
     $.ajax({
       type:'get',
       url:'./main.php',
@@ -327,3 +328,38 @@ function addTask(){
     });
     
   });
+  $("#btnSave").click(function() {
+    notes = $("#inputDescription2").val();
+    subtask=$("#inputSubTasks").val();
+    comments=$("#inputComments").val();
+    $.ajax({
+      type:'post',
+      url:'./main.php',
+      data:{
+        btnSave:true,
+        cb_id:this.value,
+        notes:notes,
+        subtask:subtask,
+        comments:comments
+      },
+      success:function(response){
+        if(response == 'updated'){
+          $(".modal").modal("hide");
+          toastr.success("Task Saved!");
+          displayInProgress();
+          displayUpcomingTask();
+        }else{
+          toastr.error(response);
+        }
+        
+      }
+    });
+    
+  });
+  function nl2br (str, is_xhtml) {
+    if (typeof str === 'undefined' || str === null) {
+        return '';
+    }
+    var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
+    return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+}

@@ -236,7 +236,7 @@ $userinfo = $_SESSION['userInfo'];
             <button type="button" class="btn btn-danger" id="btnDelete">Delete</button>
             <button type="button" class="btn btn-primary mr-auto" id="btnFinish">Finish</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
           </div>
       </div>
       </form>

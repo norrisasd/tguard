@@ -12,7 +12,12 @@
         $notes=$_GET['notes'];
         $query ="INSERT INTO `callback`(`user_id`,`TaskName`, `client_name`, `Notes`, `datecreated`, `status`) VALUES ('".$userinfo['user_id']."','$taskname','$clientname','$notes',CURDATE(),0)";
         if(mysqli_query($dbConnection,$query)){
-            $result.="Task Created";
+            $query ="INSERT INTO `callback_extend`(`callback_id`, `sub_task`, `comments`) VALUES (last_insert_id(),'','');";
+            if(mysqli_query($dbConnection,$query)){
+                $result.="Task Created";
+            }else{
+                echo mysqli_error($dbConnection);
+            }
         }else{
             echo mysqli_error($dbConnection);
         }
@@ -57,7 +62,7 @@
     }
 
     if(isset($_GET['displayUpcoming'])){
-        $query="SELECT * FROM callback WHERE DateStarted is NULL";
+        $query="SELECT callback.*,callback_extend.sub_task,callback_extend.comments FROM `callback` INNER JOIN callback_extend ON callback.callback_id = callback_extend.callback_id WHERE callback.DateStarted is NULL;";
         $result=mysqli_query($dbConnection,$query);
         if(mysqli_num_rows($result)>0){
             $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -68,7 +73,7 @@
     }
 
     if(isset($_GET['displayProgress'])){
-        $query="SELECT callback.*,SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) as total_time FROM `callback`,timerecord WHERE callback.status=0 AND callback.DateStarted is not NULL AND callback.callback_id=timerecord.callback_id GROUP BY callback.callback_id;";
+        $query="SELECT callback.*,SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) as total_time,callback_extend.sub_task,callback_extend.comments FROM `callback` INNER JOIN timerecord ON callback.callback_id=timerecord.callback_id INNER JOIN callback_extend ON callback.callback_id =callback_extend.callback_id WHERE callback.status=0 AND callback.DateStarted is not NULL GROUP BY callback.callback_id;";
         $result=mysqli_query($dbConnection,$query);
         if(mysqli_num_rows($result)>0){
             $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -156,6 +161,26 @@
         $result = mysqli_query($dbConnection,$query);
         if($result){
             $query = "UPDATE `timerecord` SET status = 1 WHERE callback_id = $cb_id and status = 0 ";
+            $result = mysqli_query($dbConnection,$query);
+            if($result){
+                $result = 'updated';
+            }else{
+                $result= mysqli_error($dbConnection);
+            }
+            
+        }else{
+            $result = mysqli_error($dbConnection);
+        }
+    }
+    if(isset($_POST['btnSave'])){
+        $notes = $_POST['notes'];
+        $subtask = $_POST['subtask'];
+        $comments = $_POST['comments'];
+        $cb_id = $_POST['cb_id'];
+        $query = "UPDATE `callback` SET Notes = '$notes' WHERE callback_id = $cb_id";
+        $result = mysqli_query($dbConnection,$query);
+        if($result){
+            $query = "UPDATE `callback_extend` SET sub_task = '$subtask', comments='$comments' WHERE callback_id = $cb_id";
             $result = mysqli_query($dbConnection,$query);
             if($result){
                 $result = 'updated';

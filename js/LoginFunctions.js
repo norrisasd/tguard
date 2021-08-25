@@ -10,8 +10,10 @@ function setLogin(){
             password:password
         },
         success:function(response){
-            if(response){
+            if(response =='agent'){
                 window.location.href="./"
+            }else if(response =='admin'){
+                window.location.href="./admin"
             }else{
                 toastr.error("Invalid Credentials");
             }
