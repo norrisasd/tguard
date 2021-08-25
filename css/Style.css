@@ -13,6 +13,11 @@ body{
     
 }
 
+.table a:link {
+    color: #0645AD !important;
+    cursor:pointer;  
+}
+
 a {
     color: #98a6ad;
     text-decoration: none;
