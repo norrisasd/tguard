@@ -177,12 +177,99 @@ require_once '../functions.php';
 
         );
 
+        //Just using the old data in the config
+        //to change the data just change the config
         var chartWeek = new Chart(
             document.getElementById('chartWeek'),
             config
 
         );
-   
+
+        //Area Chart
+        var ctx = document.getElementById("chartHour").getContext("2d");
+
+        const colors = {
+            green: {
+                fill: '#e0eadf',
+                stroke: '#5eb84d',
+            },
+            lightBlue: {
+                stroke: '#6fccdd',
+            },
+            darkBlue: {
+                fill: '#92bed2',
+                stroke: '#3282bf',
+            },
+            purple: {
+                fill: '#8fa8c8',
+                stroke: '#75539e',
+            },
+        };
+
+        const loggedIn = [26, 36, 42, 38, 40, 30, 12];
+        const available = [34, 44, 33, 24, 25, 28, 25];
+        const availableForExisting = [16, 13, 25, 33, 40, 33, 45];
+        const unavailable = [5, 9, 10, 9, 18, 19, 20];
+        const xData = [13, 14, 15, 16, 17, 18, 19];
+
+        const chartHour = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: xData,
+                datasets: [{
+                    label: "Unavailable",
+                    fill: true,
+                    backgroundColor: colors.purple.fill,
+                    pointBackgroundColor: colors.purple.stroke,
+                    borderColor: colors.purple.stroke,
+                    pointHighlightStroke: colors.purple.stroke,
+                    borderCapStyle: 'butt',
+                    data: unavailable,
+
+                }, {
+                    label: "Available for Existing",
+                    fill: true,
+                    backgroundColor: colors.darkBlue.fill,
+                    pointBackgroundColor: colors.darkBlue.stroke,
+                    borderColor: colors.darkBlue.stroke,
+                    pointHighlightStroke: colors.darkBlue.stroke,
+                    borderCapStyle: 'butt',
+                    data: availableForExisting,
+                }, {
+                    label: "Available",
+                    fill: true,
+                    backgroundColor: colors.green.fill,
+                    pointBackgroundColor: colors.lightBlue.stroke,
+                    borderColor: colors.lightBlue.stroke,
+                    pointHighlightStroke: colors.lightBlue.stroke,
+                    borderCapStyle: 'butt',
+                    data: available,
+                }, {
+                    label: "Logged In",
+                    fill: true,
+                    backgroundColor: colors.green.fill,
+                    pointBackgroundColor: colors.green.stroke,
+                    borderColor: colors.green.stroke,
+                    pointHighlightStroke: colors.green.stroke,
+                    data: loggedIn,
+                }]
+            },
+            options: {
+                responsive: true,
+                // Can't just just `stacked: true` like the docs say
+                scales: {
+                    yAxes: [{
+                        stacked: true,
+                    }]
+                },
+                animation: {
+                    duration: 750,
+                },
+            }
+        });
+
+
+
         $(".mt-2 ul li").removeClass("menu-open");
         $(".mt-2 ul li a").removeClass("active");
         $(".mt-2 ul li:nth-child(3) ul li:nth-child(1)").removeClass("menu-open");
@@ -190,6 +277,7 @@ require_once '../functions.php';
         $(".mt-2 ul li:nth-child(3) ul li:nth-child(2)").addClass("menu-open");
         $(".mt-2 ul li:nth-child(3) ul li:nth-child(2) a").addClass("active");
     </script>
+
 
 </body>
 
