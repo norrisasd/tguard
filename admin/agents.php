@@ -48,22 +48,27 @@
                                 <tr>
                                     <th class="text-center"></th>
                                     <th>Agent Name</th>
+                                    <th>Phone</th>
                                     <th>Email</th>
                                     <th>Access</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <td></td>
-                                <td><a href="#" class="table" onclick="" data-toggle="modal" data-target="#userInfo">Norris Hipolito</a></td>
-                                <td>norris@gmail.com</td>
-                                <td>Agent</td>
+                                <tr>
+                                    <td></td>
+                                    <td><a href="#" class="table" onclick="" data-toggle="modal" data-target="#userInfo">Norris Hipolito</a></td>
+                                    <td>norris@gmail.com</td>
+                                    <td>Agent</td>
+                                    <td>Agent</td>
+                                </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th class="text-center"></th>
                                     <th>Agent Name</th>
+                                    <th>Phone</th>
                                     <th>Email</th>
-                                    <th>Access</th>
+                                    <th>Username</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -294,6 +299,29 @@
         $(".mt-2 ul li:nth-child(3) ul li:nth-child(1) a").removeClass("active");
         $(".mt-2 ul li:nth-child(4) ul li:nth-child(1)").addClass("menu-open");
         $(".mt-2 ul li:nth-child(4) ul li:nth-child(1) a").addClass("active");
+        var cb="";
+        $.ajax({
+            type:'get',
+            url:'./main.php',
+            data:{
+                getAgentsJSON:true
+            },
+            success:function(response){
+                data =JSON.parse(response);
+                dt.clear().draw();
+                for(var da in data){
+                    access = data[da].access=='2'?"Agent":"Admin";
+                    dt.row.add([
+                        cb,
+                        data[da].name,
+                        data[da].phone,
+                        data[da].email,
+                        access,
+                        data[da].access
+                    ]).draw();
+                }
+            }
+        })
     </script>
 
 </body>

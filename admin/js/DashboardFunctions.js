@@ -62,7 +62,7 @@ function addTask(){
   taskname= $("#inputTaskName").val();
   clientname=$("#inputClientID").val();
   notes=$("#inputNotes").val();
-
+  agent = $("#inputAgentID").val();
   
   $.ajax({
     type:'get',
@@ -70,7 +70,8 @@ function addTask(){
     data:{
       taskname:taskname,
       clientname:clientname,
-      notes:notes
+      notes:notes,
+      agent:agent
     },
     success:function(response){
       if(response=='Task Created'){
@@ -111,6 +112,9 @@ function addTask(){
           <div class="clearfix"></div>
           `+nl2br(item.Notes)+`
           <div class="mt-3">
+            <p class="mb-1">Agent:
+              <span><i>`+item.name+`</i></span>
+            </p>
             <p class="float-right">
               <button class="btn btn-success btn-sm waves-effect waves-light" onclick='taskInfo(`+str+`)' data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="fas fa-eye"></i></button>
             </p>
@@ -150,6 +154,9 @@ function addTask(){
           <div class="clearfix"></div>
           `+nl2br(item.Notes)+`
           <div class="mt-3">
+            <p class="mb-1">Agent:
+              <span><i>`+item.name+`</i></span>
+            </p>
             <p class="float-right">
               <button class="btn btn-success btn-sm waves-effect waves-light" onclick='taskInfo(`+str+`)' data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="fas fa-eye"></i></button>
             </p>
@@ -184,9 +191,11 @@ function addTask(){
     $("#modalTaskName").html(data.TaskName);
     $("#modalStartDate").html(data.DateStarted==null?"---":data.DateStarted);
     $("#modalEndDate").html(data.DateEnded==null?"---":data.DateEnded);
-    $("#modalTimeSpent").html(data.total_time.match("00:00:00")?"---":data.total_time);
+    $("#modalTimeSpent").html(data.total_time.match("")?"---":data.total_time);
     $("#inputSubTasks").val(data.sub_task);
     $("#inputComments").val(data.comments);
+    $("#modalAgent").html(data.name);
+    $("#modalClient").html(data.client_name);
   }
   function setButtonForProgress(cb_id){
     $.ajax({
@@ -351,10 +360,10 @@ function addTask(){
         }else{
           toastr.error(response);
         }
+        
       }
     });
     return false;
-    
   });
   function nl2br (str, is_xhtml) {
     if (typeof str === 'undefined' || str === null) {

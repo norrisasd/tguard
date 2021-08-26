@@ -1,16 +1,18 @@
 <?php
-    require_once 'Config.php';
-    require_once 'functions.php';
+// ADMIN MAIN PHP
+    require_once '../Config.php';
+    require_once '../functions.php';
     $userinfo = $_SESSION['userInfo'];
     $user_id = $userinfo['user_id'];
     $result='';
 
-    if(isset($_GET['taskname']) && isset($_GET['clientname'])&& isset($_GET['notes'])){
+    if(isset($_GET['taskname']) && isset($_GET['clientname'])&& isset($_GET['notes']) && $_GET['agent']){
         //add session name
         $taskname=$_GET['taskname'];
         $clientname=$_GET['clientname'];
         $notes=$_GET['notes'];
-        $query ="INSERT INTO `callback`(`user_id`,`TaskName`, `client_name`, `Notes`, `datecreated`, `status`) VALUES ('".$userinfo['user_id']."','$taskname','$clientname','$notes',CURDATE(),0)";
+        $agent=$_GET['agent'];
+        $query ="INSERT INTO `callback`(`user_id`,`TaskName`, `client_name`, `Notes`, `datecreated`, `status`) VALUES ('$agent','$taskname','$clientname','$notes',CURDATE(),0)";
         if(mysqli_query($dbConnection,$query)){
             $query ="INSERT INTO `callback_extend`(`callback_id`, `sub_task`, `comments`) VALUES (last_insert_id(),'','');";
             if(mysqli_query($dbConnection,$query)){
@@ -24,8 +26,8 @@
     }
 
     //DISPLAY ALL TASK
-    if(isset($_GET['getTaskByUser'])){
-        $query="SELECT callback.*,SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) as total_time FROM `callback`,timerecord WHERE callback.user_id=$user_id AND callback.callback_id=timerecord.callback_id GROUP BY callback.callback_id;";
+    if(isset($_GET['getAllTask'])){
+        $query="SELECT callback.*,SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) as total_time,user.name,callback_extend.sub_task,callback_extend.comments FROM `callback` INNER JOIN timerecord on callback.callback_id=timerecord.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id GROUP BY callback.callback_id ORDER BY callback.user_id;";
         $result=mysqli_query($dbConnection,$query);
         if(mysqli_num_rows($result)>0){
             $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -34,19 +36,23 @@
     }
 
     // FILTERING
-    if(isset($_GET['searchClientName']) || isset($_GET['searchStartDate']) || isset($_GET['searchEndDate']) || isset($_GET['searchTime']) || isset($GET['startDate'])){
+    if(isset($_GET['search'])){
         $cname=$_GET['searchClientName'];
+        $aID=$_GET['searchAgentName'];
+        $tID=$_GET['searchTaskName'];
         $sdate=$_GET['searchStartDate'];
         $edate=$_GET['searchEndDate'];
-        $time = $_GET['searchTime'];
-        $bsdate=$_GET['startDate'];
-        $bedate=$_GET['endDate'];
-        $cname = $cname==""?"":"AND client_name ='".$cname."'";
-        $sdate = $sdate==""?"":"AND DateStarted='".$sdate."'";
-        $edate = $edate==""?"":"AND DateEnded='".$edate."'";
-        $time = $time=="00:00"?"":"AND callback.TimeSpent='".$time."'";
-        $betweenDate=$bsdate==''?'':"AND (('$bsdate' between DateStarted and DateEnded) or ('$bedate' between DateStarted and DateEnded) or ('$bsdate' <= DateStarted and '$bedate' >= DateEnded))";
-        $query="SELECT callback.*,SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) as total_time FROM `callback`,timerecord WHERE callback.user_id=$user_id AND callback.callback_id=timerecord.callback_id $cname $sdate $edate $time $betweenDate GROUP BY callback.callback_id;";
+        // $time = $_GET['searchTime'];
+        // $bsdate=$_GET['startDate'];
+        // $bedate=$_GET['endDate'];
+        $cname = $cname==""?"":"AND callback.client_name ='".$cname."'";
+        $aID = $aID==""?"":"AND callback.user_id =".$aID."";
+        $tID = $tID==""?"":"AND callback.callback_id =".$tID."";
+        $sdate = $sdate==""?"":"AND callback.DateStarted='".$sdate."'";
+        $edate = $edate==""?"":"AND callback.DateEnded='".$edate."'";
+        // $time = $time=="00:00"?"":"AND callback.TimeSpent='".$time."'";
+        // $betweenDate=$bsdate==''?'':"AND (('$bsdate' between DateStarted and DateEnded) or ('$bedate' between DateStarted and DateEnded) or ('$bsdate' <= DateStarted and '$bedate' >= DateEnded))";
+        $query="SELECT callback.*,SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) as total_time,user.name,callback_extend.sub_task,callback_extend.comments FROM `callback` INNER JOIN timerecord on callback.callback_id=timerecord.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id WHERE callback.status IN (1,2) $cname $aID $tID $sdate $edate GROUP BY callback.callback_id ORDER BY callback.user_id;";
         $result=mysqli_query($dbConnection,$query);
         if($result){
             if(mysqli_num_rows($result)>0){
@@ -62,7 +68,7 @@
     }
 
     if(isset($_GET['displayUpcoming'])){
-        $query="SELECT callback.*,callback_extend.sub_task,callback_extend.comments FROM `callback` INNER JOIN callback_extend ON callback.callback_id = callback_extend.callback_id WHERE callback.user_id =$user_id AND callback.DateStarted is NULL;";
+        $query="SELECT callback.*,callback_extend.sub_task,callback_extend.comments,user.name FROM `callback` INNER JOIN callback_extend ON callback.callback_id = callback_extend.callback_id INNER JOIN user ON user.user_id=callback.user_id WHERE callback.DateStarted is NULL;";
         $result=mysqli_query($dbConnection,$query);
         if(mysqli_num_rows($result)>0){
             $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -73,7 +79,7 @@
     }
 
     if(isset($_GET['displayProgress'])){
-        $query="SELECT callback.*,SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) as total_time,callback_extend.sub_task,callback_extend.comments FROM `callback` INNER JOIN timerecord ON callback.callback_id=timerecord.callback_id INNER JOIN callback_extend ON callback.callback_id =callback_extend.callback_id WHERE callback.user_id =$user_id AND callback.status=0 AND callback.DateStarted is not NULL GROUP BY callback.callback_id;";
+        $query="SELECT callback.*,SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) as total_time,callback_extend.sub_task,callback_extend.comments,user.name FROM `callback` INNER JOIN timerecord ON callback.callback_id=timerecord.callback_id INNER JOIN callback_extend ON callback.callback_id =callback_extend.callback_id INNER JOIN user ON user.user_id = callback.user_id WHERE callback.status=0 AND callback.DateStarted is not NULL GROUP BY callback.callback_id;";
         $result=mysqli_query($dbConnection,$query);
         if(mysqli_num_rows($result)>0){
             $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -190,6 +196,35 @@
             
         }else{
             $result = mysqli_error($dbConnection);
+        }
+    }
+
+    if(isset($_GET['getClientsJSON'])){
+        $query = "SELECT * FROM client";
+        $result = mysqli_query($dbConnection,$query);
+        if($result){
+            if(mysqli_num_rows($result)>0){
+                $result = mysqli_fetch_all($result,MYSQLI_ASSOC);
+                $result = json_encode($result);
+            }else{
+                echo mysqli_error($dbConnection);
+            }
+        }else{
+            echo mysqli_error($dbConnection);
+        }
+    }
+    if(isset($_GET['getAgentsJSON'])){
+        $query = "SELECT * FROM user";
+        $result = mysqli_query($dbConnection,$query);
+        if($result){
+            if(mysqli_num_rows($result)>0){
+                $result = mysqli_fetch_all($result,MYSQLI_ASSOC);
+                $result = json_encode($result);
+            }else{
+                echo mysqli_error($dbConnection);
+            }
+        }else{
+            echo mysqli_error($dbConnection);
         }
     }
 
