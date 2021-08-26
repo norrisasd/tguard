@@ -74,21 +74,13 @@
                                                         Agent
                                                     </label>
                                                 </div>
-
-
-
                                             </div>
-
                                         </div>
-
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     <div class="text-right mt-3">
                         <button type="button" class="btn btn-secondary">Cancel</button>
                         <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
@@ -96,7 +88,6 @@
                 </div>
             </section>
         </div>
-
     </div>
 
     <!-- jQuery -->
@@ -131,13 +122,6 @@
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.js"></script>
     <script src="js/TaskListFunctions.js"></script>
-
-    <script>
-        $(".mt-2 ul li").removeClass("menu-open");
-        $(".mt-2 ul li a").removeClass("active");
-        $(".mt-2 ul li:nth-child(3)").removeClass("menu-open");
-        $(".mt-2 ul li:nth-child(3) a").removeClass("active");
-    </script>
 
 
 </body>

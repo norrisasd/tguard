@@ -108,7 +108,6 @@
     </div>
 
 
-
     <!-- jQuery -->
     <script src="../plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -137,18 +136,8 @@
     <script src="../dist/js/adminlte.js"></script>
     <script src="../js/DashboardFunctions.js"></script>
 
-
     <script>
-        Dropzone.autoDiscover = false;
-        $("div#dropzone-example").dropzone({
-            url: "../php/upload", //Change the url to the php code
-            paramName: "file", // The name that will be used to transfer the file
-            maxFilesize: .5, // MB
-            addRemoveLinks: true,
-            dictDefaultMessage: '<span class="">Drop files (or click) to upload  </span> <br> \
-                    <i class="fas fa-cloud-upload-alt"></i>',
-            dictResponseError: 'Error while uploading file!',
-        });
+      
     </script>
 
 
