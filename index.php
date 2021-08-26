@@ -1,37 +1,6 @@
-<?php
-require_once './functions.php';
-$userinfo = $_SESSION['userInfo'];
-?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Task Guard</title>
-
-  <!-- Google Font: Source Sans Pro -->
-  <!-- Icons -->
-  <?php include("./components/icon.php"); ?>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="./plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="./plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="./plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
-  <!-- CUSTOM CSS -->
-  <link rel="stylesheet" href="css/Style.css">
-  <!-- toastr -->
-  <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
-  <link rel="stylesheet" href="plugins/dropzone/min/dropzone.min.css">
-</head>
+<?php include("./components/header.php");?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-
   <div class="wrapper">
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
@@ -155,7 +124,7 @@ $userinfo = $_SESSION['userInfo'];
   </div>
 
   <!-- Modal for the View -->
-  <div class="modal fade bd-example-modal-lg" id="" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal fade bd-example-modal-lg js-upload-file" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -167,7 +136,7 @@ $userinfo = $_SESSION['userInfo'];
         <form method="get" id="viewTask" action="">
           <div class="modal-body">
             <div class="container-fluid">
-              <div class="row" >
+              <div class="form-row">
                 <div class="col">
                   <label for="modalStartDate">Start Date: </label>
                   <p id="modalStartDate">---</p>
@@ -189,12 +158,12 @@ $userinfo = $_SESSION['userInfo'];
                   </div>
                 </div>
               </div>
-              <div class="row justify-content-end" style="margin-bottom: 1%;">
+              <div class="form-row justify-content-end" style="margin-bottom: 1%;">
                 <div class="col-auto">
-                  <button type="button" class="btn btn-primary mr-auto" id="btnFinish" style="min-width: 102px;" >Finish</button>
+                  <button type="button" class="btn btn-primary mr-auto" id="btnFinish" style="min-width: 102px;">Finish</button>
                 </div>
               </div>
-              <div class="row">
+              <div class="form-row">
                 <div class="col">
                   <hr class="mt-2 mb-3" />
                   <div class="form-group">
@@ -203,7 +172,7 @@ $userinfo = $_SESSION['userInfo'];
                   </div>
                 </div>
               </div>
-              <div class="row">
+              <div class="form-row">
                 <div class="col">
                   <div class="form-group">
                     <label for="inputSubTasks">Sub-Tasks: </label>
@@ -211,7 +180,7 @@ $userinfo = $_SESSION['userInfo'];
                   </div>
                 </div>
               </div>
-              <div class="row">
+              <div class="form-row">
                 <div class="col">
                   <div class="form-group">
                     <label for="inputComments">Comments: </label>
@@ -219,17 +188,17 @@ $userinfo = $_SESSION['userInfo'];
                   </div>
                 </div>
               </div>
-              <div class="row">
+              <div class="form-row">
                 <div class="col">
                   <div class="form-group">
                     <label for="inputFile">Attachments: </label><br>
 
-                    <div>
-                      <form action="/file-upload">
-                        <div class="fallback center-block">
-                          <input class="form-control" id="file" name="file" type="file" multiple />
-                        </div>
-                      </form>
+                    <div class="form-row">
+                      <div class="form-group" style="width:100%; padding-left: 1%">
+                        <div class="dropzone inputDrop" id="dropzone-example" enctype="multipart/form-data">
+                        
+                      </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -238,7 +207,7 @@ $userinfo = $_SESSION['userInfo'];
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" id="btnDelete">Delete</button>
+            <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
           </div>
@@ -268,7 +237,8 @@ $userinfo = $_SESSION['userInfo'];
   <script src="./plugins/datatables-buttons/js/buttons.html5.min.js"></script>
   <script src="./plugins/datatables-buttons/js/buttons.print.min.js"></script>
   <script src="./plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-  <script src="./plugins/dropzone/min/dropzone.min.js"></script>
+  <!-- DropZone -->
+  <script src="plugins/dropzone/min/dropzone.min.js"></script>
   <!-- TOASTR -->
   <script src="plugins/toastr/toastr.min.js"></script>
   <!-- AdminLTE App -->
@@ -277,7 +247,17 @@ $userinfo = $_SESSION['userInfo'];
 
 
   <script>
-    //Buttons
+    Dropzone.autoDiscover = false;
+    $("div#dropzone-example").dropzone({
+      url: "php/upload", //Change the url to the php code
+      paramName: "file", // The name that will be used to transfer the file
+      maxFilesize: .5, // MB
+      addRemoveLinks: true,
+      dictDefaultMessage: '<span class="">Drop files (or click) to upload  </span> <br> \
+                    <i class="fas fa-cloud-upload-alt"></i>', 
+      dictResponseError: 'Error while uploading file!',
+    });
+   
   </script>
 
 

@@ -1,34 +1,4 @@
-<?php
-require_once './functions.php';
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Task Guard</title>
-    <?php include("./components/icon.php"); ?>
-    <!-- Google Font: Source Sans Pro -->
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-    <!-- daterange picker -->
-    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="./plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="./plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="./plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-    <link rel="stylesheet" href="./plugins/datatables-select/css/select.bootstrap4.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/adminlte.min.css">
-    <!-- CUSTOM CSS -->
-    <link rel="stylesheet" href="css/Style.css">
-    <!-- toastr -->
-    <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
-</head>
+<?php include("./components/header.php"); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -74,7 +44,7 @@ require_once './functions.php';
                             <div class="col">
                                 <label for="endDate">Time Spent (hr:mn)</label>
                                 <div class="d-flex">
-                                    <input type="number" class="form-control" id="timeHr" placeholder="hr"  value="" style="margin-right:0.5%;">
+                                    <input type="number" class="form-control" id="timeHr" placeholder="hr" value="" style="margin-right:0.5%;">
                                     <input type="number" class="form-control" id="timeMn" placeholder="mn" min="0" max="60" onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;" value="" style="margin-right:0.5%;">
                                 </div>
                             </div>
