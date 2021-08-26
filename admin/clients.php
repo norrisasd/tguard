@@ -48,8 +48,8 @@
                                 <tr>
                                     <th class="text-center"></th>
                                     <th>Client Name</th>
+                                    <th>Phone</th>
                                     <th>Email</th>
-                                    <th>Access</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -62,8 +62,8 @@
                                 <tr>
                                     <th class="text-center"></th>
                                     <th>Client Name</th>
+                                    <th>Phone</th>
                                     <th>Email</th>
-                                    <th>Access</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -279,6 +279,26 @@
         $(".mt-2 ul li:nth-child(4) ul li:nth-child(1) a").removeClass("active");
         $(".mt-2 ul li:nth-child(4) ul li:nth-child(2)").addClass("menu-open");
         $(".mt-2 ul li:nth-child(4) ul li:nth-child(2) a").addClass("active");
+        var cb="";
+        $.ajax({
+            type:'get',
+            url:'./main.php',
+            data:{
+                getClientsJSON:true
+            },
+            success:function(response){
+                data =JSON.parse(response);
+                dt.clear().draw();
+                for(var da in data){
+                    dt.row.add([
+                        cb,
+                        data[da].ClientName,
+                        data[da].phone,
+                        data[da].email,
+                    ]).draw();
+                }
+            }
+        })
     </script>
 
 </body>

@@ -136,7 +136,7 @@
               <label for="inputAgent">Agent Name</label>
               <select class="form-control" id="inputAgentID" required>
                 <option value="" selected hidden>Select Agent</option>
-                <?php //displayAllAgents() 
+                <?php displayAllAgents() 
                 ?>
               </select>
             </div>
@@ -250,7 +250,7 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-danger mr-auto">Delete</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
           </div>
 
 
@@ -286,7 +286,7 @@
   <script src="../plugins/toastr/toastr.min.js"></script>
   <!-- AdminLTE App -->
   <script src="../dist/js/adminlte.js"></script>
-  <script src="../js/DashboardFunctions.js"></script>
+  <script src="./js/DashboardFunctions.js"></script>
 
 
   <script>

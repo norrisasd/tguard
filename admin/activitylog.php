@@ -29,39 +29,40 @@
                         <div class="row align-items-start">
                             <div class="col-sm-6">
                                 <label for="clientName">Client Name</label>
-                                <select id="clientName" class="form-control" onchange="searchTable()" style="margin-right:0.5%;">
+                                <select id="clientName" class="form-control" style="margin-right:0.5%;">
                                     <option value="" selected>Select Client</option>
-                                    <?php displayAllClients() ?>
+                                    <?php displayAllClients(); ?>
                                 </select>
                             </div>
                             <div class="col-sm-6">
                                 <label for="agentName">Agent Name</label>
-                                <select id="agentName" class="form-control" onchange="searchTable()" style="margin-right:0.5%;">
+                                <select id="agentName" class="form-control" style="margin-right:0.5%;">
                                     <option value="" selected>Select Agent</option>
-                                    <?php displayAllClients() ?>
+                                    <?php displayAllAgents(); ?>
                                 </select>
                             </div>
                         </div>
                         <div class="row " style="margin-top: 1%;">
                             <div class="col-sm-6">
-                                <label for="agentName">Task Name</label>
-                                <select id="agentName" class="form-control" onchange="searchTable()" style="margin-right:0.5%; ">
+                                <label for="taskName">Task Name</label>
+                                <select id="taskName" class="form-control" style="margin-right:0.5%; ">
                                     <option value="" selected>Select Task</option>
-                                    <?php displayAllClients() ?>
+                                    <?php displayAllTasks(); ?>
+                                    
                                 </select>
                             </div>
                             <div class="col-sm-3">
                                 <label for="startDate">Start Date</label>
-                                <input type="date" class="form-control" id="startDate" onchange="searchTable()" value="" style="margin-right:0.5%;">
+                                <input type="date" class="form-control" id="startDate" value="" style="margin-right:0.5%;">
                             </div>
                             <div class="col-sm-3">
                                 <label for="endDate">End Date</label>
-                                <input type="date" class="form-control" id="endDate" onchange="searchTable()" value="" style="margin-right:0.5%;">
+                                <input type="date" class="form-control" id="endDate" value="" style="margin-right:0.5%;">
                             </div>
                         </div>
                         <div class="row justify-content-end">
                             <div class="col-auto" style="margin-top: 2.5%;">
-                                <button type="button" class="btn btn-primary" style="padding-left:35px; padding-right:35px;">
+                                <button type="button" class="btn btn-primary" id="btnSearch" style="padding-left:35px; padding-right:35px;">
                                     Search
                                 </button>
                             </div>
@@ -105,6 +106,7 @@
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Time Spent</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -119,6 +121,7 @@
                                 <th>Start Time</th>
                                 <th>End Time</th>
                                 <th>Time Spent</th>
+                                <th></th>
                             </tr>
                         </tfoot>
                     </table>
@@ -131,6 +134,110 @@
     </section>
     </div>
     </div>
+    <!-- MODAL FOR VIEW -->
+    <div class="modal fade bd-example-modal-lg" id="" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTaskName">Title of Task</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form method="get" id="viewTask" action="">
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col">
+                  <label for="modalStartDate">Start Date: </label>
+                  <p id="modalStartDate">June 8, 2021 at 11:00 PM</p>
+                </div>
+                <div class="col">
+                  <label for="modalEndDate">End Date: </label>
+                  <p id="modalEndDate">June 8, 2021 at 11:00 PM</p>
+                </div>
+                <div class="col">
+                  <label for="modalTimeSpent">Time Spent: </label>
+                  <p id="modalTimeSpent">18 mins</p>
+
+                </div>
+                <div class="col">
+                  <div class="float-right">
+                    <button type="button" class="btn btn-outline-success btn-sm" style="margin-right: 2px;" id="btnPlay"><i class="fas fa-play"></i></button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm" style="margin-right: 2px;" id="btnPause"><i class="fas fa-pause"></i></button>
+                    <button type="button" class="btn btn-outline-danger btn-sm" id="btnStop"><i class="fas fa-stop"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                  <label for="modalClient">Client: </label>
+                  <p id="modalClient">Agrisoft</p>
+                </div>
+                <div class="col">
+                  <label for="modalAgent">Agent: </label>
+                  <p id="modalAgent">John Doe</p>
+                </div>
+                <div class="col ">
+                  <div class="float-right">
+                    <button type="button" class="btn btn-primary mr-auto" id="btnFinish" style="min-width: 102px;">Finish</button>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                  <hr class="mt-2 mb-3" />
+                  <div class="form-group">
+                    <label for="inputDescription2">Notes: </label>
+                    <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="inputSubTasks">Sub-Tasks: </label>
+                    <textarea type="text" class="form-control" id="inputSubTasks"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="inputComments">Comments: </label>
+                    <textarea type="text" class="form-control" id="inputComments">Lorem Ipsum Lorem Ipsum</textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="inputFile">Attachments: </label><br>
+
+                    <div class="form-row">
+                      <div class="form-group" style="width:100%; padding-left: 1%">
+                        <div class="dropzone inputDrop" id="dropzone-example" enctype="multipart/form-data">
+                        
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger mr-auto">Delete</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+          </div>
+
+
+      </div>
+      </form>
+    </div>
+  </div>
     <!-- jQuery -->
     <script src="../plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -153,16 +260,18 @@
     <script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <script src="../plugins/datatables-select/js/dataTables.select.min.js"></script>
     <!-- InputMask -->
-    <script src="../plugins/popper/popper.js"></script>
+    <script src="../plugins/popper/popper.min.js"></script>
     <script src="../plugins/moment/moment.min.js"></script>
     <script src="../plugins/inputmask/jquery.inputmask.min.js"></script>
     <!-- date-range-picker -->
+    <!-- DropZone -->
+    <script src="../plugins/dropzone/min/dropzone.min.js"></script>
     <script src="../plugins/daterangepicker/daterangepicker.js"></script>
     <!-- TOASTR -->
     <script src="../plugins/toastr/toastr.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../dist/js/adminlte.js"></script>
-    <script src="../js/TaskListFunctions.js"></script>
+    <script src="./js/ActivityLogFunctions.js"></script>
 
     <script>
         $(".mt-2 ul li").removeClass("menu-open");
@@ -171,6 +280,17 @@
         $(".mt-2 ul li:nth-child(3) a").removeClass("active");
         $(".mt-2 ul li:nth-child(3) ul li:nth-child(1)").addClass("menu-open");
         $(".mt-2 ul li:nth-child(3) ul li:nth-child(1) a").addClass("active");
+
+        Dropzone.autoDiscover = false;
+        var attachment=$("div#dropzone-example").dropzone({
+        url: "../php/upload", //Change the url to the php code
+        paramName: "file", // The name that will be used to transfer the file
+        maxFilesize: .5, // MB
+        addRemoveLinks: true,
+        dictDefaultMessage: '<span class="">Drop files (or click) to upload  </span> <br> \
+                        <i class="fas fa-cloud-upload-alt"></i>', 
+        dictResponseError: 'Error while uploading file!',
+        });
     </script>
 
 </body>

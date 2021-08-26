@@ -13,7 +13,7 @@ function setLogin(){
             if(response =='agent'){
                 window.location.href="./"
             }else if(response =='admin'){
-                window.location.href="./admin"
+                window.location.href="./admin/"
             }else{
                 toastr.error("Invalid Credentials");
             }
