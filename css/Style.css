@@ -13,24 +13,27 @@ body{
     
 }
 
+/* change color for hyperlink */
 .table a:link {
     color: #0645AD !important;
     cursor:pointer;  
 }
 
-a {
+.sideBar a:link {
     color: #98a6ad;
     text-decoration: none;
 }
 
-a:hover {
+a.side {
+    color: #98a6ad;
+    text-decoration: none;
+}
+
+a:hover.side {
     color:#fff; 
     text-decoration:none; 
     cursor:pointer;  
 }
-
-
-
 
 /* retain color if button is active and hovered */
 .nav-item > .active:hover {
@@ -99,24 +102,9 @@ a:hover {
 .inputDrop {
     background: white;
     border-radius: 5px;
-    border: 2px dashed rgb(0, 135, 247);
+    align-items: center;
     border-image: none;
-    max-width: 500px;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
-
-input#file {
-    display: inline-block;
-    width: 100%;
-    padding: 120px 0 0 0;
-    height: 100px;
-    overflow: hidden;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    background: url('../dist/img/cloud.png') center center no-repeat #fff;
-    border-radius: 5px;
-    background-size: 90px 90px;
-  }
-

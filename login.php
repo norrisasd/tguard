@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
     <link rel="stylesheet" href="./css/main.css">
+
 </head>
 
 <body>
@@ -17,38 +19,40 @@
                 <img src="dist/img/logo.png" class="mx-auto d-block" style="max-width: 15%;">
             </div>
         </div>
+
         <div class="row">
-            <div class="col-md-4 offset-md-4 form login-form">
-                <form class="form-signin" role="form" action="" method="get" onsubmit="return setLogin();">
-                    <div class="form-label-group">
-                        <h5><b>Login</b></h5>
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card border-0 shadow rounded-3 my-5">
+                    <div class="card-body p-4 p-sm-5">
+                        <form class="form-signin" role="form" action="" method="get" onsubmit="return setLogin();">
+                            <div class="form-label-group">
+                                <h5><b>Login</b></h5>
+                            </div>
+                            <div class="form-label-group mb-3">
+                                <input type="text" class="form-control" id="username" placeholder="Username">
+                                <label for="username">Username</label>
+                            </div>
+                            <div class="form-label-group mb-3">
+                                <input type="password" class="form-control" id="password" placeholder="Password">
+                                <label for="password">Password</label>
+                            </div>
 
+                            <div class="link forget-pass mb-2 text-right">
+                                <label>
+                                    <input name="remember" type="checkbox" value="Remember Me"> Remember Me
+                                </label>
+                            </div>
+                            <div class="link forget-pass text-left mb-3">
+                                <a href="#" data-toggle="modal" data-target="#emailSending" style="color:#343a40">Forgot password?</a>
+                            </div>
+                            <div class="form-group d-grid">
+                                <input class="form-control btn btn-primary btn-dark" type="submit" value="Login" name="login">
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-label-group">
-                        <input class="form-control" placeholder="Username" id="username" type="text">
-                        <label for="username">Username</label>
-                    </div>
-                    <div class="form-label-group">
-                        <input class="form-control" placeholder="Password" id="password" type="password" value="">
-                        <label for="password">Password</label>
-                    </div>
-                    <div class="link forget-pass text-right">
-                        <label>
-                            <input name="remember" type="checkbox" value="Remember Me"> Remember Me
-                        </label>
-                    </div>
-                    <div class="link forget-pass text-left"><a href="#" data-toggle="modal" data-target="#emailSending">Forgot password?</a></div>
-
-                    <div class="form-group">
-                        <input class="form-control btn btn-dark" type="submit" value="Login" name="login">
-                    </div>
-                    <!-- <div class="link login-link text-center">Not yet a member? <a href="signup-user.php">Signup now</a></div> -->
-                </form>
+                </div>
             </div>
         </div>
-
-
-    </div>
 
     </div>
 
@@ -101,7 +105,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="submitBtn" value="" >Verify</button>
+                    <button type="button" class="btn btn-primary" id="submitBtn" value="">Verify</button>
                 </div>
                 </form>
             </div>
@@ -132,8 +136,9 @@
 </body>
 <!-- jquery -->
 <script src="plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
+<!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="plugins/toastr/toastr.min.js"></script>
 <script src="js/LoginFunctions.js"></script>
+
 </html>
