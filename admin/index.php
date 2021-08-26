@@ -1,4 +1,4 @@
-<?php include("components/header.php");?>
+<?php include("components/header.php"); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
 
@@ -108,8 +108,6 @@
       </div>
     </section>
   </div>
-  </div>
-
 
   <!-- Modal for the Add -->
   <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -239,8 +237,8 @@
                     <div class="form-row">
                       <div class="form-group" style="width:100%; padding-left: 1%">
                         <div class="dropzone inputDrop" id="dropzone-example" enctype="multipart/form-data">
-                        
-                      </div>
+
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -299,7 +297,7 @@
       maxFilesize: .5, // MB
       addRemoveLinks: true,
       dictDefaultMessage: '<span class="">Drop files (or click) to upload  </span> <br> \
-                    <i class="fas fa-cloud-upload-alt"></i>', 
+                    <i class="fas fa-cloud-upload-alt"></i>',
       dictResponseError: 'Error while uploading file!',
     });
   </script>

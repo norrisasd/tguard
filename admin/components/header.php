@@ -27,6 +27,7 @@ $userinfo = $_SESSION['userInfo'];
     <link rel="stylesheet" href="../dist/css/adminlte.min.css">
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="../css/Style.css">
+    <link rel="stylesheet" href="components/main.css">
     <!-- toastr -->
     <link rel="stylesheet" href="../plugins/toastr/toastr.min.css">
     <!-- Drop Zone-->

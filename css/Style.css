@@ -19,7 +19,7 @@ body{
     cursor:pointer;  
 }
 
-.sideBar a:link {
+a:link{
     color: #98a6ad;
     text-decoration: none;
 }
