@@ -24,9 +24,12 @@ $userinfo = $_SESSION['userInfo'];
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="csss/main.css">
     <link rel="stylesheet" href="css/Style.css">
     <!-- toastr -->
     <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
     <!-- Dropzone -->
     <link rel="stylesheet" href="plugins/dropzone/min/dropzone.min.css">
+
+
 </head>

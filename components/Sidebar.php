@@ -15,7 +15,7 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="" class="d-block side" ><?php echo $userinfo['name']?></a>
+          <a href="settings.php" class="d-block side"  id="account"><?php echo $userinfo['name']?></a>
         </div>
       </div>
       <li class="nav-item menu-open">
