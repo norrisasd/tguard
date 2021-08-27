@@ -239,8 +239,8 @@
 
         $(".mt-2 ul li").removeClass("menu-open");
         $(".mt-2 ul li a").removeClass("active");
-        $(".mt-2 ul li:nth-child(3) ul li:nth-child(2)").removeClass("menu-open");
-        $(".mt-2 ul li:nth-child(3) ul li:nth-child(2) a").removeClass("active");
+        $(".mt-2 ul li:nth-child(3)").addClass("menu-open");
+        $(".mt-2 ul li:nth-child(3) a").removeClass("active");
         $(".mt-2 ul li:nth-child(3) ul li:nth-child(3)").addClass("menu-open");
         $(".mt-2 ul li:nth-child(3) ul li:nth-child(3) a").addClass("active");
     </script>

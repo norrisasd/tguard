@@ -66,11 +66,6 @@
                         </div>
                         <div class="row justify-content-end">
                             <div class="col-auto" style="margin-top: 2.5%;">
-                                <button type="button" class="btn btn-primary" id="btnSearch" style="padding-left:35px; padding-right:35px;">
-                                    Search
-                                </button>
-                            </div>
-                            <div class="col-auto" style="margin-top: 2.5%;">
                                 <div class="btn-group dropright">
                                     <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" style="width:auto" aria-expanded="false">
                                         Clear Search
@@ -96,6 +91,10 @@
                         <div class="col-auto" id="beforeLD1" style="margin-right:1%;">
                             <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Export Selected Data shown in the Table" aria-hidden="true"></i>
                         </div>
+                        <div class="ml-auto" id="beforeLD2" style="margin-right:1%;">
+                            <label for="searchInputTable">Search:</label>
+                            <input type="text" id="searchInputTable" onkeyup="dt.search( this.value ).draw();">
+                        </div>
                     </div>
                     <table id="dataTable" class="table table-bordered table-hover" style="height:100%;background-color:white">
                         <thead>
@@ -112,7 +111,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <td class="text-center"></td>
+                            <!-- <td class="text-center"></td>
                             <td>Norris Hipolito</td>
                             <td>Finish Task Guard</td>
                             <td>John Doe</td>
@@ -121,7 +120,7 @@
                             <td>June 20, 2021 at 2:30 PM</td>
                             <td>12 hrs</td>
                             <td> <button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-eye"></i></button>
-                            </td>
+                            </td> -->
                         </tbody>
                         <tfoot>
                             <tr>
@@ -278,29 +277,8 @@
     <script src="../plugins/toastr/toastr.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../dist/js/adminlte.js"></script>
-    <script src="../js/TaskListFunctions.js"></script>
+    <script src="./js/ProgressLogFunctions.js"></script>
 
-    <script>
-        $(".mt-2 ul li").removeClass("menu-open");
-        $(".mt-2 ul li a").removeClass("active");
-        $(".mt-2 ul li:nth-child(3)").removeClass("menu-open");
-        $(".mt-2 ul li:nth-child(3) a").removeClass("active");
-        $(".mt-2 ul li:nth-child(3) ul li:nth-child(1)").addClass("menu-open");
-        $(".mt-2 ul li:nth-child(3) ul li:nth-child(1) a").addClass("active");
-    </script>
-
-    <script>
-        Dropzone.autoDiscover = false;
-        $("div#dropzone-example").dropzone({
-            url: "../php/upload", //Change the url to the php code
-            paramName: "file", // The name that will be used to transfer the file
-            maxFilesize: .5, // MB
-            addRemoveLinks: true,
-            dictDefaultMessage: '<span class="">Drop files (or click) to upload  </span> <br> \
-                    <i class="fas fa-cloud-upload-alt"></i>',
-            dictResponseError: 'Error while uploading file!',
-        });
-    </script>
 </body>
 
 </html>

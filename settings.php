@@ -46,30 +46,30 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label class="form-label">Username</label>
-                                                <input type="text" class="form-control mb-1" value="nmaxwell">
+                                                <input type="text" class="form-control mb-1" value="<?php echo $userinfo['username'] ?>">
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label">Name</label>
-                                                <input type="text" class="form-control" value="Nelle Maxwell">
+                                                <input type="text" class="form-control" value="<?php echo $userinfo['name'] ?>">
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label">E-mail</label>
-                                                <input type="text" class="form-control mb-1" value="nmaxwell@mail.com">
+                                                <input type="text" class="form-control mb-1" value="<?php echo $userinfo['email'] ?>">
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label">Password</label>
-                                                <input type="password" class="form-control">
+                                                <input type="password" class="form-control" value="<?php echo $userinfo['password'] ?>">
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label">Access</label>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" <?php echo $userinfo['access'] == 1 ? "checked" : "" ?>>
                                                     <label class="form-check-label" for="flexRadioDefault1">
                                                         Admin
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" <?php echo $userinfo['access'] == 2 ? "checked" : "" ?>>
                                                     <label class="form-check-label" for="flexRadioDefault2">
                                                         Employee
                                                     </label>
@@ -122,7 +122,10 @@
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.js"></script>
     <script src="js/TaskListFunctions.js"></script>
-
+    <script>
+        $(".mt-2 ul li").removeClass("menu-open");
+        $(".mt-2 ul li a").removeClass("active");
+    </script>
 
 </body>
 

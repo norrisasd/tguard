@@ -54,42 +54,38 @@
                                     <hr class="border-light m-0">
 
                                     <div class="card-body">
-                                        <div class="form-group">
-                                            <label class="form-label">Username</label>
-                                            <input type="text" class="form-control mb-1" value="nmaxwell">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">Name</label>
-                                            <input type="text" class="form-control" value="Nelle Maxwell">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">E-mail</label>
-                                            <input type="text" class="form-control mb-1" value="nmaxwell@mail.com">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">Password</label>
-                                            <input type="password" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">Access</label>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                    Admin
-                                                </label>
+                                            <div class="form-group">
+                                                <label class="form-label">Username</label>
+                                                <input type="text" class="form-control mb-1" value="<?php echo $userinfo['username'] ?>">
                                             </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                                                <label class="form-check-label" for="flexRadioDefault2">
-                                                    Employee
-                                                </label>
+                                            <div class="form-group">
+                                                <label class="form-label">Name</label>
+                                                <input type="text" class="form-control" value="<?php echo $userinfo['name'] ?>">
                                             </div>
-
-
-
+                                            <div class="form-group">
+                                                <label class="form-label">E-mail</label>
+                                                <input type="text" class="form-control mb-1" value="<?php echo $userinfo['email'] ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">Password</label>
+                                                <input type="password" class="form-control" value="<?php echo $userinfo['password'] ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">Access</label>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" <?php echo $userinfo['access'] == 1 ? "checked" : "" ?>>
+                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        Admin
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" <?php echo $userinfo['access'] == 2 ? "checked" : "" ?>>
+                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                        Employee
+                                                    </label>
+                                                </div>
+                                            </div>
                                         </div>
-
-                                    </div>
 
                                 </div>
 

@@ -28,24 +28,24 @@
                         <div class="row align-items-start">
                             <div class="col">
                                 <label for="clientName">Client Name</label>
-                                <select id="clientName" class="form-control" style="margin-right:0.5%;">
+                                <select id="clientName" class="form-control" onclick="searchTable()" style="margin-right:0.5%;">
                                     <option value="" selected>Select</option>
                                     <?php displayAllClients() ?>
                                 </select>
                             </div>
                             <div class="col">
                                 <label for="startDate">Start Date</label>
-                                <input type="date" class="form-control" id="startDate" value="" style="margin-right:0.5%;">
+                                <input type="date" class="form-control" id="startDate" onclick="searchTable()" value="" style="margin-right:0.5%;">
                             </div>
                             <div class="col">
                                 <label for="endDate">End Date</label>
-                                <input type="date" class="form-control" id="endDate" value="" style="margin-right:0.5%;">
+                                <input type="date" class="form-control" id="endDate" onclick="searchTable()" value="" style="margin-right:0.5%;">
                             </div>
                             <div class="col">
                                 <label for="endDate">Time Spent (hr:mn)</label>
                                 <div class="d-flex">
                                     <input type="number" class="form-control" id="timeHr" placeholder="hr" value="" style="margin-right:0.5%;">
-                                    <input type="number" class="form-control" id="timeMn" placeholder="mn" min="0" max="60" onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;" value="" style="margin-right:0.5%;">
+                                    <input type="number" class="form-control" id="timeMn" placeholder="mn" min="0" max="60" onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;searchTable();" value="" style="margin-right:0.5%;">
                                 </div>
                             </div>
                             <div class="col">
@@ -56,12 +56,7 @@
                         </div>
                         <div class="row justify-content-end">
                             <div class="col-auto" style="margin-top: 2.5%;">
-                                <button type="button" class="btn btn-primary" onclick="searchTable()" style="padding-left:35px; padding-right:35px;">
-                                    Search
-                                </button>
-                            </div>
-                            <div class="col-auto" style="margin-top: 2.5%;">
-                                <div class="btn-group dropright">
+                                <div class="btn-group dropleft">
                                     <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" style="width:auto" aria-expanded="false">
                                         Clear Search
                                     </button>
@@ -85,6 +80,10 @@
                             </div>
                             <div class="col-auto" id="beforeLD1" style="margin-right:1%;">
                                 <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Export Selected Data shown in the Table" aria-hidden="true"></i>
+                            </div>
+                            <div class="ml-auto" id="beforeLD2" style="margin-right:1%;">
+                                <label for="searchInputTable">Search:</label>
+                                <input type="text" id="searchInputTable" onkeyup="dt.search( this.value ).draw();">
                             </div>
                         </div>
                         <table id="dataTable" class="table table-bordered table-hover" style="height:100%;background-color:white">

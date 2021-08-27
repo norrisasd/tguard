@@ -50,20 +50,12 @@
                                     <th>Employee Name</th>
                                     <th>Phone</th>
                                     <th>Email</th>
+                                    <th>Username</th>
                                     <th>Access</th>
-                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td>Norris Hipolito</td>
-                                    <td>norris@gmail.com</td>
-                                    <td>123</td>
-                                    <td>Employee</td>
-                                    <td><button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#userInfo"><i class="fas fa-eye"></i></button>
-                                    </td>
-                                </tr>
+                                
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -71,8 +63,8 @@
                                     <th>Employee Name</th>
                                     <th>Phone</th>
                                     <th>Email</th>
+                                    <th>Username</th>
                                     <th>Access</th>
-                                    <th></th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -161,11 +153,11 @@
                                 <dt class="col-sm-3">Username: </dt>
                                 <dd class="col-sm-9">Norris</dd>
 
-                                <dt class="col-sm-3">Password: </dt>
-                                <dd class="col-sm-9">norris</dd>
+    //                             <dt class="col-sm-3">Password: </dt>
+    //                             <dd class="col-sm-9">norris</dd>
 
-                                <dt class="col-sm-3">Email: </dt>
-                                <dd class="col-sm-9">norris@gmail</dd>
+    //                             <dt class="col-sm-3">Email: </dt>
+    //                             <dd class="col-sm-9">norris@gmail</dd>
 
                                 <dt class="col-sm-3">User Access: </dt>
                                 <dd class="col-sm-9">Employee</dd>
@@ -294,7 +286,6 @@
     <script src="../plugins/toastr/toastr.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../dist/js/adminlte.js"></script>
-    <script src="../js/TaskListFunctions.js"></script>
 
     <script>
         $(".mt-2 ul li").removeClass("menu-open");
@@ -303,25 +294,76 @@
         $(".mt-2 ul li:nth-child(3) ul li:nth-child(1) a").removeClass("active");
         $(".mt-2 ul li:nth-child(4) ul li:nth-child(1)").addClass("menu-open");
         $(".mt-2 ul li:nth-child(4) ul li:nth-child(1) a").addClass("active");
-        var cb = "";
+        var dt = $('#dataTable').DataTable({
+      "oLanguage": {
+        "sLengthMenu": "Show Entries _MENU_",
+      },
+      dom: "<'row d-flex flex-row align-items-end'>tr<'row d-flex flex-row align-items-end'<'col-md-6'l><'col-sm-2'i><'col-md-4'p>>",
+      "pageLength": 10,
+      "order": [],
+      "columnDefs": [ {
+        "targets"  : 0,
+        "orderable": false,
+        "className": "text-center select-checkbox",
+      }],
+      select:{style:'multi',
+        selector: 'tr>td:nth-child(1)'},
+      "paging": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+      "buttons": ["excel", "pdf", "print",]
+    });
+    dt.buttons().container().appendTo('#beforeLD');
+    new $.fn.dataTable.Buttons( dt, {
+      "buttons": [{
+        extend: 'excel',
+        text: 'Excel Selected',
+        exportOptions: {
+            modifier: {
+                selected: true
+            }
+        },
+    },{
+      extend: 'pdf',
+      text: 'PDF Selected',
+      exportOptions: {
+          modifier: {
+              selected: true
+          }
+      },
+  },{
+    extend: 'print',
+    text: 'Print Selected',
+    exportOptions: {
+        modifier: {
+            selected: true
+        }
+    },
+}]
+    }).container().appendTo('#beforeLD1');
+        var cb="";
         $.ajax({
-            type: 'get',
-            url: './main.php',
-            data: {
-                getAgentsJSON: true
+            type:'get',
+            url:'./main.php',
+            data:{
+                getAgentsJSON:true
             },
-            success: function(response) {
-                data = JSON.parse(response);
+            success:function(response){
+                data =JSON.parse(response);
                 dt.clear().draw();
-                for (var da in data) {
-                    access = data[da].access == '2' ? "Agent" : "Admin";
+                for(var da in data){
+                    access = data[da].access=='2'?"Agent":"Admin";
                     dt.row.add([
                         cb,
                         data[da].name,
                         data[da].phone,
                         data[da].email,
+                        data[da].username,
                         access,
-                        data[da].access
+                        data[da].access,
                     ]).draw();
                 }
             }

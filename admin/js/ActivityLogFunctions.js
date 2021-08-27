@@ -2,7 +2,9 @@
     $(".mt-2 ul li").removeClass("menu-open");
     $(".mt-2 ul li a").removeClass("active");
     $(".mt-2 ul li:nth-child(3)").addClass("menu-open");
-    $(".mt-2 ul li:nth-child(3) a").addClass("active");
+    $(".mt-2 ul li:nth-child(3) a").removeClass("active");
+    $(".mt-2 ul li:nth-child(3) ul li:nth-child(2)").addClass("menu-open");
+    $(".mt-2 ul li:nth-child(3) ul li:nth-child(2) a").addClass("active");
     //---------------------------------------------
     toastr.options.progressBar = true;
     toastr.options.preventDuplicates = true;
@@ -82,7 +84,8 @@
         type:'get',
         url:'./main.php',
         data:{
-          getAllTask:'true'
+          getAllTask:'true',
+          status:1
         },
         success:function(response){
           data = JSON.parse(response);
@@ -111,14 +114,13 @@
     function searchTable(){
         let searchClientName = document.getElementById("clientName").value;
         let searchAgentName = document.getElementById("agentName").value;
-        let searchTaskName = $('#taskName').val();
         let searchStartDate = document.getElementById("startDate").value;
         let searchEndDate = document.getElementById("endDate").value;
-        // let searchHr=document.getElementById("timeHr").value;
-        // let searchMn=document.getElementById("timeMn").value;
-        // mn = searchMn==""?"00":searchMn;
-        // hr = searchHr==""?"00":searchHr;
-        // let searchTime=hr+":"+mn;
+        let searchHr=document.getElementById("timeHr").value;
+        let searchMn=document.getElementById("timeMn").value;
+        mn = searchMn==""?"00":searchMn;
+        hr = searchHr==""?"00":searchHr;
+        let searchTime=hr+":"+mn;
         cb='';
         $.ajax({
             type:'get',
@@ -129,9 +131,10 @@
               searchStartDate:searchStartDate,
               searchEndDate:searchEndDate,
               searchAgentName:searchAgentName,
-              searchTaskName:searchTaskName,
-              // startDate:startDate,
-              // endDate:endDate,
+              startDate:startDate,
+              endDate:endDate,
+              searchTime:searchTime,
+              status:1
             },
             success:function(response){
                 if(response !=""){

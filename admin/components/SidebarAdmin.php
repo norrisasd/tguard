@@ -18,8 +18,8 @@
           <a href="settings" class="d-block side">Admin</a>
         </div>
       </div>
-      <li class="nav-item menu-open">
-        <a href="./index" class="nav-link active">
+      <li class="nav-item">
+        <a href="./index" class="nav-link">
           <i class="nav-icon fas fa-tachometer-alt"></i>
           <p>
             Dashboard
