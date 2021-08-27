@@ -1,4 +1,4 @@
-<?php include("components/header.php");?>
+<?php include("components/header.php"); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -12,7 +12,7 @@
           <a href="../index.php" class="nav-link">Home</a>
         </li> -->
             </ul>
-            <h4 style="margin-top:.5%;">Users / Agents</h4>
+            <h4 style="margin-top:.5%;">Users / Employee</h4>
             <!-- Right navbar links -->
 
         </nav>
@@ -47,28 +47,32 @@
                             <thead>
                                 <tr>
                                     <th class="text-center"></th>
-                                    <th>Agent Name</th>
+                                    <th>Employee Name</th>
                                     <th>Phone</th>
                                     <th>Email</th>
                                     <th>Access</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td></td>
-                                    <td><a href="#" class="table" onclick="" data-toggle="modal" data-target="#userInfo">Norris Hipolito</a></td>
+                                    <td>Norris Hipolito</td>
                                     <td>norris@gmail.com</td>
-                                    <td>Agent</td>
-                                    <td>Agent</td>
+                                    <td>123</td>
+                                    <td>Employee</td>
+                                    <td><button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#userInfo"><i class="fas fa-eye"></i></button>
+                                    </td>
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th class="text-center"></th>
-                                    <th>Agent Name</th>
+                                    <th>Employee Name</th>
                                     <th>Phone</th>
                                     <th>Email</th>
-                                    <th>Username</th>
+                                    <th>Access</th>
+                                    <th></th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -78,12 +82,12 @@
         </div>
     </div>
 
-    <!-- Modal for Add Agent -->
+    <!-- Modal for Add Employee -->
     <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><i class="nav-icon fas fa-user"></i> Add Agent</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="nav-icon fas fa-user"></i> Add Employee</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -112,13 +116,13 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="radioBtnType" value="1" id="adminRadioBtn" required>
                                 <label class="form-check-label" for="adminRadioBtn">
-                                    ADMIN
+                                    Admin
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" value="0" name="radioBtnType">
-                                <label class="form-check-label" for="agentRadioBtn">
-                                    AGENT
+                                <label class="form-check-label" for="employeeBtn">
+                                    Employee
                                 </label>
                             </div>
                             <!-- <div class="form-check">
@@ -128,7 +132,6 @@
                                 </label>
                             </div> -->
                         </div>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -141,12 +144,12 @@
 
 
 
-    <!-- Modal for Agent Information -->
-    <div class="modal fade" id="userIsnfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal for Employee Information -->
+    <div class="modal fade" id="userInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> <i class="fas fa-edit"></i> Edit Agent Information</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"> <i class="fas fa-edit"></i>Employee Information</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -165,7 +168,7 @@
                                 <dd class="col-sm-9">norris@gmail</dd>
 
                                 <dt class="col-sm-3">User Access: </dt>
-                                <dd class="col-sm-9">Agent</dd>
+                                <dd class="col-sm-9">Employee</dd>
                             </dl>
                         </div>
                     </form>
@@ -181,12 +184,12 @@
     </div>
 
 
-    <!-- Modal for Edit Agent Information -->
+    <!-- Modal for Edit Employee Information -->
     <div class="modal fade" id="editInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><i class="nav-icon fas fa-user"></i>Edit Agent Information</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="nav-icon fas fa-user"></i>Edit Employee Information</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -241,7 +244,7 @@
                         <div class="form-check">
                             <input class="form-check-input" type="radio" value="0" name="caradioBtnType" id="radAge">
                             <label class="form-check-label" for="radAge">
-                                Agent
+                                Employee
                             </label>
                         </div>
                         <!-- <div class="form-check">
@@ -259,6 +262,7 @@
             </div>
         </div>
     </div>
+
     <!-- jQuery -->
     <script src="../plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -299,18 +303,18 @@
         $(".mt-2 ul li:nth-child(3) ul li:nth-child(1) a").removeClass("active");
         $(".mt-2 ul li:nth-child(4) ul li:nth-child(1)").addClass("menu-open");
         $(".mt-2 ul li:nth-child(4) ul li:nth-child(1) a").addClass("active");
-        var cb="";
+        var cb = "";
         $.ajax({
-            type:'get',
-            url:'./main.php',
-            data:{
-                getAgentsJSON:true
+            type: 'get',
+            url: './main.php',
+            data: {
+                getAgentsJSON: true
             },
-            success:function(response){
-                data =JSON.parse(response);
+            success: function(response) {
+                data = JSON.parse(response);
                 dt.clear().draw();
-                for(var da in data){
-                    access = data[da].access=='2'?"Agent":"Admin";
+                for (var da in data) {
+                    access = data[da].access == '2' ? "Agent" : "Admin";
                     dt.row.add([
                         cb,
                         data[da].name,

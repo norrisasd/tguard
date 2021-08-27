@@ -1,4 +1,4 @@
-<?php include("components/header.php");?>
+<?php include("components/header.php"); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -26,50 +26,117 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="card-body">
-
-                        <!-- Table Starts -->
-
-                        <table id="dataTable" class="table table-bordered table-hover" style="height:100%;background-color:white">
-                            <thead>
-                                <tr>
-                                    <th class="text-center"></th>
-                                    <th>Agent Name</th>
-                                    <th>Task Name</th>
-                                    <th>Client Name</th>
-                                    <th>Notes</th>
-                                    <th>Start Date</th>
-                                    <th>End Date</th>
-                                    <th>Time Spent</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <td class="text-center"></td>
-                                <td>Norris Hipolito</td>
-                                <td>Finish Task Guard</td>
-                                <td>John Doe</td>
-                                <td>Lorem Ipsum</td>
-                                <td>June 20, 2021 at 2:30 AM</td>
-                                <td>June 20, 2021 at 2:30 PM</td>
-                                <td>12 hrs</td>
-                                <td> <button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-eye"></i></button>
-                                </td>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th></th>
-                                    <th>Agent Name</th>
-                                    <th>Task Name</th>
-                                    <th>Client Name</th>
-                                    <th>Notes</th>
-                                    <th>Start Time</th>
-                                    <th>End Time</th>
-                                    <th>Time Spent</th>
-                                    <th></th>
-                                </tr>
-                            </tfoot>
-                        </table>
+                        <div class="row align-items-start">
+                            <div class="col-sm-6">
+                                <label for="clientName">Client Name</label>
+                                <select id="clientName" class="form-control" style="margin-right:0.5%;">
+                                    <option value="" selected>Select Client</option>
+                                    <?php displayAllClients(); ?>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="agentName">Employee Name</label>
+                                <select id="agentName" class="form-control" style="margin-right:0.5%;">
+                                    <option value="" selected>Select Employee</option>
+                                    <?php displayAllAgents(); ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 1%;">
+                            <div class="col-sm-3">
+                                <label for="startDate">Start Date</label>
+                                <input type="date" class="form-control" id="startDate" value="" style="margin-right:0.5%;">
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="endDate">End Date</label>
+                                <input type="date" class="form-control" id="endDate" value="" style="margin-right:0.5%;">
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="endDate">Time Spent (hr:mn)</label>
+                                <div class="d-flex">
+                                    <input type="number" class="form-control" id="timeHr" placeholder="hr" value="">
+                                    <input type="number" class="form-control" id="timeMn" placeholder="mn" min="0" max="60" onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="actDate">Task Date (Date Range)</label>
+                                <!-- Start Date -->
+                                <input type="text" class="form-control" id="actDate" value="" style="margin-right:0.5%;background:white;" readonly>
+                            </div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="col-auto" style="margin-top: 2.5%;">
+                                <button type="button" class="btn btn-primary" id="btnSearch" style="padding-left:35px; padding-right:35px;">
+                                    Search
+                                </button>
+                            </div>
+                            <div class="col-auto" style="margin-top: 2.5%;">
+                                <div class="btn-group dropright">
+                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" style="width:auto" aria-expanded="false">
+                                        Clear Search
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(6)">All</button>
+                                        <div class="dropdown-divider"></div>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(1)">Client</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(2)">Date Created</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(3)">Date Ended</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(4)">Time Spent</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(5)">Task Date</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <!-- Table Starts -->
+                    <div class="row" style="margin-top:1%; margin-bottom:1%">
+                        <div class="col-auto" id="beforeLD" style="margin-right:1%;">
+                            <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Export All Data shown in the Table" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-auto" id="beforeLD1" style="margin-right:1%;">
+                            <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Export Selected Data shown in the Table" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <table id="dataTable" class="table table-bordered table-hover" style="height:100%;background-color:white">
+                        <thead>
+                            <tr>
+                                <th class="text-center"></th>
+                                <th>Employee Name</th>
+                                <th>Task Name</th>
+                                <th>Client Name</th>
+                                <th>Notes</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Time Spent</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <td class="text-center"></td>
+                            <td>Norris Hipolito</td>
+                            <td>Finish Task Guard</td>
+                            <td>John Doe</td>
+                            <td>Lorem Ipsum</td>
+                            <td>June 20, 2021 at 2:30 AM</td>
+                            <td>June 20, 2021 at 2:30 PM</td>
+                            <td>12 hrs</td>
+                            <td> <button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-eye"></i></button>
+                            </td>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th></th>
+                                <th>Employee Name</th>
+                                <th>Task Name</th>
+                                <th>Client Name</th>
+                                <th>Notes</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Time Spent</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
             </section>
         </div>
@@ -100,7 +167,6 @@
                                 <div class="col">
                                     <label for="modalTimeSpent">Time Spent: </label>
                                     <p id="modalTimeSpent">18 mins</p>
-
                                 </div>
                                 <div class="col">
                                     <div class="float-right">
@@ -116,9 +182,10 @@
                                     <p id="modalClient">Agrisoft</p>
                                 </div>
                                 <div class="col">
-                                    <label for="modalAgent">Agent: </label>
+                                    <label for="modalAgent">Employee: </label>
                                     <p id="modalAgent">John Doe</p>
                                 </div>
+                                <div class="col"></div>
                                 <div class="col ">
                                     <div class="float-right">
                                         <button type="button" class="btn btn-primary mr-auto" id="btnFinish" style="min-width: 102px;">Finish</button>
@@ -175,64 +242,65 @@
                 </form>
             </div>
         </div>
+    </div>
 
 
-        <!-- jQuery -->
-        <script src="../plugins/jquery/jquery.min.js"></script>
-        <!-- jQuery UI 1.11.4 -->
-        <script src="../plugins/jquery-ui/jquery-ui.min.js"></script>
-        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-        <!-- Bootstrap 4 -->
-        <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- DataTables  & Plugins -->
-        <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-        <script src="../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-        <script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-        <script src="../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-        <script src="../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-        <script src="../plugins/jszip/jszip.min.js"></script>
-        <script src="../plugins/pdfmake/pdfmake.min.js"></script>
-        <script src="../plugins/pdfmake/vfs_fonts.js"></script>
-        <script src="../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-        <script src="../plugins/datatables-buttons/js/buttons.print.min.js"></script>
-        <script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-        <script src="../plugins/datatables-select/js/dataTables.select.min.js"></script>
-        <!-- InputMask -->
-        <script src="../plugins/popper/popper.js"></script>
-        <script src="../plugins/moment/moment.min.js"></script>
-        <script src="../plugins/inputmask/jquery.inputmask.min.js"></script>
-        <!-- DropZone -->
-        <script src="../plugins/dropzone/min/dropzone.min.js"></script>
-        <!-- date-range-picker -->
-        <script src="../plugins/daterangepicker/daterangepicker.js"></script>
-        <!-- TOASTR -->
-        <script src="../plugins/toastr/toastr.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="../dist/js/adminlte.js"></script>
-        <script src="../js/TaskListFunctions.js"></script>
+    <!-- jQuery -->
+    <script src="../plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="../plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <!-- Bootstrap 4 -->
+    <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="../plugins/jszip/jszip.min.js"></script>
+    <script src="../plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="../plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="../plugins/datatables-select/js/dataTables.select.min.js"></script>
+    <!-- InputMask -->
+    <script src="../plugins/popper/popper.js"></script>
+    <script src="../plugins/moment/moment.min.js"></script>
+    <script src="../plugins/inputmask/jquery.inputmask.min.js"></script>
+    <!-- DropZone -->
+    <script src="../plugins/dropzone/min/dropzone.min.js"></script>
+    <!-- date-range-picker -->
+    <script src="../plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- TOASTR -->
+    <script src="../plugins/toastr/toastr.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../dist/js/adminlte.js"></script>
+    <script src="../js/TaskListFunctions.js"></script>
 
-        <script>
-            $(".mt-2 ul li").removeClass("menu-open");
-            $(".mt-2 ul li a").removeClass("active");
-            $(".mt-2 ul li:nth-child(3) ul li:nth-child(2)").removeClass("menu-open");
-            $(".mt-2 ul li:nth-child(3) ul li:nth-child(2) a").removeClass("active");
-            $(".mt-2 ul li:nth-child(3) ul li:nth-child(3)").addClass("menu-open");
-            $(".mt-2 ul li:nth-child(3) ul li:nth-child(3) a").addClass("active");
-        </script>
+    <script>
+        $(".mt-2 ul li").removeClass("menu-open");
+        $(".mt-2 ul li a").removeClass("active");
+        $(".mt-2 ul li:nth-child(3)").removeClass("menu-open");
+        $(".mt-2 ul li:nth-child(3) a").removeClass("active");
+        $(".mt-2 ul li:nth-child(3) ul li:nth-child(1)").addClass("menu-open");
+        $(".mt-2 ul li:nth-child(3) ul li:nth-child(1) a").addClass("active");
+    </script>
 
-        <script>
-            Dropzone.autoDiscover = false;
-            $("div#dropzone-example").dropzone({
-                url: "../php/upload", //Change the url to the php code
-                paramName: "file", // The name that will be used to transfer the file
-                maxFilesize: .5, // MB
-                addRemoveLinks: true,
-                dictDefaultMessage: '<span class="">Drop files (or click) to upload  </span> <br> \
+    <script>
+        Dropzone.autoDiscover = false;
+        $("div#dropzone-example").dropzone({
+            url: "../php/upload", //Change the url to the php code
+            paramName: "file", // The name that will be used to transfer the file
+            maxFilesize: .5, // MB
+            addRemoveLinks: true,
+            dictDefaultMessage: '<span class="">Drop files (or click) to upload  </span> <br> \
                     <i class="fas fa-cloud-upload-alt"></i>',
-                dictResponseError: 'Error while uploading file!',
-            });
-        </script>
+            dictResponseError: 'Error while uploading file!',
+        });
+    </script>
 </body>
 
 </html>

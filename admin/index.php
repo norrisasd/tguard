@@ -133,9 +133,9 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="inputAgent">Agent Name</label>
+              <label for="inputAgent">Employee Name</label>
               <select class="form-control" id="inputAgentID" required>
-                <option value="" selected hidden>Select Agent</option>
+                <option value="" selected hidden>Select Employee</option>
                 <?php displayAllAgents() 
                 ?>
               </select>
@@ -195,10 +195,11 @@
                   <p id="modalClient">Agrisoft</p>
                 </div>
                 <div class="col">
-                  <label for="modalAgent">Agent: </label>
+                  <label for="modalAgent">Employee: </label>
                   <p id="modalAgent">John Doe</p>
                 </div>
-                <div class="col ">
+                <div class="col"></div>
+                <div class="col">
                   <div class="float-right">
                     <button type="button" class="btn btn-primary mr-auto" id="btnFinish" style="min-width: 102px;">Finish</button>
                   </div>

@@ -36,6 +36,12 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item has-treeview">
+            <a href="progresslog" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>User Progress Log</p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
             <a href="activitylog" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>User Activity Log</p>
@@ -45,12 +51,6 @@
             <a href="activitycharts" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>User Activity Charts</p>
-            </a>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="progresslog" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>User Progress Log</p>
             </a>
           </li>
         </ul>
@@ -66,9 +66,9 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item has-treeview">
-            <a href="agents" class="nav-link">
+            <a href="employee" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>Agents</p>
+              <p>Employee</p>
             </a>
           </li>
           <li class="nav-item has-treeview">
