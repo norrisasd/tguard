@@ -112,7 +112,7 @@ function addTask(){
           <div class="clearfix"></div>
           `+nl2br(item.Notes)+`
           <div class="mt-3">
-            <p class="mb-1">Agent:
+            <p class="mb-1">Employee:
               <span><i>`+item.name+`</i></span>
             </p>
             <p class="float-right">
@@ -154,7 +154,7 @@ function addTask(){
           <div class="clearfix"></div>
           `+nl2br(item.Notes)+`
           <div class="mt-3">
-            <p class="mb-1">Agent:
+            <p class="mb-1">Employee:
               <span><i>`+item.name+`</i></span>
             </p>
             <p class="float-right">
