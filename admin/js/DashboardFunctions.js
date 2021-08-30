@@ -112,10 +112,9 @@ function displayUpcomingTask() {
       $.each(result, function (key, item) {
         let str = JSON.stringify(item);
         content += `<li class="task-warning ui-sortable-handle" id="task1">
-          <div class="checkbox checkbox-custom checkbox-single float-right">
-            <input type="checkbox" aria-label="Single checkbox Two">
-            <label></label>
-          </div>
+        <div class="float-right">
+        <p class="" id="duedate">Due Date: <b>January 01, 2021</b></p>
+        </div>
           <b>`+ item.TaskName + `</b>
           <div class="clearfix"></div>
           `+ nl2br(item.Notes) + `
@@ -154,10 +153,9 @@ function displayInProgress() {
       $.each(result, function (key, item) {
         let str = JSON.stringify(item);
         content += `<li class="task-warning ui-sortable-handle" id="task1">
-          <div class="checkbox checkbox-custom checkbox-single float-right">
-            <input type="checkbox" aria-label="Single checkbox Two">
-            <label></label>
-          </div>
+        <div class="float-right">
+        <p class="" id="duedate">Due Date: <b>January 01, 2021</b></p>
+        </div>
           <b>`+ item.TaskName + `</b>
           <div class="clearfix"></div>
           `+ nl2br(item.Notes) + `

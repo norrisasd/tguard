@@ -64,9 +64,15 @@
                                 <input type="text" class="form-control" id="actDate" value="" style="margin-right:0.5%;background:white;" readonly>
                             </div>
                         </div>
+                        <div class="row" style="margin-top:1%;">
+                            <div class="col-sm-6">
+                                <label for="dueDate">Due Date</label>
+                                <input type="date" class="form-control" id="dueDate" value="" style="margin-right:0.5%;">
+                            </div>
+                        </div>
                         <div class="row justify-content-end">
-                            <div class="col-auto" style="margin-top: 2.5%;">
-                                <div class="btn-group dropright">
+                            <div class="col-auto">
+                                <div class="btn-group dropleft">
                                     <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" style="width:auto" aria-expanded="false">
                                         Clear Search
                                     </button>
@@ -74,10 +80,12 @@
                                         <button class="dropdown-item" type="button" onclick="clearSearch(6)">All</button>
                                         <div class="dropdown-divider"></div>
                                         <button class="dropdown-item" type="button" onclick="clearSearch(1)">Client</button>
-                                        <button class="dropdown-item" type="button" onclick="clearSearch(2)">Date Created</button>
-                                        <button class="dropdown-item" type="button" onclick="clearSearch(3)">Date Ended</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(2)">Start Date</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(3)">End Date</button>
                                         <button class="dropdown-item" type="button" onclick="clearSearch(4)">Time Spent</button>
                                         <button class="dropdown-item" type="button" onclick="clearSearch(5)">Task Date</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(5)">Due Date</button>
+
                                     </div>
                                 </div>
                             </div>
@@ -157,15 +165,16 @@
                             <div class="form-row">
                                 <div class="col">
                                     <label for="modalStartDate">Start Date: </label>
-                                    <p id="modalStartDate">June 8, 2021 at 11:00 PM</p>
+                                    <p id="modalStartDate">---</p>
                                 </div>
                                 <div class="col">
                                     <label for="modalEndDate">End Date: </label>
-                                    <p id="modalEndDate">June 8, 2021 at 11:00 PM</p>
+                                    <p id="modalEndDate">---</p>
                                 </div>
                                 <div class="col">
                                     <label for="modalTimeSpent">Time Spent: </label>
-                                    <p id="modalTimeSpent">18 mins</p>
+                                    <p id="modalTimeSpent">---</p>
+
                                 </div>
                                 <div class="col">
                                     <div class="float-right">
@@ -181,11 +190,14 @@
                                     <p id="modalClient">Agrisoft</p>
                                 </div>
                                 <div class="col">
-                                    <label for="modalAgent">Employee: </label>
-                                    <p id="modalAgent">John Doe</p>
+                                    <label for="modalDueDate">Due Date: </label>
+                                    <p id="modalDueDate">January 01, 2021</p>
                                 </div>
-                                <div class="col"></div>
-                                <div class="col ">
+                                <div class="col">
+                                    <label for="modalStatus">Status: </label>
+                                    <p id="modalAgent">In Progress</p>
+                                </div>
+                                <div class="col">
                                     <div class="float-right">
                                         <button type="button" class="btn btn-primary mr-auto" id="btnFinish" style="min-width: 102px;">Finish</button>
                                     </div>
@@ -196,7 +208,7 @@
                                     <hr class="mt-2 mb-3" />
                                     <div class="form-group">
                                         <label for="inputDescription2">Notes: </label>
-                                        <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
+                                        <textarea type="text" class="form-control" id="inputDescription2"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -212,34 +224,74 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="inputComments">Comments: </label>
-                                        <textarea type="text" class="form-control" id="inputComments">Lorem Ipsum Lorem Ipsum</textarea>
+                                        <textarea type="text" class="form-control" id="inputComments"></textarea>
                                     </div>
                                 </div>
                             </div>
-                            <!-- This entire row can be commented -->
                             <div class="form-row">
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="inputFile">Attachments: </label><br>
-                                        <div class="form-row">
-                                            <div class="form-group" style="width:100%; padding-left: 1%">
-                                                <div class="dropzone inputDrop" id="dropzone-example" enctype="multipart/form-data">
+                                        <!-- Input -->
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add Attachments</button>
+                                                <div class="dropdown-menu cases" id="attachments">
+                                                    <a class="dropdown-item" href="#" value="file">File</a>
+                                                    <a class="dropdown-item" href="#" value="link">Link</a>
+                                                </div>
+                                            </div>
+                                            <div class="custom-file file" id="viewFile">
+                                                <input type="file" class="custom-file-input" id="inputType">
+                                                <label class="custom-file-label" for="inputGroupFile01 text-truncate">Choose File</label>
+                                            </div>
+                                            <div class="input-group-append uploadBtn" id="viewUpload">
+                                                <button class="btn btn-outline-secondary" type="button">Upload</button>
+                                            </div>
+
+                                            <div class="custom-file link" id="viewLink">
+                                                <input type="text input-pr-rev" class="form-control" id="basic-url" placeholder="Link">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary" type="button">Add</button>
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- Input File -->
+                                        <!-- <div class="form-row">
+                      <div class="form-group" style="width:100%; padding-left: 1%">
+                        <div class="dropzone inputDrop" id="dropzone-example" enctype="multipart/form-data">
+                      </div>
+                      </div> -->
                                     </div>
                                 </div>
-                            </div>
+                                <!-- Adding Preview -->
+                                <div class="container" style="height: 150px; overflow-y: auto;">
+                                    <table class="table table-hover">
+                                        <tbody>
+                                            <tr>
+                                                <td>File Name</td>
+                                                <td>Size</td>
+                                                <td><button class="btn btn-danger btn-sm waves-effect waves-light float-right"><i class="fas fa-trash-alt"></i></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Link</td>
+                                                <td></td>
+                                                <td><button class="btn btn-danger btn-sm waves-effect waves-light float-right"><i class="fas fa-trash-alt"></i></button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger mr-auto">Delete</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+                    </div>
             </div>
+            </form>
         </div>
     </div>
 
@@ -278,6 +330,36 @@
     <!-- AdminLTE App -->
     <script src="../dist/js/adminlte.js"></script>
     <script src="./js/ProgressLogFunctions.js"></script>
+
+    <script>
+        //Hiding the div
+        $(".custom-file").hide();
+        $(".uploadBtn").hide();
+
+        //Showing the div for the inputs
+        $(document).ready(function() {
+            $('.cases a').on('click', function() {
+                var txt = ($(this).attr('value'));
+                if (txt == 'file') {
+                    $(".file").show();
+                    $(".link").hide();
+                    $(".uploadBtn").show();
+                }
+                if (txt == 'link') {
+                    $(".link").show();
+                    $(".file").hide();
+                    $(".uploadBtn").hide();
+                }
+            });
+        });
+
+        //Changing text label of the File attachments
+        document.querySelector('.custom-file-input').addEventListener('change', function(e) {
+            var fileName = document.getElementById("inputType").files[0].name;
+            var nextSibling = e.target.nextElementSibling
+            nextSibling.innerText = fileName
+        });
+    </script>
 
 </body>
 
