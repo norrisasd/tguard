@@ -110,8 +110,8 @@
   </div>
 
   <!-- Modal for the Add -->
-  <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+  <div class="modal fade bd-modal-lg" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
@@ -136,7 +136,7 @@
               <label for="inputAgent">Employee Name</label>
               <select class="form-control" id="inputAgentID" required>
                 <option value="" selected hidden>Select Employee</option>
-                <?php displayAllAgents() 
+                <?php displayAllAgents()
                 ?>
               </select>
             </div>
@@ -144,7 +144,70 @@
               <label for="inputDescription">Notes</label>
               <textarea type="text" class="form-control" id="inputNotes"></textarea>
             </div>
+
+            <div class="form-group">
+              <label for="inputSubTasks">Sub-Tasks: </label>
+              <textarea type="text" class="form-control" id="inputSubTasks"></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="inputFile">Attachments: </label><br>
+                  <!-- Input -->
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add Attachments</button>
+                      <div class="dropdown-menu cases" id="attachments">
+                        <a class="dropdown-item" href="#" value="file">File</a>
+                        <a class="dropdown-item" href="#" value="link">Link</a>
+                      </div>
+                    </div>
+                    <div class="custom-file file" id="viewFile">
+                      <input type="file" class="custom-file-input" id="inputType">
+                      <label class="custom-file-label" for="inputGroupFile01 text-truncate">Choose File</label>
+                    </div>
+                    <div class="input-group-append uploadBtn" id="viewUpload">
+                      <button class="btn btn-outline-secondary" type="button">Upload</button>
+                    </div>
+
+                    <div class="custom-file link" id="viewLink">
+                      <input type="text input-pr-rev" class="form-control" id="basic-url" placeholder="Link">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">Add</button>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Input File -->
+                  <!-- <div class="form-row">
+                      <div class="form-group" style="width:100%; padding-left: 1%">
+                        <div class="dropzone inputDrop" id="dropzone-example" enctype="multipart/form-data">
+                      </div>
+                      </div> -->
+                </div>
+              </div>
+              <!-- Adding Preview -->
+              <div class="container" style="height: 150px; overflow-y: auto;">
+                <table class="table table-hover">
+                  <tbody>
+                    <tr>
+                      <td>File Name</td>
+                      <td>Size</td>
+                      <td><button class="btn btn-danger btn-sm waves-effect waves-light float-right"><i class="fas fa-trash-alt"></i></button></td>
+                    </tr>
+                    <tr>
+                      <td>Link</td>
+                      <td></td>
+                      <td><button class="btn btn-danger btn-sm waves-effect waves-light float-right"><i class="fas fa-trash-alt"></i></button></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+            
           </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Save</button>
@@ -179,7 +242,10 @@
                 <div class="col">
                   <label for="modalTimeSpent">Time Spent: </label>
                   <p id="modalTimeSpent">18 mins</p>
-
+                </div>
+                <div class="col">
+                  <label for="modalTimeSpent">Status: </label>
+                  <p id="modalTimeSpent">In Progress</p>
                 </div>
                 <div class="col">
                   <div class="float-right">
@@ -197,6 +263,10 @@
                 <div class="col">
                   <label for="modalAgent">Employee: </label>
                   <p id="modalAgent">John Doe</p>
+                </div>
+                <div class="col">
+                  <label for="modalDueDate">Due Date: </label>
+                  <p id="modalDueDate">January 01, 2021</p>
                 </div>
                 <div class="col"></div>
                 <div class="col">
@@ -234,27 +304,64 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="inputFile">Attachments: </label><br>
+                    <!-- Input -->
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add Attachments</button>
+                        <div class="dropdown-menu cases" id="attachments">
+                          <a class="dropdown-item" href="#" value="file">File</a>
+                          <a class="dropdown-item" href="#" value="link">Link</a>
+                        </div>
+                      </div>
+                      <div class="custom-file file" id="viewFile">
+                        <input type="file" class="custom-file-input" id="inputType">
+                        <label class="custom-file-label" for="inputGroupFile01 text-truncate">Choose File</label>
+                      </div>
+                      <div class="input-group-append uploadBtn" id="viewUpload">
+                        <button class="btn btn-outline-secondary" type="button">Upload</button>
+                      </div>
 
-                    <div class="form-row">
-                      <div class="form-group" style="width:100%; padding-left: 1%">
-                        <div class="dropzone inputDrop" id="dropzone-example" enctype="multipart/form-data">
-
+                      <div class="custom-file link" id="viewLink">
+                        <input type="text input-pr-rev" class="form-control" id="basic-url" placeholder="Link">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" type="button">Add</button>
                         </div>
                       </div>
                     </div>
+                    <!-- Input File -->
+                    <!-- <div class="form-row">
+                      <div class="form-group" style="width:100%; padding-left: 1%">
+                        <div class="dropzone inputDrop" id="dropzone-example" enctype="multipart/form-data">
+                      </div>
+                      </div> -->
                   </div>
+                </div>
+                <!-- Adding Preview -->
+                <div class="container" style="height: 150px; overflow-y: auto;">
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr>
+                        <td>File Name</td>
+                        <td>Size</td>
+                        <td><button class="btn btn-danger btn-sm waves-effect waves-light float-right"><i class="fas fa-trash-alt"></i></button></td>
+                      </tr>
+                      <tr>
+                        <td>Link</td>
+                        <td></td>
+                        <td><button class="btn btn-danger btn-sm waves-effect waves-light float-right"><i class="fas fa-trash-alt"></i></button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
                 </div>
               </div>
             </div>
-
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger mr-auto">Delete</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
           </div>
-
-
       </div>
       </form>
     </div>
@@ -291,16 +398,44 @@
 
 
   <script>
-    Dropzone.autoDiscover = false;
-    $("div#dropzone-example").dropzone({
-      url: "../php/upload", //Change the url to the php code
-      paramName: "file", // The name that will be used to transfer the file
-      maxFilesize: .5, // MB
-      addRemoveLinks: true,
-      dictDefaultMessage: '<span class="">Drop files (or click) to upload  </span> <br> \
-                    <i class="fas fa-cloud-upload-alt"></i>',
-      dictResponseError: 'Error while uploading file!',
+    //Hiding the div
+    $(".custom-file").hide();
+    $(".uploadBtn").hide();
+
+    //Showing the div for the inputs
+    $(document).ready(function() {
+      $('.cases a').on('click', function() {
+        var txt = ($(this).attr('value'));
+        if (txt == 'file') {
+          $(".file").show();
+          $(".link").hide();
+          $(".uploadBtn").show();
+        }
+        if (txt == 'link') {
+          $(".link").show();
+          $(".file").hide();
+          $(".uploadBtn").hide();
+        }
+      });
     });
+
+    //Changing text label of the File attachments
+    document.querySelector('.custom-file-input').addEventListener('change', function(e) {
+      var fileName = document.getElementById("inputType").files[0].name;
+      var nextSibling = e.target.nextElementSibling
+      nextSibling.innerText = fileName
+    });
+
+    // Dropzone.autoDiscover = false;
+    // $("div#dropzone-example").dropzone({
+    //   url: "../php/upload", //Change the url to the php code
+    //   paramName: "file", // The name that will be used to transfer the file
+    //   maxFilesize: .5, // MB
+    //   addRemoveLinks: true,
+    //   dictDefaultMessage: '<span class="">Drop files (or click) to upload  </span> <br> \
+    //                 <i class="fas fa-cloud-upload-alt"></i>',
+    //   dictResponseError: 'Error while uploading file!',
+    // });
   </script>
 
 

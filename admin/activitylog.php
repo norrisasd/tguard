@@ -29,14 +29,14 @@
             <div class="row align-items-start">
               <div class="col-sm-6">
                 <label for="clientName">Client Name</label>
-                <select id="clientName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
+                <select id="clientName" class="form-control" style="margin-right:0.5%;">
                   <option value="" selected>Select Client</option>
                   <?php displayAllClients(); ?>
                 </select>
               </div>
               <div class="col-sm-6">
                 <label for="agentName">Employee Name</label>
-                <select id="agentName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
+                <select id="agentName" class="form-control" style="margin-right:0.5%;">
                   <option value="" selected>Select Employee</option>
                   <?php displayAllAgents(); ?>
                 </select>
@@ -45,28 +45,34 @@
             <div class="row" style="margin-top: 1%;">
               <div class="col-sm-3">
                 <label for="startDate">Start Date</label>
-                <input type="date" class="form-control" id="startDate" onchange="searchTable()" value="" style="margin-right:0.5%;">
+                <input type="date" class="form-control" id="startDate" value="" style="margin-right:0.5%;">
               </div>
               <div class="col-sm-3">
                 <label for="endDate">End Date</label>
-                <input type="date" class="form-control" id="endDate" onchange="searchTable()" value="" style="margin-right:0.5%;">
+                <input type="date" class="form-control" id="endDate" value="" style="margin-right:0.5%;">
               </div>
               <div class="col-sm-3">
                 <label for="endDate">Time Spent (hr:mn)</label>
                 <div class="d-flex">
-                  <input type="number" class="form-control" id="timeHr" placeholder="hr" onchange="searchTable()" value="">
-                  <input type="number" class="form-control" id="timeMn" placeholder="mn" min="0" max="60" onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;searchTable()" value="">
+                  <input type="number" class="form-control" id="timeHr" placeholder="hr" value="">
+                  <input type="number" class="form-control" id="timeMn" placeholder="mn" min="0" max="60" onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;" value="">
                 </div>
               </div>
               <div class="col-sm-3">
                 <label for="actDate">Task Date (Date Range)</label>
                 <!-- Start Date -->
-                <input type="text" class="form-control" id="actDate" value="" onchange="searchTable()" style="margin-right:0.5%;background:white;" readonly>
+                <input type="text" class="form-control" id="actDate" value="" style="margin-right:0.5%;background:white;" readonly>
+              </div>
+            </div>
+            <div class="row" style="margin-top:1%;">
+              <div class="col-sm-6">
+                <label for="dueDate">Due Date</label>
+                <input type="date" class="form-control" id="dueDate" value="" style="margin-right:0.5%;">
               </div>
             </div>
             <div class="row justify-content-end">
-              <div class="col-auto" style="margin-top: 2.5%;">
-                <div class="btn-group dropright">
+              <div class="col-auto">
+                <div class="btn-group dropleft">
                   <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" style="width:auto" aria-expanded="false">
                     Clear Search
                   </button>
@@ -74,10 +80,12 @@
                     <button class="dropdown-item" type="button" onclick="clearSearch(6)">All</button>
                     <div class="dropdown-divider"></div>
                     <button class="dropdown-item" type="button" onclick="clearSearch(1)">Client</button>
-                    <button class="dropdown-item" type="button" onclick="clearSearch(2)">Date Created</button>
-                    <button class="dropdown-item" type="button" onclick="clearSearch(3)">Date Ended</button>
+                    <button class="dropdown-item" type="button" onclick="clearSearch(2)">Start Date</button>
+                    <button class="dropdown-item" type="button" onclick="clearSearch(3)">End Date</button>
                     <button class="dropdown-item" type="button" onclick="clearSearch(4)">Time Spent</button>
                     <button class="dropdown-item" type="button" onclick="clearSearch(5)">Task Date</button>
+                    <button class="dropdown-item" type="button" onclick="clearSearch(5)">Due Date</button>
+
                   </div>
                 </div>
               </div>
@@ -133,11 +141,8 @@
     </div>
     </section>
   </div>
-  </div>
-  </section>
-  </div>
-  </div>
-  <!-- MODAL FOR VIEW -->
+
+  <!-- Modal View -->
   <div class="modal fade bd-example-modal-lg" id="" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -150,18 +155,18 @@
         <form method="get" id="viewTask" action="">
           <div class="modal-body">
             <div class="container-fluid">
-              <div class="row">
+              <div class="form-row">
                 <div class="col">
                   <label for="modalStartDate">Start Date: </label>
-                  <p id="modalStartDate">June 8, 2021 at 11:00 PM</p>
+                  <p id="modalStartDate">---</p>
                 </div>
                 <div class="col">
                   <label for="modalEndDate">End Date: </label>
-                  <p id="modalEndDate">June 8, 2021 at 11:00 PM</p>
+                  <p id="modalEndDate">---</p>
                 </div>
                 <div class="col">
                   <label for="modalTimeSpent">Time Spent: </label>
-                  <p id="modalTimeSpent">18 mins</p>
+                  <p id="modalTimeSpent">---</p>
 
                 </div>
                 <div class="col">
@@ -178,10 +183,14 @@
                   <p id="modalClient">Agrisoft</p>
                 </div>
                 <div class="col">
-                  <label for="modalAgent">Employee: </label>
-                  <p id="modalAgent">John Doe</p>
+                  <label for="modalDueDate">Due Date: </label>
+                  <p id="modalDueDate">January 01, 2021</p>
                 </div>
-                <div class="col ">
+                <div class="col">
+                  <label for="modalStatus">Status: </label>
+                  <p id="modalAgent">In Progress</p>
+                </div>
+                <div class="col">
                   <div class="float-right">
                     <button type="button" class="btn btn-primary mr-auto" id="btnFinish" style="min-width: 102px;">Finish</button>
                   </div>
@@ -192,7 +201,7 @@
                   <hr class="mt-2 mb-3" />
                   <div class="form-group">
                     <label for="inputDescription2">Notes: </label>
-                    <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
+                    <textarea type="text" class="form-control" id="inputDescription2"></textarea>
                   </div>
                 </div>
               </div>
@@ -208,86 +217,146 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="inputComments">Comments: </label>
-                    <textarea type="text" class="form-control" id="inputComments">Lorem Ipsum Lorem Ipsum</textarea>
+                    <textarea type="text" class="form-control" id="inputComments"></textarea>
                   </div>
                 </div>
               </div>
               <div class="form-row">
                 <div class="col">
+                  <!-- 
                   <div class="form-group">
                     <label for="inputFile">Attachments: </label><br>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add Attachments</button>
+                        <div class="dropdown-menu cases" id="attachments">
+                          <a class="dropdown-item" href="#" value="file">File</a>
+                          <a class="dropdown-item" href="#" value="link">Link</a>
+                        </div>
+                      </div>
+                      <div class="custom-file file" id="viewFile">
+                        <input type="file" class="custom-file-input" id="inputType">
+                        <label class="custom-file-label" for="inputGroupFile01 text-truncate">Choose File</label>
+                      </div>
+                      <div class="input-group-append uploadBtn" id="viewUpload">
+                        <button class="btn btn-outline-secondary" type="button">Upload</button>
+                      </div>
 
-                    <div class="form-row">
-                      <div class="form-group" style="width:100%; padding-left: 1%">
-                        <div class="dropzone inputDrop" id="dropzone-example" enctype="multipart/form-data">
-
+                      <div class="custom-file link" id="viewLink">
+                        <input type="text input-pr-rev" class="form-control" id="basic-url" placeholder="Link">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" type="button">Add</button>
                         </div>
                       </div>
                     </div>
                   </div>
+-->
+                  <label for="inputFile">Attachments: </label><br>
+                  <!-- Adding Preview -->
+                  <div class="container" style="height: 150px; overflow-y: auto;">
+                    <table class="table table-hover">
+                      <tbody>
+                        <tr>
+                          <td>File Name</td>
+                          <td>Size</td>
+                          <td><button class="btn btn-danger btn-sm waves-effect waves-light float-right"><i class="fas fa-trash-alt"></i></button></td>
+                        </tr>
+                        <tr>
+                          <td>Link</td>
+                          <td></td>
+                          <td><button class="btn btn-danger btn-sm waves-effect waves-light float-right"><i class="fas fa-trash-alt"></i></button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
                 </div>
               </div>
             </div>
-
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+            </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger mr-auto">Delete</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
-          </div>
-
-
+        </form>
       </div>
-      </form>
     </div>
-  </div>
-  <!-- jQuery -->
-  <script src="../plugins/jquery/jquery.min.js"></script>
-  <!-- jQuery UI 1.11.4 -->
-  <script src="../plugins/jquery-ui/jquery-ui.min.js"></script>
-  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-  <!-- Bootstrap 4 -->
-  <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- DataTables  & Plugins -->
-  <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
-  <script src="../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-  <script src="../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-  <script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-  <script src="../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-  <script src="../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-  <script src="../plugins/jszip/jszip.min.js"></script>
-  <script src="../plugins/pdfmake/pdfmake.min.js"></script>
-  <script src="../plugins/pdfmake/vfs_fonts.js"></script>
-  <script src="../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-  <script src="../plugins/datatables-buttons/js/buttons.print.min.js"></script>
-  <script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-  <script src="../plugins/datatables-select/js/dataTables.select.min.js"></script>
-  <!-- InputMask -->
-  <script src="../plugins/popper/popper.min.js"></script>
-  <script src="../plugins/moment/moment.min.js"></script>
-  <script src="../plugins/inputmask/jquery.inputmask.min.js"></script>
-  <!-- date-range-picker -->
-  <!-- DropZone -->
-  <script src="../plugins/dropzone/min/dropzone.min.js"></script>
-  <script src="../plugins/daterangepicker/daterangepicker.js"></script>
-  <!-- TOASTR -->
-  <script src="../plugins/toastr/toastr.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="../dist/js/adminlte.js"></script>
-  <script src="./js/ActivityLogFunctions.js"></script>
+    <!-- jQuery -->
+    <script src="../plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="../plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <!-- Bootstrap 4 -->
+    <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="../plugins/jszip/jszip.min.js"></script>
+    <script src="../plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="../plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="../plugins/datatables-select/js/dataTables.select.min.js"></script>
+    <!-- InputMask -->
+    <script src="../plugins/popper/popper.min.js"></script>
+    <script src="../plugins/moment/moment.min.js"></script>
+    <script src="../plugins/inputmask/jquery.inputmask.min.js"></script>
+    <!-- date-range-picker -->
+    <!-- DropZone -->
+    <script src="../plugins/dropzone/min/dropzone.min.js"></script>
+    <script src="../plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- TOASTR -->
+    <script src="../plugins/toastr/toastr.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../dist/js/adminlte.js"></script>
+    <script src="./js/ActivityLogFunctions.js"></script>
 
-  <script>
-    Dropzone.autoDiscover = false;
-    var attachment = $("div#dropzone-example").dropzone({
-      url: "../php/upload", //Change the url to the php code
-      paramName: "file", // The name that will be used to transfer the file
-      maxFilesize: .5, // MB
-      addRemoveLinks: true,
-      dictDefaultMessage: '<span class="">Drop files (or click) to upload  </span> <br> \
-                        <i class="fas fa-cloud-upload-alt"></i>',
-      dictResponseError: 'Error while uploading file!',
-    });
-  </script>
+    <script>
+      //Hiding the div
+      $(".custom-file").hide();
+      $(".uploadBtn").hide();
+
+      //Showing the div for the inputs
+      $(document).ready(function() {
+        $('.cases a').on('click', function() {
+          var txt = ($(this).attr('value'));
+          if (txt == 'file') {
+            $(".file").show();
+            $(".link").hide();
+            $(".uploadBtn").show();
+          }
+          if (txt == 'link') {
+            $(".link").show();
+            $(".file").hide();
+            $(".uploadBtn").hide();
+          }
+        });
+      });
+
+      //Changing text label of the File attachments
+      document.querySelector('.custom-file-input').addEventListener('change', function(e) {
+        var fileName = document.getElementById("inputType").files[0].name;
+        var nextSibling = e.target.nextElementSibling
+        nextSibling.innerText = fileName
+      });
+
+      // Dropzone.autoDiscover = false;
+      // var attachment = $("div#dropzone-example").dropzone({
+      //   url: "../php/upload", //Change the url to the php code
+      //   paramName: "file", // The name that will be used to transfer the file
+      //   maxFilesize: .5, // MB
+      //   addRemoveLinks: true,
+      //   dictDefaultMessage: '<span class="">Drop files (or click) to upload  </span> <br> \
+      //                     <i class="fas fa-cloud-upload-alt"></i>',
+      //   dictResponseError: 'Error while uploading file!',
+      // });
+    </script>
 
 </body>
 

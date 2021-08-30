@@ -77,8 +77,8 @@
 
 
   <!-- Modal for the Add -->
-  <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+  <div class="modal fade bd-modal-lg" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
@@ -99,19 +99,74 @@
                 <?php displayAllClients() ?>
               </select>
             </div>
-            <!-- <div class="form-group">
-              <label for="inputTask">Kind of Task</label>
-              <select class="form-control" id="inputTask" required>
-                <option value="0">Upcoming</option>
-                <option value="1">In Progress</option>
-              </select>
-            </div> -->
+            <div class="form-group">
+              <label for="dueDate">Due Date</label>
+              <input type="date" class="form-control" id="dueDate" onclick="searchTable()" value="">
+            </div>
             <div class="form-group">
               <label for="inputDescription">Notes</label>
               <textarea type="text" class="form-control" id="inputNotes"></textarea>
             </div>
-            <div class="form-horizontal">
 
+            <div class="form-group">
+              <label for="inputSubTasks">Sub-Tasks: </label>
+              <textarea type="text" class="form-control" id="inputSubTasks"></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="inputFile">Attachments: </label><br>
+                  <!-- Input -->
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add Attachments</button>
+                      <div class="dropdown-menu cases" id="attachments">
+                        <a class="dropdown-item" href="#" value="file">File</a>
+                        <a class="dropdown-item" href="#" value="link">Link</a>
+                      </div>
+                    </div>
+                    <div class="custom-file file" id="addFile">
+                      <input type="file" class="custom-file-input" id="inputType">
+                      <label class="custom-file-label" for="inputGroupFile01 text-truncate">Choose File</label>
+                    </div>
+                    <div class="input-group-append uploadBtn" id="addUpload">
+                      <button class="btn btn-outline-secondary" type="button">Upload</button>
+                    </div>
+
+                    <div class="custom-file link" id="addLink">
+                      <input type="text input-pr-rev" class="form-control" id="basic-url" placeholder="Link">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">Add</button>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Input File -->
+                  <!-- <div class="form-row">
+                      <div class="form-group" style="width:100%; padding-left: 1%">
+                        <div class="dropzone inputDrop" id="dropzone-example" enctype="multipart/form-data">
+                      </div>
+                      </div> -->
+                </div>
+              </div>
+              <!-- Adding Preview -->
+              <div class="container" style="height: 150px; overflow-y: auto;">
+                <table class="table table-hover">
+                  <tbody>
+                    <tr>
+                      <td>File Name</td>
+                      <td>Size</td>
+                      <td><button class="btn btn-danger btn-sm waves-effect waves-light float-right"><i class="fas fa-trash-alt"></i></button></td>
+                    </tr>
+                    <tr>
+                      <td>Link</td>
+                      <td></td>
+                      <td><button class="btn btn-danger btn-sm waves-effect waves-light float-right"><i class="fas fa-trash-alt"></i></button></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
             </div>
           </div>
           <div class="modal-footer">
@@ -158,9 +213,23 @@
                   </div>
                 </div>
               </div>
-              <div class="form-row justify-content-end" style="margin-bottom: 1%;">
-                <div class="col-auto">
-                  <button type="button" class="btn btn-primary mr-auto" id="btnFinish" style="min-width: 102px;">Finish</button>
+              <div class="form-row">
+                <div class="col">
+                  <label for="modalClient">Client: </label>
+                  <p id="modalClient">Agrisoft</p>
+                </div>
+                <div class="col">
+                  <label for="modalDueDate">Due Date: </label>
+                  <p id="modalDueDate">January 01, 2021</p>
+                </div>
+                <div class="col">
+                  <label for="modalStatus">Status: </label>
+                  <p id="modalAgent">In Progress</p>
+                </div>
+                <div class="col">
+                  <div class="float-right">
+                    <button type="button" class="btn btn-primary mr-auto" id="btnFinish" style="min-width: 102px;">Finish</button>
+                  </div>
                 </div>
               </div>
               <div class="form-row">
@@ -192,32 +261,27 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="inputFile">Attachments: </label><br>
-                    <div class="">
-
-                    <!-- Adding Preview of the Files -->
-
-
-                      <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add Attachments</button>
-                          <div class="dropdown-menu cases" id="attachments">
-                            <a class="dropdown-item" href="#" value="file">File</a>
-                            <a class="dropdown-item" href="#" value="link">Link</a>
-                          </div>
+                    <!-- Input -->
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add Attachments</button>
+                        <div class="dropdown-menu cases" id="attachments">
+                          <a class="dropdown-item" href="#" value="file">File</a>
+                          <a class="dropdown-item" href="#" value="link">Link</a>
                         </div>
-                        <div class="custom-file" id="file">
-                          <input type="file" class="custom-file-input" id="inputType">
-                          <label class="custom-file-label" for="inputGroupFile01 text-truncate">Choose File</label>
-                        </div>
-                        <div class="input-group-append" id="uploadBtn">
-                          <button class="btn btn-outline-secondary" type="button">Upload</button>
-                        </div>
+                      </div>
+                      <div class="custom-file file" id="viewFile">
+                        <input type="file" class="custom-file-input" id="inputType">
+                        <label class="custom-file-label" for="inputGroupFile01 text-truncate">Choose File</label>
+                      </div>
+                      <div class="input-group-append uploadBtn" id="viewUpload">
+                        <button class="btn btn-outline-secondary" type="button">Upload</button>
+                      </div>
 
-                        <div class="custom-file" id="link">
-                          <input type="text input-pr-rev" class="form-control" id="basic-url" placeholder="Link">
-                          <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button">Add</button>
-                          </div>
+                      <div class="custom-file link" id="viewLink">
+                        <input type="text input-pr-rev" class="form-control" id="basic-url" placeholder="Link">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" type="button">Add</button>
                         </div>
                       </div>
                     </div>
@@ -228,6 +292,24 @@
                       </div>
                       </div> -->
                   </div>
+                </div>
+                <!-- Adding Preview -->
+                <div class="container" style="height: 150px; overflow-y: auto;">
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr>
+                        <td>File Name</td>
+                        <td>Size</td>
+                        <td><button class="btn btn-danger btn-sm waves-effect waves-light float-right"><i class="fas fa-trash-alt"></i></button></td>
+                      </tr>
+                      <tr>
+                        <td>Link</td>
+                        <td></td>
+                        <td><button class="btn btn-danger btn-sm waves-effect waves-light float-right"><i class="fas fa-trash-alt"></i></button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
                 </div>
               </div>
             </div>
@@ -274,21 +356,21 @@
   <script>
     //Hiding the div
     $(".custom-file").hide();
-    $("#uploadBtn").hide();
+    $(".uploadBtn").hide();
 
     //Showing the div for the inputs
     $(document).ready(function() {
-      $('#attachments a').on('click', function() {
+      $('.cases a').on('click', function() {
         var txt = ($(this).attr('value'));
         if (txt == 'file') {
-          $("#file").show();
-          $("#link").hide();
-          $("#uploadBtn").show();
+          $(".file").show();
+          $(".link").hide();
+          $(".uploadBtn").show();
         }
         if (txt == 'link') {
-          $("#link").show();
-          $("#file").hide();
-          $("#uploadBtn").hide();
+          $(".link").show();
+          $(".file").hide();
+          $(".uploadBtn").hide();
         }
       });
     });

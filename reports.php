@@ -26,36 +26,43 @@
                 <div class="container-fluid">
                     <div class="card-body">
                         <div class="row align-items-start">
-                            <div class="col">
+                            <div class="col-sm-6">
                                 <label for="clientName">Client Name</label>
                                 <select id="clientName" class="form-control" onclick="searchTable()" style="margin-right:0.5%;">
                                     <option value="" selected>Select</option>
                                     <?php displayAllClients() ?>
                                 </select>
                             </div>
-                            <div class="col">
+                            <div class="col-sm-3">
                                 <label for="startDate">Start Date</label>
                                 <input type="date" class="form-control" id="startDate" onclick="searchTable()" value="" style="margin-right:0.5%;">
                             </div>
-                            <div class="col">
+                            <div class="col-sm-3">
                                 <label for="endDate">End Date</label>
                                 <input type="date" class="form-control" id="endDate" onclick="searchTable()" value="" style="margin-right:0.5%;">
                             </div>
-                            <div class="col">
+
+                        </div>
+                        <div class="row" style="margin-top: 1%;">
+                            <div class="col-sm-3">
                                 <label for="endDate">Time Spent (hr:mn)</label>
                                 <div class="d-flex">
                                     <input type="number" class="form-control" id="timeHr" placeholder="hr" value="" style="margin-right:0.5%;">
                                     <input type="number" class="form-control" id="timeMn" placeholder="mn" min="0" max="60" onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;searchTable();" value="" style="margin-right:0.5%;">
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-sm-3">
                                 <label for="actDate">Task Date (Date Range)</label>
                                 <!-- Start Date -->
                                 <input type="text" class="form-control" id="actDate" value="" style="margin-right:0.5%;background:white;" readonly>
                             </div>
+                            <div class="col-sm-6">
+                                <label for="dueDate">Due Date</label>
+                                <input type="date" class="form-control" id="dueDate" onclick="searchTable()" value="" style="margin-right:0.5%;">
+                            </div>
                         </div>
                         <div class="row justify-content-end">
-                            <div class="col-auto" style="margin-top: 2.5%;">
+                            <div class="col-auto" style="margin-top: 1%;">
                                 <div class="btn-group dropleft">
                                     <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" style="width:auto" aria-expanded="false">
                                         Clear Search
@@ -64,10 +71,12 @@
                                         <button class="dropdown-item" type="button" onclick="clearSearch(6)">All</button>
                                         <div class="dropdown-divider"></div>
                                         <button class="dropdown-item" type="button" onclick="clearSearch(1)">Client</button>
-                                        <button class="dropdown-item" type="button" onclick="clearSearch(2)">Date Created</button>
-                                        <button class="dropdown-item" type="button" onclick="clearSearch(3)">Date Ended</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(2)">Start Date</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(3)">End Date</button>
                                         <button class="dropdown-item" type="button" onclick="clearSearch(4)">Time Spent</button>
                                         <button class="dropdown-item" type="button" onclick="clearSearch(5)">Task Date</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(5)">Due Date</button>
+
                                     </div>
                                 </div>
                             </div>
