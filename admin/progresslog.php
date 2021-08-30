@@ -29,14 +29,14 @@
                         <div class="row align-items-start">
                             <div class="col-sm-6">
                                 <label for="clientName">Client Name</label>
-                                <select id="clientName" class="form-control" style="margin-right:0.5%;">
+                                <select id="clientName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
                                     <option value="" selected>Select Client</option>
                                     <?php displayAllClients(); ?>
                                 </select>
                             </div>
                             <div class="col-sm-6">
                                 <label for="agentName">Employee Name</label>
-                                <select id="agentName" class="form-control" style="margin-right:0.5%;">
+                                <select id="agentName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
                                     <option value="" selected>Select Employee</option>
                                     <?php displayAllAgents(); ?>
                                 </select>
@@ -45,30 +45,23 @@
                         <div class="row" style="margin-top: 1%;">
                             <div class="col-sm-3">
                                 <label for="startDate">Start Date</label>
-                                <input type="date" class="form-control" id="startDate" value="" style="margin-right:0.5%;">
+                                <input type="date" onchange="searchTable()" class="form-control" id="startDate" value="" style="margin-right:0.5%;">
                             </div>
                             <div class="col-sm-3">
                                 <label for="endDate">End Date</label>
-                                <input type="date" class="form-control" id="endDate" value="" style="margin-right:0.5%;">
+                                <input type="date" onchange="searchTable()" class="form-control" id="endDate" value="" style="margin-right:0.5%;">
                             </div>
                             <div class="col-sm-3">
-                                <label for="endDate">Time Spent (hr:mn)</label>
-                                <div class="d-flex">
-                                    <input type="number" class="form-control" id="timeHr" placeholder="hr" value="">
-                                    <input type="number" class="form-control" id="timeMn" placeholder="mn" min="0" max="60" onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;" value="">
-                                </div>
+                                <label for="dueDate">Due Date</label>
+                                <input type="date" onchange="searchTable()" class="form-control" id="dueDate" value="" style="margin-right:0.5%;">
                             </div>
                             <div class="col-sm-3">
                                 <label for="actDate">Task Date (Date Range)</label>
                                 <!-- Start Date -->
-                                <input type="text" class="form-control" id="actDate" value="" style="margin-right:0.5%;background:white;" readonly>
+                                <input type="text" onchange="searchTable()" class="form-control" id="actDate" value="" style="margin-right:0.5%;background:white;" readonly>
                             </div>
                         </div>
                         <div class="row" style="margin-top:1%;">
-                            <div class="col-sm-6">
-                                <label for="dueDate">Due Date</label>
-                                <input type="date" class="form-control" id="dueDate" value="" style="margin-right:0.5%;">
-                            </div>
                         </div>
                         <div class="row justify-content-end">
                             <div class="col-auto">
@@ -84,7 +77,7 @@
                                         <button class="dropdown-item" type="button" onclick="clearSearch(3)">End Date</button>
                                         <button class="dropdown-item" type="button" onclick="clearSearch(4)">Time Spent</button>
                                         <button class="dropdown-item" type="button" onclick="clearSearch(5)">Task Date</button>
-                                        <button class="dropdown-item" type="button" onclick="clearSearch(5)">Due Date</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(7)">Due Date</button>
 
                                     </div>
                                 </div>
@@ -108,13 +101,14 @@
                         <thead>
                             <tr>
                                 <th class="text-center"></th>
-                                <th>Employee Name</th>
                                 <th>Task Name</th>
                                 <th>Client Name</th>
+                                <th>Employee Name</th>
                                 <th>Notes</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
-                                <th>Time Spent</th>
+                                <th>Due Date</th>
+                                <th>Current Time Spent</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -132,14 +126,15 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th></th>
-                                <th>Employee Name</th>
+                                <th class="text-center"></th>
                                 <th>Task Name</th>
                                 <th>Client Name</th>
+                                <th>Employee Name</th>
                                 <th>Notes</th>
-                                <th>Start Time</th>
-                                <th>End Time</th>
-                                <th>Time Spent</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Due Date</th>
+                                <th>Current Time Spent</th>
                                 <th></th>
                             </tr>
                         </tfoot>

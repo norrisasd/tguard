@@ -106,11 +106,7 @@
         let searchClientName = document.getElementById("clientName").value;
         let searchStartDate = document.getElementById("startDate").value;
         let searchEndDate = document.getElementById("endDate").value;
-        let searchHr=document.getElementById("timeHr").value;
-        let searchMn=document.getElementById("timeMn").value;
-        mn = searchMn==""?"00":searchMn;
-        hr = searchHr==""?"00":searchHr;
-        let searchTime=hr+":"+mn;
+        let searchDueDate = document.getElementById("dueDate").value;
         cb='';
         $.ajax({
             type:'get',
@@ -119,8 +115,8 @@
               searchClientName:searchClientName,
               searchStartDate:searchStartDate,
               searchEndDate:searchEndDate,
-              searchTime:searchTime,
               startDate:startDate,
+              searchDueDate:searchDueDate,
               endDate:endDate,
             },
             success:function(response){

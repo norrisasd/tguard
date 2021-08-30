@@ -25,7 +25,7 @@
 
     //DISPLAY ALL TASK
     if(isset($_GET['getTaskByUser'])){
-        $query="SELECT callback.*,SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) as total_time FROM `callback`,timerecord WHERE callback.user_id=$user_id AND callback.callback_id=timerecord.callback_id GROUP BY callback.callback_id;";
+        $query="SELECT callback.*,SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) as total_time FROM `callback`,timerecord WHERE callback.user_id=$user_id AND callback.callback_id=timerecord.callback_id AND callback.status =1 GROUP BY callback.callback_id;";
         $result=mysqli_query($dbConnection,$query);
         if(mysqli_num_rows($result)>0){
             $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -38,22 +38,22 @@
         $cname=$_GET['searchClientName'];
         $sdate=$_GET['searchStartDate'];
         $edate=$_GET['searchEndDate'];
-        $time = $_GET['searchTime'];
         $bsdate=$_GET['startDate'];
         $bedate=$_GET['endDate'];
+        $ddate=$_GET['searchDueDate'];
         $cname = $cname==""?"":"AND client_name ='".$cname."'";
         $sdate = $sdate==""?"":"AND DateStarted='".$sdate."'";
         $edate = $edate==""?"":"AND DateEnded='".$edate."'";
-        $time = $time=="00:00"?"":"AND callback.TimeSpent='".$time."'";
+        $ddate = $ddate==""?"":"AND DueDate='".$ddate."'";
         $betweenDate=$bsdate==''?'':"AND (('$bsdate' between DateStarted and DateEnded) or ('$bedate' between DateStarted and DateEnded) or ('$bsdate' <= DateStarted and '$bedate' >= DateEnded))";
-        $query="SELECT callback.*,SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) as total_time FROM `callback`,timerecord WHERE callback.user_id=$user_id AND callback.callback_id=timerecord.callback_id $cname $sdate $edate $time $betweenDate GROUP BY callback.callback_id;";
+        $query="SELECT callback.*,SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) as total_time FROM `callback`,timerecord WHERE callback.user_id=$user_id AND callback.callback_id=timerecord.callback_id AND callback.status =1 $cname $sdate $edate $ddate $betweenDate GROUP BY callback.callback_id;";
         $result=mysqli_query($dbConnection,$query);
         if($result){
             if(mysqli_num_rows($result)>0){
                 $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
                 $result=json_encode($result);
             }else{
-                $result="";
+                $result=mysqli_error($dbConnection);
             }
         }else{
             $result=mysqli_error($dbConnection);

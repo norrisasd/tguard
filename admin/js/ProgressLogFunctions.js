@@ -31,7 +31,7 @@ var dt = $('#dataTable').DataTable({
         "orderable": false,
         "className": "text-center select-checkbox",
     }, {
-        "targets": 8,
+        "targets": 9,
         "className": "text-center",
     }],
     select: { style: 'multi', selector: 'tr>td:nth-child(1)' },
@@ -97,7 +97,7 @@ function refreshTable(){
         dt.clear().draw();
         for(var da in data){
           btn =`<button class="btn btn-success btn-sm waves-effect waves-light text-center" onclick='taskInfo(`+JSON.stringify(data[da])+`)' data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="fas fa-eye"></i></button>`;
-          time = data[da].total_time;
+          time = data[da].current_time_spent == null?data[da].TimeSpent:data[da].current_time_spent;
           const timeArr=time.split(":");
           time = timeArr[0]+"hrs "+timeArr[1]+"mins "+timeArr[2]+"sec";
           dt.row.add([
@@ -108,6 +108,7 @@ function refreshTable(){
             data[da].Notes,
             data[da].DateStarted,
             data[da].DateEnded,
+            data[da].DueDate,
             time,
             btn,
           ]).draw();
@@ -121,11 +122,7 @@ function refreshTable(){
       let searchAgentName = document.getElementById("agentName").value;
       let searchStartDate = document.getElementById("startDate").value;
       let searchEndDate = document.getElementById("endDate").value;
-      let searchHr=document.getElementById("timeHr").value;
-      let searchMn=document.getElementById("timeMn").value;
-      mn = searchMn==""?"00":searchMn;
-      hr = searchHr==""?"00":searchHr;
-      let searchTime=hr+":"+mn;
+      let searchDueDate=document.getElementById("dueDate").value;
       cb='';
       $.ajax({
           type:'get',
@@ -138,7 +135,7 @@ function refreshTable(){
             searchAgentName:searchAgentName,
             startDate:startDate,
             endDate:endDate,
-            searchTime:searchTime,
+            searchDueDate:searchDueDate,
             status:0
           },
           success:function(response){
@@ -147,7 +144,7 @@ function refreshTable(){
                     dt.clear().draw();
                     for(var da in data){
                       btn =`<button class="btn btn-success btn-sm waves-effect waves-light text-center" onclick='taskInfo(`+JSON.stringify(data[da])+`)' data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="fas fa-eye"></i></button>`;
-                      time = data[da].total_time;
+                      time = data[da].current_time_spent == null?data[da].TimeSpent:data[da].current_time_spent;
                       const timeArr=time.split(":");
                       time = timeArr[0]+"hrs "+timeArr[1]+"mins "+timeArr[2]+"sec";
                       dt.row.add([
@@ -158,6 +155,7 @@ function refreshTable(){
                         data[da].Notes,
                         data[da].DateStarted,
                         data[da].DateEnded,
+                        data[da].DueDate,
                         time,
                         btn,
                       ]).draw();
@@ -168,4 +166,87 @@ function refreshTable(){
           }
         });
         return false;
+  }
+  function clearSearch(type){
+    switch(type){
+      case 1:
+        $("#clientName").prop('selectedIndex',0);
+        break;
+      case 2:
+        document.getElementById("startDate").valueAsDate = null;
+        break;
+      case 3:
+        document.getElementById("endDate").valueAsDate = null;
+        break;
+      case 4:
+        document.getElementById("timeHr").value = '';
+        document.getElementById("timeMn").value = '';
+        break;
+      case 5:
+        $('#actDate').val('');
+        startDate ='';
+        endDate='';
+        break;
+      case 6:
+        $("#clientName").prop('selectedIndex',0);
+        document.getElementById("startDate").valueAsDate = null;
+        document.getElementById("endDate").valueAsDate = null;
+        document.getElementById("timeHr").value = '';
+        document.getElementById("timeMn").value = '';
+        $('#actDate').val('');
+        startDate ='';
+        endDate='';
+        break;
+       case 7:
+        document.getElementById("dueDate").valueAsDate = null;
+        break;
+
+    }
+    searchTable();
+
+  }
+  $("#btnDelete").click(function () {
+    if (confirm("Are you sure you want to delete this task?")) {
+      $.ajax({
+        type: 'get',
+        url: './main.php',
+        data: {
+          btnDelete: true,
+          cb_id: this.value,
+        },
+        success: function (response) {
+          if (response == 'deleted') {
+            $(".modal").modal("hide");
+            toastr.success("Task Deleted");
+            searchTable();
+          } else {
+            toastr.error("There was an error!");
+          }
+  
+        }
+      });
+    }
+  
+  });
+  function taskInfo(data){
+    if(data.total_time == null){
+      data.total_time='00:00:00';
+    }
+    $("#modalStatus").html("Finished");
+    $("#btnPlay").val(data.callback_id);
+    $("#btnPause").val(data.callback_id);
+    $("#btnStop").val(data.callback_id);
+    $("#btnDelete").val(data.callback_id);
+    $("#btnFinish").val(data.callback_id);
+    $("#btnSave").val(data.callback_id);
+    $("#inputDescription2").val(data.Notes);
+    $("#modalTaskName").html(data.TaskName);
+    $("#modalStartDate").html(data.DateStarted==null?"---":data.DateStarted);
+    $("#modalEndDate").html(data.DateEnded==null?"---":data.DateEnded);
+    $("#modalTimeSpent").html(data.TimeSpent.match("00:00:00")?"---":data.TimeSpent);
+    $("#inputSubTasks").val(data.sub_task);
+    $("#inputComments").val(data.comments);
+    $("#modalAgent").html(data.name);
+    $("#modalClient").html(data.client_name);
+    $("#modalDueDate").html(data.DueDate);
   }

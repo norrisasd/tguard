@@ -92,9 +92,9 @@
           dt.clear().draw();
           for(var da in data){
             btn =`<button class="btn btn-success btn-sm waves-effect waves-light text-center" onclick='taskInfo(`+JSON.stringify(data[da])+`)' data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="fas fa-eye"></i></button>`;
-            time = data[da].total_time;
+            time = data[da].TimeSpent;
             const timeArr=time.split(":");
-            time = timeArr[0]+"hrs "+timeArr[1]+"mins "+timeArr[2]+"sec";
+            time = timeArr[0]+"hrs "+timeArr[1]+"mins";
             dt.row.add([
               cb,
               data[da].TaskName,
@@ -103,6 +103,7 @@
               data[da].Notes,
               data[da].DateStarted,
               data[da].DateEnded,
+              data[da].DueDate,
               time,
               btn,
             ]).draw();
@@ -116,11 +117,7 @@
         let searchAgentName = document.getElementById("agentName").value;
         let searchStartDate = document.getElementById("startDate").value;
         let searchEndDate = document.getElementById("endDate").value;
-        let searchHr=document.getElementById("timeHr").value;
-        let searchMn=document.getElementById("timeMn").value;
-        mn = searchMn==""?"00":searchMn;
-        hr = searchHr==""?"00":searchHr;
-        let searchTime=hr+":"+mn;
+        let searchDueDate=document.getElementById("dueDate").value;
         cb='';
         $.ajax({
             type:'get',
@@ -133,7 +130,7 @@
               searchAgentName:searchAgentName,
               startDate:startDate,
               endDate:endDate,
-              searchTime:searchTime,
+              searchDueDate:searchDueDate,
               status:1
             },
             success:function(response){
@@ -142,9 +139,9 @@
                       dt.clear().draw();
                       for(var da in data){
                         btn =`<button class="btn btn-success btn-sm waves-effect waves-light text-center" onclick='taskInfo(`+JSON.stringify(data[da])+`)' data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="fas fa-eye"></i></button>`;
-                        time = data[da].total_time;
+                        time = data[da].TimeSpent;
                         const timeArr=time.split(":");
-                        time = timeArr[0]+"hrs "+timeArr[1]+"mins "+timeArr[2]+"sec";
+                        time = timeArr[0]+"hrs "+timeArr[1]+"mins";
                         dt.row.add([
                           cb,
                           data[da].TaskName,
@@ -153,6 +150,7 @@
                           data[da].Notes,
                           data[da].DateStarted,
                           data[da].DateEnded,
+                          data[da].DueDate,
                           time,
                           btn,
                         ]).draw();
@@ -209,6 +207,7 @@
     if(data.total_time == null){
       data.total_time='00:00:00';
     }
+    $("#modalStatus").html("Finished");
     $("#btnPlay").prop('disabled', true);
     $("#btnPause").prop('disabled', true);
     $("#btnStop").prop('disabled', true);
@@ -223,11 +222,12 @@
     $("#modalTaskName").html(data.TaskName);
     $("#modalStartDate").html(data.DateStarted==null?"---":data.DateStarted);
     $("#modalEndDate").html(data.DateEnded==null?"---":data.DateEnded);
-    $("#modalTimeSpent").html(data.total_time.match("00:00:00")?"---":data.total_time);
+    $("#modalTimeSpent").html(data.TimeSpent.match("00:00:00")?"---":data.TimeSpent);
     $("#inputSubTasks").val(data.sub_task);
     $("#inputComments").val(data.comments);
     $("#modalAgent").html(data.name);
     $("#modalClient").html(data.client_name);
+    $("#modalDueDate").html(data.DueDate);
   }
   $("#btnSave").click(function() {
     notes = $("#inputDescription2").val();
@@ -259,5 +259,28 @@
   });
   $("#btnSearch").click(function(){
     searchTable();
+  });
+  $("#btnDelete").click(function () {
+    if (confirm("Are you sure you want to delete this task?")) {
+      $.ajax({
+        type: 'get',
+        url: './main.php',
+        data: {
+          btnDelete: true,
+          cb_id: this.value,
+        },
+        success: function (response) {
+          if (response == 'deleted') {
+            $(".modal").modal("hide");
+            toastr.success("Task Deleted");
+            searchTable();
+          } else {
+            toastr.error("There was an error!");
+          }
+  
+        }
+      });
+    }
+  
   });
   

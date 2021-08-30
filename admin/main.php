@@ -12,9 +12,11 @@
         $clientname=$_GET['clientname'];
         $notes=$_GET['notes'];
         $agent=$_GET['agent'];
-        $query ="INSERT INTO `callback`(`user_id`,`TaskName`, `client_name`, `Notes`, `datecreated`, `status`) VALUES ('$agent','$taskname','$clientname','$notes',CURDATE(),0)";
+        $ddate=$_GET['duedate'];
+        $subtask=$_GET['subtask'];
+        $query ="INSERT INTO `callback`(`user_id`,`TaskName`, `client_name`, `Notes`, `datecreated`,`DueDate`, `status`) VALUES ('$agent','$taskname','$clientname','$notes',CURDATE(),'$ddate',0)";
         if(mysqli_query($dbConnection,$query)){
-            $query ="INSERT INTO `callback_extend`(`callback_id`, `sub_task`, `comments`) VALUES (last_insert_id(),'','');";
+            $query ="INSERT INTO `callback_extend`(`callback_id`, `sub_task`, `comments`) VALUES (last_insert_id(),'$subtask','');";
             if(mysqli_query($dbConnection,$query)){
                 $result.="Task Created";
             }else{
@@ -28,7 +30,7 @@
     //DISPLAY ALL TASK
     if(isset($_GET['getAllTask'])){
         $status = $_GET['status'];
-        $query="SELECT callback.*,SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) as total_time,user.name,callback_extend.sub_task,callback_extend.comments FROM `callback` INNER JOIN timerecord on callback.callback_id=timerecord.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id WHERE callback.status = $status GROUP BY callback.callback_id ORDER BY callback.user_id;";
+        $query="SELECT callback.*,user.name,callback_extend.sub_task,callback_extend.comments FROM `callback` INNER JOIN timerecord on callback.callback_id=timerecord.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id WHERE callback.status = $status GROUP BY callback.callback_id ORDER BY callback.user_id;";
         $result=mysqli_query($dbConnection,$query);
         if(mysqli_num_rows($result)>0){
             $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -37,7 +39,7 @@
     }
     if(isset($_GET['getAllInProgressTask'])){
         $status = $_GET['status'];
-        $query="SELECT callback.*,SEC_TO_TIME(SUM(TIME_TO_SEC(SUBTIME(CURTIME(),timerecord.TimeStarted)))) as total_time,user.name,callback_extend.sub_task,callback_extend.comments FROM `callback` INNER JOIN timerecord on callback.callback_id=timerecord.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id WHERE callback.status = $status GROUP BY callback.callback_id ORDER BY callback.user_id;";
+        $query="SELECT callback.*,ADDTIME(callback.TimeSpent,(Select SEC_TO_TIME(SUM(TIME_TO_SEC(SUBTIME(CURTIME(),timerecord.TimeStarted)))) FROM timerecord WHERE status = 0))AS current_time_spent,user.name,callback_extend.sub_task,callback_extend.comments FROM `callback` INNER JOIN timerecord on callback.callback_id=timerecord.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id WHERE callback.status = $status GROUP BY callback.callback_id ORDER BY callback.user_id;";
         $result=mysqli_query($dbConnection,$query);
         if(mysqli_num_rows($result)>0){
             $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -51,7 +53,7 @@
         $aID=$_GET['searchAgentName'];
         $sdate=$_GET['searchStartDate'];
         $edate=$_GET['searchEndDate'];
-        $time = $_GET['searchTime'];
+        $ddate=$_GET['searchDueDate'];
         $bsdate=$_GET['startDate'];
         $bedate=$_GET['endDate'];
         $status = $_GET['status'];
@@ -59,9 +61,9 @@
         $aID = $aID==""?"":"AND callback.user_id =".$aID."";
         $sdate = $sdate==""?"":"AND callback.DateStarted='".$sdate."'";
         $edate = $edate==""?"":"AND callback.DateEnded='".$edate."'";
-        $time = $time=="00:00"?"":"AND callback.TimeSpent='".$time."'";
+        $ddate = $ddate==""?"":"AND callback.DueDate='".$ddate."'";
         $betweenDate=$bsdate==''?'':"AND (('$bsdate' between DateStarted and DateEnded) or ('$bedate' between DateStarted and DateEnded) or ('$bsdate' <= DateStarted and '$bedate' >= DateEnded))";
-        $query="SELECT callback.*,SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) as total_time,user.name,callback_extend.sub_task,callback_extend.comments FROM `callback` INNER JOIN timerecord on callback.callback_id=timerecord.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id WHERE callback.status = $status $cname $aID $sdate $edate $time $betweenDate GROUP BY callback.callback_id ORDER BY callback.user_id;";
+        $query="SELECT callback.*,ADDTIME(callback.TimeSpent,(Select SEC_TO_TIME(SUM(TIME_TO_SEC(SUBTIME(CURTIME(),timerecord.TimeStarted)))) FROM timerecord WHERE status = 0))AS current_time_spent,user.name,callback_extend.sub_task,callback_extend.comments FROM `callback` INNER JOIN timerecord on callback.callback_id=timerecord.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id WHERE callback.status = $status $cname $aID $sdate $edate $ddate $betweenDate GROUP BY callback.callback_id ORDER BY callback.user_id;";
         $result=mysqli_query($dbConnection,$query);
         if($result){
             if(mysqli_num_rows($result)>0){
@@ -128,10 +130,15 @@
         $query = "UPDATE `timerecord` SET  `TimeStop`= CURTIME(), TimeSpent=SUBTIME(CURTIME(),TimeStarted) ,status = 1 WHERE callback_id = $cb_id AND status= 0 ";
         $result = mysqli_query($dbConnection,$query);
         if($result){
-            $result = 'updated';
-
+            $query ="UPDATE `callback` SET `TimeSpent`= (SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) FROM timerecord WHERE timerecord.callback_id= $cb_id) WHERE callback.callback_id= $cb_id";
+            $result=mysqli_query($dbConnection,$query);
+            if($result){
+                $result = 'updated';
+            }else{
+                $result = mysqli_error($dbConnection);
+            }
         }else{
-            $result = '';
+            $result = mysqli_error($dbConnection);
         }
     }
 
@@ -175,10 +182,16 @@
         $query = "UPDATE `callback` SET status = 1, DateEnded = CURDATE() WHERE callback_id = $cb_id";
         $result = mysqli_query($dbConnection,$query);
         if($result){
-            $query = "UPDATE `timerecord` SET status = 1 WHERE callback_id = $cb_id and status = 0 ";
+            $query = "UPDATE `timerecord` SET status = 1, `TimeStop`= CURTIME(), TimeSpent=SUBTIME(CURTIME(),TimeStarted) WHERE callback_id = $cb_id and status = 0 ";
             $result = mysqli_query($dbConnection,$query);
             if($result){
-                $result = 'updated';
+                $query ="UPDATE `callback` SET `TimeSpent`= (SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) FROM timerecord WHERE timerecord.callback_id= $cb_id) WHERE callback.callback_id= $cb_id";
+                $result=mysqli_query($dbConnection,$query);
+                if($result){
+                    $result = 'updated';
+                }else{
+                    $result = mysqli_error($dbConnection);
+                }
             }else{
                 $result= mysqli_error($dbConnection);
             }

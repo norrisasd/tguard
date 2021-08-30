@@ -150,6 +150,11 @@
               <textarea type="text" class="form-control" id="inputSubTasks"></textarea>
             </div>
 
+            <div class="form-group">
+              <label for="inputDueDate">Due Date: </label>
+              <input type="date" class="form-control" id="inputDueDate"></input>
+            </div>
+
             <div class="form-row">
               <div class="col">
                 <div class="form-group">
@@ -244,8 +249,8 @@
                   <p id="modalTimeSpent">18 mins</p>
                 </div>
                 <div class="col">
-                  <label for="modalTimeSpent">Status: </label>
-                  <p id="modalTimeSpent">In Progress</p>
+                  <label for="modalStatus">Status: </label>
+                  <p id="modalStatus">---</p>
                 </div>
                 <div class="col">
                   <div class="float-right">
@@ -358,7 +363,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger mr-auto">Delete</button>
+            <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
           </div>

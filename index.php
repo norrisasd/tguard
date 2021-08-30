@@ -112,6 +112,10 @@
               <label for="inputSubTasks">Sub-Tasks: </label>
               <textarea type="text" class="form-control" id="inputSubTasks"></textarea>
             </div>
+            <div class="form-group">
+              <label for="inputDueDate">Due Date: </label>
+              <input type="date" class="form-control" id="inputDueDate"></input>
+            </div>
 
             <div class="form-row">
               <div class="col">

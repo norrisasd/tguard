@@ -45,20 +45,13 @@
                         </div>
                         <div class="row" style="margin-top: 1%;">
                             <div class="col-sm-3">
-                                <label for="endDate">Time Spent (hr:mn)</label>
-                                <div class="d-flex">
-                                    <input type="number" class="form-control" id="timeHr" placeholder="hr" value="" style="margin-right:0.5%;">
-                                    <input type="number" class="form-control" id="timeMn" placeholder="mn" min="0" max="60" onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;searchTable();" value="" style="margin-right:0.5%;">
-                                </div>
+                                <label for="dueDate">Due Date</label>
+                                <input type="date" class="form-control" id="dueDate" onclick="searchTable()" value="" style="margin-right:0.5%;">
                             </div>
                             <div class="col-sm-3">
                                 <label for="actDate">Task Date (Date Range)</label>
                                 <!-- Start Date -->
-                                <input type="text" class="form-control" id="actDate" value="" style="margin-right:0.5%;background:white;" readonly>
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="dueDate">Due Date</label>
-                                <input type="date" class="form-control" id="dueDate" onclick="searchTable()" value="" style="margin-right:0.5%;">
+                                <input type="text" class="form-control" onclick="searchTable()" id="actDate" value="" style="margin-right:0.5%;background:white;" readonly>
                             </div>
                         </div>
                         <div class="row justify-content-end">

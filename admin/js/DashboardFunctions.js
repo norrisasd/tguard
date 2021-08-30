@@ -71,7 +71,8 @@ function addTask() {
   clientname = $("#inputClientID").val();
   notes = $("#inputNotes").val();
   agent = $("#inputAgentID").val();
-
+  subtask = $("#inputSubTasks").val();
+  duedate = document.getElementById("inputDueDate").value;
   $.ajax({
     type: 'get',
     url: './main.php',
@@ -79,7 +80,9 @@ function addTask() {
       taskname: taskname,
       clientname: clientname,
       notes: notes,
-      agent: agent
+      agent: agent,
+      duedate: duedate,
+      subtask: subtask
     },
     success: function (response) {
       if (response == 'Task Created') {
@@ -113,7 +116,7 @@ function displayUpcomingTask() {
         let str = JSON.stringify(item);
         content += `<li class="task-warning ui-sortable-handle" id="task1">
         <div class="float-right">
-        <p class="" id="duedate">Due Date: <b>January 01, 2021</b></p>
+        <p class="" id="duedate">Due Date: <b>`+ item.DueDate + `</b></p>
         </div>
           <b>`+ item.TaskName + `</b>
           <div class="clearfix"></div>
@@ -154,7 +157,7 @@ function displayInProgress() {
         let str = JSON.stringify(item);
         content += `<li class="task-warning ui-sortable-handle" id="task1">
         <div class="float-right">
-        <p class="" id="duedate">Due Date: <b>January 01, 2021</b></p>
+        <p class="" id="duedate">Due Date: <b>`+ item.DueDate + `</b></b></p>
         </div>
           <b>`+ item.TaskName + `</b>
           <div class="clearfix"></div>
@@ -185,6 +188,12 @@ function taskInfo(data) {
     $("#btnPause").prop('disabled', true);
     $("#btnStop").prop('disabled', true);
     $("#btnFinish").prop('disabled', true);
+  } else {
+    if ($('#btnPlay').prop('disabled')) {
+      $("#modalStatus").html("Paused");
+    } else {
+      $("#modalStatus").html("Running");
+    }
   }
   setButtonForProgress(data.callback_id);
   $("#btnPlay").val(data.callback_id);
@@ -202,6 +211,9 @@ function taskInfo(data) {
   $("#inputComments").val(data.comments);
   $("#modalAgent").html(data.name);
   $("#modalClient").html(data.client_name);
+  $("#modalDueDate").html(data.DueDate);
+
+
 }
 function setButtonForProgress(cb_id) {
   $.ajax({
@@ -221,7 +233,7 @@ function setButtonForProgress(cb_id) {
       if (result.status == 1) {
         $("#btnPlay").prop('disabled', false);
         $("#btnPause").prop('disabled', true);
-        $("#btnStop").prop('disabled', true);
+        $("#btnStop").prop('disabled', false);
       } else {
         $("#btnPlay").prop('disabled', true);
         $("#btnPause").prop('disabled', false);
@@ -355,7 +367,8 @@ $("#btnSave").click(function () {
       cb_id: this.value,
       notes: notes,
       subtask: subtask,
-      comments: comments
+      comments: comments,
+
     },
     success: function (response) {
       if (response == 'updated') {
