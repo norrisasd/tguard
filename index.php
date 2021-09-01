@@ -54,7 +54,14 @@
                 <!-- Upcoming Task-->
                 <h5><b>Upcoming</b></h5>
                 <p class="text-muted m-b-30 font-13">You currently have n no. of upcoming tasks</p>
-                <ul class="sortable-list taskList list-unstyled ui-sortable">
+                <div class="input-group rounded" style="margin-bottom:1%">
+                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                  <span class="input-group-text border-0" id="search-addon">
+                    <i class="fas fa-search"></i>
+                  </span>
+                </div>
+                <div class="clearfix"></div>
+                <ul class="sortable-list taskList list-unstyled ui-sortable" style="margin-top: 3%;">
                 </ul>
               </div>
 
@@ -64,7 +71,14 @@
                 <!-- In Progress-->
                 <h5><b>In Progress</b></h5>
                 <p class="text-muted m-b-30 font-13">You currently have n no. of in progress tasks</p>
-                <ul class="sortable-list taskList list-unstyled ui-sortable">
+                <div class="input-group rounded" style="margin-bottom:1%">
+                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                  <span class="input-group-text border-0" id="search-addon">
+                    <i class="fas fa-search"></i>
+                  </span>
+                </div>
+                <div class="clearfix"></div>
+                <ul class="sortable-list taskList list-unstyled ui-sortable" style="margin-top: 3%;">
                 </ul>
               </div>
             </div>
@@ -107,7 +121,7 @@
               <label for="inputDescription">Notes</label>
               <textarea type="text" class="form-control" id="inputNotes"></textarea>
             </div>
-<!-- 
+            <!-- 
             <div class="form-group">
               <label for="inputSubTasks">Sub-Tasks: </label>
               <textarea type="text" class="form-control" id="inputSubTasks"></textarea>
@@ -166,7 +180,7 @@
 
               </div>
             </div> -->
-            
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

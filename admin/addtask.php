@@ -35,7 +35,7 @@
         <div class="row">
           <div class="col">
             <div class="float-left" style="padding-left:15px;">
-              <h3><b>Welcome back,<br> Admin</b></h3>
+              <h3><b>Welcome to <br> everyone's tasks</b></h3>
 
             </div>
           </div>
@@ -55,7 +55,14 @@
                 <!-- Upcoming Task-->
                 <h5><b>Upcoming</b></h5>
                 <p class="text-muted m-b-30 font-13">You currently have n no. of upcoming tasks</p>
-                <ul class="sortable-list taskList list-unstyled ui-sortable">
+                <div class="input-group rounded" style="margin-bottom:1%">
+                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                  <span class="input-group-text border-0" id="search-addon">
+                    <i class="fas fa-search"></i>
+                  </span>
+                </div>
+                <div class="clearfix"></div>
+                <ul class="sortable-list taskList list-unstyled ui-sortable" style="margin-top: 3%;">
                 </ul>
               </div>
 
@@ -65,7 +72,14 @@
                 <!-- In Progress-->
                 <h5><b>In Progress</b></h5>
                 <p class="text-muted m-b-30 font-13">You currently have n no. of in progress tasks</p>
-                <ul class="sortable-list taskList list-unstyled ui-sortable">
+                <div class="input-group rounded" style="margin-bottom:1%">
+                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                  <span class="input-group-text border-0" id="search-addon">
+                    <i class="fas fa-search"></i>
+                  </span>
+                </div>
+                <div class="clearfix"></div>
+                <ul class="sortable-list taskList list-unstyled ui-sortable" style="margin-top: 3%;">
                   <li class="task-warning ui-sortable-handle" id="task1">
                     <div class="checkbox checkbox-custom checkbox-single float-right">
                       <input type="checkbox" aria-label="Single checkbox Two">
@@ -415,7 +429,6 @@
       var nextSibling = e.target.nextElementSibling
       nextSibling.innerText = fileName
     });
-
   </script>
 
 

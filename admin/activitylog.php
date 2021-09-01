@@ -1,3 +1,8 @@
+<!-- 
+  Admin User Activity Log: 
+    * Contains a table that shows all the "Completed" tasks of the employees including the admin. 
+-->
+
 <?php include("components/header.php"); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -51,11 +56,16 @@
                 <label for="endDate">End Date</label>
                 <input type="date" onchange="searchTable()" class="form-control" id="endDate" value="" style="margin-right:0.5%;">
               </div>
-              <!-- <div class="col-sm-3">
-                <label for="dueDate">Due Date</label>
-                <input type="date" onchange="searchTable()" class="form-control" id="dueDate" value="" style="margin-right:0.5%;">
-              </div> -->
-              <div class="col-sm-6">
+              <div class="col-sm-3">
+                <!-- <label for="dueDate">Due Date</label>
+                                <input type="date" onchange="searchTable()" class="form-control" id="dueDate" value="" style="margin-right:0.5%;"> -->
+                <label for="clientName">Task Type</label>
+                <select id="clientName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
+                  <option value="" selected>Select Task Type</option>
+                  <?php displayAllClients(); ?>
+                </select>
+              </div>
+              <div class="col-sm-3">
                 <label for="actDate">Task Date (Date Range)</label>
                 <!-- Start Date -->
                 <input type="text" onchange="searchTable()" class="form-control" id="actDate" value="" style="margin-right:0.5%;background:white;" readonly>
@@ -93,9 +103,14 @@
             <div class="col-auto" id="beforeLD1" style="margin-right:1%;">
               <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Export Selected Data shown in the Table" aria-hidden="true"></i>
             </div>
-            <div class="ml-auto" id="beforeLD2" style="margin-right:1%;">
-              <label for="searchInputTable">Search:</label>
-              <input type="text" id="searchInputTable" onkeyup="dt.search( this.value ).draw();">
+            <div class="col"></div>
+            <div class="col-auto">
+              <div class="input-group rounded" id="beforeLD2" style="margin-right:1%;">
+                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" id="searchInputTable" onkeyup="dt.search( this.value ).draw();">
+                <span class="input-group-text border-0" id="search-addon">
+                  <i class="fas fa-search"></i>
+                </span>
+              </div>
             </div>
           </div>
           <table id="dataTable" class="table table-bordered table-hover" style="height:100%;background-color:white">
@@ -103,8 +118,10 @@
               <tr>
                 <th class="text-center"></th>
                 </th>
+                <th>Flag</th>
                 <th>Task Name</th>
                 <th>Client Name</th>
+                <th>Type</th>
                 <th>Employee Name</th>
                 <th>Notes</th>
                 <th>Start Date</th>
@@ -119,8 +136,10 @@
             <tfoot>
               <tr>
                 <th></th>
+                <th>Flag</th>
                 <th>Task Name</th>
                 <th>Client Name</th>
+                <th>Type</th>
                 <th>Employee Name</th>
                 <th>Notes</th>
                 <th>Start Time</th>
@@ -196,11 +215,23 @@
                 <div class="col">
                   <hr class="mt-2 mb-3" />
                   <div class="form-group">
-                    <label for="inputDescription2">Notes: </label>
-                    <textarea type="text" class="form-control" id="inputDescription2"></textarea>
+                    <label for="inputTaskType">Task Type</label>
+                    <select class="form-control" id="inputTaskType" required disabled>
+                      <option value="" selected hidden>Select Task Type</option>
+                      <?php displayAllClients() ?>
+                    </select>
                   </div>
                 </div>
               </div>
+              <div class="form-row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="inputDescription2">Notes: </label>
+                    <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
+                  </div>
+                </div>
+              </div>
+
               <div class="form-row">
                 <div class="col">
                   <div class="form-group">

@@ -1,10 +1,15 @@
+<!-- 
+  Admin Task Type: 
+    * Contains a dashboard of all the upcoming and in progress tasks of that Task Type. 
+-->
+
 <?php include("components/header.php"); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
 
   <!-- <div class="wrapper"> -->
-    <!-- Preloader -->
-    <!-- <div class="preloader flex-column justify-content-center align-items-center">
+  <!-- Preloader -->
+  <!-- <div class="preloader flex-column justify-content-center align-items-center">
       <img class="animation__shake" src="../dist/img/logo.png" alt="AdminLogo" height="100" width="100">
     </div>
   </div> -->
@@ -19,7 +24,7 @@
           <a href="../index.php" class="nav-link">Home</a>
         </li> -->
     </ul>
-    <h4 style="margin-top:.5%;">Dashboard</h4>
+    <h4 style="margin-top:.5%;">Tasks / Agrisoft - SEO</h4>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
@@ -35,7 +40,7 @@
         <div class="row">
           <div class="col">
             <div class="float-left" style="padding-left:15px;">
-              <h3><b>Welcome back,<br> Admin</b></h3>
+              <h3><b>All the tasks related to <br> Agrisoft - SEO</b></h3>
 
             </div>
           </div>

@@ -12,7 +12,7 @@
           <a href="../index.php" class="nav-link">Home</a>
         </li> -->
             </ul>
-            <h4 style="margin-top:.5%;">Tasks / Task List</h4>
+            <h4 style="margin-top:.5%;">Forms / Task Types</h4>
             <!-- Right navbar links -->
 
         </nav>
@@ -52,12 +52,10 @@
                                     <th>Last User</th>
                                     <th>Notes</th>
                                     <th></th>
-                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <td></td>
-                                <td><a href="#" class="table" onclick="" data-toggle="modal" data-target="#userInfo"></a></td>
                                 <td>norris@gmail.com</td>
                                 <td>Client</td>
                                 <td>June 5, 2017</td>

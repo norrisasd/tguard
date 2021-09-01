@@ -112,7 +112,7 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="clients" class="nav-link">
+            <a href="formtasktype" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>Task Types</p>
             </a>
