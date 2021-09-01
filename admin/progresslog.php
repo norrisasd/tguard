@@ -204,7 +204,7 @@
                                 </div>
                                 <div class="col">
                                     <label for="modalStatus">Status: </label>
-                                    <p id="modalAgent">In Progress</p>
+                                    <p id="modalStatus">In Progress</p>
                                 </div>
                                 <div class="col">
                                     <!-- <label for="modalDueDate">Due Date: </label>
@@ -337,6 +337,7 @@
     <!-- AdminLTE App -->
     <script src="../dist/js/adminlte.js"></script>
     <script src="./js/ProgressLogFunctions.js"></script>
+    <script src="./js/Main.js"></script>
 
     <script>
         //Hiding the div

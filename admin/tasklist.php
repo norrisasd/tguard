@@ -48,20 +48,14 @@
                                 <tr>
                                     <th class="text-center"></th>
                                     <th>Task Type</th>
-                                    <th>Client</th>
-                                    <th>Last User</th>
-                                    <th>Notes</th>
-                                    <th></th>
+                                    <th>Client Name</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <td></td>
                                 <td><a href="#" class="table" onclick="" data-toggle="modal" data-target="#userInfo"></a></td>
                                 <td>norris@gmail.com</td>
                                 <td>Client</td>
-                                <td>June 5, 2017</td>
-                                <td>2</td>
                                 <td><button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#userInfo"><i class="fas fa-eye"></i></button>
 
                             </tbody>
@@ -69,10 +63,7 @@
                                 <tr>
                                     <th class="text-center"></th>
                                     <th>Task Type</th>
-                                    <th>Client</th>
-                                    <th>Last User</th>
-                                    <th>Notes</th>
-                                    <th></th>
+                                    <th>Client Name</th>
                                     <th></th>
                                 </tr>
                             </tfoot>

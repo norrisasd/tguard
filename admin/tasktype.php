@@ -24,7 +24,7 @@
           <a href="../index.php" class="nav-link">Home</a>
         </li> -->
     </ul>
-    <h4 style="margin-top:.5%;">Tasks / Agrisoft - SEO</h4>
+    <h4 style="margin-top:.5%;">Tasks / <span id="taskTitle">Agrisoft - SEO</span></h4>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
@@ -40,7 +40,7 @@
         <div class="row">
           <div class="col">
             <div class="float-left" style="padding-left:15px;">
-              <h3><b>All the tasks related to <br> Agrisoft - SEO</b></h3>
+              <h3><b>All the tasks related to <br> <span id="taskTitle1">Agrisoft - SEO</span></b></h3>
 
             </div>
           </div>
@@ -390,10 +390,12 @@
   <!-- AdminLTE App -->
   <script src="../dist/js/adminlte.js"></script>
   <script src="./js/DashboardFunctions.js"></script>
-
+  <script src="./js/Main.js"></script>
 
   <script>
     //Hiding the div
+    $('#taskTitle').html(localStorage.getItem("type"));
+    $('#taskTitle1').html(localStorage.getItem("type"));
     $(".custom-file").hide();
     $(".uploadBtn").hide();
 
@@ -420,6 +422,8 @@
       var nextSibling = e.target.nextElementSibling
       nextSibling.innerText = fileName
     });
+
+    
 
     // Dropzone.autoDiscover = false;
     // $("div#dropzone-example").dropzone({

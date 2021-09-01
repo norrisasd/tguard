@@ -9,6 +9,7 @@ $(".mt-2 ul li:nth-child(3) ul li").removeClass("menu-open");
 $(".mt-2 ul li:nth-child(3) ul li a").removeClass("active");
 $(".mt-2 ul li:nth-child(4) ul li").removeClass("menu-open");
 $(".mt-2 ul li:nth-child(4) ul li a").removeClass("active");
+var defaultClient='asd';
 displayUpcomingTask();
 displayInProgress();
 $.widget.bridge('uibutton', $.ui.button);
@@ -26,46 +27,45 @@ var dt = $('#dataTable').DataTable({
   "autoWidth": false,
   "responsive": true,
 });
-refreshTable();
 function checkID(value) {
   toastr.error(value);
 }
-function refreshTable() {
-  $.ajax({
-    type: 'get',
-    url: './main.php',
-    data: {
-      getTaskByUser: 'true'
-    },
-    success: function (response) {
-      var btnStart = '<button type="button" class="btn btn-primary" onclick="refreshTable()">Start</button>';
-      var btnPause = '<button type="button" class="btn btn-success">Pause</button>';
-      var btnStop = '<button type="button" class="btn btn-danger">Stop</button>';
-      var cb = '';
-      data = JSON.parse(response);
-      dt.clear().draw();
-      for (var da in data) {
-        btnStart = '<button type="button" class="btn btn-primary" value="' + data[da].callback_id + '">Start</button>';
-        btnPause = '<button type="button" class="btn btn-success" value="' + data[da].callback_id + '">Pause</button>';
-        btnStop = '<button type="button" class="btn btn-danger" value="' + data[da].callback_id + '">Stop</button>';
-        cb = '<input class="form-control" type="checkbox" name="list[]" value="' + data[da].callback_id + '">';
-        dt.row.add([
-          cb,
-          data[da].TaskName,
-          data[da].client_name,
-          data[da].Notes,
-          data[da].TimeSpent,
-          data[da].TimeSpent,
-          data[da].TimeSpent,
-          btnStart,
-          btnPause,
-          btnStop,
-        ]).draw();
-      }
-    }
-  });
-  return false;
-}
+// function refreshTable() {
+//   $.ajax({
+//     type: 'get',
+//     url: './main.php',
+//     data: {
+//       getTaskByUser: 'true'
+//     },
+//     success: function (response) {
+//       var btnStart = '<button type="button" class="btn btn-primary" onclick="refreshTable()">Start</button>';
+//       var btnPause = '<button type="button" class="btn btn-success">Pause</button>';
+//       var btnStop = '<button type="button" class="btn btn-danger">Stop</button>';
+//       var cb = '';
+//       data = JSON.parse(response);
+//       dt.clear().draw();
+//       for (var da in data) {
+//         btnStart = '<button type="button" class="btn btn-primary" value="' + data[da].callback_id + '">Start</button>';
+//         btnPause = '<button type="button" class="btn btn-success" value="' + data[da].callback_id + '">Pause</button>';
+//         btnStop = '<button type="button" class="btn btn-danger" value="' + data[da].callback_id + '">Stop</button>';
+//         cb = '<input class="form-control" type="checkbox" name="list[]" value="' + data[da].callback_id + '">';
+//         dt.row.add([
+//           cb,
+//           data[da].TaskName,
+//           data[da].client_name,
+//           data[da].Notes,
+//           data[da].TimeSpent,
+//           data[da].TimeSpent,
+//           data[da].TimeSpent,
+//           btnStart,
+//           btnPause,
+//           btnStop,
+//         ]).draw();
+//       }
+//     }
+//   });
+//   return false;
+// }
 function addTask() {
   taskname = $("#inputTaskName").val();
   clientname = $("#inputClientID").val();
@@ -104,7 +104,8 @@ function displayUpcomingTask() {
     type: 'get',
     url: './main.php',
     data: {
-      displayUpcoming: true
+      displayUpcoming: true,
+      tasktype_id:localStorage.getItem("tasktype_id")
     },
     success: function (response) {
       if (response == '') {
@@ -146,7 +147,8 @@ function displayInProgress() {
     type: 'get',
     url: './main.php',
     data: {
-      displayProgress: true
+      displayProgress: true,
+      tasktype_id:localStorage.getItem("tasktype_id")
     },
     success: function (response) {
       if (response == '') {

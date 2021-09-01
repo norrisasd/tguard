@@ -23,7 +23,7 @@
         "orderable": false,
         "className": "text-center select-checkbox",
       },{
-        "targets"  : 8,
+        "targets"  : 11,
         "className": "text-center",
       }],
       select:{style:'multi',selector: 'tr>td:nth-child(1)'},
@@ -97,8 +97,10 @@
             time = timeArr[0]+"hrs "+timeArr[1]+"mins";
             dt.row.add([
               cb,
+              "TO BE ATTACHED",
               data[da].TaskName,
               data[da].client_name,
+              data[da].type,
               data[da].name,
               data[da].Notes,
               data[da].DateStarted,
@@ -141,11 +143,12 @@
                         btn =`<button class="btn btn-success btn-sm waves-effect waves-light text-center" onclick='taskInfo(`+JSON.stringify(data[da])+`)' data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="fas fa-eye"></i></button>`;
                         time = data[da].TimeSpent;
                         const timeArr=time.split(":");
-                        time = timeArr[0]+"hrs "+timeArr[1]+"mins";
+                        time = timeArr[0]+"hrs "+timeArr[1]+"mins "+timeArr[2]+"sec";
                         dt.row.add([
                           cb,
                           data[da].TaskName,
                           data[da].client_name,
+                          data[da].type,
                           data[da].name,
                           data[da].Notes,
                           data[da].DateStarted,

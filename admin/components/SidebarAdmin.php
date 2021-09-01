@@ -63,9 +63,9 @@
           </p>
           <i class="right fas fa-angle-left"></i>
         </a>
-        <ul class="nav nav-treeview">
+        <ul class="nav nav-treeview" id="tasktypes">
           <li class="nav-item has-treeview">
-            <a href="addtask" class="nav-link">
+            <a href="addtask" class="nav-link" onclick="resetDisplay()">
               <i class="far fa-circle nav-icon"></i>
               <p>Add Task</p>
             </a>
@@ -76,12 +76,12 @@
               <p>Task List</p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
+          <!-- <li class="nav-item has-treeview">
             <a href="tasktype" class="nav-link">
               <i class="nav-icon far fas fa-gavel"></i>
               <p>Agrisoft</p>
             </a>
-          </li>
+          </li> -->
         </ul>
       </li>
       <li class="nav-item">

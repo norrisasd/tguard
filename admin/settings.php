@@ -131,6 +131,7 @@
     <!-- AdminLTE App -->
     <script src="../dist/js/adminlte.js"></script>
     <script src="../js/DashboardFunctions.js"></script>
+    <script src="./js/Main.js"></script>
 
     <script>
         //Changing text label of the File attachments

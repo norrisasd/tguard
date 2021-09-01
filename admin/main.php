@@ -30,7 +30,7 @@
     //DISPLAY ALL TASK
     if(isset($_GET['getAllTask'])){
         $status = $_GET['status'];
-        $query="SELECT callback.*,user.name,callback_extend.sub_task,callback_extend.comments FROM `callback` INNER JOIN timerecord on callback.callback_id=timerecord.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id WHERE callback.status = $status GROUP BY callback.callback_id ORDER BY callback.user_id;";
+        $query="SELECT callback.*,user.name,callback_extend.sub_task,callback_extend.comments, tasktype.type FROM `callback` INNER JOIN timerecord on callback.callback_id=timerecord.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id INNER JOIN tasktype ON tasktype.tasktype_id = callback.tasktype_id WHERE callback.status = $status GROUP BY callback.callback_id ORDER BY callback.user_id;";
         $result=mysqli_query($dbConnection,$query);
         if(mysqli_num_rows($result)>0){
             $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -39,7 +39,7 @@
     }
     if(isset($_GET['getAllInProgressTask'])){
         $status = $_GET['status'];
-        $query="SELECT callback.*,ADDTIME(callback.TimeSpent,(Select SEC_TO_TIME(SUM(TIME_TO_SEC(SUBTIME(CURTIME(),timerecord.TimeStarted)))) FROM timerecord WHERE status = 0))AS current_time_spent,user.name,callback_extend.sub_task,callback_extend.comments FROM `callback` INNER JOIN timerecord on callback.callback_id=timerecord.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id WHERE callback.status = $status GROUP BY callback.callback_id ORDER BY callback.user_id;";
+        $query="SELECT callback.*,ADDTIME(callback.TimeSpent,(Select SEC_TO_TIME(SUM(TIME_TO_SEC(SUBTIME(CURTIME(),timerecord.TimeStarted)))) FROM timerecord WHERE status = 0))AS current_time_spent,user.name,callback_extend.sub_task,callback_extend.comments, tasktype.type FROM `callback` INNER JOIN timerecord on callback.callback_id=timerecord.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id INNER JOIN tasktype ON tasktype.tasktype_id = callback.tasktype_id WHERE callback.status = $status GROUP BY callback.callback_id ORDER BY callback.user_id;";
         $result=mysqli_query($dbConnection,$query);
         if(mysqli_num_rows($result)>0){
             $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -63,7 +63,7 @@
         $edate = $edate==""?"":"AND callback.DateEnded='".$edate."'";
         $ddate = $ddate==""?"":"AND callback.DueDate='".$ddate."'";
         $betweenDate=$bsdate==''?'':"AND (('$bsdate' between DateStarted and DateEnded) or ('$bedate' between DateStarted and DateEnded) or ('$bsdate' <= DateStarted and '$bedate' >= DateEnded))";
-        $query="SELECT callback.*,ADDTIME(callback.TimeSpent,(Select SEC_TO_TIME(SUM(TIME_TO_SEC(SUBTIME(CURTIME(),timerecord.TimeStarted)))) FROM timerecord WHERE status = 0))AS current_time_spent,user.name,callback_extend.sub_task,callback_extend.comments FROM `callback` INNER JOIN timerecord on callback.callback_id=timerecord.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id WHERE callback.status = $status $cname $aID $sdate $edate $ddate $betweenDate GROUP BY callback.callback_id ORDER BY callback.user_id;";
+        $query="SELECT callback.*,ADDTIME(callback.TimeSpent,(Select SEC_TO_TIME(SUM(TIME_TO_SEC(SUBTIME(CURTIME(),timerecord.TimeStarted)))) FROM timerecord WHERE status = 0))AS current_time_spent,user.name,callback_extend.sub_task,callback_extend.comments, tasktype.type FROM `callback` INNER JOIN timerecord on callback.callback_id=timerecord.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id INNER JOIN tasktype ON tasktype.tasktype_id = callback.tasktype_id WHERE callback.status = $status $cname $aID $sdate $edate $ddate $betweenDate GROUP BY callback.callback_id ORDER BY callback.user_id;";
         $result=mysqli_query($dbConnection,$query);
         if($result){
             if(mysqli_num_rows($result)>0){
@@ -79,7 +79,8 @@
     }
 
     if(isset($_GET['displayUpcoming'])){
-        $query="SELECT callback.*,callback_extend.sub_task,callback_extend.comments,user.name FROM `callback` INNER JOIN callback_extend ON callback.callback_id = callback_extend.callback_id INNER JOIN user ON user.user_id=callback.user_id WHERE callback.DateStarted is NULL;";
+        $tasktypeID=$_GET['tasktype_id']==""?"":" AND callback.tasktype_id=".$_GET['tasktype_id']."";
+        $query="SELECT callback.*,callback_extend.sub_task,callback_extend.comments,user.name FROM `callback` INNER JOIN callback_extend ON callback.callback_id = callback_extend.callback_id INNER JOIN user ON user.user_id=callback.user_id WHERE callback.DateStarted is NULL $tasktypeID;";
         $result=mysqli_query($dbConnection,$query);
         if(mysqli_num_rows($result)>0){
             $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -90,7 +91,8 @@
     }
 
     if(isset($_GET['displayProgress'])){
-        $query="SELECT callback.*,SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) as total_time,callback_extend.sub_task,callback_extend.comments,user.name FROM `callback` INNER JOIN timerecord ON callback.callback_id=timerecord.callback_id INNER JOIN callback_extend ON callback.callback_id =callback_extend.callback_id INNER JOIN user ON user.user_id = callback.user_id WHERE callback.status=0 AND callback.DateStarted is not NULL GROUP BY callback.callback_id;";
+        $tasktypeID=$_GET['tasktype_id']==""?"":" AND callback.tasktype_id=".$_GET['tasktype_id']."";
+        $query="SELECT callback.*,SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) as total_time,callback_extend.sub_task,callback_extend.comments,user.name FROM `callback` INNER JOIN timerecord ON callback.callback_id=timerecord.callback_id INNER JOIN callback_extend ON callback.callback_id =callback_extend.callback_id INNER JOIN user ON user.user_id = callback.user_id WHERE callback.status=0 $tasktypeID AND callback.DateStarted is not NULL GROUP BY callback.callback_id;";
         $result=mysqli_query($dbConnection,$query);
         if(mysqli_num_rows($result)>0){
             $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -237,6 +239,21 @@
     }
     if(isset($_GET['getAgentsJSON'])){
         $query = "SELECT * FROM user";
+        $result = mysqli_query($dbConnection,$query);
+        if($result){
+            if(mysqli_num_rows($result)>0){
+                $result = mysqli_fetch_all($result,MYSQLI_ASSOC);
+                $result = json_encode($result);
+            }else{
+                echo mysqli_error($dbConnection);
+            }
+        }else{
+            echo mysqli_error($dbConnection);
+        }
+    }
+    
+    if(isset($_GET['getTaskTypes'])){
+        $query="SELECT * FROM tasktype";
         $result = mysqli_query($dbConnection,$query);
         if($result){
             if(mysqli_num_rows($result)>0){

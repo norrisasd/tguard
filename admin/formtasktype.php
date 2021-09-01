@@ -265,6 +265,7 @@
     <script src="../plugins/toastr/toastr.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../dist/js/adminlte.js"></script>
+    <script src="./js/Main.js"></script>
 
     <script>
         $(".mt-2 ul li").removeClass("menu-open");

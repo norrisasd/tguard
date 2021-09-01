@@ -341,6 +341,7 @@
     <!-- AdminLTE App -->
     <script src="../dist/js/adminlte.js"></script>
     <script src="./js/ActivityLogFunctions.js"></script>
+    <script src="./js/Main.js"></script>
 
     <script>
       //Hiding the div

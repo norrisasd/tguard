@@ -31,7 +31,7 @@ var dt = $('#dataTable').DataTable({
         "orderable": false,
         "className": "text-center select-checkbox",
     }, {
-        "targets": 9,
+        "targets": 10,
         "className": "text-center",
     }],
     select: { style: 'multi', selector: 'tr>td:nth-child(1)' },
@@ -104,6 +104,7 @@ function refreshTable(){
             cb,
             data[da].TaskName,
             data[da].client_name,
+            data[da].type,
             data[da].name,
             data[da].Notes,
             data[da].DateStarted,
@@ -151,6 +152,7 @@ function refreshTable(){
                         cb,
                         data[da].TaskName,
                         data[da].client_name,
+                        data[da].type,
                         data[da].name,
                         data[da].Notes,
                         data[da].DateStarted,
@@ -232,7 +234,12 @@ function refreshTable(){
     if(data.total_time == null){
       data.total_time='00:00:00';
     }
-    $("#modalStatus").html("Finished");
+    setButtonForProgress(data.callback_id);
+    if($('#btnPlay').prop('disabled')){
+      $("#modalStatus").html("Running");
+    } else {
+      $("#modalStatus").html("Paused");
+    }
     $("#btnPlay").val(data.callback_id);
     $("#btnPause").val(data.callback_id);
     $("#btnStop").val(data.callback_id);
@@ -250,3 +257,143 @@ function refreshTable(){
     $("#modalClient").html(data.client_name);
     $("#modalDueDate").html(data.DueDate);
   }
+  function setButtonForProgress(cb_id) {
+    $.ajax({
+      type: 'get',
+      url: './main.php',
+      data: {
+        getTimeStatus: true,
+        cb_id: cb_id
+      },
+      success: function (response) {
+  
+        if (response == '') {
+          $("#btnPlay").prop('disabled', false);
+          return false;
+        }
+        result = JSON.parse(response);
+        if (result.status == 1) {
+          $("#btnPlay").prop('disabled', false);
+          $("#btnPause").prop('disabled', true);
+          $("#btnStop").prop('disabled', false);
+        } else {
+          $("#btnPlay").prop('disabled', true);
+          $("#btnPause").prop('disabled', false);
+          $("#btnStop").prop('disabled', false);
+          $("#btnFinish").prop('disabled', false);
+        }
+      }
+    });
+  
+  }
+  $("#btnPlay").click(function () {
+    $.ajax({
+      type: 'get',
+      url: './main.php',
+      data: {
+        btnPlay: true,
+        cb_id: this.value,
+      },
+      success: function (response) {
+        if (response == 'updated') {
+          $(".modal").modal("hide");
+          toastr.success("Task started");
+          refreshTable();
+        } else {
+          toastr.error("There was an error!");
+        }
+  
+      }
+    });
+  });
+  $("#btnPause").click(function () {
+    $.ajax({
+      type: 'get',
+      url: './main.php',
+      data: {
+        btnPause: true,
+        cb_id: this.value,
+      },
+      success: function (response) {
+        if (response == 'updated') {
+          $(".modal").modal("hide");
+          toastr.success("Task Paused");
+          refreshTable();
+        } else {
+          toastr.error("There was an error!");
+        }
+  
+      }
+    });
+  });
+  $("#btnStop").click(function () {
+    if (confirm("Are you sure you want to stop and reset this task?")) {
+      $.ajax({
+        type: 'get',
+        url: './main.php',
+        data: {
+          btnStop: true,
+          cb_id: this.value,
+        },
+        success: function (response) {
+          if (response == 'stopped') {
+            $(".modal").modal("hide");
+            toastr.success("Task Stopped");
+            refreshTable();
+          } else {
+            toastr.error("There was an error!");
+          }
+  
+        }
+      });
+    }
+  });
+  $("#btnFinish").click(function () {
+    $.ajax({
+      type: 'get',
+      url: './main.php',
+      data: {
+        btnFinish: true,
+        cb_id: this.value,
+      },
+      success: function (response) {
+        if (response == 'updated') {
+          $(".modal").modal("hide");
+          toastr.success("Task Finish!");
+          refreshTable();
+        } else {
+          toastr.error(response);
+        }
+  
+      }
+    });
+  
+  });
+  $("#btnSave").click(function () {
+    notes = $("#inputDescription2").val();
+    subtask = $("#inputSubTasks").val();
+    comments = $("#inputComments").val();
+    $.ajax({
+      type: 'post',
+      url: './main.php',
+      data: {
+        btnSave: true,
+        cb_id: this.value,
+        notes: notes,
+        subtask: subtask,
+        comments: comments,
+  
+      },
+      success: function (response) {
+        if (response == 'updated') {
+          $(".modal").modal("hide");
+          toastr.success("Task Saved!");
+          refreshTable();
+        } else {
+          toastr.error(response);
+        }
+  
+      }
+    });
+    return false;
+  });
