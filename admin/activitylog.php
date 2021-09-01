@@ -33,7 +33,7 @@
           <div class="card-body">
             <div class="row align-items-start">
               <div class="col-sm-6">
-                <label for="clientName">Client Name</label>
+                <label for="clientName">Client</label>
                 <select id="clientName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
                   <option value="" selected>Select Client</option>
                   <?php displayAllClients(); ?>
@@ -120,9 +120,9 @@
                 </th>
                 <th>Flag</th>
                 <th>Task Name</th>
-                <th>Client Name</th>
+                <th>Client</th>
                 <th>Type</th>
-                <th>Employee Name</th>
+                <th>Employee</th>
                 <th>Notes</th>
                 <th>Start Date</th>
                 <th>End Date</th>
@@ -138,9 +138,9 @@
                 <th></th>
                 <th>Flag</th>
                 <th>Task Name</th>
-                <th>Client Name</th>
+                <th>Client</th>
                 <th>Type</th>
-                <th>Employee Name</th>
+                <th>Employee</th>
                 <th>Notes</th>
                 <th>Start Time</th>
                 <th>End Time</th>

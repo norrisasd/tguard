@@ -157,7 +157,7 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="inputClient">Client Name</label>
+              <label for="inputClient">Client</label>
               <select class="form-control" id="inputClientID" required>
                 <option value="" selected hidden>Select Client</option>
                 <?php displayAllClients() ?>

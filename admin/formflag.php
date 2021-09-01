@@ -1,3 +1,9 @@
+<!-- 
+  Admin Form Flag Type: 
+    * Contains the table of all flag type and can create, view, edit and delete flag types. 
+-->
+
+
 <?php include("components/header.php"); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -12,7 +18,7 @@
           <a href="../index.php" class="nav-link">Home</a>
         </li> -->
             </ul>
-            <h4 style="margin-top:.5%;">Tasks / Task List</h4>
+            <h4 style="margin-top:.5%;">Forms / Flag Types</h4>
             <!-- Right navbar links -->
 
         </nav>
@@ -26,6 +32,26 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="card-body">
+                        <div class="row align-items-start">
+                            <div class="col-sm-6">
+                                <label for="clientName">Flag Types</label>
+                                <select id="clientName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
+                                    <option value="" selected>Select Flag Types</option>
+                                    <?php displayAllClients(); ?>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="row justify-content-end" style="margin-top:2%;">
+                            <div class="col-auto">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-danger" style="width:auto">
+                                        Clear Search
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
                         <div class="row align-items-start" style="margin-bottom: 1%; margin-top: 2.5%;">
                             <div class="col-auto" style="margin-top:1%">
                                 <input type="checkbox" value="" style="margin-left:10px;" id="selectAll" onclick="selectAll(this)"> Select All
@@ -37,21 +63,31 @@
                             </div>
                             <div class="col-auto">
                                 <div class="btn-group dropright">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addClient">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addFlagType">
                                         Add
                                     </button>
                                 </div>
                             </div>
+
+                            <div class="col"></div>
+                            <div class="col-auto">
+                                <div class="input-group rounded" id="beforeLD2" style="margin-right:1%;">
+                                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" id="searchInputTable" onkeyup="dt.search( this.value ).draw();">
+                                    <span class="input-group-text border-0" id="search-addon">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
+
                         <table id="dataTable" class="table table-bordered table-hover" style="height:100%;background-color:white">
                             <thead>
                                 <tr>
                                     <th class="text-center"></th>
-                                    <th>Task Type</th>
-                                    <th>Client</th>
-                                    <th>Last User</th>
+                                    <th>Flag Type</th>
+                                    <th>Color</th>
+                                    <th>Background Color</th>
                                     <th>Notes</th>
-                                    <th></th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -59,20 +95,18 @@
                                 <td></td>
                                 <td><a href="#" class="table" onclick="" data-toggle="modal" data-target="#userInfo"></a></td>
                                 <td>norris@gmail.com</td>
-                                <td>Client</td>
-                                <td>June 5, 2017</td>
                                 <td>2</td>
-                                <td><button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#userInfo"><i class="fas fa-eye"></i></button>
+                                <td></td>
+                                <td><button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#viewTaskType"><i class="fas fa-eye"></i></button>
 
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th class="text-center"></th>
-                                    <th>Task Type</th>
-                                    <th>Client</th>
-                                    <th>Last User</th>
+                                    <th>Flag Type</th>
+                                    <th>Color</th>
+                                    <th>Background Color</th>
                                     <th>Notes</th>
-                                    <th></th>
                                     <th></th>
                                 </tr>
                             </tfoot>
@@ -84,156 +118,116 @@
     </div>
 
     <!-- Modal for Add  -->
-    <div class="modal fade" id="addClient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addFlagType" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><i class="nav-icon fas fa-user"></i> Add Client</h5>
+                    <h5 class="modal-title" id="modalTaskName">Add Flag Type</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form action="" method="post" onsubmit="return addClient();" autocomplete="off" id="">
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Client</label>
-                            <input type="text" class="form-control" name="name" id="username" placeholder="" autocomplete="off" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Email</label>
-                            <input type="email" class="form-control" name="email" id="email" autocomplete="off" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Phone</label>
-                            <input type="text" class="form-control" name="phone" id="phone" autocomplete="off" required>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+                <form method="get" id="viewTask" action="">
+                    <div class="modal-body">
+                        <div class="container-fluid">
 
-    <!-- Modal for Client Information -->
-    <div class="modal fade" id="userInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> <i class="fas fa-edit"></i>Client Information</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="" onsubmit="return editUserInfo();">
-                        <div id="editInfoBody">
-                            <dl class="row">
-                                <dt class="col-sm-3">Client: </dt>
-                                <dd class="col-sm-9">Norris</dd>
+                            <div class="form-group">
+                                <label for="inputTaskType">Flag Type</label>
+                                <input type="text" class="form-control" id="inputTaskType" placeholder="" required />
 
-                                <dt class="col-sm-3">Phone: </dt>
-                                <dd class="col-sm-9">norris</dd>
-
-                                <dt class="col-sm-3">Email: </dt>
-                                <dd class="col-sm-9">norris@gmail</dd>
-
-                                <dt class="col-sm-3">Date Created: </dt>
-                                <dd class="col-sm-9">July 7, 2007</dd>
-
-                                <dt class="col-sm-3">No. of Tasks: </dt>
-                                <dd class="col-sm-9">5</dd>
-                            </dl>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success mr-auto" data-toggle="modal" data-target="#editInfo">Edit Information</button>
-                    <!-- <a href="#" target="_blank" data-toggle="modal" data-target="#changeAccess" style="color:#0645AD;">Change Access</a> -->
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+                            </div>
 
 
-    <!-- Modal for Edit Client Information -->
-    <div class="modal fade" id="editInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><i class="nav-icon fas fa-user"></i>Edit Client Information</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="" method="post" onsubmit="" autocomplete="off" id="">
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Client</label>
-                            <input type="text" class="form-control" name="name" id="clientname" placeholder="" autocomplete="off" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Email</label>
-                            <input type="email" class="form-control" name="email" id="email" autocomplete="off" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Phone</label>
-                            <input type="text" class="form-control" name="phone" id="phone" autocomplete="off" required>
-                        </div>
+                            <div class="form-group">
+                                <label for="inputNotes">Notes: </label>
+                                <textarea type="text" class="form-control" id="inputNotes"></textarea>
+                            </div>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Modal for Change Access -->
-    <!-- <div class="modal fade" id="changeAccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Choose Access</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" style="margin:auto">
-                    <div class="col">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="caradioBtnType" value="1" id="radAdm" required>
-                            <label class="form-check-label" for="radAdm">
-                                Admin
-                            </label>
+                            <!-- <div class="form-group">
+                                <label for="inputColor">Color </label>
+                                <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#563d7c" title="Choose your color">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputBG">Background Color </label>
+                                <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#fff" title="Choose your color">
+                            </div> -->
+
+                            <!--
+                            <div class="form-group">
+                                <label for="inputSubTasks">Sub-Tasks: </label>
+                                <textarea type="text" class="form-control" id="inputSubTasks"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputComments">Comments: </label>
+                                <textarea type="text" class="form-control" id="inputComments"></textarea>
+                            </div> -->
+
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="0" name="caradioBtnType" id="radAge">
-                            <label class="form-check-label" for="radAge">
-                                Client
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="NULL" name="caradioBtnType" id="radMod">
-                            <label class="form-check-label" for="radMod">
-                                MODERATOR
-                            </label>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" onclick="updateAccess()" class="btn btn-primary" id="btnAccess">Save changes</button>
-                </div>
+                </form>
             </div>
         </div>
-    </div> -->
+    </div>
+
+    <!-- Modal for View  -->
+    <div class="modal fade" id="viewTaskType" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTaskName">Flag Type</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="get" id="viewTask" action="">
+                    <div class="modal-body">
+                        <div class="container-fluid">
+
+                            <div class="form-group">
+                                <label for="inputTaskType">Flag Type</label>
+                                <input type="text" class="form-control" id="inputTaskType" placeholder="" required />
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="inputNotes">Notes: </label>
+                                <textarea type="text" class="form-control" id="inputNotes"></textarea>
+                            </div>
+
+
+                            <!-- <div class="form-group">
+                                <label for="inputDescription2">Notes: </label>
+                                <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputSubTasks">Sub-Tasks: </label>
+                                <textarea type="text" class="form-control" id="inputSubTasks"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputComments">Comments: </label>
+                                <textarea type="text" class="form-control" id="inputComments"></textarea>
+                            </div> -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- jQuery -->
     <script src="../plugins/jquery/jquery.min.js"></script>

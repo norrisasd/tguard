@@ -140,14 +140,14 @@
               <input type="text" class="form-control" id="inputTaskName" placeholder="" required />
             </div>
             <div class="form-group">
-              <label for="inputClient">Client Name</label>
+              <label for="inputClient">Client</label>
               <select class="form-control" id="inputClientID" required>
                 <option value="" selected hidden>Select Client</option>
                 <?php displayAllClients() ?>
               </select>
             </div>
             <div class="form-group">
-              <label for="inputAgent">Employee Name</label>
+              <label for="inputAgent">Employee</label>
               <select class="form-control" id="inputAgentID" required>
                 <option value="" selected hidden>Select Employee</option>
                 <?php displayAllAgents()

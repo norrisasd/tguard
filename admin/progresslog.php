@@ -33,14 +33,14 @@
                     <div class="card-body">
                         <div class="row align-items-start">
                             <div class="col-sm-6">
-                                <label for="clientName">Client Name</label>
+                                <label for="clientName">Client</label>
                                 <select id="clientName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
                                     <option value="" selected>Select Client</option>
                                     <?php displayAllClients(); ?>
                                 </select>
                             </div>
                             <div class="col-sm-6">
-                                <label for="agentName">Employee Name</label>
+                                <label for="agentName">Employee</label>
                                 <select id="agentName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
                                     <option value="" selected>Select Employee</option>
                                     <?php displayAllAgents(); ?>
@@ -118,9 +118,9 @@
                             <tr>
                                 <th class="text-center"></th>
                                 <th>Task Name</th>
-                                <th>Client Name</th>
+                                <th>Client</th>
                                 <th>Task Type</th>
-                                <th>Employee Name</th>
+                                <th>Employee</th>
                                 <th>Notes</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
@@ -145,9 +145,9 @@
                             <tr>
                                 <th class="text-center"></th>
                                 <th>Task Name</th>
-                                <th>Client Name</th>
+                                <th>Client</th>
                                 <th>Task Type</th>
-                                <th>Employee Name</th>
+                                <th>Employee</th>
                                 <th>Notes</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
@@ -185,7 +185,7 @@
                                     <p id="modalEndDate">---</p>
                                 </div>
                                 <div class="col">
-                                    <label for="modalTimeSpent">Time Spent: </label>
+                                    <label for="modalTimeSpent">Current Time Spent: </label>
                                     <p id="modalTimeSpent">---</p>
 
                                 </div>
