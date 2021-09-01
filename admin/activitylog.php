@@ -51,11 +51,11 @@
                 <label for="endDate">End Date</label>
                 <input type="date" onchange="searchTable()" class="form-control" id="endDate" value="" style="margin-right:0.5%;">
               </div>
-              <div class="col-sm-3">
+              <!-- <div class="col-sm-3">
                 <label for="dueDate">Due Date</label>
                 <input type="date" onchange="searchTable()" class="form-control" id="dueDate" value="" style="margin-right:0.5%;">
-              </div>
-              <div class="col-sm-3">
+              </div> -->
+              <div class="col-sm-6">
                 <label for="actDate">Task Date (Date Range)</label>
                 <!-- Start Date -->
                 <input type="text" onchange="searchTable()" class="form-control" id="actDate" value="" style="margin-right:0.5%;background:white;" readonly>
@@ -178,13 +178,14 @@
                   <p id="modalClient">Agrisoft</p>
                 </div>
                 <div class="col">
-                  <label for="modalDueDate">Due Date: </label>
-                  <p id="modalDueDate">January 01, 2021</p>
-                </div>
-                <div class="col">
                   <label for="modalStatus">Status: </label>
                   <p id="modalStatus">In Progress</p>
                 </div>
+                <div class="col">
+                  <!-- <label for="modalDueDate">Due Date: </label>
+                  <p id="modalDueDate">January 01, 2021</p> -->
+                </div>
+
                 <div class="col">
                   <div class="float-right">
                     <button type="button" class="btn btn-primary mr-auto" id="btnFinish" style="min-width: 102px;">Finish</button>
@@ -216,9 +217,8 @@
                   </div>
                 </div>
               </div>
-              <div class="form-row">
+              <!-- <div class="form-row">
                 <div class="col">
-                  <!-- 
                   <div class="form-group">
                     <label for="inputFile">Attachments: </label><br>
                     <div class="input-group mb-3">
@@ -245,9 +245,8 @@
                       </div>
                     </div>
                   </div>
--->
+
                   <label for="inputFile">Attachments: </label><br>
-                  <!-- Adding Preview -->
                   <div class="container" style="height: 150px; overflow-y: auto;">
                     <table class="table table-hover">
                       <tbody>
@@ -266,7 +265,7 @@
 
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button>

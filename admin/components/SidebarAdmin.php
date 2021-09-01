@@ -47,38 +47,78 @@
               <p>User Activity Log</p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
+          <!-- <li class="nav-item has-treeview">
             <a href="activitycharts" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>User Activity Charts</p>
             </a>
-          </li>
+          </li> -->
         </ul>
-      </li>
       </li>
       <li class="nav-item">
         <a href="pages/client" class="nav-link">
-          <i class="nav-icon fas fa-user"></i>
+          <i class="nav-icon fas fa-tasks"></i>
           <p>
-            Users
+            Tasks
           </p>
           <i class="right fas fa-angle-left"></i>
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item has-treeview">
-            <a href="employee" class="nav-link">
+            <a href="addtask" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>Employee</p>
+              <p>Add Task</p>
             </a>
           </li>
+          <li class="nav-item has-treeview">
+            <a href="tasklist" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Task List</p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="tasktype" class="nav-link">
+              <i class="nav-icon far fas fa-gavel"></i>
+              <p>Agrisoft</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a href="pages/client" class="nav-link">
+          <i class="nav-icon fas fa-scroll"></i>
+          <p>
+            Forms
+          </p>
+          <i class="right fas fa-angle-left"></i>
+        </a>
+        <ul class="nav nav-treeview">
           <li class="nav-item has-treeview">
             <a href="clients" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>Clients</p>
             </a>
           </li>
+          <li class="nav-item has-treeview">
+            <a href="employee" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Employees</p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="clients" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Flag Types</p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="clients" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Task Types</p>
+            </a>
+          </li>
+
         </ul>
-      </li>
       </li>
       <li class="nav-item">
         <a href="../php/logout" class="nav-link">

@@ -19,7 +19,7 @@
           <a href="../index.php" class="nav-link">Home</a>
         </li> -->
     </ul>
-    <h4 style="margin-top:.5%;">Dashboard</h4>
+    <h4 style="margin-top:.5%;">Tasks / Add Task</h4>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
@@ -416,16 +416,6 @@
       nextSibling.innerText = fileName
     });
 
-    // Dropzone.autoDiscover = false;
-    // $("div#dropzone-example").dropzone({
-    //   url: "../php/upload", //Change the url to the php code
-    //   paramName: "file", // The name that will be used to transfer the file
-    //   maxFilesize: .5, // MB
-    //   addRemoveLinks: true,
-    //   dictDefaultMessage: '<span class="">Drop files (or click) to upload  </span> <br> \
-    //                 <i class="fas fa-cloud-upload-alt"></i>',
-    //   dictResponseError: 'Error while uploading file!',
-    // });
   </script>
 
 

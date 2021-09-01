@@ -12,7 +12,7 @@
           <a href="../index.php" class="nav-link">Home</a>
         </li> -->
             </ul>
-            <h4 style="margin-top:.5%;">Users / Employee</h4>
+            <h4 style="margin-top:.5%;">Tasks / Task List</h4>
             <!-- Right navbar links -->
 
         </nav>
@@ -37,7 +37,7 @@
                             </div>
                             <div class="col-auto">
                                 <div class="btn-group dropright">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUser">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addClient">
                                         Add
                                     </button>
                                 </div>
@@ -47,84 +47,72 @@
                             <thead>
                                 <tr>
                                     <th class="text-center"></th>
-                                    <th>Employee Name</th>
+                                    <th>Client Name</th>
                                     <th>Phone</th>
                                     <th>Email</th>
-                                    <th>Username</th>
-                                    <th>Access</th>
+                                    <th>Date Created</th>
+                                    <th>No. of Tasks</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- <td><button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#userInfo"><i class="fas fa-eye"></i></button> -->
+                                <td></td>
+                                <td><a href="#" class="table" onclick="" data-toggle="modal" data-target="#userInfo">Norris Hipolito</a></td>
+                                <td>norris@gmail.com</td>
+                                <td>Client</td>
+                                <td>June 5, 2017</td>
+                                <td>2</td>
+                                <td><button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#userInfo"><i class="fas fa-eye"></i></button>
+
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th class="text-center"></th>
-                                    <th>Employee Name</th>
+                                    <th>Client Name</th>
                                     <th>Phone</th>
                                     <th>Email</th>
-                                    <th>Username</th>
-                                    <th>Access</th>
+                                    <th>Date Created</th>
+                                    <th>No. of Tasks</th>
                                     <th></th>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
+
+
                 </div>
-            </section>
         </div>
+        </section>
+    </div>
+    </div>
+    </section>
+    </div>
     </div>
 
-    <!-- Modal for Add Employee -->
-    <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <!-- Modal for Add Client -->
+    <div class="modal fade" id="addClient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><i class="nav-icon fas fa-user"></i> Add Employee</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="nav-icon fas fa-user"></i> Add Client</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post" onsubmit="return addUser();" autocomplete="off" id="addUserModal">
+                    <form action="" method="post" onsubmit="return addClient();" autocomplete="off" id="">
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">Username</label>
+                            <label for="exampleFormControlInput1">Client Name</label>
                             <input type="text" class="form-control" name="name" id="username" placeholder="" autocomplete="off" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="ex ampleFormControlInput1">Password</label>
-                            <input type="password" class="form-control" name="password" id="password" autocomplete="off" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Confirm Password</label>
-                            <input type="password" class="form-control" id="cpassword" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Email</label>
                             <input type="email" class="form-control" name="email" id="email" autocomplete="off" required>
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">Access</label>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="radioBtnType" value="1" id="adminRadioBtn" required>
-                                <label class="form-check-label" for="adminRadioBtn">
-                                    Admin
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" value="0" name="radioBtnType">
-                                <label class="form-check-label" for="employeeBtn">
-                                    Employee
-                                </label>
-                            </div>
-                            <!-- <div class="form-check">
-                                <input class="form-check-input" type="radio" value="NULL" name="radioBtnType">
-                                <label class="form-check-label" for="moderatorRadioBtn">
-                                    MODERATOR
-                                </label>
-                            </div> -->
+                            <label for="exampleFormControlInput1">Phone</label>
+                            <input type="text" class="form-control" name="phone" id="phone" autocomplete="off" required>
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -136,12 +124,14 @@
         </div>
     </div>
 
-    <!-- Modal for Employee Information -->
+
+
+    <!-- Modal for Client Information -->
     <div class="modal fade" id="userInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> <i class="fas fa-edit"></i>Employee Information</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"> <i class="fas fa-edit"></i>Client Information</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -150,24 +140,27 @@
                     <form method="post" action="" onsubmit="return editUserInfo();">
                         <div id="editInfoBody">
                             <dl class="row">
-                                <dt class="col-sm-3">Username: </dt>
+                                <dt class="col-sm-3">Client Name: </dt>
                                 <dd class="col-sm-9">Norris</dd>
 
-                                <dt class="col-sm-3">Password: </dt>
+                                <dt class="col-sm-3">Phone: </dt>
                                 <dd class="col-sm-9">norris</dd>
 
                                 <dt class="col-sm-3">Email: </dt>
                                 <dd class="col-sm-9">norris@gmail</dd>
 
-                                <dt class="col-sm-3">User Access: </dt>
-                                <dd class="col-sm-9">Employee</dd>
+                                <dt class="col-sm-3">Date Created: </dt>
+                                <dd class="col-sm-9">July 7, 2007</dd>
+
+                                <dt class="col-sm-3">No. of Tasks: </dt>
+                                <dd class="col-sm-9">5</dd>
                             </dl>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success mr-auto" data-toggle="modal" data-target="#editInfo">Edit Information</button>
-                    <a href="#" target="_blank" data-toggle="modal" data-target="#changeAccess" style="color:#0645AD;">Change Access</a>
+                    <!-- <a href="#" target="_blank" data-toggle="modal" data-target="#changeAccess" style="color:#0645AD;">Change Access</a> -->
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </form>
                 </div>
@@ -176,33 +169,29 @@
     </div>
 
 
-    <!-- Modal for Edit Employee Information -->
+    <!-- Modal for Edit Client Information -->
     <div class="modal fade" id="editInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><i class="nav-icon fas fa-user"></i>Edit Employee Information</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="nav-icon fas fa-user"></i>Edit Client Information</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post" onsubmit="" autocomplete="off" id="addUserModal">
+                    <form action="" method="post" onsubmit="" autocomplete="off" id="">
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">Username</label>
-                            <input type="text" class="form-control" name="name" id="username" placeholder="" autocomplete="off" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="ex ampleFormControlInput1">Password</label>
-                            <input type="password" class="form-control" name="password" id="password" autocomplete="off" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Confirm Password</label>
-                            <input type="password" class="form-control" id="cpassword" autocomplete="off" required>
+                            <label for="exampleFormControlInput1">Client Name</label>
+                            <input type="text" class="form-control" name="name" id="clientname" placeholder="" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Email</label>
                             <input type="email" class="form-control" name="email" id="email" autocomplete="off" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Phone</label>
+                            <input type="text" class="form-control" name="phone" id="phone" autocomplete="off" required>
                         </div>
 
                 </div>
@@ -216,7 +205,7 @@
     </div>
 
     <!-- Modal for Change Access -->
-    <div class="modal fade" id="changeAccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="changeAccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -236,15 +225,15 @@
                         <div class="form-check">
                             <input class="form-check-input" type="radio" value="0" name="caradioBtnType" id="radAge">
                             <label class="form-check-label" for="radAge">
-                                Employee
+                                Client
                             </label>
                         </div>
-                        <!-- <div class="form-check">
+                        <div class="form-check">
                             <input class="form-check-input" type="radio" value="NULL" name="caradioBtnType" id="radMod">
                             <label class="form-check-label" for="radMod">
                                 MODERATOR
                             </label>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -253,7 +242,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- jQuery -->
     <script src="../plugins/jquery/jquery.min.js"></script>
@@ -290,10 +279,10 @@
     <script>
         $(".mt-2 ul li").removeClass("menu-open");
         $(".mt-2 ul li a").removeClass("active");
-        $(".mt-2 ul li:nth-child(3) ul li:nth-child(1)").removeClass("menu-open");
-        $(".mt-2 ul li:nth-child(3) ul li:nth-child(1) a").removeClass("active");
-        $(".mt-2 ul li:nth-child(4) ul li:nth-child(1)").addClass("menu-open");
-        $(".mt-2 ul li:nth-child(4) ul li:nth-child(1) a").addClass("active");
+        $(".mt-2 ul li:nth-child(4) ul li:nth-child(1)").removeClass("menu-open");
+        $(".mt-2 ul li:nth-child(4) ul li:nth-child(1) a").removeClass("active");
+        $(".mt-2 ul li:nth-child(4) ul li:nth-child(2)").addClass("menu-open");
+        $(".mt-2 ul li:nth-child(4) ul li:nth-child(2) a").addClass("active");
         var dt = $('#dataTable').DataTable({
             "oLanguage": {
                 "sLengthMenu": "Show Entries _MENU_",
@@ -305,6 +294,10 @@
                 "targets": 0,
                 "orderable": false,
                 "className": "text-center select-checkbox",
+            }, {
+                "targets": 6,
+                "orderable": false,
+                "className": "text-center",
             }],
             select: {
                 style: 'multi',
@@ -351,21 +344,21 @@
             type: 'get',
             url: './main.php',
             data: {
-                getAgentsJSON: true
+                getClientsJSON: true
             },
             success: function(response) {
                 data = JSON.parse(response);
                 dt.clear().draw();
                 for (var da in data) {
-                    access = data[da].access == '2' ? "Agent" : "Admin";
+                    btn = `<button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#userInfo"><i class="fas fa-eye"></i></button>`;
                     dt.row.add([
                         cb,
-                        data[da].name,
+                        data[da].ClientName,
                         data[da].phone,
                         data[da].email,
-                        data[da].username,
-                        access,
-                        data[da].access,
+                        data[da].email,
+                        data[da].email,
+                        btn,
                     ]).draw();
                 }
             }

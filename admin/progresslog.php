@@ -51,11 +51,11 @@
                                 <label for="endDate">End Date</label>
                                 <input type="date" onchange="searchTable()" class="form-control" id="endDate" value="" style="margin-right:0.5%;">
                             </div>
-                            <div class="col-sm-3">
+                            <!-- <div class="col-sm-3">
                                 <label for="dueDate">Due Date</label>
                                 <input type="date" onchange="searchTable()" class="form-control" id="dueDate" value="" style="margin-right:0.5%;">
-                            </div>
-                            <div class="col-sm-3">
+                            </div> -->
+                            <div class="col-sm-6">
                                 <label for="actDate">Task Date (Date Range)</label>
                                 <!-- Start Date -->
                                 <input type="text" onchange="searchTable()" class="form-control" id="actDate" value="" style="margin-right:0.5%;background:white;" readonly>
@@ -185,13 +185,14 @@
                                     <p id="modalClient">Agrisoft</p>
                                 </div>
                                 <div class="col">
-                                    <label for="modalDueDate">Due Date: </label>
-                                    <p id="modalDueDate">January 01, 2021</p>
-                                </div>
-                                <div class="col">
                                     <label for="modalStatus">Status: </label>
                                     <p id="modalAgent">In Progress</p>
                                 </div>
+                                <div class="col">
+                                    <!-- <label for="modalDueDate">Due Date: </label>
+                                    <p id="modalDueDate">January 01, 2021</p> -->
+                                </div>
+
                                 <div class="col">
                                     <div class="float-right">
                                         <button type="button" class="btn btn-primary mr-auto" id="btnFinish" style="min-width: 102px;">Finish</button>
@@ -223,11 +224,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-row">
+                            <!-- <div class="form-row">
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="inputFile">Attachments: </label><br>
-                                        <!-- Input -->
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add Attachments</button>
@@ -251,15 +251,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- Input File -->
-                                        <!-- <div class="form-row">
-                      <div class="form-group" style="width:100%; padding-left: 1%">
-                        <div class="dropzone inputDrop" id="dropzone-example" enctype="multipart/form-data">
-                      </div>
-                      </div> -->
+
                                     </div>
                                 </div>
-                                <!-- Adding Preview -->
                                 <div class="container" style="height: 150px; overflow-y: auto;">
                                     <table class="table table-hover">
                                         <tbody>
@@ -277,7 +271,7 @@
                                     </table>
 
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="modal-footer">

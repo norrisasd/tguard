@@ -44,11 +44,11 @@
 
                         </div>
                         <div class="row" style="margin-top: 1%;">
-                            <div class="col-sm-3">
+                            <!-- <div class="col-sm-3">
                                 <label for="dueDate">Due Date</label>
                                 <input type="date" class="form-control" id="dueDate" onclick="searchTable()" value="" style="margin-right:0.5%;">
-                            </div>
-                            <div class="col-sm-3">
+                            </div> -->
+                            <div class="col-sm-6">
                                 <label for="actDate">Task Date (Date Range)</label>
                                 <!-- Start Date -->
                                 <input type="text" class="form-control" onclick="searchTable()" id="actDate" value="" style="margin-right:0.5%;background:white;" readonly>
