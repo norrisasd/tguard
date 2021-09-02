@@ -40,7 +40,7 @@
                 </select>
               </div>
               <div class="col-sm-6">
-                <label for="agentName">Employee Name</label>
+                <label for="agentName">Employee</label>
                 <select id="agentName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
                   <option value="" selected>Select Employee</option>
                   <?php displayAllAgents(); ?>
@@ -121,12 +121,12 @@
                 <th>Flag</th>
                 <th>Task Name</th>
                 <th>Client</th>
-                <th>Type</th>
+                <th>Task Type</th>
                 <th>Employee</th>
                 <th>Notes</th>
                 <th>Start Date</th>
                 <th>End Date</th>
-                <th>Due Date</th>
+                <!-- <th>Due Date</th> -->
                 <th>Time Spent</th>
                 <th></th>
               </tr>
@@ -139,12 +139,12 @@
                 <th>Flag</th>
                 <th>Task Name</th>
                 <th>Client</th>
-                <th>Type</th>
+                <th>Task Type</th>
                 <th>Employee</th>
                 <th>Notes</th>
                 <th>Start Time</th>
                 <th>End Time</th>
-                <th>Due Date</th>
+                <!-- <th>Due Date</th> -->
                 <th>Time Spent</th>
                 <th></th>
               </tr>
@@ -181,7 +181,10 @@
                 <div class="col">
                   <label for="modalTimeSpent">Time Spent: </label>
                   <p id="modalTimeSpent">---</p>
-
+                </div>
+                <div class="col">
+                  <label for="modalStatus">Status: </label>
+                  <p id="modalStatus">In Progress</p>
                 </div>
                 <div class="col">
                   <div class="float-right">
@@ -191,19 +194,16 @@
                   </div>
                 </div>
               </div>
-              <div class="form-row">
-                <div class="col">
+              <div class="form-row" style="margin-bottom: 1%;">
+                <!-- <div class="col">
                   <label for="modalClient">Client: </label>
                   <p id="modalClient">Agrisoft</p>
                 </div>
+
                 <div class="col">
-                  <label for="modalStatus">Status: </label>
-                  <p id="modalStatus">In Progress</p>
-                </div>
-                <div class="col">
-                  <!-- <label for="modalDueDate">Due Date: </label>
-                  <p id="modalDueDate">January 01, 2021</p> -->
-                </div>
+                  <label for="modalDueDate">Due Date: </label>
+                  <p id="modalDueDate">January 01, 2021</p>
+                </div> -->
 
                 <div class="col">
                   <div class="float-right">
@@ -215,9 +215,40 @@
                 <div class="col">
                   <hr class="mt-2 mb-3" />
                   <div class="form-group">
+                    <label for="inputTask">Task Name</label>
+                    <input type="text" class="form-control" id="inputTaskName" placeholder="" required disabled />
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                  <div class="form-group">
                     <label for="inputTaskType">Task Type</label>
                     <select class="form-control" id="inputTaskType" required disabled>
                       <option value="" selected hidden>Select Task Type</option>
+                      <?php displayAllClients() ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="inputTaskType">Client</label>
+                    <select class="form-control" id="inputTaskType" required disabled>
+                      <option value="" selected hidden>Select Client</option>
+                      <?php displayAllClients() ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="inputTaskType">Employee</label>
+                    <select class="form-control" id="inputTaskType" required disabled>
+                      <option value="" selected hidden>Select Employee</option>
                       <?php displayAllClients() ?>
                     </select>
                   </div>

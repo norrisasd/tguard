@@ -4,6 +4,8 @@
 -->
 
 <?php include("components/header.php"); ?>
+<?php include("components/loader.php"); ?>
+
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -124,8 +126,8 @@
                                 <th>Notes</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
-                                <th>Due Date</th>
-                                <th>Current Time Spent</th>
+                                <!-- <th>Due Date</th> -->
+                                <th>Time Spent</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -151,8 +153,8 @@
                                 <th>Notes</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
-                                <th>Due Date</th>
-                                <th>Current Time Spent</th>
+                                <!-- <th>Due Date</th> -->
+                                <th>Time Spent</th>
                                 <th></th>
                             </tr>
                         </tfoot>
@@ -185,9 +187,12 @@
                                     <p id="modalEndDate">---</p>
                                 </div>
                                 <div class="col">
-                                    <label for="modalTimeSpent">Current Time Spent: </label>
+                                    <label for="modalTimeSpent">Time Spent: </label>
                                     <p id="modalTimeSpent">---</p>
-
+                                </div>
+                                <div class="col">
+                                    <label for="modalStatus">Status: </label>
+                                    <p id="modalStatus">In Progress</p>
                                 </div>
                                 <div class="col">
                                     <div class="float-right">
@@ -197,19 +202,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="col">
+                            <div class="form-row" style="margin-bottom: 1%;">
+                                <!-- <div class="col">
                                     <label for="modalClient">Client: </label>
                                     <p id="modalClient">Agrisoft</p>
                                 </div>
+
                                 <div class="col">
-                                    <label for="modalStatus">Status: </label>
-                                    <p id="modalStatus">In Progress</p>
-                                </div>
-                                <div class="col">
-                                    <!-- <label for="modalDueDate">Due Date: </label>
-                                    <p id="modalDueDate">January 01, 2021</p> -->
-                                </div>
+                                    <label for="modalDueDate">Due Date: </label>
+                                    <p id="modalDueDate">January 01, 2021</p>
+                                </div> -->
 
                                 <div class="col">
                                     <div class="float-right">
@@ -221,11 +223,55 @@
                                 <div class="col">
                                     <hr class="mt-2 mb-3" />
                                     <div class="form-group">
+                                        <label for="inputTask">Task Name</label>
+                                        <input type="text" class="form-control" id="inputTaskName" placeholder="" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="inputTaskType">Task Type</label>
+                                        <select class="form-control" id="inputTaskType" required>
+                                            <option value="" selected hidden>Select Task Type</option>
+                                            <?php displayAllClients() ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="inputTaskType">Client</label>
+                                        <select class="form-control" id="inputTaskType" required>
+                                            <option value="" selected hidden>Select Client</option>
+                                            <?php displayAllClients() ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="inputTaskType">Employee</label>
+                                        <select class="form-control" id="inputTaskType" required>
+                                            <option value="" selected hidden>Select Employee</option>
+                                            <?php displayAllClients() ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="form-group">
                                         <label for="inputDescription2">Notes: </label>
                                         <textarea type="text" class="form-control" id="inputDescription2"></textarea>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="form-row">
                                 <div class="col">
                                     <div class="form-group">

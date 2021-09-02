@@ -1,4 +1,11 @@
+<!-- 
+  Admin Charts: 
+    * Contain charts of all the data in both employee and client
+-->
+
 <?php include("components/header.php"); ?>
+<?php include("components/loader.php"); ?>
+
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">

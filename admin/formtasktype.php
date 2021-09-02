@@ -5,6 +5,7 @@
 
 
 <?php include("components/header.php"); ?>
+<?php include("components/loader.php"); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -67,12 +68,12 @@
                             <div class="col-auto" style="margin-top:1%">
                                 <input type="checkbox" value="" style="margin-left:10px;" id="selectAll" onclick="selectAll(this)"> Select All
                             </div>
-                            <div class="col-auto" >
+                            <div class="col-auto">
                                 <button type="button" class="btn btn-success">
                                     Export
                                 </button>
                             </div>
-                            <div class="col-auto" >
+                            <div class="col-auto">
                                 <div class="btn-group dropright">
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTaskType">
                                         Add
@@ -81,7 +82,7 @@
                             </div>
 
                             <div class="col"></div>
-                            <div class="col-auto" >
+                            <div class="col-auto">
                                 <div class="input-group rounded" id="beforeLD2" style="margin-right:1%;">
                                     <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" id="searchInputTable" onkeyup="dt.search( this.value ).draw();">
                                     <span class="input-group-text border-0" id="search-addon">
@@ -153,12 +154,12 @@
                                 </select>
                             </div>
 
-                            <!-- <div class="form-group">
+                            <div class="form-group">
                                 <label for="inputDescription2">Notes: </label>
                                 <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
                             </div>
 
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="inputSubTasks">Sub-Tasks: </label>
                                 <textarea type="text" class="form-control" id="inputSubTasks"></textarea>
                             </div>
@@ -166,7 +167,7 @@
                             <div class="form-group">
                                 <label for="inputComments">Comments: </label>
                                 <textarea type="text" class="form-control" id="inputComments"></textarea>
-                            </div> -->
+                            </div>  -->
 
                         </div>
                         <div class="modal-footer">
@@ -208,12 +209,12 @@
                                 </select>
                             </div>
 
-                            <!-- <div class="form-group">
+                            <div class="form-group">
                                 <label for="inputDescription2">Notes: </label>
                                 <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
                             </div>
 
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="inputSubTasks">Sub-Tasks: </label>
                                 <textarea type="text" class="form-control" id="inputSubTasks"></textarea>
                             </div>

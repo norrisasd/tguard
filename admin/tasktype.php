@@ -4,15 +4,10 @@
 -->
 
 <?php include("components/header.php"); ?>
+<?php include("components/loader.php"); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
 
-  <!-- <div class="wrapper"> -->
-  <!-- Preloader -->
-  <!-- <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="../dist/img/logo.png" alt="AdminLogo" height="100" width="100">
-    </div>
-  </div> -->
 
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
@@ -41,7 +36,6 @@
           <div class="col">
             <div class="float-left" style="padding-left:15px;">
               <h3><b>All the tasks related to <br> <span id="taskTitle1">Agrisoft - SEO</span></b></h3>
-
             </div>
           </div>
           <div class="col">
@@ -60,7 +54,14 @@
                 <!-- Upcoming Task-->
                 <h5><b>Upcoming</b></h5>
                 <p class="text-muted m-b-30 font-13">You currently have n no. of upcoming tasks</p>
-                <ul class="sortable-list taskList list-unstyled ui-sortable">
+                <div class="input-group rounded" style="margin-bottom:1%">
+                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                  <span class="input-group-text border-0" id="search-addon">
+                    <i class="fas fa-search"></i>
+                  </span>
+                </div>
+                <div class="clearfix"></div>
+                <ul class="sortable-list taskList list-unstyled ui-sortable" style="margin-top: 3%;">
                 </ul>
               </div>
 
@@ -70,7 +71,14 @@
                 <!-- In Progress-->
                 <h5><b>In Progress</b></h5>
                 <p class="text-muted m-b-30 font-13">You currently have n no. of in progress tasks</p>
-                <ul class="sortable-list taskList list-unstyled ui-sortable">
+                <div class="input-group rounded" style="margin-bottom:1%">
+                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                  <span class="input-group-text border-0" id="search-addon">
+                    <i class="fas fa-search"></i>
+                  </span>
+                </div>
+                <div class="clearfix"></div>
+                <ul class="sortable-list taskList list-unstyled ui-sortable" style="margin-top: 3%;">
                   <li class="task-warning ui-sortable-handle" id="task1">
                     <div class="checkbox checkbox-custom checkbox-single float-right">
                       <input type="checkbox" aria-label="Single checkbox Two">
@@ -126,19 +134,27 @@
         </div>
         <form method="get" id="addTaskForm" action="" onsubmit="return addTask();">
           <div class="modal-body">
+
             <div class="form-group">
               <label for="inputTask">Task Name</label>
               <input type="text" class="form-control" id="inputTaskName" placeholder="" required />
             </div>
             <div class="form-group">
-              <label for="inputClient">Client Name</label>
+              <label for="inputTaskType">Task Type</label>
+              <select class="form-control" id="inputTaskType" required>
+                <option value="" selected hidden>Select Task Type</option>
+                <?php displayAllClients() ?>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inputClient">Client</label>
               <select class="form-control" id="inputClientID" required>
                 <option value="" selected hidden>Select Client</option>
                 <?php displayAllClients() ?>
               </select>
             </div>
             <div class="form-group">
-              <label for="inputAgent">Employee Name</label>
+              <label for="inputAgent">Employee</label>
               <select class="form-control" id="inputAgentID" required>
                 <option value="" selected hidden>Select Employee</option>
                 <?php displayAllAgents()
@@ -258,28 +274,64 @@
                 </div>
               </div>
               <div class="form-row">
-                <div class="col">
-                  <label for="modalClient">Client: </label>
-                  <p id="modalClient">Agrisoft</p>
+                <!-- <div class="col">
+                  <label for="modalDueDate">Due Date: </label>
+                  <p id="modalDueDate">January 01, 2021</p>
                 </div>
-                <div class="col">
-                  <label for="modalAgent">Employee: </label>
-                  <p id="modalAgent">John Doe</p>
-                </div>
-                <div class="col">
-                  <!-- <label for="modalDueDate">Due Date: </label>
-                  <p id="modalDueDate">January 01, 2021</p> -->
-                </div>
-                <div class="col"></div>
+                <div class="col"></div> -->
                 <div class="col">
                   <div class="float-right">
                     <button type="button" class="btn btn-primary mr-auto" id="btnFinish" style="min-width: 102px;">Finish</button>
                   </div>
                 </div>
               </div>
+
               <div class="form-row">
                 <div class="col">
                   <hr class="mt-2 mb-3" />
+                  <div class="form-group">
+                    <label for="inputTask">Task Name</label>
+                    <input type="text" class="form-control" id="inputTaskName" placeholder="" required />
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="inputTaskType">Task Type</label>
+                    <select class="form-control" id="inputTaskType" required>
+                      <option value="" selected hidden>Select Task Type</option>
+                      <?php displayAllClients() ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="inputTaskType">Client</label>
+                    <select class="form-control" id="inputTaskType" required>
+                      <option value="" selected hidden>Select Client</option>
+                      <?php displayAllClients() ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="inputTaskType">Employee</label>
+                    <select class="form-control" id="inputTaskType" required>
+                      <option value="" selected hidden>Select Employee</option>
+                      <?php displayAllClients() ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col">
                   <div class="form-group">
                     <label for="inputDescription2">Notes: </label>
                     <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
@@ -423,7 +475,7 @@
       nextSibling.innerText = fileName
     });
 
-    
+
 
     // Dropzone.autoDiscover = false;
     // $("div#dropzone-example").dropzone({

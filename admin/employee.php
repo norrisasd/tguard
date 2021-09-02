@@ -1,4 +1,11 @@
+<!-- 
+  Admin Form - Employee: 
+    * Create, read, update and delete employee  
+    * Contains a table of all the employee
+-->
 <?php include("components/header.php"); ?>
+<?php include("components/loader.php"); ?>
+
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -42,15 +49,25 @@
                                     </button>
                                 </div>
                             </div>
+                            <div class="col"> </div>
+                            <div class="col-auto">
+                                <div class="input-group rounded" id="beforeLD2" style="margin-right:1%;">
+                                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" id="searchInputTable" onkeyup="dt.search( this.value ).draw();">
+                                    <span class="input-group-text border-0" id="search-addon">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                         <table id="dataTable" class="table table-bordered table-hover" style="height:100%;background-color:white">
                             <thead>
                                 <tr>
                                     <th class="text-center"></th>
                                     <th>Employee Name</th>
-                                    <th>Phone</th>
                                     <th>Email</th>
                                     <th>Username</th>
+                                    <th>Password</th>
+                                    <th>Phone</th>
                                     <th>Access</th>
                                     <th></th>
                                 </tr>
@@ -62,9 +79,10 @@
                                 <tr>
                                     <th class="text-center"></th>
                                     <th>Employee Name</th>
-                                    <th>Phone</th>
                                     <th>Email</th>
                                     <th>Username</th>
+                                    <th>Password</th>
+                                    <th>Phone</th>
                                     <th>Access</th>
                                     <th></th>
                                 </tr>
@@ -81,13 +99,17 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><i class="nav-icon fas fa-user"></i> Add Employee</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"> Add Employee</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <form action="" method="post" onsubmit="return addUser();" autocomplete="off" id="addUserModal">
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Employeee Name</label>
+                            <input type="text" class="form-control" name="name" id="name" autocomplete="off" required>
+                        </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Username</label>
                             <input type="text" class="form-control" name="name" id="username" placeholder="" autocomplete="off" required>
@@ -103,6 +125,10 @@
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Email</label>
                             <input type="email" class="form-control" name="email" id="email" autocomplete="off" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Phone</label>
+                            <input type="text" class="form-control" name="phone" id="phone" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Access</label>
@@ -136,58 +162,22 @@
         </div>
     </div>
 
-    <!-- Modal for Employee Information -->
-    <div class="modal fade" id="userInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal for View Employee -->
+    <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> <i class="fas fa-edit"></i>Employee Information</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"> Employee Information</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="" onsubmit="return editUserInfo();">
-                        <div id="editInfoBody">
-                            <dl class="row">
-                                <dt class="col-sm-3">Username: </dt>
-                                <dd class="col-sm-9">Norris</dd>
-
-                                <dt class="col-sm-3">Password: </dt>
-                                <dd class="col-sm-9">norris</dd>
-
-                                <dt class="col-sm-3">Email: </dt>
-                                <dd class="col-sm-9">norris@gmail</dd>
-
-                                <dt class="col-sm-3">User Access: </dt>
-                                <dd class="col-sm-9">Employee</dd>
-                            </dl>
+                    <form action="" method="post" onsubmit="return addUser();" autocomplete="off" id="addUserModal">
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Employeee Name</label>
+                            <input type="text" class="form-control" name="name" id="name" autocomplete="off" required>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success mr-auto" data-toggle="modal" data-target="#editInfo">Edit Information</button>
-                    <a href="#" target="_blank" data-toggle="modal" data-target="#changeAccess" style="color:#0645AD;">Change Access</a>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Modal for Edit Employee Information -->
-    <div class="modal fade" id="editInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><i class="nav-icon fas fa-user"></i>Edit Employee Information</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="" method="post" onsubmit="" autocomplete="off" id="addUserModal">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Username</label>
                             <input type="text" class="form-control" name="name" id="username" placeholder="" autocomplete="off" required>
@@ -196,64 +186,49 @@
                             <label for="ex ampleFormControlInput1">Password</label>
                             <input type="password" class="form-control" name="password" id="password" autocomplete="off" required>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Confirm Password</label>
-                            <input type="password" class="form-control" id="cpassword" autocomplete="off" required>
-                        </div>
+
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Email</label>
                             <input type="email" class="form-control" name="email" id="email" autocomplete="off" required>
                         </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Phone</label>
+                            <input type="text" class="form-control" name="phone" id="phone" autocomplete="off" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Access</label>
 
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radioBtnType" value="1" id="adminRadioBtn" required>
+                                <label class="form-check-label" for="adminRadioBtn">
+                                    Admin
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" value="0" name="radioBtnType">
+                                <label class="form-check-label" for="employeeBtn">
+                                    Employee
+                                </label>
+                            </div>
+                            <!-- <div class="form-check">
+                                <input class="form-check-input" type="radio" value="NULL" name="radioBtnType">
+                                <label class="form-check-label" for="moderatorRadioBtn">
+                                    MODERATOR
+                                </label>
+                            </div> -->
+                        </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal for Change Access -->
-    <div class="modal fade" id="changeAccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Choose Access</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" style="margin:auto">
-                    <div class="col">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="caradioBtnType" value="1" id="radAdm" required>
-                            <label class="form-check-label" for="radAdm">
-                                Admin
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="0" name="caradioBtnType" id="radAge">
-                            <label class="form-check-label" for="radAge">
-                                Employee
-                            </label>
-                        </div>
-                        <!-- <div class="form-check">
-                            <input class="form-check-input" type="radio" value="NULL" name="caradioBtnType" id="radMod">
-                            <label class="form-check-label" for="radMod">
-                                MODERATOR
-                            </label>
-                        </div> -->
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" onclick="updateAccess()" class="btn btn-primary" id="btnAccess">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <!-- jQuery -->
     <script src="../plugins/jquery/jquery.min.js"></script>
@@ -295,6 +270,7 @@
         $(".mt-2 ul li:nth-child(3) ul li:nth-child(1) a").removeClass("active");
         $(".mt-2 ul li:nth-child(4) ul li:nth-child(1)").addClass("menu-open");
         $(".mt-2 ul li:nth-child(4) ul li:nth-child(1) a").addClass("active");
+        /* 
         var dt = $('#dataTable').DataTable({
             "oLanguage": {
                 "sLengthMenu": "Show Entries _MENU_",
@@ -371,6 +347,7 @@
                 }
             }
         })
+        */
     </script>
 
 </body>

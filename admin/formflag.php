@@ -3,8 +3,8 @@
     * Contains the table of all flag type and can create, view, edit and delete flag types. 
 -->
 
-
 <?php include("components/header.php"); ?>
+<?php include("components/loader.php"); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -85,8 +85,8 @@
                                 <tr>
                                     <th class="text-center"></th>
                                     <th>Flag Type</th>
-                                    <th>Color</th>
-                                    <th>Background Color</th>
+                                    <!-- <th>Color</th>
+                                    <th>Background Color</th> -->
                                     <th>Notes</th>
                                     <th></th>
                                 </tr>
@@ -95,8 +95,8 @@
                                 <td></td>
                                 <td><a href="#" class="table" onclick="" data-toggle="modal" data-target="#userInfo"></a></td>
                                 <td>norris@gmail.com</td>
-                                <td>2</td>
-                                <td></td>
+                                <!-- <td>2</td>
+                                <td></td> -->
                                 <td><button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#viewTaskType"><i class="fas fa-eye"></i></button>
 
                             </tbody>
@@ -104,8 +104,8 @@
                                 <tr>
                                     <th class="text-center"></th>
                                     <th>Flag Type</th>
-                                    <th>Color</th>
-                                    <th>Background Color</th>
+                                    <!-- <th>Color</th>
+                                    <th>Background Color</th> -->
                                     <th>Notes</th>
                                     <th></th>
                                 </tr>

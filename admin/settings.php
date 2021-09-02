@@ -1,13 +1,8 @@
 <?php include("components/header.php"); ?>
+<?php include("components/loader.php"); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
 
-    <div class="wrapper">
-        <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="../dist/img/logo.png" alt="AdminLogo" height="100" width="100">
-        </div>
-    </div>
 
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <!-- Left navbar links -->

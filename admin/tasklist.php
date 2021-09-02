@@ -1,4 +1,6 @@
 <?php include("components/header.php"); ?>
+<?php include("components/loader.php"); ?>
+
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -26,6 +28,22 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="card-body">
+                        <!-- <div class="row align-items-start">
+                            <div class="col-sm-6">
+                                <label for="clientName">Task Types</label>
+                                <select id="clientName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
+                                    <option value="" selected>Select Task Types</option>
+                                    <?php displayAllClients(); ?>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="agentName">Client</label>
+                                <select id="agentName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
+                                    <option value="" selected>Select Client</option>
+                                    <?php displayAllAgents(); ?>
+                                </select>
+                            </div>
+                        </div> -->
                         <div class="row align-items-start" style="margin-bottom: 1%; margin-top: 2.5%;">
                             <div class="col-auto" style="margin-top:1%">
                                 <input type="checkbox" value="" style="margin-left:10px;" id="selectAll" onclick="selectAll(this)"> Select All
@@ -37,9 +55,19 @@
                             </div>
                             <div class="col-auto">
                                 <div class="btn-group dropright">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addClient">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTaskType">
                                         Add
                                     </button>
+                                </div>
+                            </div>
+
+                            <div class="col"></div>
+                            <div class="col-auto">
+                                <div class="input-group rounded" id="beforeLD2" style="margin-right:1%;">
+                                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" id="searchInputTable" onkeyup="dt.search( this.value ).draw();">
+                                    <span class="input-group-text border-0" id="search-addon">
+                                        <i class="fas fa-search"></i>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -49,6 +77,7 @@
                                     <th class="text-center"></th>
                                     <th>Task Type</th>
                                     <th>Client Name</th>
+                                    <th>Notes</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -56,7 +85,8 @@
                                 <td><a href="#" class="table" onclick="" data-toggle="modal" data-target="#userInfo"></a></td>
                                 <td>norris@gmail.com</td>
                                 <td>Client</td>
-                                <td><button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#userInfo"><i class="fas fa-eye"></i></button>
+                                <td></td>
+                                <td><button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#viewTaskType"><i class="fas fa-eye"></i></button>
 
                             </tbody>
                             <tfoot>
@@ -64,6 +94,7 @@
                                     <th class="text-center"></th>
                                     <th>Task Type</th>
                                     <th>Client Name</th>
+                                    <th>Notes</th>
                                     <th></th>
                                 </tr>
                             </tfoot>
@@ -75,11 +106,11 @@
     </div>
 
     <!-- Modal for Add  -->
-    <div class="modal fade" id="addClient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addTaskType" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><i class="nav-icon fas fa-user"></i> Add Client</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add Task Type</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -87,16 +118,27 @@
                 <div class="modal-body">
                     <form action="" method="post" onsubmit="return addClient();" autocomplete="off" id="">
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">Client</label>
+                            <label for="exampleFormControlInput1">Task Type</label>
                             <input type="text" class="form-control" name="name" id="username" placeholder="" autocomplete="off" required>
                         </div>
                         <div class="form-group">
+                            <label for="inputTaskType">Client</label>
+                            <select class="form-control" id="inputTaskType" required>
+                                <option value="" selected hidden>Select Client</option>
+                                <?php displayAllClients() ?>
+                            </select>
+                        </div>
+                        <!-- <div class="form-group">
                             <label for="exampleFormControlInput1">Email</label>
                             <input type="email" class="form-control" name="email" id="email" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Phone</label>
                             <input type="text" class="form-control" name="phone" id="phone" autocomplete="off" required>
+                        </div> -->
+                        <div class="form-group">
+                            <label for="inputDescription2">Notes: </label>
+                            <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -108,123 +150,61 @@
         </div>
     </div>
 
-    <!-- Modal for Client Information -->
-    <div class="modal fade" id="userInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal for View  -->
+    <div class="modal fade" id="viewTaskType" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> <i class="fas fa-edit"></i>Client Information</h5>
+                    <h5 class="modal-title" id="modalTaskName">Task Type</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form method="post" action="" onsubmit="return editUserInfo();">
-                        <div id="editInfoBody">
-                            <dl class="row">
-                                <dt class="col-sm-3">Client: </dt>
-                                <dd class="col-sm-9">Norris</dd>
+                <form method="get" id="viewTask" action="">
+                    <div class="modal-body">
+                        <div class="container-fluid">
 
-                                <dt class="col-sm-3">Phone: </dt>
-                                <dd class="col-sm-9">norris</dd>
+                            <div class="form-group">
+                                <label for="inputTaskType">Task Type</label>
+                                <input type="text" class="form-control" id="inputTaskType" placeholder="" required />
 
-                                <dt class="col-sm-3">Email: </dt>
-                                <dd class="col-sm-9">norris@gmail</dd>
+                            </div>
 
-                                <dt class="col-sm-3">Date Created: </dt>
-                                <dd class="col-sm-9">July 7, 2007</dd>
+                            <div class="form-group">
+                                <label for="inputClient">Client</label>
+                                <select class="form-control" id="inputClient" required>
+                                    <option value="" selected hidden>Select Task Type</option>
+                                    <?php displayAllClients() ?>
+                                </select>
+                            </div>
 
-                                <dt class="col-sm-3">No. of Tasks: </dt>
-                                <dd class="col-sm-9">5</dd>
-                            </dl>
+                            <div class="form-group">
+                                <label for="inputDescription2">Notes: </label>
+                                <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
+                            </div>
+                            <!-- 
+
+                            <div class="form-group">
+                                <label for="inputSubTasks">Sub-Tasks: </label>
+                                <textarea type="text" class="form-control" id="inputSubTasks"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputComments">Comments: </label>
+                                <textarea type="text" class="form-control" id="inputComments"></textarea>
+                            </div> -->
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success mr-auto" data-toggle="modal" data-target="#editInfo">Edit Information</button>
-                    <!-- <a href="#" target="_blank" data-toggle="modal" data-target="#changeAccess" style="color:#0645AD;">Change Access</a> -->
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Modal for Edit Client Information -->
-    <div class="modal fade" id="editInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><i class="nav-icon fas fa-user"></i>Edit Client Information</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="" method="post" onsubmit="" autocomplete="off" id="">
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Client</label>
-                            <input type="text" class="form-control" name="name" id="clientname" placeholder="" autocomplete="off" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Email</label>
-                            <input type="email" class="form-control" name="email" id="email" autocomplete="off" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Phone</label>
-                            <input type="text" class="form-control" name="phone" id="phone" autocomplete="off" required>
-                        </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal for Change Access -->
-    <!-- <div class="modal fade" id="changeAccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Choose Access</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" style="margin:auto">
-                    <div class="col">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="caradioBtnType" value="1" id="radAdm" required>
-                            <label class="form-check-label" for="radAdm">
-                                Admin
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="0" name="caradioBtnType" id="radAge">
-                            <label class="form-check-label" for="radAge">
-                                Client
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="NULL" name="caradioBtnType" id="radMod">
-                            <label class="form-check-label" for="radMod">
-                                MODERATOR
-                            </label>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" onclick="updateAccess()" class="btn btn-primary" id="btnAccess">Save changes</button>
-                </div>
+                </form>
             </div>
         </div>
-    </div> -->
+    </div>
+
 
     <!-- jQuery -->
     <script src="../plugins/jquery/jquery.min.js"></script>

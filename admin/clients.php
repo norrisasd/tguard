@@ -1,4 +1,12 @@
+<!-- 
+  Admin Form - Client: 
+    * Create, read, update and delete clients  
+    * Contains a table of all the clients
+-->
+
 <?php include("components/header.php"); ?>
+<?php include("components/loader.php"); ?>
+
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -42,12 +50,22 @@
                                     </button>
                                 </div>
                             </div>
+
+                            <div class="col"></div>
+                            <div class="col-auto">
+                                <div class="input-group rounded" id="beforeLD2" style="margin-right:1%;">
+                                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" id="searchInputTable" onkeyup="dt.search( this.value ).draw();">
+                                    <span class="input-group-text border-0" id="search-addon">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                         <table id="dataTable" class="table table-bordered table-hover" style="height:100%;background-color:white">
                             <thead>
                                 <tr>
                                     <th class="text-center"></th>
-                                    <th>Client Name</th>
+                                    <th>Client</th>
                                     <th>Phone</th>
                                     <th>Email</th>
                                     <th>Date Created</th>
@@ -62,13 +80,13 @@
                                 <td>Client</td>
                                 <td>June 5, 2017</td>
                                 <td>2</td>
-                                <td><button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#userInfo"><i class="fas fa-eye"></i></button>
+                                <td><button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#viewClient"><i class="fas fa-eye"></i></button>
 
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th class="text-center"></th>
-                                    <th>Client Name</th>
+                                    <th>Client</th>
                                     <th>Phone</th>
                                     <th>Email</th>
                                     <th>Date Created</th>
@@ -95,7 +113,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><i class="nav-icon fas fa-user"></i> Add Client</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add Client</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -125,124 +143,57 @@
     </div>
 
 
-
     <!-- Modal for Client Information -->
-    <div class="modal fade" id="userInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="viewClient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> <i class="fas fa-edit"></i>Client Information</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Client Information</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="" onsubmit="return editUserInfo();">
-                        <div id="editInfoBody">
-                            <dl class="row">
-                                <dt class="col-sm-3">Client Name: </dt>
-                                <dd class="col-sm-9">Norris</dd>
-
-                                <dt class="col-sm-3">Phone: </dt>
-                                <dd class="col-sm-9">norris</dd>
-
-                                <dt class="col-sm-3">Email: </dt>
-                                <dd class="col-sm-9">norris@gmail</dd>
-
-                                <dt class="col-sm-3">Date Created: </dt>
-                                <dd class="col-sm-9">July 7, 2007</dd>
-
-                                <dt class="col-sm-3">No. of Tasks: </dt>
-                                <dd class="col-sm-9">5</dd>
-                            </dl>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success mr-auto" data-toggle="modal" data-target="#editInfo">Edit Information</button>
-                    <!-- <a href="#" target="_blank" data-toggle="modal" data-target="#changeAccess" style="color:#0645AD;">Change Access</a> -->
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Modal for Edit Client Information -->
-    <div class="modal fade" id="editInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><i class="nav-icon fas fa-user"></i>Edit Client Information</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="" method="post" onsubmit="" autocomplete="off" id="">
+                    <form action="" method="post" onsubmit="return addClient();" autocomplete="off" id="">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Client Name</label>
-                            <input type="text" class="form-control" name="name" id="clientname" placeholder="" autocomplete="off" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Email</label>
-                            <input type="email" class="form-control" name="email" id="email" autocomplete="off" required>
+                            <input type="text" class="form-control" name="name" id="username" placeholder="" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Phone</label>
                             <input type="text" class="form-control" name="phone" id="phone" autocomplete="off" required>
                         </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Email</label>
+                            <input type="email" class="form-control" name="email" id="email" autocomplete="off" required>
+                        </div>
 
+                        <!-- <div class="form-group">
+                            <label class="form-label">Access</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" <?php echo $userinfo['access'] == 1 ? "checked" : "" ?>>
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Enabled
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" <?php echo $userinfo['access'] == 2 ? "checked" : "" ?>>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Disabled
+                                </label>
+                            </div>
+                        </div> -->
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                    </form>
+                    <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
                 </div>
+
+                </form>
             </div>
         </div>
     </div>
-
-    <!-- Modal for Change Access -->
-    <!-- <div class="modal fade" id="changeAccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Choose Access</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" style="margin:auto">
-                    <div class="col">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="caradioBtnType" value="1" id="radAdm" required>
-                            <label class="form-check-label" for="radAdm">
-                                Admin
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="0" name="caradioBtnType" id="radAge">
-                            <label class="form-check-label" for="radAge">
-                                Client
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="NULL" name="caradioBtnType" id="radMod">
-                            <label class="form-check-label" for="radMod">
-                                MODERATOR
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" onclick="updateAccess()" class="btn btn-primary" id="btnAccess">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div> -->
 
     <!-- jQuery -->
     <script src="../plugins/jquery/jquery.min.js"></script>
@@ -284,6 +235,7 @@
         $(".mt-2 ul li:nth-child(4) ul li:nth-child(1) a").removeClass("active");
         $(".mt-2 ul li:nth-child(4) ul li:nth-child(2)").addClass("menu-open");
         $(".mt-2 ul li:nth-child(4) ul li:nth-child(2) a").addClass("active");
+
         var dt = $('#dataTable').DataTable({
             "oLanguage": {
                 "sLengthMenu": "Show Entries _MENU_",
@@ -295,7 +247,7 @@
                 "targets": 0,
                 "orderable": false,
                 "className": "text-center select-checkbox",
-            },{
+            }, {
                 "targets": 6,
                 "orderable": false,
                 "className": "text-center",
@@ -351,7 +303,7 @@
                 data = JSON.parse(response);
                 dt.clear().draw();
                 for (var da in data) {
-                    btn = `<button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#userInfo"><i class="fas fa-eye"></i></button>`;
+                    btn = `<button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#viewClient"><i class="fas fa-eye"></i></button>`;
                     dt.row.add([
                         cb,
                         data[da].ClientName,
