@@ -1,4 +1,13 @@
+<!-- 
+  Agent Settings: 
+    * User can view and edit his/her account information 
+    * User can change profile picture
+    * User cannot change his/her access
+-->
+
 <?php include("./components/header.php"); ?>
+<?php include("./components/loader.php"); ?>
+
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -63,13 +72,13 @@
                                             <div class="form-group">
                                                 <label class="form-label">Access</label>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" <?php echo $userinfo['access'] == 1 ? "checked" : "" ?>>
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" <?php echo $userinfo['access'] == 1 ? "checked" : "" ?> disabled>
                                                     <label class="form-check-label" for="flexRadioDefault1">
                                                         Admin
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" <?php echo $userinfo['access'] == 2 ? "checked" : "" ?>>
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" <?php echo $userinfo['access'] == 2 ? "checked" : "" ?> selected disabled>
                                                     <label class="form-check-label" for="flexRadioDefault2">
                                                         Employee
                                                     </label>

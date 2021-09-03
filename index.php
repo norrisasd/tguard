@@ -1,12 +1,13 @@
+<!-- 
+  Agent Index 
+    * Contains a dashboard of the agent's upcoming and in progress tasks
+-->
+
 <?php include("./components/header.php"); ?>
+<?php include("./components/loader.php"); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-  <div class="wrapper">
-    <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="dist/img/logo.png" alt="AdminLogo" height="100" width="100">
-    </div>
-  </div>
+
 
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
@@ -55,13 +56,13 @@
                 <h5><b>Upcoming</b></h5>
                 <p class="text-muted m-b-30 font-13">You currently have n no. of upcoming tasks</p>
                 <div class="input-group rounded" style="margin-bottom:1%">
-                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                  <input type="search" onkeydown="w3.filterHTML('#upcomingTask', 'li', this.value)" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                   <span class="input-group-text border-0" id="search-addon">
                     <i class="fas fa-search"></i>
                   </span>
                 </div>
                 <div class="clearfix"></div>
-                <ul class="sortable-list taskList list-unstyled ui-sortable" style="margin-top: 3%;">
+                <ul class="sortable-list taskList list-unstyled ui-sortable" id="upcomingTask" style="margin-top: 3%;">
                 </ul>
               </div>
 
@@ -72,21 +73,53 @@
                 <h5><b>In Progress</b></h5>
                 <p class="text-muted m-b-30 font-13">You currently have n no. of in progress tasks</p>
                 <div class="input-group rounded" style="margin-bottom:1%">
-                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" onkeydown="w3.filterHTML('#inprogressTasks', 'li', this.value)"/>
                   <span class="input-group-text border-0" id="search-addon">
                     <i class="fas fa-search"></i>
                   </span>
                 </div>
                 <div class="clearfix"></div>
-                <ul class="sortable-list taskList list-unstyled ui-sortable" style="margin-top: 3%;">
+                <ul class="sortable-list taskList list-unstyled ui-sortable" style="margin-top: 3%;" id="inprogressTasks">
+                  <li class="task-warning ui-sortable-handle" id="task1">
+                    <div class="checkbox checkbox-custom checkbox-single float-right">
+                      <input type="checkbox" aria-label="Single checkbox Two">
+                      <label></label>
+                    </div>
+                    <b>Name of Task</b>
+                    <div class="clearfix"></div>
+                    Short Description
+                    <div class="mt-3">
+                      <p class="float-right">
+                        <button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-eye"></i></button>
+                      </p>
+                      <p class="mb-2">Client:
+                        <span><i>Petey Cruiser</i></span>
+                      </p>
+                    </div>
+                  </li>
+                  <li class="task-warning ui-sortable-handle" id="task1">
+                    <div class="checkbox checkbox-custom checkbox-single float-right">
+                      <input type="checkbox" aria-label="Single checkbox Two">
+                      <label></label>
+                    </div>
+                    <b>Name of Task</b>
+                    <div class="clearfix"></div>
+                    Short Description
+                    <div class="mt-3">
+                      <p class="float-right">
+                        <button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-eye"></i></button>
+                      </p>
+                      <p class="mb-2">Client:
+                        <span><i>Petey Cruiser</i></span>
+                      </p>
+                    </div>
+                  </li>
                 </ul>
               </div>
             </div>
           </div>
         </div>
-      </div>
     </section>
-  </div>
   </div>
 
 
@@ -107,7 +140,14 @@
               <input type="text" class="form-control" id="inputTaskName" placeholder="" required />
             </div>
             <div class="form-group">
-              <label for="inputClient">Client Name</label>
+              <label for="inputTaskType">Task Type</label>
+              <select class="form-control" id="inputTaskType" required>
+                <option value="" selected hidden>Select Task Type</option>
+                <?php displayAllClients() ?>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inputClient">Client</label>
               <select class="form-control" id="inputClientID" required>
                 <option value="" selected hidden>Select Client</option>
                 <?php displayAllClients() ?>
@@ -120,6 +160,11 @@
             <div class="form-group">
               <label for="inputDescription">Notes</label>
               <textarea type="text" class="form-control" id="inputNotes"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="inputSubTasks">Sub-Tasks: </label>
+              <textarea type="text" class="form-control" id="inputSubTasks"></textarea>
             </div>
             <!-- 
             <div class="form-group">
@@ -216,7 +261,10 @@
                 <div class="col">
                   <label for="modalTimeSpent">Time Spent: </label>
                   <p id="modalTimeSpent">---</p>
-
+                </div>
+                <div class="col">
+                  <label for="modalStatus">Status: </label>
+                  <p id="modalAgent">In Progress</p>
                 </div>
                 <div class="col">
                   <div class="float-right">
@@ -226,19 +274,16 @@
                   </div>
                 </div>
               </div>
-              <div class="form-row">
-                <div class="col">
+              <div class="form-row" style="margin-bottom: 1%;">
+                <!-- <div class="col">
                   <label for="modalClient">Client: </label>
                   <p id="modalClient">Agrisoft</p>
                 </div>
+
                 <div class="col">
-                  <label for="modalStatus">Status: </label>
-                  <p id="modalAgent">In Progress</p>
-                </div>
-                <div class="col">
-                  <!-- <label for="modalDueDate">Due Date: </label>
-                  <p id="modalDueDate">January 01, 2021</p> -->
-                </div>
+                  <label for="modalDueDate">Due Date: </label>
+                  <p id="modalDueDate">January 01, 2021</p>
+                </div> -->
                 <div class="col">
                   <div class="float-right">
                     <button type="button" class="btn btn-primary mr-auto" id="btnFinish" style="min-width: 102px;">Finish</button>
@@ -249,8 +294,39 @@
                 <div class="col">
                   <hr class="mt-2 mb-3" />
                   <div class="form-group">
+                    <label for="inputTask">Task Name</label>
+                    <input type="text" class="form-control" id="inputTaskName" placeholder="" required />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="inputTaskType">Task Type</label>
+                    <select class="form-control" id="inputTaskType" required>
+                      <option value="" selected hidden>Select Task Type</option>
+                      <?php displayAllClients() ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="inputTaskType">Client</label>
+                    <select class="form-control" id="inputTaskType" required>
+                      <option value="" selected hidden>Select Client</option>
+                      <?php displayAllClients() ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                  <div class="form-group">
                     <label for="inputDescription2">Notes: </label>
-                    <textarea type="text" class="form-control" id="inputDescription2"></textarea>
+                    <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
                   </div>
                 </div>
               </div>
@@ -355,7 +431,9 @@
   <script src="plugins/toastr/toastr.min.js"></script>
   <!-- AdminLTE App -->
   <script src="dist/js/adminlte.js"></script>
-  <script src="js/DashboardFunctions.js"></script>
+  <script src="./js/DashboardFunctions.js"></script>
+  <script src="./js/Main.js"></script>
+  <script src="https://www.w3schools.com/lib/w3.js"></script>
 
 
   <script>

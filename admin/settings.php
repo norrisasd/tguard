@@ -1,8 +1,14 @@
+<!-- 
+  Admin Settings: 
+    * User can view and edit his/her account information 
+    * User can change profile picture
+    * User can change his/her access
+-->
+
 <?php include("components/header.php"); ?>
 <?php include("components/loader.php"); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-
 
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <!-- Left navbar links -->
@@ -21,9 +27,11 @@
             <!-- Notifications Dropdown Menu -->
         </ul>
     </nav>
+
     <aside class="main-sidebar sidebar-primary elevation-4">
         <?php include("components/SidebarAdmin.php"); ?>
     </aside>
+
     <!-- Main Content -->
     <div class="content-wrapper">
         <!-- Main content -->
@@ -31,7 +39,6 @@
             <div class="container light-style flex-grow-1 container-p-y" style="width: 70%;">
                 <div class="card overflow-hidden p-3">
                     <div class="row no-gutters row-bordered row-border-light ">
-
                         <div class="col">
                             <div class="tab-content">
                                 <div class="tab-pane fade active show" id="account-general">

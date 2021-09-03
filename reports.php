@@ -1,4 +1,10 @@
+<!-- 
+  Agent Reports
+    * Contain a report of all completed tasks with the flags
+-->
+
 <?php include("./components/header.php"); ?>
+<?php include("./components/loader.php"); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -27,7 +33,7 @@
                     <div class="card-body">
                         <div class="row align-items-start">
                             <div class="col-sm-6">
-                                <label for="clientName">Client Name</label>
+                                <label for="clientName">Client</label>
                                 <select id="clientName" class="form-control" onclick="searchTable()" style="margin-right:0.5%;">
                                     <option value="" selected>Select</option>
                                     <?php displayAllClients() ?>
@@ -53,6 +59,20 @@
                                 <!-- Start Date -->
                                 <input type="text" class="form-control" onclick="searchTable()" id="actDate" value="" style="margin-right:0.5%;background:white;" readonly>
                             </div>
+                            <div class="col-sm-3">
+                                <label for="clientName">Task Type</label>
+                                <select id="clientName" class="form-control" onclick="searchTable()" style="margin-right:0.5%;">
+                                    <option value="" selected>Select Task Type</option>
+                                    <?php displayAllClients() ?>
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="clientName">Flag Type</label>
+                                <select id="clientName" class="form-control" onclick="searchTable()" style="margin-right:0.5%;">
+                                    <option value="" selected>Select Flag Type</option>
+                                    <?php displayAllClients() ?>
+                                </select>
+                            </div>
                         </div>
                         <div class="row justify-content-end">
                             <div class="col-auto" style="margin-top: 1%;">
@@ -66,9 +86,11 @@
                                         <button class="dropdown-item" type="button" onclick="clearSearch(1)">Client</button>
                                         <button class="dropdown-item" type="button" onclick="clearSearch(2)">Start Date</button>
                                         <button class="dropdown-item" type="button" onclick="clearSearch(3)">End Date</button>
-                                        <button class="dropdown-item" type="button" onclick="clearSearch(4)">Time Spent</button>
+                                        <!-- <button class="dropdown-item" type="button" onclick="clearSearch(4)">Time Spent</button> -->
                                         <button class="dropdown-item" type="button" onclick="clearSearch(5)">Task Date</button>
-                                        <button class="dropdown-item" type="button" onclick="clearSearch(5)">Due Date</button>
+                                        <!-- <button class="dropdown-item" type="button" onclick="clearSearch(7)">Due Date</button> -->
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(7)">Task Type</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(7)">Flag Type</button>
 
                                     </div>
                                 </div>
@@ -76,29 +98,36 @@
 
                         </div>
                         <!-- Table Starts-->
-                        <div class="row" style="margin-top:1%">
+                        <div class="row" style="margin-top:1%; margin-bottom:1%">
                             <div class="col-auto" id="beforeLD" style="margin-right:1%;">
                                 <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Export All Data shown in the Table" aria-hidden="true"></i>
                             </div>
                             <div class="col-auto" id="beforeLD1" style="margin-right:1%;">
                                 <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Export Selected Data shown in the Table" aria-hidden="true"></i>
                             </div>
-                            <div class="ml-auto" id="beforeLD2" style="margin-right:1%;">
-                                <label for="searchInputTable">Search:</label>
-                                <input type="text" id="searchInputTable" onkeyup="dt.search( this.value ).draw();">
+                            <div class="col"></div>
+                            <div class="col-auto">
+                                <div class="input-group rounded" id="beforeLD2" style="margin-right:1%;">
+                                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" id="searchInputTable" onkeyup="dt.search( this.value ).draw();">
+                                    <span class="input-group-text border-0" id="search-addon">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         <table id="dataTable" class="table table-bordered table-hover" style="height:100%;background-color:white">
                             <thead>
                                 <tr>
                                     <th class="text-center"></th>
-                                    </th>
+                                    <th>Flag Type</th>
                                     <th>Task Name</th>
-                                    <th>Client Name</th>
+                                    <th>Task Type</th>
+                                    <th>Client</th>
                                     <th>Notes</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
                                     <th>Time Spent</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -106,12 +135,15 @@
                             <tfoot>
                                 <tr>
                                     <th></th>
+                                    <th>Flag Type</th>
                                     <th>Task Name</th>
-                                    <th>Client Name</th>
+                                    <th>Task Type</th>
+                                    <th>Client</th>
                                     <th>Notes</th>
                                     <th>Start Time</th>
                                     <th>End Time</th>
                                     <th>Time Spent</th>
+                                    <th></th>
                                 </tr>
                             </tfoot>
                         </table>

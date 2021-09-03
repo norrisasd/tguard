@@ -1,13 +1,15 @@
+<!-- 
+  Admin Form - Client: 
+    * Create, read, update and delete clients  
+    * Contains a table of all the clients
+-->
+
+
 <?php include("components/header.php"); ?>
+<?php include("components/loader.php"); ?>
+
 
 <body class="hold-transition sidebar-mini layout-fixed">
-
-  <div class="wrapper">
-    <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="../dist/img/logo.png" alt="AdminLogo" height="100" width="100">
-    </div>
-  </div>
 
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
@@ -455,9 +457,9 @@
   <script src="https://www.w3schools.com/lib/w3.js"></script>
   <script>
     $(".mt-2 ul li").removeClass("menu-open");
-  $(".mt-2 ul li a").removeClass("active");
-  $(".mt-2 ul li:nth-child(4) ul li:nth-child(1)").addClass("menu-open");
-  $(".mt-2 ul li:nth-child(4) ul li:nth-child(1) a").addClass("active");
+    $(".mt-2 ul li a").removeClass("active");
+    $(".mt-2 ul li:nth-child(4) ul li:nth-child(1)").addClass("menu-open");
+    $(".mt-2 ul li:nth-child(4) ul li:nth-child(1) a").addClass("active");
     //Hiding the div
     $(".custom-file").hide();
     $(".uploadBtn").hide();
@@ -485,16 +487,17 @@
       var nextSibling = e.target.nextElementSibling
       nextSibling.innerText = fileName
     });
-    function setInputClient(value){
+
+    function setInputClient(value) {
       // alert(value);
       $.ajax({
-        type:'get',
-        url:'./main.php',
-        data:{
-          getInputClientByTasktypeID:true,
-          tasktype_id:value
+        type: 'get',
+        url: './main.php',
+        data: {
+          getInputClientByTasktypeID: true,
+          tasktype_id: value
         },
-        success: function (response){
+        success: function(response) {
           data = JSON.parse(response);
           toastr.info(data[0].ClientName);
           $("#inputClientID").val(data[0].ClientName);
