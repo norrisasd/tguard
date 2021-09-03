@@ -1,7 +1,15 @@
 <?php
     require_once 'Config.php';
     $userinfo = $_SESSION['userInfo'];
-    
+    if(!isset($_SESSION['login'])){
+        if(is_dir("admin")){
+            header("Location: login");
+        }else{
+            header("Location: ../login");
+        }
+        
+        
+    }
     function displayAllClients(){
         global $dbConnection;
         $query="SELECT * FROM client";
