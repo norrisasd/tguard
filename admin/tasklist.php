@@ -45,14 +45,9 @@
                             </div>
                         </div> -->
                         <div class="row align-items-start" style="margin-bottom: 1%; margin-top: 2.5%;">
-                            <div class="col-auto" style="margin-top:1%">
+                            <!-- <div class="col-auto" style="margin-top:1%">
                                 <input type="checkbox" value="" style="margin-left:10px;" id="selectAll" onclick="selectAll(this)"> Select All
-                            </div>
-                            <div class="col-auto">
-                                <button type="button" class="btn btn-success">
-                                    Export
-                                </button>
-                            </div>
+                            </div> -->
                             <div class="col-auto">
                                 <div class="btn-group dropright">
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTaskType">
@@ -77,24 +72,30 @@
                                     <th class="text-center"></th>
                                     <th>Task Type</th>
                                     <th>Client Name</th>
-                                    <th>Notes</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <td><a href="#" class="table" onclick="" data-toggle="modal" data-target="#userInfo"></a></td>
-                                <td>norris@gmail.com</td>
-                                <td>Client</td>
-                                <td></td>
-                                <td><button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#viewTaskType"><i class="fas fa-eye"></i></button>
-
+                                <!-- <td class="text-center"></td>
+                            <td>Norris Hipolito</td>
+                            <td>Finish Task Guard</td>
+                            <td>John Doe</td>
+                            <td>Lorem Ipsum</td>
+                            <td>June 20, 2021 at 2:30 AM</td>
+                            <td>June 20, 2021 at 2:30 PM</td>
+                            <td>12 hrs</td>
+                            <td> <button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-eye"></i></button>
+                            </td> -->
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th class="text-center"></th>
                                     <th>Task Type</th>
                                     <th>Client Name</th>
-                                    <th>Notes</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
                                     <th></th>
                                 </tr>
                             </tfoot>
@@ -116,16 +117,16 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post" onsubmit="return addClient();" autocomplete="off" id="">
+                    <form action="" method="post" onsubmit="return addTaskType();" autocomplete="off" id="">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Task Type</label>
-                            <input type="text" class="form-control" name="name" id="username" placeholder="" autocomplete="off" required>
+                            <input type="text" class="form-control" name="name" id="inputTaskType" placeholder="" autocomplete="off" required>
                         </div>
                         <div class="form-group">
-                            <label for="inputTaskType">Client</label>
-                            <select class="form-control" id="inputTaskType" required>
+                            <label for="inputClient">Client</label>
+                            <select class="form-control" id="inputClient" required>
                                 <option value="" selected hidden>Select Client</option>
-                                <?php displayAllClients() ?>
+                                <?php displayAllClientsValID() ?>
                             </select>
                         </div>
                         <!-- <div class="form-group">
@@ -135,11 +136,11 @@
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Phone</label>
                             <input type="text" class="form-control" name="phone" id="phone" autocomplete="off" required>
-                        </div> -->
+                        </div> 
                         <div class="form-group">
                             <label for="inputDescription2">Notes: </label>
                             <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
-                        </div>
+                        </div>-->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -165,24 +166,24 @@
                         <div class="container-fluid">
 
                             <div class="form-group">
-                                <label for="inputTaskType">Task Type</label>
-                                <input type="text" class="form-control" id="inputTaskType" placeholder="" required />
+                                <label for="viewTaskType">Task Type</label>
+                                <input type="text" class="form-control" id="viewType" placeholder="" required />
 
                             </div>
 
                             <div class="form-group">
-                                <label for="inputClient">Client</label>
-                                <select class="form-control" id="inputClient" required>
+                                <label for="viewClient">Client</label>
+                                <select class="form-control" id="viewClient" required>
                                     <option value="" selected hidden>Select Task Type</option>
-                                    <?php displayAllClients() ?>
+                                    <?php displayAllClientsValID() ?>
                                 </select>
                             </div>
-
+<!-- 
                             <div class="form-group">
                                 <label for="inputDescription2">Notes: </label>
                                 <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
                             </div>
-                            <!-- 
+                            
 
                             <div class="form-group">
                                 <label for="inputSubTasks">Sub-Tasks: </label>
@@ -237,95 +238,10 @@
     <script src="../plugins/toastr/toastr.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../dist/js/adminlte.js"></script>
+    <script src="./js/TaskListFunctions.js"></script>
+    <script src="./js/Main.js"></script>
 
-    <script>
-        $(".mt-2 ul li").removeClass("menu-open");
-        $(".mt-2 ul li a").removeClass("active");
-        $(".mt-2 ul li:nth-child(4) ul li:nth-child(1)").removeClass("menu-open");
-        $(".mt-2 ul li:nth-child(4) ul li:nth-child(1) a").removeClass("active");
-        $(".mt-2 ul li:nth-child(4) ul li:nth-child(2)").addClass("menu-open");
-        $(".mt-2 ul li:nth-child(4) ul li:nth-child(2) a").addClass("active");
-        var dt = $('#dataTable').DataTable({
-            "oLanguage": {
-                "sLengthMenu": "Show Entries _MENU_",
-            },
-            dom: "<'row d-flex flex-row align-items-end'>tr<'row d-flex flex-row align-items-end'<'col-md-6'l><'col-sm-2'i><'col-md-4'p>>",
-            "pageLength": 10,
-            "order": [],
-            "columnDefs": [{
-                "targets": 0,
-                "orderable": false,
-                "className": "text-center select-checkbox",
-            }, {
-                "targets": 6,
-                "orderable": false,
-                "className": "text-center",
-            }],
-            select: {
-                style: 'multi',
-                selector: 'tr>td:nth-child(1)'
-            },
-            "paging": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-            "buttons": ["excel", "pdf", "print", ]
-        });
-        dt.buttons().container().appendTo('#beforeLD');
-        new $.fn.dataTable.Buttons(dt, {
-            "buttons": [{
-                extend: 'excel',
-                text: 'Excel Selected',
-                exportOptions: {
-                    modifier: {
-                        selected: true
-                    }
-                },
-            }, {
-                extend: 'pdf',
-                text: 'PDF Selected',
-                exportOptions: {
-                    modifier: {
-                        selected: true
-                    }
-                },
-            }, {
-                extend: 'print',
-                text: 'Print Selected',
-                exportOptions: {
-                    modifier: {
-                        selected: true
-                    }
-                },
-            }]
-        }).container().appendTo('#beforeLD1');
-        var cb = "";
-        $.ajax({
-            type: 'get',
-            url: './main.php',
-            data: {
-                getClientsJSON: true
-            },
-            success: function(response) {
-                data = JSON.parse(response);
-                dt.clear().draw();
-                for (var da in data) {
-                    btn = `<button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#userInfo"><i class="fas fa-eye"></i></button>`;
-                    dt.row.add([
-                        cb,
-                        data[da].ClientName,
-                        data[da].phone,
-                        data[da].email,
-                        data[da].email,
-                        data[da].email,
-                        btn,
-                    ]).draw();
-                }
-            }
-        })
-    </script>
+
 
 </body>
 

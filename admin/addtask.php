@@ -56,13 +56,13 @@
                 <h5><b>Upcoming</b></h5>
                 <p class="text-muted m-b-30 font-13">You currently have n no. of upcoming tasks</p>
                 <div class="input-group rounded" style="margin-bottom:1%">
-                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                  <input type="search" onkeydown="w3.filterHTML('#upcomingTask', 'li', this.value)" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                   <span class="input-group-text border-0" id="search-addon">
                     <i class="fas fa-search"></i>
                   </span>
                 </div>
                 <div class="clearfix"></div>
-                <ul class="sortable-list taskList list-unstyled ui-sortable" style="margin-top: 3%;">
+                <ul class="sortable-list taskList list-unstyled ui-sortable" id="upcomingTask" style="margin-top: 3%;">
                 </ul>
               </div>
 
@@ -73,13 +73,13 @@
                 <h5><b>In Progress</b></h5>
                 <p class="text-muted m-b-30 font-13">You currently have n no. of in progress tasks</p>
                 <div class="input-group rounded" style="margin-bottom:1%">
-                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                  <input type="search" onkeydown="w3.filterHTML('#inprogressTasks', 'li', this.value)" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                   <span class="input-group-text border-0" id="search-addon">
                     <i class="fas fa-search"></i>
                   </span>
                 </div>
                 <div class="clearfix"></div>
-                <ul class="sortable-list taskList list-unstyled ui-sortable" style="margin-top: 3%;">
+                <ul class="sortable-list taskList list-unstyled ui-sortable" id="inprogressTasks" style="margin-top: 3%;">
                   <li class="task-warning ui-sortable-handle" id="task1">
                     <div class="checkbox checkbox-custom checkbox-single float-right">
                       <input type="checkbox" aria-label="Single checkbox Two">
@@ -141,15 +141,15 @@
             </div>
             <div class="form-group">
               <label for="inputTaskType">Task Type</label>
-              <select class="form-control" id="inputTaskType" required>
+              <select class="form-control" onchange="setInputClient(this.value)" id="inputTaskType" required>
                 <option value="" selected hidden>Select Task Type</option>
-                <?php displayAllTasks() ?>
+                <?php displayAllTaskType() ?>
               </select>
             </div>
 
             <div class="form-group">
               <label for="inputClient">Client</label>
-              <select class="form-control" id="inputClientID" required>
+              <select class="form-control" id="inputClientID" disabled>
                 <option value="" selected hidden>Select Client</option>
                 <?php displayAllClients() ?>
               </select>
@@ -452,8 +452,12 @@
   <script src="../dist/js/adminlte.js"></script>
   <script src="./js/DashboardFunctions.js"></script>
   <script src="./js/Main.js"></script>
-
+  <script src="https://www.w3schools.com/lib/w3.js"></script>
   <script>
+    $(".mt-2 ul li").removeClass("menu-open");
+  $(".mt-2 ul li a").removeClass("active");
+  $(".mt-2 ul li:nth-child(4) ul li:nth-child(1)").addClass("menu-open");
+  $(".mt-2 ul li:nth-child(4) ul li:nth-child(1) a").addClass("active");
     //Hiding the div
     $(".custom-file").hide();
     $(".uploadBtn").hide();
@@ -481,6 +485,23 @@
       var nextSibling = e.target.nextElementSibling
       nextSibling.innerText = fileName
     });
+    function setInputClient(value){
+      // alert(value);
+      $.ajax({
+        type:'get',
+        url:'./main.php',
+        data:{
+          getInputClientByTasktypeID:true,
+          tasktype_id:value
+        },
+        success: function (response){
+          data = JSON.parse(response);
+          toastr.info(data[0].ClientName);
+          $("#inputClientID").val(data[0].ClientName);
+        }
+      });
+      return false;
+    }
   </script>
 
 

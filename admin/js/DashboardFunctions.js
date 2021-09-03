@@ -72,7 +72,8 @@ function addTask() {
   notes = $("#inputNotes").val();
   agent = $("#inputAgentID").val();
   subtask = $("#inputSubTasks").val();
-  duedate = document.getElementById("inputDueDate").value;
+  tasktype= $("#inputTaskType").val();
+  // duedate = document.getElementById("inputDueDate").value;
   $.ajax({
     type: 'get',
     url: './main.php',
@@ -81,8 +82,9 @@ function addTask() {
       clientname: clientname,
       notes: notes,
       agent: agent,
-      duedate: duedate,
-      subtask: subtask
+      // duedate: duedate,
+      subtask: subtask,
+      tasktype:tasktype
     },
     success: function (response) {
       if (response == 'Task Created') {
@@ -115,7 +117,7 @@ function displayUpcomingTask() {
       result = JSON.parse(response);
       $.each(result, function (key, item) {
         let str = JSON.stringify(item);
-        content += `<li class="task-warning ui-sortable-handle" id="task1">
+        content += `<li class="task-warning ui-sortable-handle">
         <!-- 
         <div class="float-right">
         <p class="" id="duedate">Due Date: <b>`+ item.DueDate + `</b></p>

@@ -23,7 +23,7 @@
         "orderable": false,
         "className": "text-center select-checkbox",
       },{
-        "targets"  : 11,
+        "targets"  : 10,
         "className": "text-center",
       }],
       select:{style:'multi',selector: 'tr>td:nth-child(1)'},
@@ -105,7 +105,7 @@
               data[da].Notes,
               data[da].DateStarted,
               data[da].DateEnded,
-              data[da].DueDate,
+              // data[da].DueDate,
               time,
               btn,
             ]).draw();
@@ -119,7 +119,8 @@
         let searchAgentName = document.getElementById("agentName").value;
         let searchStartDate = document.getElementById("startDate").value;
         let searchEndDate = document.getElementById("endDate").value;
-        let searchDueDate=document.getElementById("dueDate").value;
+        let searchTaskType = document.getElementById("taskType").value;
+        // let searchDueDate=document.getElementById("dueDate").value;
         cb='';
         $.ajax({
             type:'get',
@@ -132,7 +133,8 @@
               searchAgentName:searchAgentName,
               startDate:startDate,
               endDate:endDate,
-              searchDueDate:searchDueDate,
+              searchTaskType:searchTaskType,
+              // searchDueDate:searchDueDate,
               status:1
             },
             success:function(response){
@@ -146,6 +148,7 @@
                         time = timeArr[0]+"hrs "+timeArr[1]+"mins "+timeArr[2]+"sec";
                         dt.row.add([
                           cb,
+                          "TO BE ATTACHED",
                           data[da].TaskName,
                           data[da].client_name,
                           data[da].type,
@@ -153,7 +156,7 @@
                           data[da].Notes,
                           data[da].DateStarted,
                           data[da].DateEnded,
-                          data[da].DueDate,
+                          // data[da].DueDate,
                           time,
                           btn,
                         ]).draw();
@@ -231,6 +234,10 @@
     $("#modalAgent").html(data.name);
     $("#modalClient").html(data.client_name);
     $("#modalDueDate").html(data.DueDate);
+    $("#inputClient").val(data.client_name);
+    $("#inputTaskName").val(data.TaskName);
+    $("#inputEmployee").val(data.user_id);
+    $("#inputTaskType").val(data.tasktype_id);
   }
   $("#btnSave").click(function() {
     notes = $("#inputDescription2").val();

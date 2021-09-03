@@ -21,7 +21,7 @@ function getTaskTypes() {
                         </a>
                     </li>`;
             }
-            $('ul #tasktypes > li:nth-child(2)').after(str);
+            $('ul #tasktypes > li:eq(2)').html(str);
         }
     });
     return false;

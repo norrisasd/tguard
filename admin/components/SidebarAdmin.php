@@ -76,12 +76,12 @@
               <p>Task List</p>
             </a>
           </li>
-          <!-- <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview">
             <a href="tasktype" class="nav-link">
               <i class="nav-icon far fas fa-gavel"></i>
               <p>Agrisoft</p>
             </a>
-          </li> -->
+          </li>
         </ul>
       </li>
       <li class="nav-item">

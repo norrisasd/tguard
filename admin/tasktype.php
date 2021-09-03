@@ -55,13 +55,13 @@
                 <h5><b>Upcoming</b></h5>
                 <p class="text-muted m-b-30 font-13">You currently have n no. of upcoming tasks</p>
                 <div class="input-group rounded" style="margin-bottom:1%">
-                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                  <input type="search" onkeydown="w3.filterHTML('#upcomingTasks', 'li', this.value)" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                   <span class="input-group-text border-0" id="search-addon">
                     <i class="fas fa-search"></i>
                   </span>
                 </div>
                 <div class="clearfix"></div>
-                <ul class="sortable-list taskList list-unstyled ui-sortable" style="margin-top: 3%;">
+                <ul class="sortable-list taskList list-unstyled ui-sortable" id="upcomingTasks" style="margin-top: 3%;">
                 </ul>
               </div>
 
@@ -72,13 +72,13 @@
                 <h5><b>In Progress</b></h5>
                 <p class="text-muted m-b-30 font-13">You currently have n no. of in progress tasks</p>
                 <div class="input-group rounded" style="margin-bottom:1%">
-                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                  <input type="search" onkeydown="w3.filterHTML('#inprogressTasks', 'li', this.value)" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                   <span class="input-group-text border-0" id="search-addon">
                     <i class="fas fa-search"></i>
                   </span>
                 </div>
                 <div class="clearfix"></div>
-                <ul class="sortable-list taskList list-unstyled ui-sortable" style="margin-top: 3%;">
+                <ul class="sortable-list taskList list-unstyled ui-sortable" id="inprogressTasks" style="margin-top: 3%;">
                   <li class="task-warning ui-sortable-handle" id="task1">
                     <div class="checkbox checkbox-custom checkbox-single float-right">
                       <input type="checkbox" aria-label="Single checkbox Two">
@@ -291,7 +291,7 @@
                   <hr class="mt-2 mb-3" />
                   <div class="form-group">
                     <label for="inputTask">Task Name</label>
-                    <input type="text" class="form-control" id="inputTaskName" placeholder="" required />
+                    <input type="text"  class="form-control" id="inputTaskName" placeholder="" required />
                   </div>
                 </div>
               </div>
@@ -443,6 +443,7 @@
   <script src="../dist/js/adminlte.js"></script>
   <script src="./js/DashboardFunctions.js"></script>
   <script src="./js/Main.js"></script>
+  <script src="https://www.w3schools.com/lib/w3.js"></script>
 
   <script>
     //Hiding the div

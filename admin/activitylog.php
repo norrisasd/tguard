@@ -60,9 +60,9 @@
                 <!-- <label for="dueDate">Due Date</label>
                                 <input type="date" onchange="searchTable()" class="form-control" id="dueDate" value="" style="margin-right:0.5%;"> -->
                 <label for="clientName">Task Type</label>
-                <select id="clientName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
+                <select id="taskType" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
                   <option value="" selected>Select Task Type</option>
-                  <?php displayAllClients(); ?>
+                  <?php displayAllTaskType(); ?>
                 </select>
               </div>
               <div class="col-sm-3">
@@ -226,7 +226,7 @@
                     <label for="inputTaskType">Task Type</label>
                     <select class="form-control" id="inputTaskType" required disabled>
                       <option value="" selected hidden>Select Task Type</option>
-                      <?php displayAllClients() ?>
+                      <?php displayAllTaskType() ?>
                     </select>
                   </div>
                 </div>
@@ -235,7 +235,7 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="inputTaskType">Client</label>
-                    <select class="form-control" id="inputTaskType" required disabled>
+                    <select class="form-control" id="inputClient" required disabled>
                       <option value="" selected hidden>Select Client</option>
                       <?php displayAllClients() ?>
                     </select>
@@ -247,9 +247,9 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="inputTaskType">Employee</label>
-                    <select class="form-control" id="inputTaskType" required disabled>
+                    <select class="form-control" id="inputEmployee" required disabled>
                       <option value="" selected hidden>Select Employee</option>
-                      <?php displayAllClients() ?>
+                      <?php displayAllAgents() ?>
                     </select>
                   </div>
                 </div>

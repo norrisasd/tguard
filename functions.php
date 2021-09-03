@@ -14,6 +14,16 @@
             }
         }
     }
+    function displayAllClientsValID(){
+        global $dbConnection;
+        $query="SELECT * FROM client";
+        $result=mysqli_query($dbConnection,$query);
+        if(mysqli_num_rows($result)>0){
+            while($data=mysqli_fetch_assoc($result)){
+                echo '<option value="'.$data['client_id'].'">'.$data['ClientName'].'</option>';
+            }
+        }
+    }
     function displayAllAgents(){
         global $dbConnection;
         $query="SELECT * FROM user WHERE access = 2";
@@ -32,6 +42,16 @@
         if(mysqli_num_rows($result)>0){
             while($data=mysqli_fetch_assoc($result)){
                 echo '<option value="'.$data['callback_id'].'" onchange="alert(this.value)">'.$data['TaskName'].'</option>';
+            }
+        }
+    }
+    function displayAllTaskType(){
+        global $dbConnection;
+        $query="SELECT * FROM tasktype";
+        $result=mysqli_query($dbConnection,$query);
+        if(mysqli_num_rows($result)>0){
+            while($data=mysqli_fetch_assoc($result)){
+                echo '<option value="'.$data['tasktype_id'].'" onchange="alert(this.value)">'.$data['type'].'</option>';
             }
         }
     }

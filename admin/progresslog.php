@@ -61,10 +61,10 @@
                             <div class="col-sm-3">
                                 <!-- <label for="dueDate">Due Date</label>
                                 <input type="date" onchange="searchTable()" class="form-control" id="dueDate" value="" style="margin-right:0.5%;"> -->
-                                <label for="clientName">Task Type</label>
-                                <select id="clientName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
+                                <label for="taskType">Task Type</label>
+                                <select id="taskType" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
                                     <option value="" selected>Select Task Type</option>
-                                    <?php displayAllClients(); ?>
+                                    <?php displayAllTaskType(); ?>
                                 </select>
                             </div>
                             <div class="col-sm-3">
@@ -234,7 +234,7 @@
                                         <label for="inputTaskType">Task Type</label>
                                         <select class="form-control" id="inputTaskType" required>
                                             <option value="" selected hidden>Select Task Type</option>
-                                            <?php displayAllClients() ?>
+                                            <?php displayAllTaskType() ?>
                                         </select>
                                     </div>
                                 </div>
@@ -243,7 +243,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="inputTaskType">Client</label>
-                                        <select class="form-control" id="inputTaskType" required>
+                                        <select class="form-control" id="inputClient" required>
                                             <option value="" selected hidden>Select Client</option>
                                             <?php displayAllClients() ?>
                                         </select>
@@ -255,9 +255,9 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="inputTaskType">Employee</label>
-                                        <select class="form-control" id="inputTaskType" required>
+                                        <select class="form-control" id="inputEmployee" required>
                                             <option value="" selected hidden>Select Employee</option>
-                                            <?php displayAllClients() ?>
+                                            <?php displayAllAgents() ?>
                                         </select>
                                     </div>
                                 </div>
@@ -386,33 +386,33 @@
     <script src="./js/Main.js"></script>
 
     <script>
-        //Hiding the div
-        $(".custom-file").hide();
-        $(".uploadBtn").hide();
+        // //Hiding the div
+        // $(".custom-file").hide();
+        // $(".uploadBtn").hide();
 
-        //Showing the div for the inputs
-        $(document).ready(function() {
-            $('.cases a').on('click', function() {
-                var txt = ($(this).attr('value'));
-                if (txt == 'file') {
-                    $(".file").show();
-                    $(".link").hide();
-                    $(".uploadBtn").show();
-                }
-                if (txt == 'link') {
-                    $(".link").show();
-                    $(".file").hide();
-                    $(".uploadBtn").hide();
-                }
-            });
-        });
+        // //Showing the div for the inputs
+        // $(document).ready(function() {
+        //     $('.cases a').on('click', function() {
+        //         var txt = ($(this).attr('value'));
+        //         if (txt == 'file') {
+        //             $(".file").show();
+        //             $(".link").hide();
+        //             $(".uploadBtn").show();
+        //         }
+        //         if (txt == 'link') {
+        //             $(".link").show();
+        //             $(".file").hide();
+        //             $(".uploadBtn").hide();
+        //         }
+        //     });
+        // });
 
-        //Changing text label of the File attachments
-        document.querySelector('.custom-file-input').addEventListener('change', function(e) {
-            var fileName = document.getElementById("inputType").files[0].name;
-            var nextSibling = e.target.nextElementSibling
-            nextSibling.innerText = fileName
-        });
+        // //Changing text label of the File attachments
+        // document.querySelector('.custom-file-input').addEventListener('change', function(e) {
+        //     var fileName = document.getElementById("inputType").files[0].name;
+        //     var nextSibling = e.target.nextElementSibling
+        //     nextSibling.innerText = fileName
+        // });
     </script>
 
 </body>

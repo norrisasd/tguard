@@ -12,9 +12,10 @@
         $clientname=$_GET['clientname'];
         $notes=$_GET['notes'];
         $agent=$_GET['agent'];
-        $ddate=$_GET['duedate'];
+        // $ddate=$_GET['duedate'];
         $subtask=$_GET['subtask'];
-        $query ="INSERT INTO `callback`(`user_id`,`TaskName`, `client_name`, `Notes`, `datecreated`,`DueDate`, `status`) VALUES ('$agent','$taskname','$clientname','$notes',CURDATE(),'$ddate',0)";
+        $ttype=$_GET['tasktype'];
+        $query ="INSERT INTO `callback`(`user_id`,`TaskName`, `client_name`, `Notes`, `datecreated`, `status`,`tasktype_id`) VALUES ('$agent','$taskname','$clientname','$notes',CURDATE(),0,$ttype)";
         if(mysqli_query($dbConnection,$query)){
             $query ="INSERT INTO `callback_extend`(`callback_id`, `sub_task`, `comments`) VALUES (last_insert_id(),'$subtask','');";
             if(mysqli_query($dbConnection,$query)){
@@ -53,7 +54,8 @@
         $aID=$_GET['searchAgentName'];
         $sdate=$_GET['searchStartDate'];
         $edate=$_GET['searchEndDate'];
-        $ddate=$_GET['searchDueDate'];
+        // $ddate=$_GET['searchDueDate'];
+        $ttype=$_GET['searchTaskType'];
         $bsdate=$_GET['startDate'];
         $bedate=$_GET['endDate'];
         $status = $_GET['status'];
@@ -61,9 +63,10 @@
         $aID = $aID==""?"":"AND callback.user_id =".$aID."";
         $sdate = $sdate==""?"":"AND callback.DateStarted='".$sdate."'";
         $edate = $edate==""?"":"AND callback.DateEnded='".$edate."'";
-        $ddate = $ddate==""?"":"AND callback.DueDate='".$ddate."'";
+        $ttype= $ttype ==""?"":"AND callback.tasktype_id=$ttype";
+        // $ddate = $ddate==""?"":"AND callback.DueDate='".$ddate."'";
         $betweenDate=$bsdate==''?'':"AND (('$bsdate' between DateStarted and DateEnded) or ('$bedate' between DateStarted and DateEnded) or ('$bsdate' <= DateStarted and '$bedate' >= DateEnded))";
-        $query="SELECT callback.*,ADDTIME(callback.TimeSpent,(Select SEC_TO_TIME(SUM(TIME_TO_SEC(SUBTIME(CURTIME(),timerecord.TimeStarted)))) FROM timerecord WHERE status = 0))AS current_time_spent,user.name,callback_extend.sub_task,callback_extend.comments, tasktype.type FROM `callback` INNER JOIN timerecord on callback.callback_id=timerecord.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id INNER JOIN tasktype ON tasktype.tasktype_id = callback.tasktype_id WHERE callback.status = $status $cname $aID $sdate $edate $ddate $betweenDate GROUP BY callback.callback_id ORDER BY callback.user_id;";
+        $query="SELECT callback.*,ADDTIME(callback.TimeSpent,(Select SEC_TO_TIME(SUM(TIME_TO_SEC(SUBTIME(CURTIME(),timerecord.TimeStarted)))) FROM timerecord WHERE status = 0))AS current_time_spent,user.name,callback_extend.sub_task,callback_extend.comments, tasktype.type FROM `callback` INNER JOIN timerecord on callback.callback_id=timerecord.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id INNER JOIN tasktype ON tasktype.tasktype_id = callback.tasktype_id WHERE callback.status = $status $cname $aID $sdate $edate $betweenDate $ttype GROUP BY callback.callback_id ORDER BY callback.user_id;";
         $result=mysqli_query($dbConnection,$query);
         if($result){
             if(mysqli_num_rows($result)>0){
@@ -253,7 +256,7 @@
     }
     
     if(isset($_GET['getTaskTypes'])){
-        $query="SELECT * FROM tasktype";
+        $query="SELECT tasktype.tasktype_id,tasktype.type,client.* FROM tasktype INNER JOIN client ON client.client_id = tasktype.client_id";
         $result = mysqli_query($dbConnection,$query);
         if($result){
             if(mysqli_num_rows($result)>0){
@@ -267,5 +270,38 @@
         }
     }
 
+    if(isset($_POST['addTaskType'])){
+        $query="INSERT INTO `tasktype`(`type`, `client_id`) VALUES ('".$_POST['tasktype']."',".$_POST['client'].")";
+        $result = mysqli_query($dbConnection,$query);
+        if($result){
+            $result = "inserted";
+        }else{
+            $result = "mysqli_error($dbConnection)";
+        }
+    }
+    if(isset($_POST['btnDeleteTaskType'])){
+        $query="DELETE FROM `tasktype` WHERE tasktype_id=".$_POST['tasktype_id'];
+        $result=mysqli_query($dbConnection,$query);
+        if($result){
+            $result = 'deleted';
+        }else{
+            $result= mysqli_error($dbConnection);
+        }
+    }
+    if(isset($_GET['getInputClientByTasktypeID'])){
+        $query="SELECT client.ClientName,client.client_id FROM tasktype INNER JOIN client ON client.client_id = tasktype.client_id WHERE tasktype.tasktype_id =".$_GET['tasktype_id'];
+        $result = mysqli_query($dbConnection,$query);
+        // echo $query;
+        if($result){
+            if(mysqli_num_rows($result)>0){
+                $result = mysqli_fetch_all($result,MYSQLI_ASSOC);
+                $result = json_encode($result);
+            }else{
+                $result ='';
+            }
+        }else{
+            $result=mysqli_error($dbConnection);
+        }
+    }
     echo $result;
 ?>
