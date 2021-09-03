@@ -113,7 +113,6 @@
                                 </span>
                             </div>
                         </div>
-
                     </div>
                     <table id="dataTable" class="table table-bordered table-hover" style="height:100%;background-color:white">
                         <thead>
@@ -232,7 +231,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="inputTaskType">Task Type</label>
-                                        <select class="form-control" id="inputTaskType" required>
+                                        <select class="form-control" onchange="setInputClientView(this.value)" id="inputTaskType" required>
                                             <option value="" selected hidden>Select Task Type</option>
                                             <?php displayAllTaskType() ?>
                                         </select>
@@ -243,7 +242,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="inputTaskType">Client</label>
-                                        <select class="form-control" id="inputClient" required>
+                                        <select class="form-control" id="inputClient" disabled>
                                             <option value="" selected hidden>Select Client</option>
                                             <?php displayAllClients() ?>
                                         </select>
@@ -382,8 +381,9 @@
     <script src="../plugins/toastr/toastr.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../dist/js/adminlte.js"></script>
-    <script src="./js/ProgressLogFunctions.js"></script>
     <script src="./js/Main.js"></script>
+    <script src="./js/ProgressLogFunctions.js"></script>
+    
 
     <script>
         // //Hiding the div

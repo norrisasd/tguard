@@ -1,8 +1,9 @@
 <?php
     require_once 'Config.php';
     $userinfo = $_SESSION['userInfo'];
+    $user_id = $userinfo['user_id'];
     if(!isset($_SESSION['login'])){
-        if(is_dir("admin")){
+        if(is_dir('admin')){
             header("Location: login");
         }else{
             header("Location: ../login");
@@ -32,7 +33,7 @@
     }
     function displayAllAgents(){
         global $dbConnection;
-        $query="SELECT * FROM user WHERE access = 2";
+        $query="SELECT * FROM user";
         $result=mysqli_query($dbConnection,$query);
         if(mysqli_num_rows($result)>0){
             while($data=mysqli_fetch_assoc($result)){
@@ -62,3 +63,4 @@
         }
     }
     // function
+?>

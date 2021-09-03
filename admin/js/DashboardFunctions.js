@@ -71,7 +71,7 @@ function addTask() {
   clientname = $("#inputClientID").val();
   notes = $("#inputNotes").val();
   agent = $("#inputAgentID").val();
-  subtask = $("#inputSubTasks").val();
+  subtask = $("#subTasks").val();
   tasktype= $("#inputTaskType").val();
   // duedate = document.getElementById("inputDueDate").value;
   $.ajax({
@@ -195,9 +195,9 @@ function taskInfo(data) {
     $("#btnFinish").prop('disabled', true);
   } else {
     if ($('#btnPlay').prop('disabled')) {
-      $("#modalStatus").html("Paused");
-    } else {
       $("#modalStatus").html("Running");
+    } else {
+      $("#modalStatus").html("Paused");
     }
   }
   setButtonForProgress(data.callback_id);
@@ -208,16 +208,18 @@ function taskInfo(data) {
   $("#btnFinish").val(data.callback_id);
   $("#btnSave").val(data.callback_id);
   $("#inputDescription2").val(data.Notes);
-  $("#modalTaskName").html(data.TaskName);
+  $("#viewTaskName").val(data.TaskName);
   $("#modalStartDate").html(data.DateStarted == null ? "---" : data.DateStarted);
   $("#modalEndDate").html(data.DateEnded == null ? "---" : data.DateEnded);
-  $("#modalTimeSpent").html(data.total_time.match("") ? "---" : data.total_time);
+  $("#modalTimeSpent").html(data.total_time==""?"---" : data.total_time);
   $("#inputSubTasks").val(data.sub_task);
   $("#inputComments").val(data.comments);
   $("#modalAgent").html(data.name);
   $("#modalClient").html(data.client_name);
   $("#modalDueDate").html(data.DueDate);
-
+  $("#viewTaskType").val(data.tasktype_id);
+  setInputClientView(data.tasktype_id);
+  $("#viewEmployee").val(data.user_id);
 
 }
 function setButtonForProgress(cb_id) {
@@ -364,6 +366,10 @@ $("#btnSave").click(function () {
   notes = $("#inputDescription2").val();
   subtask = $("#inputSubTasks").val();
   comments = $("#inputComments").val();
+  taskname=$("#viewTaskName").val();
+  tasktype=$("#viewTaskType").val();
+  client=$("#viewClient").val();
+  employee=$("#viewEmployee").val();
   $.ajax({
     type: 'post',
     url: './main.php',
@@ -373,6 +379,10 @@ $("#btnSave").click(function () {
       notes: notes,
       subtask: subtask,
       comments: comments,
+      taskname:taskname,
+      tasktype:tasktype,
+      client:client,
+      employee:employee,
 
     },
     success: function (response) {

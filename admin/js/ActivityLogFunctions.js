@@ -243,6 +243,10 @@ $("#btnSave").click(function () {
   notes = $("#inputDescription2").val();
   subtask = $("#inputSubTasks").val();
   comments = $("#inputComments").val();
+  taskname = $("#inputTaskName").val();
+  tasktype = $("#inputTaskType").val();
+  client = $("#inputClient").val();
+  employee = $("#inputEmployee").val();
   $.ajax({
     type: 'post',
     url: './main.php',
@@ -251,7 +255,11 @@ $("#btnSave").click(function () {
       cb_id: this.value,
       notes: notes,
       subtask: subtask,
-      comments: comments
+      comments: comments,
+      taskname: taskname,
+      tasktype: tasktype,
+      client: client,
+      employee: employee,
     },
     success: function (response) {
       if (response == 'updated') {
@@ -293,3 +301,4 @@ $("#btnDelete").click(function () {
   }
 
 });
+

@@ -110,7 +110,7 @@ function refreshTable() {
           data[da].DateStarted,
           "Task In Progress",
           // data[da].DueDate,
-          time,
+          'Running',
           btn,
         ]).draw();
       }
@@ -158,7 +158,7 @@ function searchTable() {
             data[da].DateStarted,
             "Task In Progress",
             // data[da].DueDate,
-            time,
+            'Running',
             btn,
           ]).draw();
         }
@@ -235,9 +235,9 @@ function taskInfo(data) {
     data.total_time = '00:00:00';
   }
   setButtonForProgress(data.callback_id);
-  if ($('#btnPlay').prop('disabled')) {
+  if($("#btnPlay").prop("disabled")){
     $("#modalStatus").html("Running");
-  } else {
+  }else{
     $("#modalStatus").html("Paused");
   }
   $("#btnPlay").val(data.callback_id);
@@ -273,7 +273,7 @@ function setButtonForProgress(cb_id) {
     },
     success: function (response) {
 
-      if (response == '') {
+      if(response == ''){
         $("#btnPlay").prop('disabled', false);
         return false;
       }
@@ -379,10 +379,10 @@ $("#btnSave").click(function () {
   notes = $("#inputDescription2").val();
   subtask = $("#inputSubTasks").val();
   comments = $("#inputComments").val();
-  // taskname=$("#inputTaskName").val();
-  // tasktype=$("#inputTaskType").val();
-  // client=$("#inputClient").val();
-  // employee=$("#inputEmployee").val();
+  taskname=$("#inputTaskName").val();
+  tasktype=$("#inputTaskType").val();
+  client=$("#inputClient").val();
+  employee=$("#inputEmployee").val();
   $.ajax({
     type: 'post',
     url: './main.php',
@@ -392,6 +392,10 @@ $("#btnSave").click(function () {
       notes: notes,
       subtask: subtask,
       comments: comments,
+      taskname: taskname,
+      tasktype: tasktype,
+      client: client,
+      employee: employee,
 
     },
     success: function (response) {

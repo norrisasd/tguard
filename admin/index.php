@@ -42,6 +42,7 @@
           <div class="col">
             <div class="float-left" style="padding-left:15px;">
               <h3><b>Welcome back,<br> Admin</b></h3>
+
             </div>
           </div>
           <div class="col">
@@ -151,14 +152,14 @@
             </div>
             <div class="form-group">
               <label for="inputTaskType">Task Type</label>
-              <select class="form-control" id="inputTaskType" required>
+              <select class="form-control" onchange="setInputClient(this.value)" id="inputTaskType" required>
                 <option value="" selected hidden>Select Task Type</option>
-                <?php displayAllClients() ?>
+                <?php displayAllTaskType() ?>
               </select>
             </div>
             <div class="form-group">
               <label for="inputClient">Client</label>
-              <select class="form-control" id="inputClientID" required>
+              <select class="form-control" id="inputClientID" disabled>
                 <option value="" selected hidden>Select Client</option>
                 <?php displayAllClients() ?>
               </select>
@@ -166,8 +167,7 @@
 
             <div class="form-group">
               <label for="inputAgent">Employee</label>
-              <select class="form-control" id="inputAgentID" required>
-                <option value="" selected hidden>Select Employee</option>
+              <select class="form-control" id="inputAgentID" disabled>
                 <?php displayAllAgents()
                 ?>
               </select>
@@ -183,7 +183,7 @@
 
             <div class="form-group">
               <label for="inputSubTasks">Sub-Tasks: </label>
-              <textarea type="text" class="form-control" id="inputSubTasks"></textarea>
+              <textarea type="text" class="form-control" id="subTasks"></textarea>
             </div>
 
             <!-- 
@@ -309,7 +309,7 @@
                   <hr class="mt-2 mb-3" />
                   <div class="form-group">
                     <label for="inputTask">Task Name</label>
-                    <input type="text" class="form-control" id="inputTaskName" placeholder="" required />
+                    <input type="text" class="form-control" id="viewTaskName" placeholder="" required />
                   </div>
                 </div>
               </div>
@@ -317,10 +317,10 @@
               <div class="form-row">
                 <div class="col">
                   <div class="form-group">
-                    <label for="inputTaskType">Task Type</label>
-                    <select class="form-control" id="inputTaskType" required>
+                    <label for="viewTaskType">Task Type</label>
+                    <select class="form-control" onchange="setInputClientView(this.value)" id="viewTaskType" required>
                       <option value="" selected hidden>Select Task Type</option>
-                      <?php displayAllClients() ?>
+                      <?php displayAllTaskType() ?>
                     </select>
                   </div>
                 </div>
@@ -328,8 +328,8 @@
               <div class="form-row">
                 <div class="col">
                   <div class="form-group">
-                    <label for="inputTaskType">Client</label>
-                    <select class="form-control" id="inputTaskType" required>
+                    <label for="viewClient">Client</label>
+                    <select class="form-control" id="viewClient" disabled>
                       <option value="" selected hidden>Select Client</option>
                       <?php displayAllClients() ?>
                     </select>
@@ -340,10 +340,10 @@
               <div class="form-row">
                 <div class="col">
                   <div class="form-group">
-                    <label for="inputTaskType">Employee</label>
-                    <select class="form-control" id="inputTaskType" required>
+                    <label for="viewEmployee">Employee</label>
+                    <select class="form-control" id="viewEmployee" disabled>
                       <option value="" selected hidden>Select Employee</option>
-                      <?php displayAllClients() ?>
+                      <?php displayAllAgents() ?>
                     </select>
                   </div>
                 </div>
@@ -463,13 +463,12 @@
   <script src="../dist/js/adminlte.js"></script>
   <script src="./js/DashboardFunctions.js"></script>
   <script src="./js/Main.js"></script>
-  <script src="https://www.w3schools.com/lib/w3.js"></script>
 
   <script>
     //Hiding the div
     $(".custom-file").hide();
     $(".uploadBtn").hide();
-
+    $("#inputAgentID").val("<?php echo $user_id ?>");
     //Showing the div for the inputs
     $(document).ready(function() {
       $('.cases a').on('click', function() {
@@ -488,11 +487,11 @@
     });
 
     //Changing text label of the File attachments
-    document.querySelector('.custom-file-input').addEventListener('change', function(e) {
-      var fileName = document.getElementById("inputType").files[0].name;
-      var nextSibling = e.target.nextElementSibling
-      nextSibling.innerText = fileName
-    });
+    // document.querySelector('.custom-file-input').addEventListener('change', function(e) {
+    //   var fileName = document.getElementById("inputType").files[0].name;
+    //   var nextSibling = e.target.nextElementSibling
+    //   nextSibling.innerText = fileName
+    // });
 
     // Dropzone.autoDiscover = false;
     // $("div#dropzone-example").dropzone({

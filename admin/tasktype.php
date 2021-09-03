@@ -141,14 +141,14 @@
             </div>
             <div class="form-group">
               <label for="inputTaskType">Task Type</label>
-              <select class="form-control" id="inputTaskType" required>
+              <select class="form-control" id="inputTaskType" disabled>
                 <option value="" selected hidden>Select Task Type</option>
-                <?php displayAllClients() ?>
+                <?php displayAllTaskType() ?>
               </select>
             </div>
             <div class="form-group">
               <label for="inputClient">Client</label>
-              <select class="form-control" id="inputClientID" required>
+              <select class="form-control" id="inputClientID" disabled>
                 <option value="" selected hidden>Select Client</option>
                 <?php displayAllClients() ?>
               </select>
@@ -172,7 +172,7 @@
 
             <div class="form-group">
               <label for="inputSubTasks">Sub-Tasks: </label>
-              <textarea type="text" class="form-control" id="inputSubTasks"></textarea>
+              <textarea type="text" class="form-control" id="subTasks"></textarea>
             </div>
 
             <!-- 
@@ -285,23 +285,23 @@
                   </div>
                 </div>
               </div>
-
               <div class="form-row">
                 <div class="col">
                   <hr class="mt-2 mb-3" />
                   <div class="form-group">
                     <label for="inputTask">Task Name</label>
-                    <input type="text"  class="form-control" id="inputTaskName" placeholder="" required />
+                    <input type="text" class="form-control" id="viewTaskName" placeholder="" required />
                   </div>
                 </div>
               </div>
+
               <div class="form-row">
                 <div class="col">
                   <div class="form-group">
-                    <label for="inputTaskType">Task Type</label>
-                    <select class="form-control" id="inputTaskType" required>
+                    <label for="viewTaskType">Task Type</label>
+                    <select class="form-control" onchange="setInputClientView(this.value)" id="viewTaskType" required>
                       <option value="" selected hidden>Select Task Type</option>
-                      <?php displayAllClients() ?>
+                      <?php displayAllTaskType() ?>
                     </select>
                   </div>
                 </div>
@@ -309,8 +309,8 @@
               <div class="form-row">
                 <div class="col">
                   <div class="form-group">
-                    <label for="inputTaskType">Client</label>
-                    <select class="form-control" id="inputTaskType" required>
+                    <label for="viewClient">Client</label>
+                    <select class="form-control" id="viewClient" disabled>
                       <option value="" selected hidden>Select Client</option>
                       <?php displayAllClients() ?>
                     </select>
@@ -321,10 +321,10 @@
               <div class="form-row">
                 <div class="col">
                   <div class="form-group">
-                    <label for="inputTaskType">Employee</label>
-                    <select class="form-control" id="inputTaskType" required>
+                    <label for="viewEmployee">Employee</label>
+                    <select class="form-control" id="viewEmployee" disabled>
                       <option value="" selected hidden>Select Employee</option>
-                      <?php displayAllClients() ?>
+                      <?php displayAllAgents() ?>
                     </select>
                   </div>
                 </div>
@@ -447,6 +447,9 @@
 
   <script>
     //Hiding the div
+    var defaultTypeID=localStorage.getItem("tasktype_id");
+    $("#inputTaskType").val(defaultTypeID);
+    setInputClient(defaultTypeID);
     $('#taskTitle').html(localStorage.getItem("type"));
     $('#taskTitle1').html(localStorage.getItem("type"));
     $(".custom-file").hide();
