@@ -1,9 +1,7 @@
 <?php
     require_once 'Config.php';
     $userinfo = $_SESSION['userInfo'];
-    if(!isset($_SESSION['login'])){
-        header("Location: login");
-    }
+    
     function displayAllClients(){
         global $dbConnection;
         $query="SELECT * FROM client";
