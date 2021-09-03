@@ -72,6 +72,16 @@
                 <input type="text" onchange="searchTable()" class="form-control" id="actDate" value="" style="margin-right:0.5%;background:white;" readonly>
               </div>
             </div>
+            <div class="row" style="margin-top: 1%;">
+              <div class="col-sm-6">
+                <label for="flagType">Flag Type</label>
+                <select id="flagType" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
+                  <option value="" selected>Select Flag</option>
+                  <?php displayAllAgents(); ?>
+                </select>
+              </div>
+
+            </div>
             <div class="row" style="margin-top:1%;">
             </div>
             <div class="row justify-content-end">
@@ -87,9 +97,9 @@
                     <button class="dropdown-item" type="button" onclick="clearSearch(2)">Start Date</button>
                     <button class="dropdown-item" type="button" onclick="clearSearch(3)">End Date</button>
                     <button class="dropdown-item" type="button" onclick="clearSearch(4)">Time Spent</button>
-                    <button class="dropdown-item" type="button" onclick="clearSearch(5)">Task Date</button>
-                    <button class="dropdown-item" type="button" onclick="clearSearch(7)">Due Date</button>
-
+                    <button class="dropdown-item" type="button" onclick="clearSearch(5)">Task Type</button>
+                    <button class="dropdown-item" type="button" onclick="clearSearch(7)">Task Date</button>
+                    <button class="dropdown-item" type="button" onclick="clearSearch(8)">Flag Type</button>
                   </div>
                 </div>
               </div>

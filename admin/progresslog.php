@@ -88,8 +88,8 @@
                                         <button class="dropdown-item" type="button" onclick="clearSearch(2)">Start Date</button>
                                         <button class="dropdown-item" type="button" onclick="clearSearch(3)">End Date</button>
                                         <button class="dropdown-item" type="button" onclick="clearSearch(4)">Time Spent</button>
-                                        <button class="dropdown-item" type="button" onclick="clearSearch(5)">Task Date</button>
-                                        <button class="dropdown-item" type="button" onclick="clearSearch(7)">Due Date</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(5)">Task Types</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(7)">Task Date</button>
 
                                     </div>
                                 </div>
