@@ -66,6 +66,7 @@ function checkID(value) {
 //   });
 //   return false;
 // }
+
 function addTask() {
   taskname = $("#inputTaskName").val();
   clientname = $("#inputClientID").val();
@@ -100,6 +101,7 @@ function addTask() {
   });
   return false;
 }
+
 function displayUpcomingTask() {
   let content = '';
   $.ajax({
@@ -143,6 +145,7 @@ function displayUpcomingTask() {
   });
   return false;
 }
+
 function displayInProgress() {
   let content = '';
   $.ajax({
@@ -185,6 +188,7 @@ function displayInProgress() {
   });
   return false;
 }
+
 function taskInfo(data) {
   if (data.total_time == null) {
     data.total_time = '';

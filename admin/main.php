@@ -105,6 +105,7 @@
         }
         
     }
+    
     if(isset($_GET['btnPlay'])){
         $cb_id = $_GET['cb_id'];
         $query = "UPDATE `callback` SET `DateStarted`= CURDATE() WHERE `DateStarted` IS NULL AND callback_id = $cb_id ";
@@ -130,6 +131,7 @@
             $result ='';
         }
     }
+
     if(isset($_GET['btnPause'])){
         $cb_id = $_GET['cb_id'];
         $query = "UPDATE `timerecord` SET  `TimeStop`= CURTIME(), TimeSpent=SUBTIME(CURTIME(),TimeStarted) ,status = 1 WHERE callback_id = $cb_id AND status= 0 ";
@@ -205,6 +207,7 @@
             $result = mysqli_error($dbConnection);
         }
     }
+
     if(isset($_POST['btnSave'])){
         $notes = $_POST['notes'];
         $subtask = $_POST['subtask'];

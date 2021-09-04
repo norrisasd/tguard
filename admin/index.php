@@ -8,13 +8,6 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
 
-  <div class="wrapper">
-    <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="../dist/img/logo.png" alt="AdminLogo" height="100" width="100">
-    </div>
-  </div>
-
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -65,7 +58,7 @@
                 <p class="text-muted m-b-30 font-13">You currently have n no. of upcoming tasks</p>
 
                 <div class="input-group rounded" style="margin-bottom:1%">
-                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" onkeydown="w3.filterHTML('#upcomingTask', 'li', this.value)"/>
+                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" onkeydown="w3.filterHTML('#upcomingTask', 'li', this.value)" />
                   <span class="input-group-text border-0" id="search-addon">
                     <i class="fas fa-search"></i>
                   </span>
@@ -84,7 +77,7 @@
                 <h5><b>In Progress</b></h5>
                 <p class="text-muted m-b-30 font-13">You currently have n no. of in progress tasks</p>
                 <div class="input-group rounded" style="margin-bottom:1%">
-                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" onkeydown="w3.filterHTML('#inprogressTasks', 'li', this.value)"/>
+                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" onkeydown="w3.filterHTML('#inprogressTasks', 'li', this.value)" />
                   <span class="input-group-text border-0" id="search-addon">
                     <i class="fas fa-search"></i>
                   </span>
@@ -353,7 +346,7 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="inputDescription2">Notes: </label>
-                    <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
+                    <textarea type="text" class="form-control" id="inputDescription2"></textarea>
                   </div>
                 </div>
               </div>
@@ -370,7 +363,7 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="inputComments">Comments: </label>
-                    <textarea type="text" class="form-control" id="inputComments">Lorem Ipsum Lorem Ipsum</textarea>
+                    <textarea type="text" class="form-control" id="inputComments"></textarea>
                   </div>
                 </div>
               </div>
@@ -433,7 +426,6 @@
       </form>
     </div>
   </div>
-  </div>
 
   <!-- jQuery -->
   <script src="../plugins/jquery/jquery.min.js"></script>
@@ -463,6 +455,7 @@
   <script src="../dist/js/adminlte.js"></script>
   <script src="./js/DashboardFunctions.js"></script>
   <script src="./js/Main.js"></script>
+  <script src="https://www.w3schools.com/lib/w3.js"></script>
 
   <script>
     //Hiding the div

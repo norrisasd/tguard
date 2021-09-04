@@ -73,7 +73,7 @@
                 <h5><b>In Progress</b></h5>
                 <p class="text-muted m-b-30 font-13">You currently have n no. of in progress tasks</p>
                 <div class="input-group rounded" style="margin-bottom:1%">
-                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" onkeydown="w3.filterHTML('#inprogressTasks', 'li', this.value)"/>
+                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" onkeydown="w3.filterHTML('#inprogressTasks', 'li', this.value)" />
                   <span class="input-group-text border-0" id="search-addon">
                     <i class="fas fa-search"></i>
                   </span>
@@ -122,7 +122,6 @@
     </section>
   </div>
 
-
   <!-- Modal for the Add -->
   <div class="modal fade bd-modal-lg" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -141,21 +140,29 @@
             </div>
             <div class="form-group">
               <label for="inputTaskType">Task Type</label>
-              <select class="form-control" id="inputTaskType" required>
+              <select class="form-control" onchange="setInputClient(this.value)" id="inputTaskType" required>
                 <option value="" selected hidden>Select Task Type</option>
-                <?php displayAllClients() ?>
+                <?php displayAllTaskType() ?>
               </select>
             </div>
             <div class="form-group">
               <label for="inputClient">Client</label>
-              <select class="form-control" id="inputClientID" required>
+              <select class="form-control" id="inputClientID" disabled>
                 <option value="" selected hidden>Select Client</option>
                 <?php displayAllClients() ?>
               </select>
             </div>
+
+            <div class="form-group">
+              <label for="inputAgent">Employee</label>
+              <select class="form-control" id="inputAgentID" disabled>
+                <?php displayAllAgents()
+                ?>
+              </select>
+            </div>
             <!-- <div class="form-group">
-              <label for="dueDate">Due Date</label>
-              <input type="date" class="form-control" id="dueDate" onclick="searchTable()" value="">
+              <label for="inputDueDate">Due Date: </label>
+              <input type="date" class="form-control" id="inputDueDate"></input>
             </div> -->
             <div class="form-group">
               <label for="inputDescription">Notes</label>
@@ -164,19 +171,14 @@
 
             <div class="form-group">
               <label for="inputSubTasks">Sub-Tasks: </label>
-              <textarea type="text" class="form-control" id="inputSubTasks"></textarea>
-            </div>
-            <!-- 
-            <div class="form-group">
-              <label for="inputSubTasks">Sub-Tasks: </label>
-              <textarea type="text" class="form-control" id="inputSubTasks"></textarea>
+              <textarea type="text" class="form-control" id="subTasks"></textarea>
             </div>
 
+            <!-- 
             <div class="form-row">
               <div class="col">
                 <div class="form-group">
                   <label for="inputFile">Attachments: </label><br>
-          
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add Attachments</button>
@@ -185,26 +187,21 @@
                         <a class="dropdown-item" href="#" value="link">Link</a>
                       </div>
                     </div>
-                    <div class="custom-file file" id="addFile">
+                    <div class="custom-file file" id="viewFile">
                       <input type="file" class="custom-file-input" id="inputType">
                       <label class="custom-file-label" for="inputGroupFile01 text-truncate">Choose File</label>
                     </div>
-                    <div class="input-group-append uploadBtn" id="addUpload">
+                    <div class="input-group-append uploadBtn" id="viewUpload">
                       <button class="btn btn-outline-secondary" type="button">Upload</button>
                     </div>
 
-                    <div class="custom-file link" id="addLink">
+                    <div class="custom-file link" id="viewLink">
                       <input type="text input-pr-rev" class="form-control" id="basic-url" placeholder="Link">
                       <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="button">Add</button>
                       </div>
                     </div>
                   </div>
-                  <div class="form-row">
-                      <div class="form-group" style="width:100%; padding-left: 1%">
-                        <div class="dropzone inputDrop" id="dropzone-example" enctype="multipart/form-data">
-                      </div>
-                      </div>
                 </div>
               </div>
               <div class="container" style="height: 150px; overflow-y: auto;">
@@ -227,6 +224,7 @@
             </div> -->
 
           </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Save</button>
@@ -237,7 +235,7 @@
   </div>
 
   <!-- Modal for the View -->
-  <div class="modal fade bd-example-modal-lg js-upload-file" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal fade bd-example-modal-lg" id="" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -252,19 +250,19 @@
               <div class="form-row">
                 <div class="col">
                   <label for="modalStartDate">Start Date: </label>
-                  <p id="modalStartDate">---</p>
+                  <p id="modalStartDate">June 8, 2021 at 11:00 PM</p>
                 </div>
                 <div class="col">
                   <label for="modalEndDate">End Date: </label>
-                  <p id="modalEndDate">---</p>
+                  <p id="modalEndDate">June 8, 2021 at 11:00 PM</p>
                 </div>
                 <div class="col">
                   <label for="modalTimeSpent">Time Spent: </label>
-                  <p id="modalTimeSpent">---</p>
+                  <p id="modalTimeSpent">18 mins</p>
                 </div>
                 <div class="col">
                   <label for="modalStatus">Status: </label>
-                  <p id="modalAgent">In Progress</p>
+                  <p id="modalStatus">---</p>
                 </div>
                 <div class="col">
                   <div class="float-right">
@@ -279,11 +277,15 @@
                   <label for="modalClient">Client: </label>
                   <p id="modalClient">Agrisoft</p>
                 </div>
-
+                <div class="col">
+                  <label for="modalAgent">Employee: </label>
+                  <p id="modalAgent">John Doe</p>
+                </div>
                 <div class="col">
                   <label for="modalDueDate">Due Date: </label>
                   <p id="modalDueDate">January 01, 2021</p>
-                </div> -->
+                </div>
+                <div class="col"></div> -->
                 <div class="col">
                   <div class="float-right">
                     <button type="button" class="btn btn-primary mr-auto" id="btnFinish" style="min-width: 102px;">Finish</button>
@@ -295,7 +297,7 @@
                   <hr class="mt-2 mb-3" />
                   <div class="form-group">
                     <label for="inputTask">Task Name</label>
-                    <input type="text" class="form-control" id="inputTaskName" placeholder="" required />
+                    <input type="text" class="form-control" id="viewTaskName" placeholder="" required />
                   </div>
                 </div>
               </div>
@@ -303,10 +305,10 @@
               <div class="form-row">
                 <div class="col">
                   <div class="form-group">
-                    <label for="inputTaskType">Task Type</label>
-                    <select class="form-control" id="inputTaskType" required>
+                    <label for="viewTaskType">Task Type</label>
+                    <select class="form-control" onchange="setInputClientView(this.value)" id="viewTaskType" required>
                       <option value="" selected hidden>Select Task Type</option>
-                      <?php displayAllClients() ?>
+                      <?php displayAllTaskType() ?>
                     </select>
                   </div>
                 </div>
@@ -314,22 +316,36 @@
               <div class="form-row">
                 <div class="col">
                   <div class="form-group">
-                    <label for="inputTaskType">Client</label>
-                    <select class="form-control" id="inputTaskType" required>
+                    <label for="viewClient">Client</label>
+                    <select class="form-control" id="viewClient" disabled>
                       <option value="" selected hidden>Select Client</option>
                       <?php displayAllClients() ?>
                     </select>
                   </div>
                 </div>
               </div>
+
+              <div class="form-row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="viewEmployee">Employee</label>
+                    <select class="form-control" id="viewEmployee" disabled>
+                      <option value="" selected hidden>Select Employee</option>
+                      <?php displayAllAgents() ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
               <div class="form-row">
                 <div class="col">
                   <div class="form-group">
                     <label for="inputDescription2">Notes: </label>
-                    <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
+                    <textarea type="text" class="form-control" id="inputDescription2"></textarea>
                   </div>
                 </div>
               </div>
+
               <div class="form-row">
                 <div class="col">
                   <div class="form-group">
@@ -373,6 +389,7 @@
                         </div>
                       </div>
                     </div>
+
                   </div>
                 </div>
                 <div class="container" style="height: 150px; overflow-y: auto;">
@@ -459,11 +476,11 @@
     });
 
     //Changing text label of the File attachments
-    document.querySelector('.custom-file-input').addEventListener('change', function(e) {
-      var fileName = document.getElementById("inputType").files[0].name;
-      var nextSibling = e.target.nextElementSibling
-      nextSibling.innerText = fileName
-    });
+    // document.querySelector('.custom-file-input').addEventListener('change', function(e) {
+    //   var fileName = document.getElementById("inputType").files[0].name;
+    //   var nextSibling = e.target.nextElementSibling
+    //   nextSibling.innerText = fileName
+    // });
 
 
     // Dropzone.autoDiscover = false;

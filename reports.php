@@ -60,15 +60,15 @@
                                 <input type="text" class="form-control" onclick="searchTable()" id="actDate" value="" style="margin-right:0.5%;background:white;" readonly>
                             </div>
                             <div class="col-sm-3">
-                                <label for="clientName">Task Type</label>
-                                <select id="clientName" class="form-control" onclick="searchTable()" style="margin-right:0.5%;">
+                                <label for="taskType">Task Type</label>
+                                <select id="taskType" class="form-control" onclick="searchTable()" style="margin-right:0.5%;">
                                     <option value="" selected>Select Task Type</option>
                                     <?php displayAllClients() ?>
                                 </select>
                             </div>
                             <div class="col-sm-3">
-                                <label for="clientName">Flag Type</label>
-                                <select id="clientName" class="form-control" onclick="searchTable()" style="margin-right:0.5%;">
+                                <label for="flagType">Flag Type</label>
+                                <select id="flagType" class="form-control" onclick="searchTable()" style="margin-right:0.5%;">
                                     <option value="" selected>Select Flag Type</option>
                                     <?php displayAllClients() ?>
                                 </select>
@@ -81,16 +81,14 @@
                                         Clear Search
                                     </button>
                                     <div class="dropdown-menu">
-                                        <button class="dropdown-item" type="button" onclick="clearSearch(6)">All</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(7)">All</button>
                                         <div class="dropdown-divider"></div>
                                         <button class="dropdown-item" type="button" onclick="clearSearch(1)">Client</button>
                                         <button class="dropdown-item" type="button" onclick="clearSearch(2)">Start Date</button>
                                         <button class="dropdown-item" type="button" onclick="clearSearch(3)">End Date</button>
-                                        <!-- <button class="dropdown-item" type="button" onclick="clearSearch(4)">Time Spent</button> -->
-                                        <button class="dropdown-item" type="button" onclick="clearSearch(5)">Task Date</button>
-                                        <!-- <button class="dropdown-item" type="button" onclick="clearSearch(7)">Due Date</button> -->
-                                        <button class="dropdown-item" type="button" onclick="clearSearch(7)">Task Type</button>
-                                        <button class="dropdown-item" type="button" onclick="clearSearch(7)">Flag Type</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(4)">Task Date</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(5)">Task Type</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(6)">Flag Type</button>
 
                                     </div>
                                 </div>
