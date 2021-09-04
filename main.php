@@ -212,8 +212,6 @@ if (isset($_POST['btnSave'])) {
     }
 }
 
-echo $result;
-
 
 if (isset($_GET['getClientsJSON'])) {
     $query = "SELECT * FROM client";
@@ -302,6 +300,8 @@ if (isset($_GET['getTimeStatusByID'])) {
         }
     }
 }
-echo $result;
+
+
+    echo $result;
 ?>
 

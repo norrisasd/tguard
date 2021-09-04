@@ -20,7 +20,11 @@ var dt = $('#dataTable').DataTable({
     "targets": 0,
     "orderable": false,
     "className": "text-center select-checkbox",
+  },{
+    "targets": 9,
+    "className": "text-center",
   }],
+  
   select: { style: 'multi' },
   "paging": true,
   "searching": true,
@@ -88,14 +92,18 @@ function refreshTable() {
         time = data[da].total_time;
         const timeArr = time.split(":");
         time = timeArr[0] + "hrs " + timeArr[1] + "mins " + timeArr[2] + "sec";
+        btn = `<button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" onclick='tasktypeInfo(` + JSON.stringify(data[da]) + `)' data-target="#viewTaskType"><i class="fas fa-eye"></i></button>`;
         dt.row.add([
           cb,
+          "WEW",
           data[da].TaskName,
+          data[da].tasktype_id,
           data[da].client_name,
           data[da].Notes,
           data[da].DateStarted,
           data[da].DateEnded,
           time,
+          btn,
         ]).draw();
       }
     }
