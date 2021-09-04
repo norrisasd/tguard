@@ -2,24 +2,10 @@ toastr.options.progressBar = true;
 toastr.options.preventDuplicates = true;
 toastr.options.closeButton = true;
 
-var defaultClient = 'asd';
 displayUpcomingTask();
 displayInProgress();
 $.widget.bridge('uibutton', $.ui.button);
 $('[data-toggle="popover"]').popover();
-var dt = $('#dataTable').DataTable({
-  "oLanguage": {
-    "sLengthMenu": "Show Entries _MENU_",
-  },
-  dom: "<'row d-flex flex-row align-items-end'>tr<'row d-flex flex-row align-items-end'<'col-md-6'l><'col-sm-2'i><'col-md-4'p>>",
-  "pageLength": 10,
-  "paging": true,
-  "searching": true,
-  "ordering": true,
-  "info": true,
-  "autoWidth": false,
-  "responsive": true,
-});
 
 function checkID(value) {
   toastr.error(value);
@@ -46,7 +32,7 @@ function addTask() {
       tasktype:tasktype
     },
     success: function (response) {
-      if (response == 'Task Created') {
+      if (response.match("Task Created!")=='Task Created!') {
         toastr.success(response);
         document.getElementById("addTaskForm").reset();
         $(".modal").modal("hide");
@@ -70,7 +56,6 @@ function displayUpcomingTask() {
       tasktype_id:localStorage.getItem("tasktype_id")
     },
     success: function (response) {
-      // toastr.info(response);
       if (response == '') {
         $("#upcoming ul").html(content);
         return false;
@@ -115,8 +100,7 @@ function displayInProgress() {
       tasktype_id: localStorage.getItem("tasktype_id")
     },
     success: function (response) {
-      // alert(response);
-      if (response == '') {
+      if (response == "") {
         $("#inProgress ul").html(content);
         return false;
       }
@@ -182,7 +166,6 @@ function taskInfo(data) {
   setInputClientView(data.tasktype_id);
   $("#viewEmployee").val(data.user_id);
 }
-
 function nl2br(str, is_xhtml) {
   if (typeof str === 'undefined' || str === null) {
     return '';

@@ -95,7 +95,7 @@
     }
 
     if(isset($_GET['displayProgress'])){
-        $tasktypeID=$_GET['tasktype_id']==""?"AND callback.user_id = $user_id":" AND callback.tasktype_id=".$_GET['tasktype_id']."";
+        $tasktypeID=$_GET['tasktype_id']==""?"":" AND callback.tasktype_id=".$_GET['tasktype_id']."";
         $query="SELECT callback.*,SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) as total_time,callback_extend.sub_task,callback_extend.comments,user.name FROM `callback` INNER JOIN timerecord ON callback.callback_id=timerecord.callback_id INNER JOIN callback_extend ON callback.callback_id =callback_extend.callback_id INNER JOIN user ON user.user_id = callback.user_id WHERE callback.status=0 $tasktypeID AND callback.DateStarted is not NULL GROUP BY callback.callback_id;";
         $result=mysqli_query($dbConnection,$query);
         if(mysqli_num_rows($result)>0){
@@ -320,6 +320,29 @@
                 $result=mysqli_fetch_assoc($result);
                 $result = json_encode($result);
             }
+        }
+    }
+    if(isset($_GET['getExistedTaskType'])){
+        $query="SELECT tasktype.* FROM `tasktype`,assigned_tasktype WHERE assigned_tasktype.user_id=".$_GET['user_id']." AND assigned_tasktype.tasktype_id=tasktype.tasktype_id;";
+        $result=mysqli_query($dbConnection,$query);
+        if($result){
+            if(mysqli_num_rows($result)>0){
+                $result = mysqli_fetch_all($result,MYSQLI_ASSOC);
+                $result = json_encode($result);
+            }else{
+                $result="";
+            }
+        }else{
+            $result ="";
+        }
+    }
+    if(isset($_POST['assignUser'])){
+        $query="INSERT INTO `assigned_tasktype`(`tasktype_id`, `user_id`) VALUES (".$_POST['tasktype'].",".$_POST['user'].")";
+        $result=mysqli_query($dbConnection,$query);
+        if($result){
+            $result="assigned";
+        }else{
+            $result=mysqli_error($dbConnection);
         }
     }
     echo $result;

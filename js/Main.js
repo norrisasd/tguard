@@ -9,7 +9,7 @@ function getTaskTypes() {
         type: 'get',
         url: './main.php',
         data: {
-            getTaskTypes: 'true',
+            getAssignedTaskTypes: 'true',
         },
         success: function (response) {
             data = JSON.parse(response);
@@ -21,7 +21,7 @@ function getTaskTypes() {
                         </a>
                     </li>`;
             }
-            $('ul #tasktypes > li:eq(2)').html(str);
+            $('ul #assignedTask > li:eq(0)').html(str);
         }
     });
     return false;

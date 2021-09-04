@@ -1,10 +1,10 @@
 <!-- 
-  Agent Index 
-    * Contains a dashboard of the agent's upcoming and in progress tasks
+  Admin Task Type: 
+    * Contains a dashboard of all the upcoming and in progress tasks of that Task Type. 
 -->
 
-<?php include("./components/header.php"); ?>
-<?php include("./components/loader.php"); ?>
+<?php include("components/header.php"); ?>
+<?php include("components/loader.php"); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
 
@@ -19,7 +19,7 @@
           <a href="../index.php" class="nav-link">Home</a>
         </li> -->
     </ul>
-    <h4 style="margin-top:.5%;">Dashboard</h4>
+    <h4 style="margin-top:.5%;">Tasks / <span id="taskTitle">Agrisoft - SEO</span></h4>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
@@ -27,7 +27,7 @@
     </ul>
   </nav>
   <aside class="main-sidebar sidebar-primary elevation-4">
-    <?php include("./components/Sidebar.php"); ?>
+    <?php include("components/Sidebar.php"); ?>
   </aside>
   <div class="content-wrapper">
     <section class="content">
@@ -35,8 +35,7 @@
         <div class="row">
           <div class="col">
             <div class="float-left" style="padding-left:15px;">
-              <h3><b>Welcome back,<br> <?php echo $userinfo['name'] ?></b></h3>
-
+              <h3><b>All the tasks related to <br> <span id="taskTitle1">Agrisoft - SEO</span></b></h3>
             </div>
           </div>
           <div class="col">
@@ -56,13 +55,13 @@
                 <h5><b>Upcoming</b></h5>
                 <p class="text-muted m-b-30 font-13">You currently have n no. of upcoming tasks</p>
                 <div class="input-group rounded" style="margin-bottom:1%">
-                  <input type="search" onkeydown="w3.filterHTML('#upcomingTask', 'li', this.value)" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                  <input type="search" onkeydown="w3.filterHTML('#upcomingTasks', 'li', this.value)" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                   <span class="input-group-text border-0" id="search-addon">
                     <i class="fas fa-search"></i>
                   </span>
                 </div>
                 <div class="clearfix"></div>
-                <ul class="sortable-list taskList list-unstyled ui-sortable" id="upcomingTask" style="margin-top: 3%;">
+                <ul class="sortable-list taskList list-unstyled ui-sortable" id="upcomingTasks" style="margin-top: 3%;">
                 </ul>
               </div>
 
@@ -73,13 +72,13 @@
                 <h5><b>In Progress</b></h5>
                 <p class="text-muted m-b-30 font-13">You currently have n no. of in progress tasks</p>
                 <div class="input-group rounded" style="margin-bottom:1%">
-                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" onkeydown="w3.filterHTML('#inprogressTasks', 'li', this.value)" />
+                  <input type="search" onkeydown="w3.filterHTML('#inprogressTasks', 'li', this.value)" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                   <span class="input-group-text border-0" id="search-addon">
                     <i class="fas fa-search"></i>
                   </span>
                 </div>
                 <div class="clearfix"></div>
-                <ul class="sortable-list taskList list-unstyled ui-sortable" style="margin-top: 3%;" id="inprogressTasks">
+                <ul class="sortable-list taskList list-unstyled ui-sortable" id="inprogressTasks" style="margin-top: 3%;">
                   <li class="task-warning ui-sortable-handle" id="task1">
                     <div class="checkbox checkbox-custom checkbox-single float-right">
                       <input type="checkbox" aria-label="Single checkbox Two">
@@ -119,6 +118,7 @@
             </div>
           </div>
         </div>
+      </div>
     </section>
   </div>
 
@@ -134,13 +134,14 @@
         </div>
         <form method="get" id="addTaskForm" action="" onsubmit="return addTask();">
           <div class="modal-body">
+
             <div class="form-group">
               <label for="inputTask">Task Name</label>
               <input type="text" class="form-control" id="inputTaskName" placeholder="" required />
             </div>
             <div class="form-group">
               <label for="inputTaskType">Task Type</label>
-              <select class="form-control" onchange="setInputClient(this.value)" id="inputTaskType" required>
+              <select class="form-control" id="inputTaskType" disabled>
                 <option value="" selected hidden>Select Task Type</option>
                 <?php displayAssignedTaskType() ?>
               </select>
@@ -152,10 +153,10 @@
                 <?php displayAllClients() ?>
               </select>
             </div>
-
             <div class="form-group">
               <label for="inputAgent">Employee</label>
               <select class="form-control" id="inputAgentID" disabled>
+                <option value="" selected hidden>Select Employee</option>
                 <?php displayAllAgents()
                 ?>
               </select>
@@ -272,16 +273,8 @@
                   </div>
                 </div>
               </div>
-              <div class="form-row" style="margin-bottom: 1%;">
+              <div class="form-row">
                 <!-- <div class="col">
-                  <label for="modalClient">Client: </label>
-                  <p id="modalClient">Agrisoft</p>
-                </div>
-                <div class="col">
-                  <label for="modalAgent">Employee: </label>
-                  <p id="modalAgent">John Doe</p>
-                </div>
-                <div class="col">
                   <label for="modalDueDate">Due Date: </label>
                   <p id="modalDueDate">January 01, 2021</p>
                 </div>
@@ -296,7 +289,7 @@
                 <div class="col">
                   <hr class="mt-2 mb-3" />
                   <div class="form-group">
-                    <label for="viewTaskName">Task Name</label>
+                    <label for="inputTask">Task Name</label>
                     <input type="text" class="form-control" id="viewTaskName" placeholder="" required />
                   </div>
                 </div>
@@ -341,11 +334,10 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="inputDescription2">Notes: </label>
-                    <textarea type="text" class="form-control" id="inputDescription2"></textarea>
+                    <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
                   </div>
                 </div>
               </div>
-
               <div class="form-row">
                 <div class="col">
                   <div class="form-group">
@@ -358,7 +350,7 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="inputComments">Comments: </label>
-                    <textarea type="text" class="form-control" id="inputComments"></textarea>
+                    <textarea type="text" class="form-control" id="inputComments">Lorem Ipsum Lorem Ipsum</textarea>
                   </div>
                 </div>
               </div>
@@ -421,14 +413,15 @@
       </form>
     </div>
   </div>
+  </div>
 
   <!-- jQuery -->
-  <script src="plugins/jquery/jquery.min.js"></script>
+  <script src="./plugins/jquery/jquery.min.js"></script>
   <!-- jQuery UI 1.11.4 -->
-  <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+  <script src="./plugins/jquery-ui/jquery-ui.min.js"></script>
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
   <!-- Bootstrap 4 -->
-  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- DataTables  & Plugins -->
   <script src="./plugins/datatables/jquery.dataTables.min.js"></script>
   <script src="./plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -443,23 +436,27 @@
   <script src="./plugins/datatables-buttons/js/buttons.print.min.js"></script>
   <script src="./plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
   <!-- DropZone -->
-  <script src="plugins/dropzone/min/dropzone.min.js"></script>
+  <script src="./plugins/dropzone/min/dropzone.min.js"></script>
   <!-- TOASTR -->
-  <script src="plugins/toastr/toastr.min.js"></script>
+  <script src="./plugins/toastr/toastr.min.js"></script>
   <!-- AdminLTE App -->
-  <script src="dist/js/adminlte.js"></script>
+  <script src="./dist/js/adminlte.js"></script>
   <script src="./js/DashboardFunctions.js"></script>
   <script src="./js/Main.js"></script>
   <script src="https://www.w3schools.com/lib/w3.js"></script>
 
-
   <script>
+    //Hiding the div
+    var defaultTypeID=localStorage.getItem("tasktype_id");
+    $("#inputTaskType").val(defaultTypeID);
+    setInputClient(defaultTypeID);
+    $('#taskTitle').html(localStorage.getItem("type"));
+    $('#taskTitle1').html(localStorage.getItem("type"));
     $("#inputAgentID").val("<?php echo $user_id ?>");
-    // //Hiding the div
-    // $(".custom-file").hide();
-    // $(".uploadBtn").hide();
+    $(".custom-file").hide();
+    $(".uploadBtn").hide();
 
-    // //Showing the div for the inputs
+    //Showing the div for the inputs
     // $(document).ready(function() {
     //   $('.cases a').on('click', function() {
     //     var txt = ($(this).attr('value'));
@@ -476,7 +473,7 @@
     //   });
     // });
 
-    //Changing text label of the File attachments
+    // //Changing text label of the File attachments
     // document.querySelector('.custom-file-input').addEventListener('change', function(e) {
     //   var fileName = document.getElementById("inputType").files[0].name;
     //   var nextSibling = e.target.nextElementSibling
@@ -484,9 +481,10 @@
     // });
 
 
+
     // Dropzone.autoDiscover = false;
     // $("div#dropzone-example").dropzone({
-    //   url: "php/upload", //Change the url to the php code
+    //   url: "../php/upload", //Change the url to the php code
     //   paramName: "file", // The name that will be used to transfer the file
     //   maxFilesize: .5, // MB
     //   addRemoveLinks: true,

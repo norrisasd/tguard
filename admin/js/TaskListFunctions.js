@@ -88,6 +88,54 @@ function addTaskType() {
     });
     return false;
 }
+function setTaskTypeOptions(value) {
+    resetTaskTypeOption();
+    $.ajax({
+        type: 'get',
+        url: './main.php',
+        data: {
+            getExistedTaskType: true,
+            user_id: value
+        },
+        success: function (response) {
+            if (response == "") {
+                return false;
+            } else {
+                data = JSON.parse(response);
+                for (var da in data) {
+                    if(data[da].tasktype_id !=0){
+                        $("#assignTaskType option[value='" + data[da].tasktype_id + "']").remove();
+                    }
+                    
+                }
+            }
+
+        }
+    });
+}
+function assignUser(){
+    user=$("#assignAgent").val();
+    tasktype=$("#assignTaskType").val();
+    $.ajax({
+        type:'post',
+        url:'./main.php',
+        data:{
+            assignUser:true,
+            user:user,
+            tasktype:tasktype
+        },
+        success:function(response){
+            if(response == "assigned"){
+                toastr.success("Assigned Successfully");
+                $(".modal").modal("hide");
+                document.getElementById("assignUserForm").reset();
+            }else{
+                toastr.error(response);
+            }
+        }
+    });
+    return false;
+}
 $("#btnDelete").click(function () {
     if (confirm("Are you sure you want to delete this tasktype?")) {
         $.ajax({

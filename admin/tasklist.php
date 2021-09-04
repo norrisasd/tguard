@@ -59,6 +59,13 @@
                                     </button>
                                 </div>
                             </div>
+                            <div class="col-auto">
+                                <div class="btn-group dropright">
+                                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#assignUser">
+                                        Assign to a User
+                                    </button>
+                                </div>
+                            </div>
 
                             <div class="col"></div>
                             <div class="col-auto">
@@ -209,6 +216,49 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="assignUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Task Type</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" onsubmit="return assignUser();" autocomplete="off" id="assignUserForm">
+                        <div class="form-group">
+                            <label for="inputClient">Agent</label>
+                            <select class="form-control" onchange="setTaskTypeOptions(this.value)" id="assignAgent" required>
+                                <option value="" selected hidden>Select Agent</option>
+                                <?php displayAllAgents() ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="assignTaskType">Task Type</label>
+                            <select class="form-control" onchange="setInputClientView(this.value)"  id="assignTaskType" required>
+                                <option value="" selected hidden>Select Task Type</option>
+                                <?php displayAllTaskType() ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="assignClient">Client</label>
+                            <select class="form-control" id="assignClient" disabled>
+                                <option value="" selected hidden>Select Client</option>
+                                <?php displayAllClientsValID() ?>
+                            </select>
+                        </div>
+                        
+                        
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- jQuery -->
@@ -244,7 +294,12 @@
     <script src="../dist/js/adminlte.js"></script>
     <script src="./js/TaskListFunctions.js"></script>
     <script src="./js/Main.js"></script>
-
+    <script>
+        function resetTaskTypeOption(){
+            $("#assignTaskType").html('<option value="" selected hidden>Select Task Type</option>'+'<?php echo displayAllTaskType() ?>');
+            $('#assignClient').val("");
+        }
+    </script>
 
 
 </body>

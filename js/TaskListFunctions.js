@@ -20,12 +20,13 @@ var dt = $('#dataTable').DataTable({
     "targets": 0,
     "orderable": false,
     "className": "text-center select-checkbox",
-  }, {
+  },{
     "targets": 9,
     "className": "text-center",
   }],
 
-  select: { style: 'multi' },
+  select: { style: 'multi',
+  selector: 'tr>td:nth-child(1)' },
   "paging": true,
   "searching": true,
   "ordering": true,
@@ -87,7 +88,6 @@ function refreshTable() {
       status: 1
     },
     success: function (response) {
-      console.log(response);
       data = JSON.parse(response);
       dt.clear().draw();
       for (var da in data) {
@@ -112,7 +112,6 @@ function refreshTable() {
   });
   return false;
 }
-
 function searchTable() {
   let searchClientName = document.getElementById("clientName").value;
   let searchStartDate = document.getElementById("startDate").value;
@@ -130,7 +129,7 @@ function searchTable() {
       searchStartDate: searchStartDate,
       searchEndDate: searchEndDate,
       startDate: startDate,
-      // searchDueDate: searchDueDate,
+      searchDueDate: searchDueDate,
       endDate: endDate,
       searchTaskType: searchTaskType,
       status: 1

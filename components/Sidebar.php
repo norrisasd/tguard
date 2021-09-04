@@ -19,7 +19,7 @@
         </div>
       </div>
       <li class="nav-item menu-open">
-        <a href="./" class="nav-link active">
+        <a href="./" onclick="resetDisplay()" class="nav-link active">
           <i class="nav-icon fas fa-tachometer-alt"></i>
           <p>
             Dashboard
@@ -33,6 +33,29 @@
             Reports
           </p>
         </a>
+      </li>
+      <li class="nav-item">
+        <a href="reports" class="nav-link">
+        <i class="nav-icon fas fa-tasks"></i>
+          <p>
+            Assigned Task
+          </p>
+          <i class="right fas fa-angle-left"></i>
+        </a>
+        <ul class="nav nav-treeview" id="assignedTask">
+          <li class="nav-item has-treeview">
+            <a href="progresslog" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>User Progress Log</p>
+            </a>
+          </li>
+          <!-- <li class="nav-item has-treeview">
+            <a href="activitycharts" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>User Activity Charts</p>
+            </a>
+          </li> -->
+        </ul>
       </li>
       <li class="nav-item">
         <a href="php/logout" class="nav-link">

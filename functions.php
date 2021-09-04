@@ -62,7 +62,6 @@
             }
         }
     }
-
     function displayAssignedTaskType(){
         global $dbConnection,$user_id;
         $query="SELECT tasktype.tasktype_id,tasktype.type FROM assigned_tasktype INNER JOIN tasktype ON assigned_tasktype.tasktype_id = tasktype.tasktype_id WHERE assigned_tasktype.user_id=" .$user_id;
@@ -73,6 +72,5 @@
             }
         }
     }
-
-
     // function
+?>

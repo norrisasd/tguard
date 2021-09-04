@@ -59,6 +59,7 @@ function setInputClientView(value) {
             data = JSON.parse(response);
             $("#viewClient").val(data[0].ClientName);
             $("#inputClient").val(data[0].ClientName);
+            $("#assignClient").val(data[0].client_id);
         }
     });
     return false;
