@@ -63,7 +63,7 @@
                                 <label for="taskType">Task Type</label>
                                 <select id="taskType" class="form-control" onclick="searchTable()" style="margin-right:0.5%;">
                                     <option value="" selected>Select Task Type</option>
-                                    <?php displayAllClients() ?>
+                                    <?php displayAllTaskType() ?>
                                 </select>
                             </div>
                             <div class="col-sm-3">
@@ -150,9 +150,192 @@
             </section>
         </div>
     </div>
-    </section>
+
+
+    <!-- Modal View -->
+    <div class="modal fade bd-example-modal-lg" id="" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTaskName">Title of Task</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="get" id="viewTask" action="">
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="form-row">
+                                <div class="col">
+                                    <label for="modalStartDate">Start Date: </label>
+                                    <p id="modalStartDate">---</p>
+                                </div>
+                                <div class="col">
+                                    <label for="modalEndDate">End Date: </label>
+                                    <p id="modalEndDate">---</p>
+                                </div>
+                                <div class="col">
+                                    <label for="modalTimeSpent">Time Spent: </label>
+                                    <p id="modalTimeSpent">---</p>
+                                </div>
+                                <div class="col">
+                                    <label for="modalStatus">Status: </label>
+                                    <p id="modalStatus">In Progress</p>
+                                </div>
+                                <div class="col">
+                                    <div class="float-right">
+                                        <button type="button" class="btn btn-outline-success btn-sm" style="margin-right: 2px;" id="btnPlay"><i class="fas fa-play"></i></button>
+                                        <button type="button" class="btn btn-outline-secondary btn-sm" style="margin-right: 2px;" id="btnPause"><i class="fas fa-pause"></i></button>
+                                        <button type="button" class="btn btn-outline-danger btn-sm" id="btnStop"><i class="fas fa-stop"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row" style="margin-bottom: 1%;">
+                                <!-- <div class="col">
+                  <label for="modalClient">Client: </label>
+                  <p id="modalClient">Agrisoft</p>
+                </div>
+
+                <div class="col">
+                  <label for="modalDueDate">Due Date: </label>
+                  <p id="modalDueDate">January 01, 2021</p>
+                </div> -->
+
+                                <div class="col">
+                                    <div class="float-right">
+                                        <button type="button" class="btn btn-primary mr-auto" id="btnFinish" style="min-width: 102px;">Finish</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col">
+                                    <hr class="mt-2 mb-3" />
+                                    <div class="form-group">
+                                        <label for="inputTask">Task Name</label>
+                                        <input type="text" class="form-control" id="inputTaskName" placeholder="" required disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="inputTaskType">Task Type</label>
+                                        <select class="form-control" id="inputTaskType" required disabled>
+                                            <option value="" selected hidden>Select Task Type</option>
+                                            <?php displayAssignedTaskType() ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="inputTaskType">Client</label>
+                                        <select class="form-control" id="inputClient" required disabled>
+                                            <option value="" selected hidden>Select Client</option>
+                                            <?php displayAllClients() ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="inputTaskType">Employee</label>
+                                        <select class="form-control" id="inputEmployee" required disabled>
+                                            <option value="" selected hidden>Select Employee</option>
+                                            <?php displayAllAgents() ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="inputDescription2">Notes: </label>
+                                        <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="inputSubTasks">Sub-Tasks: </label>
+                                        <textarea type="text" class="form-control" id="inputSubTasks"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="inputComments">Comments: </label>
+                                        <textarea type="text" class="form-control" id="inputComments"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="form-row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="inputFile">Attachments: </label><br>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add Attachments</button>
+                        <div class="dropdown-menu cases" id="attachments">
+                          <a class="dropdown-item" href="#" value="file">File</a>
+                          <a class="dropdown-item" href="#" value="link">Link</a>
+                        </div>
+                      </div>
+                      <div class="custom-file file" id="viewFile">
+                        <input type="file" class="custom-file-input" id="inputType">
+                        <label class="custom-file-label" for="inputGroupFile01 text-truncate">Choose File</label>
+                      </div>
+                      <div class="input-group-append uploadBtn" id="viewUpload">
+                        <button class="btn btn-outline-secondary" type="button">Upload</button>
+                      </div>
+
+                      <div class="custom-file link" id="viewLink">
+                        <input type="text input-pr-rev" class="form-control" id="basic-url" placeholder="Link">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" type="button">Add</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <label for="inputFile">Attachments: </label><br>
+                  <div class="container" style="height: 150px; overflow-y: auto;">
+                    <table class="table table-hover">
+                      <tbody>
+                        <tr>
+                          <td>File Name</td>
+                          <td>Size</td>
+                          <td><button class="btn btn-danger btn-sm waves-effect waves-light float-right"><i class="fas fa-trash-alt"></i></button></td>
+                        </tr>
+                        <tr>
+                          <td>Link</td>
+                          <td></td>
+                          <td><button class="btn btn-danger btn-sm waves-effect waves-light float-right"><i class="fas fa-trash-alt"></i></button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div> -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    </div>
+
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -184,7 +367,10 @@
     <script src="plugins/toastr/toastr.min.js"></script>
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.js"></script>
-    <script src="js/TaskListFunctions.js"></script>
+    <script src="./js/TaskListFunctions.js"></script>
+    <script src="./js/Main.js"></script>
+    
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
 </body>
 
 </html>

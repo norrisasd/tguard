@@ -209,6 +209,7 @@ function clearSearch(type) {
   searchTable();
 
 }
+
 function taskInfo(data) {
   if (data.total_time == null) {
     data.total_time = '00:00:00';

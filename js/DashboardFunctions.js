@@ -70,7 +70,7 @@ function displayUpcomingTask() {
       tasktype_id:localStorage.getItem("tasktype_id")
     },
     success: function (response) {
-      toastr.info(response);
+      // toastr.info(response);
       if (response == '') {
         $("#upcoming ul").html(content);
         return false;
@@ -87,9 +87,9 @@ function displayUpcomingTask() {
           <div class="clearfix"></div>
           `+ nl2br(item.Notes) + `
           <div class="mt-3">
-            <p class="mb-1">Employee:
+            <!-- <p class="mb-1">Employee:
               <span><i>`+ item.name + `</i></span>
-            </p>
+            </p> -->
             <p class="float-right">
               <button class="btn btn-success btn-sm waves-effect waves-light" onclick='taskInfo(`+ str + `)' data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="fas fa-eye"></i></button>
             </p>
@@ -169,7 +169,7 @@ function taskInfo(data) {
   $("#btnFinish").val(data.callback_id);
   $("#btnSave").val(data.callback_id);
   $("#inputDescription2").val(data.Notes);
-  $("#modalTaskName").val(data.TaskName);
+  $("#viewTaskName").val(data.TaskName);
   $("#modalStartDate").html(data.DateStarted == null ? "---" : data.DateStarted);
   $("#modalEndDate").html(data.DateEnded == null ? "---" : data.DateEnded);
   $("#modalTimeSpent").html(data.total_time == "" ? "---" : data.total_time);
@@ -182,6 +182,7 @@ function taskInfo(data) {
   setInputClientView(data.tasktype_id);
   $("#viewEmployee").val(data.user_id);
 }
+
 function nl2br(str, is_xhtml) {
   if (typeof str === 'undefined' || str === null) {
     return '';

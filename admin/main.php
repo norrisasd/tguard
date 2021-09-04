@@ -38,6 +38,7 @@
             $result=json_encode($result);
         }
     }
+    
     if(isset($_GET['getAllInProgressTask'])){
         $status = $_GET['status'];
         $query="SELECT timerecord.TimeRecord_ID,callback.*,ADDTIME(callback.TimeSpent,(Select SEC_TO_TIME(SUM(TIME_TO_SEC(SUBTIME(CURTIME(),timerecord.TimeStarted)))) FROM timerecord WHERE timerecord.status = 0))AS current_time_spent,user.name,callback_extend.sub_task,callback_extend.comments, tasktype.type FROM `callback` INNER JOIN timerecord on callback.callback_id=timerecord.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id INNER JOIN tasktype ON tasktype.tasktype_id = callback.tasktype_id WHERE callback.status = $status GROUP BY callback.callback_id ORDER BY callback.user_id;";
@@ -184,6 +185,7 @@
             $result = '';
         }
     }
+    
     if(isset($_GET['btnFinish'])){
         $cb_id = $_GET['cb_id'];
         $query = "UPDATE `callback` SET status = 1, DateEnded = CURDATE() WHERE callback_id = $cb_id";

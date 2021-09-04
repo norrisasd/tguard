@@ -62,5 +62,17 @@
             }
         }
     }
+
+    function displayAssignedTaskType(){
+        global $dbConnection,$user_id;
+        $query="SELECT tasktype.tasktype_id,tasktype.type FROM assigned_tasktype INNER JOIN tasktype ON assigned_tasktype.tasktype_id = tasktype.tasktype_id WHERE assigned_tasktype.user_id=" .$user_id;
+        $result=mysqli_query($dbConnection,$query);
+        if(mysqli_num_rows($result)>0){
+            while($data=mysqli_fetch_assoc($result)){
+                echo '<option value="'.$data['tasktype_id'].'" onchange="alert(this.value)">'.$data['type'].'</option>';
+            }
+        }
+    }
+
+
     // function
-?>

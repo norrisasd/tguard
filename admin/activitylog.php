@@ -349,82 +349,83 @@
         </form>
       </div>
     </div>
-    <!-- jQuery -->
-    <script src="../plugins/jquery/jquery.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="../plugins/jquery-ui/jquery-ui.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <!-- Bootstrap 4 -->
-    <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- DataTables  & Plugins -->
-    <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="../plugins/jszip/jszip.min.js"></script>
-    <script src="../plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="../plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="../plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-    <script src="../plugins/datatables-select/js/dataTables.select.min.js"></script>
-    <!-- InputMask -->
-    <script src="../plugins/popper/popper.min.js"></script>
-    <script src="../plugins/moment/moment.min.js"></script>
-    <script src="../plugins/inputmask/jquery.inputmask.min.js"></script>
-    <!-- date-range-picker -->
-    <!-- DropZone -->
-    <script src="../plugins/dropzone/min/dropzone.min.js"></script>
-    <script src="../plugins/daterangepicker/daterangepicker.js"></script>
-    <!-- TOASTR -->
-    <script src="../plugins/toastr/toastr.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../dist/js/adminlte.js"></script>
-    <script src="./js/ActivityLogFunctions.js"></script>
-    <script src="./js/Main.js"></script>
+  </div>
+  <!-- jQuery -->
+  <script src="../plugins/jquery/jquery.min.js"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="../plugins/jquery-ui/jquery-ui.min.js"></script>
+  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <!-- Bootstrap 4 -->
+  <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- DataTables  & Plugins -->
+  <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <script src="../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+  <script src="../plugins/jszip/jszip.min.js"></script>
+  <script src="../plugins/pdfmake/pdfmake.min.js"></script>
+  <script src="../plugins/pdfmake/vfs_fonts.js"></script>
+  <script src="../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+  <script src="../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+  <script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+  <script src="../plugins/datatables-select/js/dataTables.select.min.js"></script>
+  <!-- InputMask -->
+  <script src="../plugins/popper/popper.min.js"></script>
+  <script src="../plugins/moment/moment.min.js"></script>
+  <script src="../plugins/inputmask/jquery.inputmask.min.js"></script>
+  <!-- date-range-picker -->
+  <!-- DropZone -->
+  <script src="../plugins/dropzone/min/dropzone.min.js"></script>
+  <script src="../plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- TOASTR -->
+  <script src="../plugins/toastr/toastr.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="../dist/js/adminlte.js"></script>
+  <script src="./js/ActivityLogFunctions.js"></script>
+  <script src="./js/Main.js"></script>
 
-    <script>
-      //Hiding the div
-      $(".custom-file").hide();
-      $(".uploadBtn").hide();
+  <script>
+    //Hiding the div
+    $(".custom-file").hide();
+    $(".uploadBtn").hide();
 
-      //Showing the div for the inputs
-      $(document).ready(function() {
-        $('.cases a').on('click', function() {
-          var txt = ($(this).attr('value'));
-          if (txt == 'file') {
-            $(".file").show();
-            $(".link").hide();
-            $(".uploadBtn").show();
-          }
-          if (txt == 'link') {
-            $(".link").show();
-            $(".file").hide();
-            $(".uploadBtn").hide();
-          }
-        });
+    //Showing the div for the inputs
+    $(document).ready(function() {
+      $('.cases a').on('click', function() {
+        var txt = ($(this).attr('value'));
+        if (txt == 'file') {
+          $(".file").show();
+          $(".link").hide();
+          $(".uploadBtn").show();
+        }
+        if (txt == 'link') {
+          $(".link").show();
+          $(".file").hide();
+          $(".uploadBtn").hide();
+        }
       });
+    });
 
-      //Changing text label of the File attachments
-      document.querySelector('.custom-file-input').addEventListener('change', function(e) {
-        var fileName = document.getElementById("inputType").files[0].name;
-        var nextSibling = e.target.nextElementSibling
-        nextSibling.innerText = fileName
-      });
+    //Changing text label of the File attachments
+    document.querySelector('.custom-file-input').addEventListener('change', function(e) {
+      var fileName = document.getElementById("inputType").files[0].name;
+      var nextSibling = e.target.nextElementSibling
+      nextSibling.innerText = fileName
+    });
 
-      // Dropzone.autoDiscover = false;
-      // var attachment = $("div#dropzone-example").dropzone({
-      //   url: "../php/upload", //Change the url to the php code
-      //   paramName: "file", // The name that will be used to transfer the file
-      //   maxFilesize: .5, // MB
-      //   addRemoveLinks: true,
-      //   dictDefaultMessage: '<span class="">Drop files (or click) to upload  </span> <br> \
-      //                     <i class="fas fa-cloud-upload-alt"></i>',
-      //   dictResponseError: 'Error while uploading file!',
-      // });
-    </script>
+    // Dropzone.autoDiscover = false;
+    // var attachment = $("div#dropzone-example").dropzone({
+    //   url: "../php/upload", //Change the url to the php code
+    //   paramName: "file", // The name that will be used to transfer the file
+    //   maxFilesize: .5, // MB
+    //   addRemoveLinks: true,
+    //   dictDefaultMessage: '<span class="">Drop files (or click) to upload  </span> <br> \
+    //                     <i class="fas fa-cloud-upload-alt"></i>',
+    //   dictResponseError: 'Error while uploading file!',
+    // });
+  </script>
 
 </body>
 

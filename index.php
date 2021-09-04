@@ -296,7 +296,7 @@
                 <div class="col">
                   <hr class="mt-2 mb-3" />
                   <div class="form-group">
-                    <label for="inputTask">Task Name</label>
+                    <label for="viewTaskName">Task Name</label>
                     <input type="text" class="form-control" id="viewTaskName" placeholder="" required />
                   </div>
                 </div>
@@ -450,6 +450,7 @@
   <script src="dist/js/adminlte.js"></script>
   <script src="./js/DashboardFunctions.js"></script>
   <script src="./js/Main.js"></script>
+  
   <script src="https://www.w3schools.com/lib/w3.js"></script>
 
 

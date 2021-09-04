@@ -20,11 +20,11 @@ var dt = $('#dataTable').DataTable({
     "targets": 0,
     "orderable": false,
     "className": "text-center select-checkbox",
-  },{
+  }, {
     "targets": 9,
     "className": "text-center",
   }],
-  
+
   select: { style: 'multi' },
   "paging": true,
   "searching": true,
@@ -83,16 +83,18 @@ function refreshTable() {
     type: 'get',
     url: './main.php',
     data: {
-      getTaskByUser: 'true'
+      getTaskByUser: 'true',
+      status: 1
     },
     success: function (response) {
+      console.log(response);
       data = JSON.parse(response);
       dt.clear().draw();
       for (var da in data) {
-        time = data[da].total_time;
+        btn = `<button class="btn btn-success btn-sm waves-effect waves-light text-center" onclick='taskInfo(` + JSON.stringify(data[da]) + `)' data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="fas fa-eye"></i></button>`;
+        time = data[da].TimeSpent;
         const timeArr = time.split(":");
-        time = timeArr[0] + "hrs " + timeArr[1] + "mins " + timeArr[2] + "sec";
-        btn = `<button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" onclick='tasktypeInfo(` + JSON.stringify(data[da]) + `)' data-target="#viewTaskType"><i class="fas fa-eye"></i></button>`;
+        time = timeArr[0] + "hrs " + timeArr[1] + "mins";
         dt.row.add([
           cb,
           "WEW",
@@ -110,39 +112,49 @@ function refreshTable() {
   });
   return false;
 }
+
 function searchTable() {
   let searchClientName = document.getElementById("clientName").value;
   let searchStartDate = document.getElementById("startDate").value;
   let searchEndDate = document.getElementById("endDate").value;
-  let searchDueDate = document.getElementById("dueDate").value;
+  // let searchDueDate = document.getElementById("dueDate").value;
+  let searchTaskType = document.getElementById("taskType").value;
+
   cb = '';
   $.ajax({
     type: 'get',
     url: './main.php',
     data: {
+      search: true, 
       searchClientName: searchClientName,
       searchStartDate: searchStartDate,
       searchEndDate: searchEndDate,
       startDate: startDate,
-      searchDueDate: searchDueDate,
+      // searchDueDate: searchDueDate,
       endDate: endDate,
+      searchTaskType: searchTaskType,
+      status: 1
     },
     success: function (response) {
       if (response != "") {
         data = JSON.parse(response);
         dt.clear().draw();
         for (var da in data) {
-          time = data[da].total_time;
+          btn = `<button class="btn btn-success btn-sm waves-effect waves-light text-center" onclick='taskInfo(` + JSON.stringify(data[da]) + `)' data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="fas fa-eye"></i></button>`;
+          time = data[da].TimeSpent;
           const timeArr = time.split(":");
           time = timeArr[0] + "hrs " + timeArr[1] + "mins " + timeArr[2] + "sec";
           dt.row.add([
             cb,
+            "WEW",
             data[da].TaskName,
+            data[da].tasktype_id,
             data[da].client_name,
             data[da].Notes,
             data[da].DateStarted,
             data[da].DateEnded,
             time,
+            btn,
           ]).draw();
         }
       } else {
@@ -193,3 +205,99 @@ function clearSearch(type) {
   searchTable();
 
 }
+
+//Task Info
+
+function taskInfo(data) {
+  if (data.total_time == null) {
+    data.total_time = '00:00:00';
+  }
+  $("#modalStatus").html("Finished");
+  $("#btnPlay").prop('disabled', true);
+  $("#btnPause").prop('disabled', true);
+  $("#btnStop").prop('disabled', true);
+  $("#btnFinish").prop('disabled', true);
+  $("#btnPlay").val(data.callback_id);
+  $("#btnPause").val(data.callback_id);
+  $("#btnStop").val(data.callback_id);
+  $("#btnDelete").val(data.callback_id);
+  $("#btnFinish").val(data.callback_id);
+  $("#btnSave").val(data.callback_id);
+  $("#inputDescription2").val(data.Notes);
+  $("#modalTaskName").html(data.TaskName);
+  $("#modalStartDate").html(data.DateStarted == null ? "---" : data.DateStarted);
+  $("#modalEndDate").html(data.DateEnded == null ? "---" : data.DateEnded);
+  $("#modalTimeSpent").html(data.TimeSpent.match("00:00:00") ? "---" : data.TimeSpent);
+  $("#inputSubTasks").val(data.sub_task);
+  $("#inputComments").val(data.comments);
+  $("#modalAgent").html(data.name);
+  $("#modalClient").html(data.client_name);
+  // $("#modalDueDate").html(data.DueDate);
+  $("#inputClient").val(data.client_name);
+  $("#inputTaskName").val(data.TaskName);
+  $("#inputEmployee").val(data.user_id);
+  $("#inputTaskType").val(data.tasktype_id);
+
+}
+$("#btnSave").click(function () {
+  notes = $("#inputDescription2").val();
+  subtask = $("#inputSubTasks").val();
+  comments = $("#inputComments").val();
+  taskname = $("#inputTaskName").val();
+  tasktype = $("#inputTaskType").val();
+  client = $("#inputClient").val();
+  employee = $("#inputEmployee").val();
+  $.ajax({
+    type: 'post',
+    url: './main.php',
+    data: {
+      btnSave: true,
+      cb_id: this.value,
+      notes: notes,
+      subtask: subtask,
+      comments: comments,
+      taskname: taskname,
+      tasktype: tasktype,
+      client: client,
+      employee: employee,
+    },
+    success: function (response) {
+      if (response == 'updated') {
+        $(".modal").modal("hide");
+        toastr.success("Task Saved!");
+        refreshTable();
+      } else {
+        toastr.error(response);
+      }
+
+    }
+  });
+  return false;
+
+});
+$("#btnSearch").click(function () {
+  searchTable();
+});
+$("#btnDelete").click(function () {
+  if (confirm("Are you sure you want to delete this task?")) {
+    $.ajax({
+      type: 'get',
+      url: './main.php',
+      data: {
+        btnDelete: true,
+        cb_id: this.value,
+      },
+      success: function (response) {
+        if (response == 'deleted') {
+          $(".modal").modal("hide");
+          toastr.success("Task Deleted");
+          searchTable();
+        } else {
+          toastr.error("There was an error!");
+        }
+
+      }
+    });
+  }
+
+});
