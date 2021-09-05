@@ -1,11 +1,9 @@
+<?php include("./components/header.php"); ?>
+<?php include("./components/loader.php"); ?>
 <!-- 
   Agent Index 
     * Contains a dashboard of the agent's upcoming and in progress tasks
 -->
-
-<?php include("./components/header.php"); ?>
-<?php include("./components/loader.php"); ?>
-
 <body class="hold-transition sidebar-mini layout-fixed">
 
 

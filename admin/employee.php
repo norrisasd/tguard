@@ -1,11 +1,10 @@
+<?php include("components/header.php"); ?>
+<?php include("components/loader.php"); ?>
 <!-- 
   Admin Form - Employee: 
     * Create, read, update and delete employee  
     * Contains a table of all the employee
 -->
-<?php include("components/header.php"); ?>
-<?php include("components/loader.php"); ?>
-
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">

@@ -1,12 +1,12 @@
+<?php include("./components/header.php"); ?>
+<?php include("./components/loader.php"); ?>
+
 <!-- 
   Agent Settings: 
     * User can view and edit his/her account information 
     * User can change profile picture
     * User cannot change his/her access
 -->
-
-<?php include("./components/header.php"); ?>
-<?php include("./components/loader.php"); ?>
 
 
 <body class="hold-transition sidebar-mini layout-fixed">

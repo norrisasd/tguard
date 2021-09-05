@@ -1,11 +1,11 @@
+<?php include("components/header.php"); ?>
+<?php include("components/loader.php"); ?>
 <!-- 
   Admin Form - Client: 
     * Create, read, update and delete clients  
     * Contains a table of all the clients
 -->
 
-<?php include("components/header.php"); ?>
-<?php include("components/loader.php"); ?>
 
 
 <body class="hold-transition sidebar-mini layout-fixed">

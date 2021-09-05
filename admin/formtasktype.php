@@ -1,10 +1,9 @@
+<?php include("components/header.php"); ?>
+<?php include("components/loader.php"); ?>
 <!-- 
   Admin Form Task Type: 
     * Contains the table of all present and past task type and can create, view, edit and delete task types. 
 -->
-
-<?php include("components/header.php"); ?>
-<?php include("components/loader.php"); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
