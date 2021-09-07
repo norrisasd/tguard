@@ -219,7 +219,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-row">
+                            <!-- <div class="form-row">
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="inputTaskType">Task Type</label>
@@ -229,7 +229,7 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="form-row">
                                 <div class="col">
