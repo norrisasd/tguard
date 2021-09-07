@@ -15,7 +15,7 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button" style="color:black!important"><i class="fas fa-bars"></i></a>
                 </li>
                 <!-- <li class="nav-item d-none d-sm-inline-block">
-          <a href="../index.php" class="nav-link">Home</a>s
+          <a href="../index.php" class="nav-link">Home</a>
         </li> -->
             </ul>
             <h4 style="margin-top:.5%;">Forms / Employee</h4>
@@ -35,11 +35,6 @@
                         <div class="row align-items-start" style="margin-bottom: 1%; margin-top: 2.5%;">
                             <div class="col-auto" style="margin-top:1%">
                                 <input type="checkbox" value="" style="margin-left:10px;" id="selectAll" onclick="selectAll(this)"> Select All
-                            </div>
-                            <div class="col-auto">
-                                <button type="button" class="btn btn-success">
-                                    Export
-                                </button>
                             </div>
                             <div class="col-auto">
                                 <div class="btn-group dropright">
@@ -107,15 +102,15 @@
                     <form action="" method="post" onsubmit="return addUser();" autocomplete="off" id="addUserModal">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Employeee Name</label>
-                            <input type="text" class="form-control" name="name" id="name" autocomplete="off" required>
+                            <input type="text" class="form-control"  id="name" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Username</label>
-                            <input type="text" class="form-control" name="name" id="username" placeholder="" autocomplete="off" required>
+                            <input type="text" class="form-control"  id="username" placeholder="" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="ex ampleFormControlInput1">Password</label>
-                            <input type="password" class="form-control" name="password" id="password" autocomplete="off" required>
+                            <input type="password" class="form-control"  id="password" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Confirm Password</label>
@@ -123,23 +118,23 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Email</label>
-                            <input type="email" class="form-control" name="email" id="email" autocomplete="off" required>
+                            <input type="email" class="form-control" id="email" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Phone</label>
-                            <input type="text" class="form-control" name="phone" id="phone" autocomplete="off" required>
+                            <input type="number" class="form-control"  id="phone" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Access</label>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="radioBtnType" value="1" id="adminRadioBtn" required>
+                                <input class="form-check-input" type="radio" name="radioBtnType" value="1" required>
                                 <label class="form-check-label" for="adminRadioBtn">
                                     Admin
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" value="0" name="radioBtnType">
+                                <input class="form-check-input" type="radio" value="2" name="radioBtnType">
                                 <label class="form-check-label" for="employeeBtn">
                                     Employee
                                 </label>
@@ -162,7 +157,7 @@
     </div>
 
     <!-- Modal for View Employee -->
-    <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="viewUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -172,56 +167,48 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post" onsubmit="return addUser();" autocomplete="off" id="addUserModal">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Employeee Name</label>
-                            <input type="text" class="form-control" name="name" id="name" autocomplete="off" required>
+                            <input type="text" class="form-control" id="viewName" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Username</label>
-                            <input type="text" class="form-control" name="name" id="username" placeholder="" autocomplete="off" required>
+                            <input type="text" class="form-control"  id="viewUsername" placeholder="" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="ex ampleFormControlInput1">Password</label>
-                            <input type="password" class="form-control" name="password" id="password" autocomplete="off" required>
+                            <input type="password" class="form-control" id="viewPassword" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Email</label>
-                            <input type="email" class="form-control" name="email" id="email" autocomplete="off" required>
+                            <input type="email" class="form-control" id="viewEmail" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Phone</label>
-                            <input type="text" class="form-control" name="phone" id="phone" autocomplete="off" required>
+                            <input type="text" class="form-control" id="viewPhone" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Access</label>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="radioBtnType" value="1" id="adminRadioBtn" required>
+                                <input class="form-check-input" type="radio" name="viewRadioBtnType" value="1" id="viewAdminRadioBtn" required>
                                 <label class="form-check-label" for="adminRadioBtn">
                                     Admin
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" value="0" name="radioBtnType">
+                                <input class="form-check-input" type="radio" value="2" name="viewRadioBtnType" id="viewAgentRadioBtn">
                                 <label class="form-check-label" for="employeeBtn">
                                     Employee
                                 </label>
                             </div>
-                            <!-- <div class="form-check">
-                                <input class="form-check-input" type="radio" value="NULL" name="radioBtnType">
-                                <label class="form-check-label" for="moderatorRadioBtn">
-                                    MODERATOR
-                                </label>
-                            </div> -->
                         </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
-                    </form>
                 </div>
             </div>
         </div>
@@ -261,93 +248,7 @@
     <!-- AdminLTE App -->
     <script src="../dist/js/adminlte.js"></script>
     <script src="./js/Main.js"></script>
-
-    <script>
-        $(".mt-2 ul li").removeClass("menu-open");
-        $(".mt-2 ul li a").removeClass("active");
-        $(".mt-2 ul li:nth-child(3) ul li:nth-child(1)").removeClass("menu-open");
-        $(".mt-2 ul li:nth-child(3) ul li:nth-child(1) a").removeClass("active");
-        $(".mt-2 ul li:nth-child(5) ul li:nth-child(2)").addClass("menu-open");
-        $(".mt-2 ul li:nth-child(5) ul li:nth-child(2) a").addClass("active");
-        /* 
-        var dt = $('#dataTable').DataTable({
-            "oLanguage": {
-                "sLengthMenu": "Show Entries _MENU_",
-            },
-            dom: "<'row d-flex flex-row align-items-end'>tr<'row d-flex flex-row align-items-end'<'col-md-6'l><'col-sm-2'i><'col-md-4'p>>",
-            "pageLength": 10,
-            "order": [],
-            "columnDefs": [{
-                "targets": 0,
-                "orderable": false,
-                "className": "text-center select-checkbox",
-            }],
-            select: {
-                style: 'multi',
-                selector: 'tr>td:nth-child(1)'
-            },
-            "paging": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-            "buttons": ["excel", "pdf", "print", ]
-        });
-        dt.buttons().container().appendTo('#beforeLD');
-        new $.fn.dataTable.Buttons(dt, {
-            "buttons": [{
-                extend: 'excel',
-                text: 'Excel Selected',
-                exportOptions: {
-                    modifier: {
-                        selected: true
-                    }
-                },
-            }, {
-                extend: 'pdf',
-                text: 'PDF Selected',
-                exportOptions: {
-                    modifier: {
-                        selected: true
-                    }
-                },
-            }, {
-                extend: 'print',
-                text: 'Print Selected',
-                exportOptions: {
-                    modifier: {
-                        selected: true
-                    }
-                },
-            }]
-        }).container().appendTo('#beforeLD1');
-        var cb = "";
-        $.ajax({
-            type: 'get',
-            url: './main.php',
-            data: {
-                getAgentsJSON: true
-            },
-            success: function(response) {
-                data = JSON.parse(response);
-                dt.clear().draw();
-                for (var da in data) {
-                    access = data[da].access == '2' ? "Agent" : "Admin";
-                    dt.row.add([
-                        cb,
-                        data[da].name,
-                        data[da].phone,
-                        data[da].email,
-                        data[da].username,
-                        access,
-                        data[da].access,
-                    ]).draw();
-                }
-            }
-        })
-        */
-    </script>
+    <script src="./js/EmployeeFunctions.js"></script>
 
 </body>
 

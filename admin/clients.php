@@ -6,6 +6,8 @@
     * Contains a table of all the clients
 -->
 
+
+
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -120,15 +122,15 @@
                     <form action="" method="post" onsubmit="return addClient();" autocomplete="off" id="">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Client Name</label>
-                            <input type="text" class="form-control" name="name" id="username" placeholder="" autocomplete="off" required>
+                            <input type="text" class="form-control" id="clientname" placeholder="" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Email</label>
-                            <input type="email" class="form-control" name="email" id="email" autocomplete="off" required>
+                            <input type="email" class="form-control" id="clientemail" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Phone</label>
-                            <input type="text" class="form-control" name="phone" id="phone" autocomplete="off" required>
+                            <input type="text" class="form-control" id="clientphone" autocomplete="off" required>
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -152,10 +154,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post" onsubmit="return addClient();" autocomplete="off" id="">
+                    <form action="" method="post" autocomplete="off" id="">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Client Name</label>
-                            <input type="text" class="form-control" name="name" id="username" placeholder="" autocomplete="off" required>
+                            <input type="text" class="form-control" name="name" id="name" placeholder="" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Phone</label>
@@ -290,6 +292,8 @@
                 },
             }]
         }).container().appendTo('#beforeLD1');
+
+        function refreshTable() {
         var cb = "";
         $.ajax({
             type: 'get',
@@ -314,6 +318,33 @@
                 }
             }
         })
+        }
+        refreshTable();
+        function addClient() {
+            name = $("#clientname").val();
+            phone = $("#clientphone").val();
+            email = $("#clientemail").val();
+            $.ajax({
+                type: 'post',
+                url: './main.php',
+                data: {
+                    addClient:true,
+                    name: name,
+                    phone: phone,
+                    email: email
+                },
+                success: function(response) {
+                    if (response == "inserted") {
+                        toastr.success("Client Created");
+                        refreshTable();
+                        $(".modal").modal("hide");
+                    }else{
+                        toastr.error(response);
+                    }
+                }
+            });
+            return false;
+        }
     </script>
 
 </body>

@@ -345,5 +345,39 @@
             $result=mysqli_error($dbConnection);
         }
     }
+    if(isset($_POST['addUser'])){
+        $retval=checkUsername($_POST['username']);
+        if($retval){
+            echo "taken";
+            return;
+        }
+        $query="INSERT INTO `user`(`name`, `phone`, `email`, `username`, `password`, `access`) VALUES ('".$_POST['fullname']."',".$_POST['phone'].",'".$_POST['email']."','".$_POST['username']."','".$_POST['password']."',".$_POST['access'].")";
+        $result=mysqli_query($dbConnection,$query);
+        if($result){
+            $result="inserted";
+        }else{
+            echo mysqli_error($dbConnection);
+        }
+    }
+
+    if(isset($_POST['saveUser'])){
+        $query="UPDATE `user` SET `name`='".$_POST['fullname']."',`phone`=".$_POST['phone'].",`email`='".$_POST['email']."',`username`='".$_POST['username']."',`password`='".$_POST['password']."',`access`=".$_POST['access']." WHERE user_id =".$_POST['user_id'];
+        $result=mysqli_query($dbConnection,$query);
+        if($result){
+            $result="updated";
+        }else{
+            echo mysqli_error($dbConnection);
+        }
+    }
+
+    if(isset($_POST['addClient'])){
+        $query="INSERT INTO `client`(`ClientName`, `phone`, `email`) VALUES ('".$_POST['name']."',".$_POST['phone'].",'".$_POST['email']."')";
+        $result=mysqli_query($dbConnection,$query);
+        if($result){
+            $result="inserted";
+        }else{
+            echo mysqli_error($dbConnection);
+        }
+    }   
     echo $result;
 ?>

@@ -72,5 +72,16 @@
             }
         }
     }
+    function checkUsername($username){
+        global $dbConnection;
+        $query ="SELECT * FROM user where username ='$username'";
+        $result = mysqli_query($dbConnection,$query);
+        if($result){
+            if(mysqli_num_rows($result)==1){
+                return true;
+            }
+        }
+        return false;
+    }
     // function
 ?>
