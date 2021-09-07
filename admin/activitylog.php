@@ -193,10 +193,10 @@
                   <label for="modalTimeSpent">Time Spent: </label>
                   <p id="modalTimeSpent">---</p>
                 </div>
-                <div class="col">
+                <!-- <div class="col">
                   <label for="modalStatus">Status: </label>
                   <p id="modalStatus">In Progress</p>
-                </div>
+                </div> -->
                 <div class="col">
                   <div class="float-right">
                     <button type="button" class="btn btn-outline-success btn-sm" style="margin-right: 2px;" id="btnPlay"><i class="fas fa-play"></i></button>
@@ -225,6 +225,18 @@
               <div class="form-row">
                 <div class="col">
                   <hr class="mt-2 mb-3" />
+                  <div class="form-group">
+                    <label for="inputFlagType">Flag Type</label>
+                    <select class="form-control" id="inputFlagType" required >
+                      <option value="" selected hidden>Select Flag Type</option>
+                      <?php displayAllTaskType() ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col">
                   <div class="form-group">
                     <label for="inputTask">Task Name</label>
                     <input type="text" class="form-control" id="inputTaskName" placeholder="" required disabled />

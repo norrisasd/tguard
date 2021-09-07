@@ -264,10 +264,10 @@
                   <label for="modalTimeSpent">Time Spent: </label>
                   <p id="modalTimeSpent">18 mins</p>
                 </div>
-                <div class="col">
+                <!-- <div class="col">
                   <label for="modalStatus">Status: </label>
                   <p id="modalStatus">---</p>
-                </div>
+                </div> -->
                 <div class="col">
                   <div class="float-right">
                     <button type="button" class="btn btn-outline-success btn-sm" style="margin-right: 2px;" id="btnPlay"><i class="fas fa-play"></i></button>
@@ -460,6 +460,7 @@
     $(".mt-2 ul li a").removeClass("active");
     $(".mt-2 ul li:nth-child(4) ul li:nth-child(1)").addClass("menu-open");
     $(".mt-2 ul li:nth-child(4) ul li:nth-child(1) a").addClass("active");
+    
     //Hiding the div
     $(".custom-file").hide();
     $(".uploadBtn").hide();

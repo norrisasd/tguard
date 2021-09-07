@@ -4,6 +4,7 @@
   Admin Index: 
     * Contains a dashboard of the ADMIN's upcoming and in progress tasks
 -->
+
 <body class="hold-transition sidebar-mini layout-fixed">
 
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -263,10 +264,10 @@
                   <label for="modalTimeSpent">Time Spent: </label>
                   <p id="modalTimeSpent">18 mins</p>
                 </div>
-                <div class="col">
+                <!-- <div class="col">
                   <label for="modalStatus">Status: </label>
                   <p id="modalStatus">---</p>
-                </div>
+                </div> -->
                 <div class="col">
                   <div class="float-right">
                     <button type="button" class="btn btn-outline-success btn-sm" style="margin-right: 2px;" id="btnPlay"><i class="fas fa-play"></i></button>

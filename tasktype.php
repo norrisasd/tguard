@@ -4,6 +4,7 @@
   Admin Task Type: 
     * Contains a dashboard of all the upcoming and in progress tasks of that Task Type. 
 -->
+
 <body class="hold-transition sidebar-mini layout-fixed">
 
 
@@ -259,10 +260,10 @@
                   <label for="modalTimeSpent">Time Spent: </label>
                   <p id="modalTimeSpent">18 mins</p>
                 </div>
-                <div class="col">
+                <!-- <div class="col">
                   <label for="modalStatus">Status: </label>
                   <p id="modalStatus">---</p>
-                </div>
+                </div> -->
                 <div class="col">
                   <div class="float-right">
                     <button type="button" class="btn btn-outline-success btn-sm" style="margin-right: 2px;" id="btnPlay"><i class="fas fa-play"></i></button>
@@ -445,7 +446,7 @@
 
   <script>
     //Hiding the div
-    var defaultTypeID=localStorage.getItem("tasktype_id");
+    var defaultTypeID = localStorage.getItem("tasktype_id");
     $("#inputTaskType").val(defaultTypeID);
     setInputClient(defaultTypeID);
     $('#taskTitle').html(localStorage.getItem("type"));
@@ -453,6 +454,14 @@
     $("#inputAgentID").val("<?php echo $user_id ?>");
     $(".custom-file").hide();
     $(".uploadBtn").hide();
+
+
+    //SIDEBAR ACTIVE BUTTON
+    $(".mt-2 ul li").removeClass("menu-open");
+    $(".mt-2 ul li a").removeClass("active");
+    $(".mt-2 ul li:nth-child(4)").addClass("menu-open");
+    $(".mt-2 ul li:nth-child(4) a").addClass("active");
+    //---------------------------------------------
 
     //Showing the div for the inputs
     // $(document).ready(function() {

@@ -153,6 +153,7 @@ function taskInfo(data) {
   $("#btnFinish").val(data.callback_id);
   $("#btnSave").val(data.callback_id);
   $("#inputDescription2").val(data.Notes);
+  $("#modalTaskName").html(data.TaskName);
   $("#viewTaskName").val(data.TaskName);
   $("#modalStartDate").html(data.DateStarted == null ? "---" : data.DateStarted);
   $("#modalEndDate").html(data.DateEnded == null ? "---" : data.DateEnded);

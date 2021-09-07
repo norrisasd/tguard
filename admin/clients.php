@@ -6,8 +6,6 @@
     * Contains a table of all the clients
 -->
 
-
-
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -20,7 +18,7 @@
           <a href="../index.php" class="nav-link">Home</a>
         </li> -->
             </ul>
-            <h4 style="margin-top:.5%;">Users / Clients</h4>
+            <h4 style="margin-top:.5%;">Forms / Clients</h4>
             <!-- Right navbar links -->
 
         </nav>
@@ -233,8 +231,8 @@
         $(".mt-2 ul li a").removeClass("active");
         $(".mt-2 ul li:nth-child(4) ul li:nth-child(1)").removeClass("menu-open");
         $(".mt-2 ul li:nth-child(4) ul li:nth-child(1) a").removeClass("active");
-        $(".mt-2 ul li:nth-child(4) ul li:nth-child(2)").addClass("menu-open");
-        $(".mt-2 ul li:nth-child(4) ul li:nth-child(2) a").addClass("active");
+        $(".mt-2 ul li:nth-child(5) ul li:nth-child(1)").addClass("menu-open");
+        $(".mt-2 ul li:nth-child(5) ul li:nth-child(1) a").addClass("active");
 
         var dt = $('#dataTable').DataTable({
             "oLanguage": {

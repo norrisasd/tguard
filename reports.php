@@ -176,10 +176,10 @@
                                     <label for="modalTimeSpent">Time Spent: </label>
                                     <p id="modalTimeSpent">---</p>
                                 </div>
-                                <div class="col">
+                                <!-- <div class="col">
                                     <label for="modalStatus">Status: </label>
                                     <p id="modalStatus">In Progress</p>
-                                </div>
+                                </div> -->
                                 <div class="col">
                                     <div class="float-right">
                                         <button type="button" class="btn btn-outline-success btn-sm" style="margin-right: 2px;" id="btnPlay"><i class="fas fa-play"></i></button>

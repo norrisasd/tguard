@@ -189,10 +189,10 @@
                                     <label for="modalTimeSpent">Time Spent: </label>
                                     <p id="modalTimeSpent">---</p>
                                 </div>
-                                <div class="col">
+                                <!-- <div class="col">
                                     <label for="modalStatus">Status: </label>
                                     <p id="modalStatus">In Progress</p>
-                                </div>
+                                </div> -->
                                 <div class="col">
                                     <div class="float-right">
                                         <button type="button" class="btn btn-outline-success btn-sm" style="margin-right: 2px;" id="btnPlay"><i class="fas fa-play"></i></button>
@@ -218,6 +218,19 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="inputTaskType">Task Type</label>
+                                        <select class="form-control" onchange="setInputClientView(this.value)" id="inputTaskType" required>
+                                            <option value="" selected hidden>Select Task Type</option>
+                                            <?php displayAllTaskType() ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="form-row">
                                 <div class="col">
                                     <hr class="mt-2 mb-3" />
@@ -383,7 +396,7 @@
     <script src="../dist/js/adminlte.js"></script>
     <script src="./js/Main.js"></script>
     <script src="./js/ProgressLogFunctions.js"></script>
-    
+
 
     <script>
         // //Hiding the div

@@ -271,8 +271,8 @@
         $(".mt-2 ul li a").removeClass("active");
         $(".mt-2 ul li:nth-child(4) ul li:nth-child(1)").removeClass("menu-open");
         $(".mt-2 ul li:nth-child(4) ul li:nth-child(1) a").removeClass("active");
-        $(".mt-2 ul li:nth-child(4) ul li:nth-child(2)").addClass("menu-open");
-        $(".mt-2 ul li:nth-child(4) ul li:nth-child(2) a").addClass("active");
+        $(".mt-2 ul li:nth-child(5) ul li:nth-child(4)").addClass("menu-open");
+        $(".mt-2 ul li:nth-child(5) ul li:nth-child(4) a").addClass("active");
         var dt = $('#dataTable').DataTable({
             "oLanguage": {
                 "sLengthMenu": "Show Entries _MENU_",

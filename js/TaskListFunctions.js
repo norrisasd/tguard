@@ -129,7 +129,7 @@ function searchTable() {
       searchStartDate: searchStartDate,
       searchEndDate: searchEndDate,
       startDate: startDate,
-      searchDueDate: searchDueDate,
+      // searchDueDate: searchDueDate,
       endDate: endDate,
       searchTaskType: searchTaskType,
       status: 1
@@ -194,8 +194,8 @@ function clearSearch(type) {
       $("#clientName").prop('selectedIndex', 0);
       document.getElementById("startDate").valueAsDate = null;
       document.getElementById("endDate").valueAsDate = null;
-      document.getElementById("timeHr").value = '';
-      document.getElementById("timeMn").value = '';
+      $("#taskType").prop('selectedIndex', 0);
+      $("#flagType").prop('selectedIndex', 0);
       $('#actDate').val('');
       startDate = '';
       endDate = '';
