@@ -236,7 +236,7 @@
     }
 
     if(isset($_GET['getClientsJSON'])){
-        $query = "SELECT * FROM client";
+        $query = "SELECT * FROM client WHERE enabled= 1";
         $result = mysqli_query($dbConnection,$query);
         if($result){
             if(mysqli_num_rows($result)>0){
@@ -250,7 +250,7 @@
         }
     }
     if(isset($_GET['getAgentsJSON'])){
-        $query = "SELECT * FROM user";
+        $query = "SELECT * FROM user where enabled = 1";
         $result = mysqli_query($dbConnection,$query);
         if($result){
             if(mysqli_num_rows($result)>0){
@@ -379,5 +379,55 @@
             echo mysqli_error($dbConnection);
         }
     }   
+    if(isset($_POST['archiveEmployee'])){
+        $query ="UPDATE user set enabled = 0 WHERE user_id=".$_POST['archiveEmployee'];
+        $result=mysqli_query($dbConnection,$query);
+        if($result){
+            $result="archived";
+        }else{
+            echo mysqli_error($dbConnection);
+        }
+    }
+    if(isset($_POST['saveClient'])){
+        $query="UPDATE `client` SET `ClientName`='".$_POST['fullname']."',`phone`=".$_POST['phone'].",`email`='".$_POST['email']."' WHERE client_id =".$_POST['saveClient'];
+        $result=mysqli_query($dbConnection,$query);
+        if($result){
+            $result="updated";
+        }else{
+            echo mysqli_error($dbConnection);
+        }
+    }
+    if(isset($_POST['archiveClient'])){
+        $query ="UPDATE client set enabled = 0 WHERE client_id=".$_POST['archiveClient'];
+        $result=mysqli_query($dbConnection,$query);
+        if($result){
+            $result="archived";
+        }else{
+            echo mysqli_error($dbConnection);
+        }
+    }
+    if(isset($_POST['addFlagType'])){
+        $query="INSERT INTO `flagtype`(`flagtype`, `notes`) VALUES ('".$_POST['flagtype']."','".$_POST['notes']."')";
+        $result=mysqli_query($dbConnection,$query);
+        if($result){
+            $result="inserted";
+        }else{
+            echo mysqli_error($dbConnection);
+        }
+    }
+    if(isset($_GET['getFlagType'])){
+        $query = "SELECT * FROM flagtype";
+        $result = mysqli_query($dbConnection,$query);
+        if($result){
+            if(mysqli_num_rows($result)>0){
+                $result = mysqli_fetch_all($result,MYSQLI_ASSOC);
+                $result = json_encode($result);
+            }else{
+                echo mysqli_error($dbConnection);
+            }
+        }else{
+            echo mysqli_error($dbConnection);
+        }
+    }
     echo $result;
 ?>

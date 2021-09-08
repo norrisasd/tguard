@@ -33,8 +33,11 @@
                 <div class="container-fluid">
                     <div class="card-body">
                         <div class="row align-items-start" style="margin-bottom: 1%; margin-top: 2.5%;">
-                            <div class="col-auto" style="margin-top:1%">
-                                <input type="checkbox" value="" style="margin-left:10px;" id="selectAll" onclick="selectAll(this)"> Select All
+                            <div class="col-auto" id="beforeLD" style="margin-right:1%;">
+                                <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Export All Data shown in the Table" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-auto" id="beforeLD1" style="margin-right:1%;">
+                                <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Export Selected Data shown in the Table" aria-hidden="true"></i>
                             </div>
                             <div class="col-auto">
                                 <div class="btn-group dropright">
@@ -56,7 +59,12 @@
                         <table id="dataTable" class="table table-bordered table-hover" style="height:100%;background-color:white">
                             <thead>
                                 <tr>
-                                    <th class="text-center"></th>
+                                    <th class="text-center"><input type="checkbox" onchange="
+                                        if(this.checked)
+                                            dt.rows().select();
+                                        else
+                                            dt.rows().deselect();
+                                    "></th>
                                     <th>Employee Name</th>
                                     <th>Email</th>
                                     <th>Username</th>
@@ -102,15 +110,15 @@
                     <form action="" method="post" onsubmit="return addUser();" autocomplete="off" id="addUserModal">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Employeee Name</label>
-                            <input type="text" class="form-control"  id="name" autocomplete="off" required>
+                            <input type="text" class="form-control" id="name" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Username</label>
-                            <input type="text" class="form-control"  id="username" placeholder="" autocomplete="off" required>
+                            <input type="text" class="form-control" id="username" placeholder="" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="ex ampleFormControlInput1">Password</label>
-                            <input type="password" class="form-control"  id="password" autocomplete="off" required>
+                            <input type="password" class="form-control" id="password" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Confirm Password</label>
@@ -122,7 +130,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Phone</label>
-                            <input type="number" class="form-control"  id="phone" autocomplete="off" required>
+                            <input type="number" class="form-control" id="phone" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Access</label>
@@ -167,46 +175,46 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Employeee Name</label>
-                            <input type="text" class="form-control" id="viewName" autocomplete="off" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Username</label>
-                            <input type="text" class="form-control"  id="viewUsername" placeholder="" autocomplete="off" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="ex ampleFormControlInput1">Password</label>
-                            <input type="password" class="form-control" id="viewPassword" autocomplete="off" required>
-                        </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Employeee Name</label>
+                        <input type="text" class="form-control" id="viewName" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Username</label>
+                        <input type="text" class="form-control" id="viewUsername" placeholder="" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ex ampleFormControlInput1">Password</label>
+                        <input type="password" class="form-control" id="viewPassword" autocomplete="off" required>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Email</label>
-                            <input type="email" class="form-control" id="viewEmail" autocomplete="off" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Phone</label>
-                            <input type="text" class="form-control" id="viewPhone" autocomplete="off" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Access</label>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Email</label>
+                        <input type="email" class="form-control" id="viewEmail" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Phone</label>
+                        <input type="text" class="form-control" id="viewPhone" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Access</label>
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="viewRadioBtnType" value="1" id="viewAdminRadioBtn" required>
-                                <label class="form-check-label" for="adminRadioBtn">
-                                    Admin
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" value="2" name="viewRadioBtnType" id="viewAgentRadioBtn">
-                                <label class="form-check-label" for="employeeBtn">
-                                    Employee
-                                </label>
-                            </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="viewRadioBtnType" value="1" id="viewAdminRadioBtn" required>
+                            <label class="form-check-label" for="adminRadioBtn">
+                                Admin
+                            </label>
                         </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="2" name="viewRadioBtnType" id="viewAgentRadioBtn">
+                            <label class="form-check-label" for="employeeBtn">
+                                Employee
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button>
+                    <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Archive</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
                 </div>

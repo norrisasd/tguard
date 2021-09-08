@@ -35,13 +35,11 @@
                 <div class="container-fluid">
                     <div class="card-body">
                         <div class="row align-items-start" style="margin-bottom: 1%; margin-top: 2.5%;">
-                            <div class="col-auto" style="margin-top:1%">
-                                <input type="checkbox" value="" style="margin-left:10px;" id="selectAll" onclick="selectAll(this)"> Select All
+                            <div class="col-auto" id="beforeLD" style="margin-right:1%;">
+                                <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Export All Data shown in the Table" aria-hidden="true"></i>
                             </div>
-                            <div class="col-auto">
-                                <button type="button" class="btn btn-success">
-                                    Export
-                                </button>
+                            <div class="col-auto" id="beforeLD1" style="margin-right:1%;">
+                                <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Export Selected Data shown in the Table" aria-hidden="true"></i>
                             </div>
                             <div class="col-auto">
                                 <div class="btn-group dropright">
@@ -50,7 +48,6 @@
                                     </button>
                                 </div>
                             </div>
-
                             <div class="col"></div>
                             <div class="col-auto">
                                 <div class="input-group rounded" id="beforeLD2" style="margin-right:1%;">
@@ -64,7 +61,12 @@
                         <table id="dataTable" class="table table-bordered table-hover" style="height:100%;background-color:white">
                             <thead>
                                 <tr>
-                                    <th class="text-center"></th>
+                                    <th class="text-center"><input type="checkbox" onchange="
+                                        if(this.checked)
+                                            dt.rows().select();
+                                        else
+                                            dt.rows().deselect();
+                                    "></th>
                                     <th>Client</th>
                                     <th>Phone</th>
                                     <th>Email</th>
@@ -157,15 +159,15 @@
                     <form action="" method="post" autocomplete="off" id="">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Client Name</label>
-                            <input type="text" class="form-control" name="name" id="name" placeholder="" autocomplete="off" required>
+                            <input type="text" class="form-control" id="viewName" placeholder="" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Phone</label>
-                            <input type="text" class="form-control" name="phone" id="phone" autocomplete="off" required>
+                            <input type="text" class="form-control" id="viewPhone" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Email</label>
-                            <input type="email" class="form-control" name="email" id="email" autocomplete="off" required>
+                            <input type="email" class="form-control" id="viewEmail" autocomplete="off" required>
                         </div>
 
                         <!-- <div class="form-group">
@@ -185,7 +187,7 @@
                         </div> -->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button>
+                    <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Archive</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
                 </div>
@@ -228,124 +230,7 @@
     <script src="../dist/js/adminlte.js"></script>
     <script src="./js/Main.js"></script>
 
-    <script>
-        $(".mt-2 ul li").removeClass("menu-open");
-        $(".mt-2 ul li a").removeClass("active");
-        $(".mt-2 ul li:nth-child(4) ul li:nth-child(1)").removeClass("menu-open");
-        $(".mt-2 ul li:nth-child(4) ul li:nth-child(1) a").removeClass("active");
-        $(".mt-2 ul li:nth-child(5) ul li:nth-child(1)").addClass("menu-open");
-        $(".mt-2 ul li:nth-child(5) ul li:nth-child(1) a").addClass("active");
-
-        var dt = $('#dataTable').DataTable({
-            "oLanguage": {
-                "sLengthMenu": "Show Entries _MENU_",
-            },
-            dom: "<'row d-flex flex-row align-items-end'>tr<'row d-flex flex-row align-items-end'<'col-md-6'l><'col-sm-2'i><'col-md-4'p>>",
-            "pageLength": 10,
-            "order": [],
-            "columnDefs": [{
-                "targets": 0,
-                "orderable": false,
-                "className": "text-center select-checkbox",
-            }, {
-                "targets": 6,
-                "orderable": false,
-                "className": "text-center",
-            }],
-            select: {
-                style: 'multi',
-                selector: 'tr>td:nth-child(1)'
-            },
-            "paging": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-            "buttons": ["excel", "pdf", "print", ]
-        });
-        dt.buttons().container().appendTo('#beforeLD');
-        new $.fn.dataTable.Buttons(dt, {
-            "buttons": [{
-                extend: 'excel',
-                text: 'Excel Selected',
-                exportOptions: {
-                    modifier: {
-                        selected: true
-                    }
-                },
-            }, {
-                extend: 'pdf',
-                text: 'PDF Selected',
-                exportOptions: {
-                    modifier: {
-                        selected: true
-                    }
-                },
-            }, {
-                extend: 'print',
-                text: 'Print Selected',
-                exportOptions: {
-                    modifier: {
-                        selected: true
-                    }
-                },
-            }]
-        }).container().appendTo('#beforeLD1');
-
-        function refreshTable() {
-        var cb = "";
-        $.ajax({
-            type: 'get',
-            url: './main.php',
-            data: {
-                getClientsJSON: true
-            },
-            success: function(response) {
-                data = JSON.parse(response);
-                dt.clear().draw();
-                for (var da in data) {
-                    btn = `<button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#viewClient"><i class="fas fa-eye"></i></button>`;
-                    dt.row.add([
-                        cb,
-                        data[da].ClientName,
-                        data[da].phone,
-                        data[da].email,
-                        data[da].email,
-                        data[da].email,
-                        btn,
-                    ]).draw();
-                }
-            }
-        })
-        }
-        refreshTable();
-        function addClient() {
-            name = $("#clientname").val();
-            phone = $("#clientphone").val();
-            email = $("#clientemail").val();
-            $.ajax({
-                type: 'post',
-                url: './main.php',
-                data: {
-                    addClient:true,
-                    name: name,
-                    phone: phone,
-                    email: email
-                },
-                success: function(response) {
-                    if (response == "inserted") {
-                        toastr.success("Client Created");
-                        refreshTable();
-                        $(".modal").modal("hide");
-                    }else{
-                        toastr.error(response);
-                    }
-                }
-            });
-            return false;
-        }
-    </script>
+    <script src="./js/ClientsFunctions.js"></script>
 
 </body>
 

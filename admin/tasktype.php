@@ -498,6 +498,7 @@
     //                 <i class="fas fa-cloud-upload-alt"></i>',
     //   dictResponseError: 'Error while uploading file!',
     // });
+    
   </script>
 
 

@@ -52,14 +52,6 @@
                             </div>
                         </div>
                         <div class="row align-items-start" style="margin-bottom: 1%; margin-top: 2.5%;">
-                            <div class="col-auto" style="margin-top:1%">
-                                <input type="checkbox" value="" style="margin-left:10px;" id="selectAll" onclick="selectAll(this)"> Select All
-                            </div>
-                            <div class="col-auto">
-                                <button type="button" class="btn btn-success">
-                                    Export
-                                </button>
-                            </div>
                             <div class="col-auto">
                                 <div class="btn-group dropright">
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addFlagType">
@@ -91,13 +83,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <td></td>
-                                <td><a href="#" class="table" onclick="" data-toggle="modal" data-target="#userInfo"></a></td>
-                                <td>norris@gmail.com</td>
-                                <!-- <td>2</td>
-                                <td></td> -->
-                                <td><button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#viewTaskType"><i class="fas fa-eye"></i></button>
-
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -126,13 +111,13 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="get" id="viewTask" action="">
+                <form method="get" id="viewTask" onsubmit="return addFlagType()" action="">
                     <div class="modal-body">
                         <div class="container-fluid">
 
                             <div class="form-group">
                                 <label for="inputTaskType">Flag Type</label>
-                                <input type="text" class="form-control" id="inputTaskType" placeholder="" required />
+                                <input type="text" class="form-control" id="inputFlagType" placeholder="" required />
 
                             </div>
 
@@ -280,7 +265,7 @@
                 "orderable": false,
                 "className": "text-center select-checkbox",
             }, {
-                "targets": 6,
+                "targets": 3,
                 "orderable": false,
                 "className": "text-center",
             }],
@@ -324,30 +309,53 @@
                 },
             }]
         }).container().appendTo('#beforeLD1');
-        var cb = "";
-        $.ajax({
-            type: 'get',
-            url: './main.php',
-            data: {
-                getClientsJSON: true
-            },
-            success: function(response) {
-                data = JSON.parse(response);
-                dt.clear().draw();
-                for (var da in data) {
-                    btn = `<button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#userInfo"><i class="fas fa-eye"></i></button>`;
-                    dt.row.add([
-                        cb,
-                        data[da].ClientName,
-                        data[da].phone,
-                        data[da].email,
-                        data[da].email,
-                        data[da].email,
-                        btn,
-                    ]).draw();
+        refreshTable();
+
+        function refreshTable() {
+            var cb = "";
+            $.ajax({
+                type: 'get',
+                url: './main.php',
+                data: {
+                    getFlagType: true
+                },
+                success: function(response) {
+                    data = JSON.parse(response);
+                    dt.clear().draw();
+                    for (var da in data) {
+                        btn = `<button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#userInfo"><i class="fas fa-eye"></i></button>`;
+                        dt.row.add([
+                            cb,
+                            data[da].flagtype,
+                            data[da].notes,
+                            btn,
+                        ]).draw();
+                    }
                 }
-            }
-        })
+            })
+        }
+
+        function addFlagType() {
+            flagtype = $("#inputFlagType").val();
+            notes = $("#inputNotes").val();
+            $.ajax({
+                type: 'post',
+                url: './main.php',
+                data: {
+                    addFlagType: true,
+                    flagtype: flagtype,
+                    notes: notes
+                },
+                success: function(response) {
+                    if (response == "inserted") {
+                        toastr.success("Flag Created");
+                        refreshTable();
+                        $(".modal").modal("hide");
+                    }
+                }
+            });
+            return false;
+        }
     </script>
 
 </body>

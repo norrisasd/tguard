@@ -96,23 +96,19 @@
                                     <th class="text-center"></th>
                                     <th>Task Type</th>
                                     <th>Client Name</th>
-                                    <th></th>
+                                    <th>Email</th>
+                                    <th>Status</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <td></td>
-                                <td><a href="#" class="table" onclick="" data-toggle="modal" data-target="#userInfo"></a></td>
-                                <td>norris@gmail.com</td>
-                                <td>2</td>
-                                <td><button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#viewTaskType"><i class="fas fa-eye"></i></button>
-
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th class="text-center"></th>
                                     <th>Task Type</th>
                                     <th>Client Name</th>
+                                    <th></th>
                                     <th></th>
                                     <th></th>
                                 </tr>
@@ -285,7 +281,7 @@
                 "orderable": false,
                 "className": "text-center select-checkbox",
             }, {
-                "targets": 6,
+                "targets": 5,
                 "orderable": false,
                 "className": "text-center",
             }],
@@ -334,7 +330,7 @@
             type: 'get',
             url: './main.php',
             data: {
-                getClientsJSON: true
+                getTaskTypes: true
             },
             success: function(response) {
                 data = JSON.parse(response);
@@ -343,11 +339,10 @@
                     btn = `<button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#userInfo"><i class="fas fa-eye"></i></button>`;
                     dt.row.add([
                         cb,
+                        data[da].type,
                         data[da].ClientName,
-                        data[da].phone,
                         data[da].email,
-                        data[da].email,
-                        data[da].email,
+                        data[da].enabled==1?"Active":"Archived",
                         btn,
                     ]).draw();
                 }
