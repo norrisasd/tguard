@@ -120,6 +120,7 @@ function searchTable() {
   let searchStartDate = document.getElementById("startDate").value;
   let searchEndDate = document.getElementById("endDate").value;
   let searchTaskType = document.getElementById("taskType").value;
+  let searchFlagType = document.getElementById("flagType").value; 
   // let searchDueDate=document.getElementById("dueDate").value;
   cb = '';
   $.ajax({
@@ -180,30 +181,41 @@ function clearSearch(type) {
     case 1:
       $("#clientName").prop('selectedIndex', 0);
       break;
-    case 2:
-      document.getElementById("startDate").valueAsDate = null;
-      break;
+    case 2: 
+      $("#agentName").prop('selectedIndex', 0);
+      break; 
     case 3:
-      document.getElementById("endDate").valueAsDate = null;
+      document.getElementById("startDate").valueAsDate = null;
       break;
     case 4:
-      document.getElementById("timeHr").value = '';
-      document.getElementById("timeMn").value = '';
+      document.getElementById("endDate").valueAsDate = null;
       break;
-    case 5:
+    // case 5:
+    //   document.getElementById("timeHr").value = '';
+    //   document.getElementById("timeMn").value = '';
+    //   break;
+    case 6:
+      $("#taskType").prop('selectedIndex', 0);
+      break; 
+    case 7:
       $('#actDate').val('');
       startDate = '';
       endDate = '';
       break;
-    case 6:
+    case 8:
+        $("#flagType").prop('selectedIndex', 0);
+        break;
+    case 9:
       $("#clientName").prop('selectedIndex', 0);
+      $("#taskType").prop('selectedIndex', 0);
+      $("#agentName").prop('selectedIndex', 0);
+      $("#flagType").prop('selectedIndex', 0);
+      $('#actDate').val('');
+      startDate = '';
+      endDate = '';
       document.getElementById("startDate").valueAsDate = null;
       document.getElementById("endDate").valueAsDate = null;
-      document.getElementById("timeHr").value = '';
-      document.getElementById("timeMn").value = '';
-      $('#actDate').val('');
-      startDate = '';
-      endDate = '';
+    
       break;
   }
   searchTable();

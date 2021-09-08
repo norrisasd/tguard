@@ -70,12 +70,13 @@
                                     <th>Username</th>
                                     <th>Password</th>
                                     <th>Phone</th>
-                                    <th>Access</th>
+                                    <th>User</th>
+                                    <th></th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- <td><button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#userInfo"><i class="fas fa-eye"></i></button> -->
+                                <!-- <td><button class="btn btn-info btn-sm waves-effect waves-light" data-toggle="modal" data-target="#accessUser">Access</button></td> -->
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -85,8 +86,10 @@
                                     <th>Username</th>
                                     <th>Password</th>
                                     <th>Phone</th>
-                                    <th>Access</th>
+                                    <th>User</th>
                                     <th></th>
+                                    <th></th>
+                                    <!-- <td><button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#userInfo"><i class="fas fa-eye"></i></button></td> -->
                                 </tr>
                             </tfoot>
                         </table>
@@ -222,7 +225,46 @@
         </div>
     </div>
 
+    <!-- Modal for Access Employee -->
+    <div class="modal fade" id="accessUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Access</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
 
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <table class="table table-hover" id="accessTable">
+                        <thead>
+                            <tr>
+                                <th>Task Types</th>
+                                <th>Access</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Agrisoft</td>
+                                <td> <select id="accessType" class="form-control" style="margin-right:0.5%;">
+                                        <option value="" selected>Select Access Type</option>
+                                        <?php displayAllClients(); ?>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- jQuery -->
     <script src="../plugins/jquery/jquery.min.js"></script>
