@@ -62,12 +62,13 @@
                                     <th>Username</th>
                                     <th>Password</th>
                                     <th>Phone</th>
-                                    <th>Access</th>
+                                    <th>User</th>
+                                    <th></th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- <td><button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#userInfo"><i class="fas fa-eye"></i></button> -->
+                                <!-- <td><button class="btn btn-info btn-sm waves-effect waves-light" data-toggle="modal" data-target="#accessUser">Access</button></td> -->
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -77,8 +78,10 @@
                                     <th>Username</th>
                                     <th>Password</th>
                                     <th>Phone</th>
-                                    <th>Access</th>
+                                    <th>User</th>
                                     <th></th>
+                                    <th></th>
+                                    <!-- <td><button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#userInfo"><i class="fas fa-eye"></i></button></td> -->
                                 </tr>
                             </tfoot>
                         </table>
@@ -102,15 +105,15 @@
                     <form action="" method="post" onsubmit="return addUser();" autocomplete="off" id="addUserModal">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Employeee Name</label>
-                            <input type="text" class="form-control"  id="name" autocomplete="off" required>
+                            <input type="text" class="form-control" id="name" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Username</label>
-                            <input type="text" class="form-control"  id="username" placeholder="" autocomplete="off" required>
+                            <input type="text" class="form-control" id="username" placeholder="" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="ex ampleFormControlInput1">Password</label>
-                            <input type="password" class="form-control"  id="password" autocomplete="off" required>
+                            <input type="password" class="form-control" id="password" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Confirm Password</label>
@@ -122,7 +125,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Phone</label>
-                            <input type="number" class="form-control"  id="phone" autocomplete="off" required>
+                            <input type="number" class="form-control" id="phone" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Access</label>
@@ -167,46 +170,47 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Employeee Name</label>
-                            <input type="text" class="form-control" id="viewName" autocomplete="off" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Username</label>
-                            <input type="text" class="form-control"  id="viewUsername" placeholder="" autocomplete="off" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="ex ampleFormControlInput1">Password</label>
-                            <input type="password" class="form-control" id="viewPassword" autocomplete="off" required>
-                        </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Employeee Name</label>
+                        <input type="text" class="form-control" id="viewName" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Username</label>
+                        <input type="text" class="form-control" id="viewUsername" placeholder="" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ex ampleFormControlInput1">Password</label>
+                        <input type="password" class="form-control" id="viewPassword" autocomplete="off" required>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Email</label>
-                            <input type="email" class="form-control" id="viewEmail" autocomplete="off" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Phone</label>
-                            <input type="text" class="form-control" id="viewPhone" autocomplete="off" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Access</label>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Email</label>
+                        <input type="email" class="form-control" id="viewEmail" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Phone</label>
+                        <input type="text" class="form-control" id="viewPhone" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Access</label>
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="viewRadioBtnType" value="1" id="viewAdminRadioBtn" required>
-                                <label class="form-check-label" for="adminRadioBtn">
-                                    Admin
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" value="2" name="viewRadioBtnType" id="viewAgentRadioBtn">
-                                <label class="form-check-label" for="employeeBtn">
-                                    Employee
-                                </label>
-                            </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="viewRadioBtnType" value="1" id="viewAdminRadioBtn" required>
+                            <label class="form-check-label" for="adminRadioBtn">
+                                Admin
+                            </label>
                         </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="2" name="viewRadioBtnType" id="viewAgentRadioBtn">
+                            <label class="form-check-label" for="employeeBtn">
+                                Employee
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button>
+                    <!-- <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button> -->
+                    <button type="button" class="btn btn-info mr-auto" id="btnArchive">Archive</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
                 </div>
@@ -214,7 +218,46 @@
         </div>
     </div>
 
+    <!-- Modal for Access Employee -->
+    <div class="modal fade" id="accessUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Access</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
 
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <table class="table table-hover" id="accessTable">
+                        <thead>
+                            <tr>
+                                <th>Task Types</th>
+                                <th>Access</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Agrisoft</td>
+                                <td> <select id="accessType" class="form-control" style="margin-right:0.5%;">
+                                        <option value="" selected>Select Access Type</option>
+                                        <?php displayAllClients(); ?>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- jQuery -->
     <script src="../plugins/jquery/jquery.min.js"></script>

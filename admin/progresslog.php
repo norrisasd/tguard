@@ -82,14 +82,15 @@
                                         Clear Search
                                     </button>
                                     <div class="dropdown-menu">
-                                        <button class="dropdown-item" type="button" onclick="clearSearch(6)">All</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(7)">All</button>
                                         <div class="dropdown-divider"></div>
                                         <button class="dropdown-item" type="button" onclick="clearSearch(1)">Client</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(8)">Employee</button>
                                         <button class="dropdown-item" type="button" onclick="clearSearch(2)">Start Date</button>
                                         <button class="dropdown-item" type="button" onclick="clearSearch(3)">End Date</button>
                                         <button class="dropdown-item" type="button" onclick="clearSearch(4)">Time Spent</button>
                                         <button class="dropdown-item" type="button" onclick="clearSearch(5)">Task Types</button>
-                                        <button class="dropdown-item" type="button" onclick="clearSearch(7)">Task Date</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(6)">Task Date</button>
 
                                     </div>
                                 </div>

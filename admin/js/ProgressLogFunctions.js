@@ -124,6 +124,7 @@ function searchTable() {
   let searchStartDate = document.getElementById("startDate").value;
   let searchEndDate = document.getElementById("endDate").value;
   let searchTaskType = document.getElementById("taskType").value;
+  let searchFlagType = document.getElementById("flagType").value;
   cb = '';
   $.ajax({
     type: 'get',
@@ -136,7 +137,7 @@ function searchTable() {
       searchAgentName: searchAgentName,
       startDate: startDate,
       endDate: endDate,
-      searchTaskType:searchTaskType,
+      searchTaskType: searchTaskType,
       status: 0
     },
     success: function (response) {
@@ -185,24 +186,28 @@ function clearSearch(type) {
       document.getElementById("timeMn").value = '';
       break;
     case 5:
+      $("#taskType").prop('selectedIndex', 0);
+      break;
+    case 6:
       $('#actDate').val('');
       startDate = '';
       endDate = '';
       break;
-    case 6:
+    case 8: 
+      $("#agentName").prop('selectedIndex', 0);
+      break; 
+    case 7:
       $("#clientName").prop('selectedIndex', 0);
+      $("#agentName").prop('selectedIndex', 0);
+      $("#taskType").prop('selectedIndex', 0);
+      $('#actDate').val('');
+      startDate = '';
+      endDate = '';
       document.getElementById("startDate").valueAsDate = null;
       document.getElementById("endDate").valueAsDate = null;
       document.getElementById("timeHr").value = '';
       document.getElementById("timeMn").value = '';
-      $('#actDate').val('');
-      startDate = '';
-      endDate = '';
       break;
-    case 7:
-      document.getElementById("dueDate").valueAsDate = null;
-      break;
-
   }
   searchTable();
 
@@ -235,9 +240,9 @@ function taskInfo(data) {
     data.total_time = '00:00:00';
   }
   setButtonForProgress(data.callback_id);
-  if($("#btnPlay").prop("disabled")){
+  if ($("#btnPlay").prop("disabled")) {
     $("#modalStatus").html("Running");
-  }else{
+  } else {
     $("#modalStatus").html("Paused");
   }
   $("#btnPlay").val(data.callback_id);
@@ -260,8 +265,8 @@ function taskInfo(data) {
   $("#inputTaskName").val(data.TaskName);
   $("#inputEmployee").val(data.user_id);
   $("#inputTaskType").val(data.tasktype_id);
-  
-  
+
+
 }
 function setButtonForProgress(cb_id) {
   $.ajax({
@@ -273,7 +278,7 @@ function setButtonForProgress(cb_id) {
     },
     success: function (response) {
 
-      if(response == ''){
+      if (response == '') {
         $("#btnPlay").prop('disabled', false);
         return false;
       }
@@ -379,10 +384,10 @@ $("#btnSave").click(function () {
   notes = $("#inputDescription2").val();
   subtask = $("#inputSubTasks").val();
   comments = $("#inputComments").val();
-  taskname=$("#inputTaskName").val();
-  tasktype=$("#inputTaskType").val();
-  client=$("#inputClient").val();
-  employee=$("#inputEmployee").val();
+  taskname = $("#inputTaskName").val();
+  tasktype = $("#inputTaskType").val();
+  client = $("#inputClient").val();
+  employee = $("#inputEmployee").val();
   $.ajax({
     type: 'post',
     url: './main.php',

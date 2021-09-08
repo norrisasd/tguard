@@ -91,13 +91,14 @@
                     Clear Search
                   </button>
                   <div class="dropdown-menu">
-                    <button class="dropdown-item" type="button" onclick="clearSearch(6)">All</button>
+                    <button class="dropdown-item" type="button" onclick="clearSearch(9)">All</button>
                     <div class="dropdown-divider"></div>
                     <button class="dropdown-item" type="button" onclick="clearSearch(1)">Client</button>
-                    <button class="dropdown-item" type="button" onclick="clearSearch(2)">Start Date</button>
-                    <button class="dropdown-item" type="button" onclick="clearSearch(3)">End Date</button>
-                    <button class="dropdown-item" type="button" onclick="clearSearch(4)">Time Spent</button>
-                    <button class="dropdown-item" type="button" onclick="clearSearch(5)">Task Type</button>
+                    <button class="dropdown-item" type="button" onclick="clearSearch(2)">Employee</button>
+                    <button class="dropdown-item" type="button" onclick="clearSearch(3)">Start Date</button>
+                    <button class="dropdown-item" type="button" onclick="clearSearch(4)">End Date</button>
+                    <!-- <button class="dropdown-item" type="button" onclick="clearSearch(5)">Time Spent</button> -->
+                    <button class="dropdown-item" type="button" onclick="clearSearch(6)">Task Type</button>
                     <button class="dropdown-item" type="button" onclick="clearSearch(7)">Task Date</button>
                     <button class="dropdown-item" type="button" onclick="clearSearch(8)">Flag Type</button>
                   </div>
@@ -227,7 +228,7 @@
                   <hr class="mt-2 mb-3" />
                   <div class="form-group">
                     <label for="inputFlagType">Flag Type</label>
-                    <select class="form-control" id="inputFlagType" required >
+                    <select class="form-control" id="inputFlagType" required>
                       <option value="" selected hidden>Select Flag Type</option>
                       <?php displayAllTaskType() ?>
                     </select>

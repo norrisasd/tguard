@@ -81,7 +81,7 @@ function refreshTable() {
                     data[da].password,
                     data[da].phone,
                     access,
-                    btn
+                    btn, 
                 ]).draw();
             }
         }

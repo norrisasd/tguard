@@ -37,13 +37,13 @@
         <ul class="nav nav-treeview">
           <li class="nav-item has-treeview">
             <a href="progresslog" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
+              <i class="fas fa-briefcase nav-icon"></i>
               <p>User Progress Log</p>
             </a>
           </li>
           <li class="nav-item has-treeview">
             <a href="activitylog" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
+              <i class="fas fa-clipboard nav-icon"></i>
               <p>User Activity Log</p>
             </a>
           </li>
@@ -66,13 +66,13 @@
         <ul class="nav nav-treeview" id="tasktypes">
           <li class="nav-item has-treeview">
             <a href="addtask" class="nav-link" onclick="resetDisplay()">
-              <i class="far fa-circle nav-icon"></i>
+              <i class="fas fa-plus-square nav-icon"></i>
               <p>Add Task</p>
             </a>
           </li>
           <li class="nav-item has-treeview">
             <a href="tasklist" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
+              <i class="fas fa-list-alt nav-icon"></i>
               <p>Task List</p>
             </a>
           </li>
@@ -95,26 +95,27 @@
         <ul class="nav nav-treeview">
           <li class="nav-item has-treeview">
             <a href="clients" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
+              <i class="fas fa-user nav-icon"></i>
               <p>Clients</p>
             </a>
           </li>
           <li class="nav-item has-treeview">
             <a href="employee" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
+              <i class="fas fa-user-shield nav-icon"></i>
               <p>Employees</p>
             </a>
           </li>
           <li class="nav-item has-treeview">
             <a href="formflag" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
+              <i class="fas fa-flag nav-icon"></i>
               <p>Flag Types</p>
             </a>
           </li>
           <li class="nav-item has-treeview">
             <a href="formtasktype" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
+              <i class="fas fa-list-alt nav-icon"></i>
               <p>Task Types</p>
+
             </a>
           </li>
 
