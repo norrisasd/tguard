@@ -1,9 +1,10 @@
 $(".mt-2 ul li").removeClass("menu-open");
 $(".mt-2 ul li a").removeClass("active");
-$(".mt-2 ul li:nth-child(3) ul li:nth-child(1)").removeClass("menu-open");
-$(".mt-2 ul li:nth-child(3) ul li:nth-child(1) a").removeClass("active");
-$(".mt-2 ul li:nth-child(5) ul li:nth-child(2)").addClass("menu-open");
-$(".mt-2 ul li:nth-child(5) ul li:nth-child(2) a").addClass("active");
+$(".mt-2 ul li:nth-child(4) ul li:nth-child(1)").removeClass("menu-open");
+$(".mt-2 ul li:nth-child(4) ul li:nth-child(1) a").removeClass("active");
+$(".mt-2 ul li:nth-child(5) ul li:nth-child(1)").addClass("menu-open");
+$(".mt-2 ul li:nth-child(5) ul li:nth-child(1) a").addClass("active");
+
 var dt = $('#dataTable').DataTable({
     "oLanguage": {
         "sLengthMenu": "Show Entries _MENU_",
@@ -16,8 +17,9 @@ var dt = $('#dataTable').DataTable({
         "orderable": false,
         "className": "text-center select-checkbox",
     }, {
-        "targets": 7,
-        "className": "text-center"
+        "targets": 6,
+        "orderable": false,
+        "className": "text-center",
     }],
     select: {
         style: 'multi',
@@ -59,124 +61,87 @@ new $.fn.dataTable.Buttons(dt, {
         },
     }]
 }).container().appendTo('#beforeLD1');
+
 function refreshTable() {
     var cb = "";
     $.ajax({
         type: 'get',
         url: './main.php',
         data: {
-            getAgentsJSON: true
+            getClientsJSON: true
         },
         success: function (response) {
             data = JSON.parse(response);
             dt.clear().draw();
             for (var da in data) {
-                access = data[da].access == '2' ? "Agent" : "Admin";
-                btn = `<button class="btn btn-success btn-sm waves-effect waves-light text-center" onclick='taskInfo(` + JSON.stringify(data[da]) + `)' data-toggle="modal" data-target="#viewUser" ><i class="fas fa-eye"></i></button>`;
+                btn = `<button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" onclick='taskInfo(` + JSON.stringify(data[da]) + `)' data-target="#viewClient"><i class="fas fa-eye"></i></button>`;
                 dt.row.add([
                     cb,
-                    data[da].name,
-                    data[da].email,
-                    data[da].username,
-                    data[da].password,
+                    data[da].ClientName,
                     data[da].phone,
-                    access,
-                    btn, 
+                    data[da].email,
+                    data[da].email,
+                    data[da].email,
+                    btn,
                 ]).draw();
             }
         }
     })
 }
 refreshTable();
-function addUser() {
-    fullname = $("#name").val();
-    username = $("#username").val();
-    password = $("#password").val();
-    cpassword = $("#cpassword").val();
-    email = $("#email").val();
-    phone = $("#phone").val();
-    access = $('input[name="radioBtnType"]:checked').val();
-    if (cpassword != password) {
-        toastr.error("Password doesnt match!");
-        $("#password").val("");
-        $("#cpassword").val("");
-        return false;
-    }
 
+function addClient() {
+    name = $("#clientname").val();
+    phone = $("#clientphone").val();
+    email = $("#clientemail").val();
     $.ajax({
         type: 'post',
         url: './main.php',
         data: {
-            addUser: true,
-            fullname: fullname,
-            username: username,
-            password: password,
-            cpassword: cpassword,
-            email: email,
+            addClient: true,
+            name: name,
             phone: phone,
-            access: access,
-
+            email: email
         },
         success: function (response) {
             if (response == "inserted") {
-                toastr.success("User Created");
+                toastr.success("Client Created");
                 refreshTable();
                 $(".modal").modal("hide");
-                document.getElementById("addUserModal").reset();
-            } else if (response == "taken") {
-                toastr.error("Username Taken");
             } else {
                 toastr.error(response);
             }
         }
-
     });
     return false;
 }
-
 function taskInfo(data) {
-    $("#btnDelete").val(data.user_id);
-    $("#btnSave").val(data.user_id);
-    $("#viewName").val(data.name);
-    $("#viewUsername").val(data.username);
-    $("#viewPassword").val(data.password);
+    $("#btnDelete").val(data.client_id);
+    $("#btnSave").val(data.client_id);
+    $("#viewName").val(data.ClientName);
     $("#viewEmail").val(data.email);
     $("#viewPhone").val(data.phone);
-    if (data.access == 1)
-        $("#viewAdminRadioBtn").prop("checked", true);
-    else
-        $("#viewAgentRadioBtn").prop("checked", true);
 }
 $("#btnSave").click(function () {
     fullname = $("#viewName").val();
-    username = $("#viewUsername").val();
-    password = $("#viewPassword").val();
     email = $("#viewEmail").val();
     phone = $("#viewPhone").val();
-    access = $('input[name="viewRadioBtnType"]:checked').val();
-    user_id = $("#btnSave").val();
     $.ajax({
         type: 'post',
         url: './main.php',
         data: {
-            saveUser: true,
+            saveClient: this.value,
             fullname: fullname,
-            username: username,
-            password: password,
             email: email,
             phone: phone,
-            access: access,
-            user_id: user_id
 
         },
         success: function (response) {
             if (response == "updated") {
-                toastr.success("User Updated");
+                toastr.success("Client Updated");
                 refreshTable();
                 $(".modal").modal("hide");
-            } else if (response == "taken") {
-                toastr.error("Username Taken");
-            } else {
+            }else {
                 toastr.error(response);
             }
         }
@@ -190,13 +155,14 @@ $("#btnDelete").click(function () {
             type:'post',
             url:'./main.php',
             data:{
-                archiveEmployee:this.value,
+                archiveClient:this.value,
             },
             success: function(response){
                 if(response == 'archived'){
-                    toastr.success("Employee has been Archived!");
+                    toastr.success("Client has been Archived!");
                     refreshTable();
                     $(".modal").modal("hide");
+                    getTaskTypes();
                 }else{
                     toastr.error(response);
                 }
@@ -205,5 +171,3 @@ $("#btnDelete").click(function () {
     }
 
 });
-
-
