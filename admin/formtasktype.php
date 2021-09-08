@@ -337,7 +337,7 @@
                 data = JSON.parse(response);
                 dt.clear().draw();
                 for (var da in data) {
-                    btn = `<button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#userInfo"><i class="fas fa-eye"></i></button>`;
+                    btn = `<button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#viewTaskType"><i class="fas fa-eye"></i></button>`;
                     dt.row.add([
                         cb,
                         data[da].type,
