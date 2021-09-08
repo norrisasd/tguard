@@ -207,20 +207,6 @@
                             <label class="form-check-label" for="adminRadioBtn">
                                 Admin
                             </label>
-<<<<<<< HEAD
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="2" name="viewRadioBtnType" id="viewAgentRadioBtn">
-                            <label class="form-check-label" for="employeeBtn">
-                                Employee
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <!-- <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button> -->
-                    <button type="button" class="btn btn-info mr-auto" id="btnArchive">Archive</button>
-=======
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" value="2" name="viewRadioBtnType" id="viewAgentRadioBtn">
@@ -232,7 +218,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Archive</button>
->>>>>>> 4826b760c8a7e7ce5d59b0ed135365ad6502554d
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
                 </div>
