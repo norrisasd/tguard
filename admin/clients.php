@@ -34,6 +34,38 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="card-body">
+                        <div class="row align-items-start">
+                            <div class="col-sm-6">
+                                <label for="clientName">Client</label>
+                                <select id="clientName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
+                                    <option value="" selected>Select Client</option>
+                                    <?php displayAllClients(); ?>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="status">Status</label>
+                                <select id="status" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
+                                    <option value="" selected hidden>Select Status</option>
+                                    <option value="">Active</option>
+                                    <option value="">Archive</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row justify-content-end" style="margin-top:2%;">
+                            <div class="col-auto">
+                                <div class="btn-group dropleft">
+                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" style="width:auto" aria-expanded="false">
+                                        Clear Search
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(6)">All</button>
+                                        <div class="dropdown-divider"></div>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(1)">Task Type</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(2)">Status</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row align-items-start" style="margin-bottom: 1%; margin-top: 2.5%;">
                             <div class="col-auto" id="beforeLD" style="margin-right:1%;">
                                 <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Export All Data shown in the Table" aria-hidden="true"></i>
@@ -72,6 +104,7 @@
                                     <th>Email</th>
                                     <th>Date Created</th>
                                     <th>No. of Tasks</th>
+                                    <th>Status</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -82,6 +115,7 @@
                                 <td>Client</td>
                                 <td>June 5, 2017</td>
                                 <td>2</td>
+                                <td>Active</td>
                                 <td><button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#viewClient"><i class="fas fa-eye"></i></button>
 
                             </tbody>
@@ -93,6 +127,7 @@
                                     <th>Email</th>
                                     <th>Date Created</th>
                                     <th>No. of Tasks</th>
+                                    <th>Status</th>
                                     <th></th>
                                 </tr>
                             </tfoot>
@@ -168,6 +203,13 @@
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Email</label>
                             <input type="email" class="form-control" id="viewEmail" autocomplete="off" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Status</label>
+                            <select class="form-control" id="inputStatus">
+                                <option value="" selected>Active</option>
+                                <option value="">Archived</option>
+                            </select>
                         </div>
 
                         <!-- <div class="form-group">

@@ -53,7 +53,9 @@
               <div class="card-box cardTask" id="upcoming">
                 <!-- Upcoming Task-->
                 <h5><b>Upcoming</b></h5>
-                <p class="text-muted m-b-30 font-13">You currently have n no. of upcoming tasks</p>
+                <p class="text-muted m-b-30 font-13">You currently have <span id=total>
+                    n
+                  </span> of upcoming tasks</p>
                 <div class="input-group rounded" style="margin-bottom:1%">
                   <input type="search" onkeydown="w3.filterHTML('#upcomingTasks', 'li', this.value)" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                   <span class="input-group-text border-0" id="search-addon">
@@ -70,7 +72,9 @@
               <div class="card-box cardTask" id="inProgress">
                 <!-- In Progress-->
                 <h5><b>In Progress</b></h5>
-                <p class="text-muted m-b-30 font-13">You currently have n no. of in progress tasks</p>
+                <p class="text-muted m-b-30 font-13">You currently have <span id = total>
+                    n 
+                  </span> of in progress tasks</p>
                 <div class="input-group rounded" style="margin-bottom:1%">
                   <input type="search" onkeydown="w3.filterHTML('#inprogressTasks', 'li', this.value)" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                   <span class="input-group-text border-0" id="search-addon">
@@ -498,7 +502,6 @@
     //                 <i class="fas fa-cloud-upload-alt"></i>',
     //   dictResponseError: 'Error while uploading file!',
     // });
-    
   </script>
 
 
