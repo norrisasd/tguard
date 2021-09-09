@@ -70,19 +70,13 @@
                                     <th>Client</th>
                                     <th>Phone</th>
                                     <th>Email</th>
-                                    <th>Date Created</th>
-                                    <th>No. of Tasks</th>
+                                    <!-- <th>Date Created</th> -->
+                                    <th>No. of Tasktype</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <td></td>
-                                <td><a href="#" class="table" onclick="" data-toggle="modal" data-target="#userInfo">Norris Hipolito</a></td>
-                                <td>norris@gmail.com</td>
-                                <td>Client</td>
-                                <td>June 5, 2017</td>
-                                <td>2</td>
-                                <td><button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#viewClient"><i class="fas fa-eye"></i></button>
+                            
 
                             </tbody>
                             <tfoot>
@@ -91,8 +85,8 @@
                                     <th>Client</th>
                                     <th>Phone</th>
                                     <th>Email</th>
-                                    <th>Date Created</th>
-                                    <th>No. of Tasks</th>
+                                    <!-- <th>Date Created</th> -->
+                                    <th>No. of Tasktype</th>
                                     <th></th>
                                 </tr>
                             </tfoot>
@@ -169,7 +163,10 @@
                             <label for="exampleFormControlInput1">Email</label>
                             <input type="email" class="form-control" id="viewEmail" autocomplete="off" required>
                         </div>
-
+                        <!-- <div class="form-group">
+                            <label for="exampleFormControlInput1">Status</label>
+                            <input type="button" class="form-control btn btn-outline-primary no-click" value="Active">
+                        </div> -->
                         <!-- <div class="form-group">
                             <label class="form-label">Access</label>
                             <div class="form-check">
@@ -220,7 +217,7 @@
     <script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <script src="../plugins/datatables-select/js/dataTables.select.min.js"></script>
     <!-- InputMask -->
-    <script src="../plugins/popper/popper.js"></script>
+    <script src="../plugins/popper/umd/popper.js"></script>
     <script src="../plugins/moment/moment.min.js"></script>
     <script src="../plugins/inputmask/jquery.inputmask.min.js"></script>
     <!-- date-range-picker -->

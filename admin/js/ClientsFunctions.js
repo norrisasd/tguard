@@ -17,7 +17,7 @@ var dt = $('#dataTable').DataTable({
         "orderable": false,
         "className": "text-center select-checkbox",
     }, {
-        "targets": 6,
+        "targets": 5,
         "orderable": false,
         "className": "text-center",
     }],
@@ -31,7 +31,15 @@ var dt = $('#dataTable').DataTable({
     "info": true,
     "autoWidth": false,
     "responsive": true,
-    "buttons": ["excel", "pdf", "print",]
+    "buttons": ["excel", "pdf", "print",],
+    createdRow: function (row, data, index) {
+        //
+        // if the second column cell is blank apply special formatting
+        //
+        if (data[4] == "0") {
+            $(row).css('color','red');
+        }
+    }
 });
 dt.buttons().container().appendTo('#beforeLD');
 new $.fn.dataTable.Buttons(dt, {
@@ -80,10 +88,10 @@ function refreshTable() {
                     data[da].ClientName,
                     data[da].phone,
                     data[da].email,
-                    data[da].email,
-                    data[da].email,
+                    data[da].tasktype_count,
                     btn,
                 ]).draw();
+                
             }
         }
     })
@@ -149,7 +157,7 @@ $("#btnSave").click(function () {
     });
     return false;
 });
-$("#btnDelete").click(function () {
+$("#btnArchive").click(function () {
     if(confirm("Are you sure you want to archive this employee?")){
         $.ajax({
             type:'post',

@@ -13,7 +13,7 @@
     }
     function displayAllClients(){
         global $dbConnection;
-        $query="SELECT * FROM client";
+        $query="SELECT * FROM client WHERE enabled=1";
         $result=mysqli_query($dbConnection,$query);
         if(mysqli_num_rows($result)>0){
             while($data=mysqli_fetch_assoc($result)){
@@ -23,7 +23,7 @@
     }
     function displayAllClientsValID(){
         global $dbConnection;
-        $query="SELECT * FROM client";
+        $query="SELECT * FROM client where enabled =1";
         $result=mysqli_query($dbConnection,$query);
         if(mysqli_num_rows($result)>0){
             while($data=mysqli_fetch_assoc($result)){

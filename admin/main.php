@@ -236,7 +236,7 @@
     }
 
     if(isset($_GET['getClientsJSON'])){
-        $query = "SELECT * FROM client WHERE enabled= 1";
+        $query = "SELECT client.*,COUNT(tasktype.client_id) as tasktype_count FROM client LEFT JOIN tasktype ON tasktype.client_id = client.client_id GROUP BY client.client_id ORDER BY client.enabled;";
         $result = mysqli_query($dbConnection,$query);
         if($result){
             if(mysqli_num_rows($result)>0){
@@ -427,6 +427,29 @@
             }
         }else{
             echo mysqli_error($dbConnection);
+        }
+    }
+    if(isset($_GET['displayEmployeeAccess'])){
+        $query = "SELECT assigned_tasktype.assigned_tasktype_id,tasktype.type FROM `assigned_tasktype` INNER JOIN tasktype on tasktype.tasktype_id=assigned_tasktype.assigned_tasktype_id WHERE assigned_tasktype.user_id=".$_GET['displayEmployeeAccess'];
+        $result = mysqli_query($dbConnection,$query);
+        if($result){
+            if(mysqli_num_rows($result)>0){
+                $result = mysqli_fetch_all($result,MYSQLI_ASSOC);
+                $result = json_encode($result);
+            }else{
+                $result= '';
+            }
+        }else{
+            $result = mysqli_error($dbConnection);
+        }
+    }
+    if(isset($_POST['revokeAccess'])){
+        $query="DELETE FROM `assigned_tasktype` WHERE assigned_tasktype_id=".$_POST['revokeAccess'];
+        $result = mysqli_query($dbConnection,$query);
+        if($result){
+            $result="revoked";
+        }else{
+            $result = mysqli_error($dbConnection);
         }
     }
     echo $result;

@@ -244,7 +244,7 @@
                                 <th>Access</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="accessBody">
                             <tr>
                                 <td>Agrisoft</td>
                                 <td> <select id="accessType" class="form-control" style="margin-right:0.5%;">
