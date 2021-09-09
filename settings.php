@@ -131,6 +131,7 @@
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.js"></script>
     <script src="js/TaskListFunctions.js"></script>
+    <script src="js/Main.js"></script>
     <script>
         $(".mt-2 ul li").removeClass("menu-open");
         $(".mt-2 ul li a").removeClass("active");

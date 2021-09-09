@@ -33,17 +33,18 @@
                     <div class="card-body">
                         <div class="row align-items-start">
                             <div class="col-sm-6">
-                                <label for="clientName">Task Types</label>
+                                <label for="clientName">Client</label>
                                 <select id="clientName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
-                                    <option value="" selected>Select Task Types</option>
+                                    <option value="" selected>Select Client</option>
                                     <?php displayAllClients(); ?>
                                 </select>
                             </div>
                             <div class="col-sm-6">
-                                <label for="agentName">Client</label>
-                                <select id="agentName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
-                                    <option value="" selected>Select Client</option>
-                                    <?php displayAllAgents(); ?>
+                                <label for="status">Status</label>
+                                <select id="status" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
+                                    <option value="" selected hidden>Select Status</option>
+                                    <option value="">Active</option>
+                                    <option value="">Archive</option>
                                 </select>
                             </div>
                         </div>
@@ -57,7 +58,7 @@
                                         <button class="dropdown-item" type="button" onclick="clearSearch(6)">All</button>
                                         <div class="dropdown-divider"></div>
                                         <button class="dropdown-item" type="button" onclick="clearSearch(1)">Task Type</button>
-                                        <button class="dropdown-item" type="button" onclick="clearSearch(2)">Client</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(2)">Status</button>
                                     </div>
                                 </div>
                             </div>
@@ -108,8 +109,8 @@
                                     <th class="text-center"></th>
                                     <th>Task Type</th>
                                     <th>Client Name</th>
-                                    <th></th>
-                                    <th></th>
+                                    <th>Email</th>
+                                    <th>Status</th>
                                     <th></th>
                                 </tr>
                             </tfoot>
@@ -190,22 +191,29 @@
                         <div class="container-fluid">
 
                             <div class="form-group">
-                                <label for="inputTaskType">Task Type</label>
-                                <input type="text" class="form-control" id="inputTaskType" placeholder="" required />
+                                <label for="viewTaskType">Task Type</label>
+                                <input type="text" class="form-control" id="viewTaskType" placeholder="" required />
 
                             </div>
 
                             <div class="form-group">
-                                <label for="inputClient">Client</label>
-                                <select class="form-control" id="inputClient" required>
+                                <label for="viewClient">Client</label>
+                                <select class="form-control" id="viewClient" required>
                                     <option value="" selected hidden>Select Task Type</option>
                                     <?php displayAllClients() ?>
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label for="inputDescription2">Notes: </label>
-                                <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
+                                <label for="viewNotes">Notes: </label>
+                                <textarea type="text" class="form-control" id="viewNotes"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Status</label>
+                                <select class="form-control" id="inputStatus">
+                                    <option value="" selected>Active</option>
+                                    <option value="">Archived</option>
+                                </select>
                             </div>
 
                             <!-- <div class="form-group">
@@ -262,93 +270,10 @@
     <!-- AdminLTE App -->
     <script src="../dist/js/adminlte.js"></script>
     <script src="./js/Main.js"></script>
+    <script src="./js/TaskType.js"></script>r
 
     <script>
-        $(".mt-2 ul li").removeClass("menu-open");
-        $(".mt-2 ul li a").removeClass("active");
-        $(".mt-2 ul li:nth-child(4) ul li:nth-child(1)").removeClass("menu-open");
-        $(".mt-2 ul li:nth-child(4) ul li:nth-child(1) a").removeClass("active");
-        $(".mt-2 ul li:nth-child(5) ul li:nth-child(4)").addClass("menu-open");
-        $(".mt-2 ul li:nth-child(5) ul li:nth-child(4) a").addClass("active");
-        var dt = $('#dataTable').DataTable({
-            "oLanguage": {
-                "sLengthMenu": "Show Entries _MENU_",
-            },
-            dom: "<'row d-flex flex-row align-items-end'>tr<'row d-flex flex-row align-items-end'<'col-md-6'l><'col-sm-2'i><'col-md-4'p>>",
-            "pageLength": 10,
-            "order": [],
-            "columnDefs": [{
-                "targets": 0,
-                "orderable": false,
-                "className": "text-center select-checkbox",
-            }, {
-                "targets": 5,
-                "orderable": false,
-                "className": "text-center",
-            }],
-            select: {
-                style: 'multi',
-                selector: 'tr>td:nth-child(1)'
-            },
-            "paging": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-            "buttons": ["excel", "pdf", "print", ]
-        });
-        dt.buttons().container().appendTo('#beforeLD');
-        new $.fn.dataTable.Buttons(dt, {
-            "buttons": [{
-                extend: 'excel',
-                text: 'Excel Selected',
-                exportOptions: {
-                    modifier: {
-                        selected: true
-                    }
-                },
-            }, {
-                extend: 'pdf',
-                text: 'PDF Selected',
-                exportOptions: {
-                    modifier: {
-                        selected: true
-                    }
-                },
-            }, {
-                extend: 'print',
-                text: 'Print Selected',
-                exportOptions: {
-                    modifier: {
-                        selected: true
-                    }
-                },
-            }]
-        }).container().appendTo('#beforeLD1');
-        var cb = "";
-        $.ajax({
-            type: 'get',
-            url: './main.php',
-            data: {
-                getTaskTypes: true
-            },
-            success: function(response) {
-                data = JSON.parse(response);
-                dt.clear().draw();
-                for (var da in data) {
-                    btn = `<button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#viewTaskType"><i class="fas fa-eye"></i></button>`;
-                    dt.row.add([
-                        cb,
-                        data[da].type,
-                        data[da].ClientName,
-                        data[da].email,
-                        data[da].enabled==1?"Active":"Archived",
-                        btn,
-                    ]).draw();
-                }
-            }
-        })
+
     </script>
 
 </body>

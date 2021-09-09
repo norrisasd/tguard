@@ -32,6 +32,38 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="card-body">
+                        <div class="row align-items-start">
+                            <div class="col-sm-6">
+                                <label for="employeeName">Employee</label>
+                                <select id="employeeName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
+                                    <option value="" selected>Select Employee</option>
+                                    <?php displayAllAgents(); ?>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="status">Status</label>
+                                <select id="status" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
+                                    <option value="" selected hidden>Select Status</option>
+                                    <option value="">Active</option>
+                                    <option value="">Archive</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row justify-content-end" style="margin-top:2%;">
+                            <div class="col-auto">
+                                <div class="btn-group dropleft">
+                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" style="width:auto" aria-expanded="false">
+                                        Clear Search
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(6)">All</button>
+                                        <div class="dropdown-divider"></div>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(1)">Employee</button>
+                                        <button class="dropdown-item" type="button" onclick="clearSearch(2)">Status</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row align-items-start" style="margin-bottom: 1%; margin-top: 2.5%;">
                             <div class="col-auto" id="beforeLD" style="margin-right:1%;">
                                 <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Export All Data shown in the Table" aria-hidden="true"></i>
@@ -71,7 +103,7 @@
                                     <th>Password</th>
                                     <th>Phone</th>
                                     <th>User</th>
-                                    <th></th>
+                                    <th>Status</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -87,7 +119,7 @@
                                     <th>Password</th>
                                     <th>Phone</th>
                                     <th>User</th>
-                                    <th></th>
+                                    <th>Status</th>
                                     <th></th>
                                     <!-- <td><button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#userInfo"><i class="fas fa-eye"></i></button></td> -->
                                 </tr>
@@ -215,9 +247,17 @@
                             </label>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Status</label>
+                        <select class="form-control" id="inputStatus">
+                            <option value="" selected>Active</option>
+                            <option value="">Archived</option>
+                        </select>
+                    </div>
                 </div>
+
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Archive</button>
+                    <button type="button" class="btn btn-info mr-auto" id="btnArchive">Archive</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
                 </div>
