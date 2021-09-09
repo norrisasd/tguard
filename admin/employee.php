@@ -105,6 +105,7 @@
                                     <th>User</th>
                                     <th>Status</th>
                                     <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -120,6 +121,7 @@
                                     <th>Phone</th>
                                     <th>User</th>
                                     <th>Status</th>
+                                    <th></th>
                                     <th></th>
                                     <!-- <td><button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#userInfo"><i class="fas fa-eye"></i></button></td> -->
                                 </tr>

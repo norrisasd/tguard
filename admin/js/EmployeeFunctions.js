@@ -16,7 +16,7 @@ var dt = $('#dataTable').DataTable({
         "orderable": false,
         "className": "text-center select-checkbox",
     }, {
-        "targets": [7, 8],
+        "targets": [8, 9],
         "className": "text-center"
     }],
     select: {
@@ -82,6 +82,7 @@ function refreshTable() {
                     data[da].password,
                     data[da].phone,
                     access,
+                    "status",
                     btn,
                     btnAccess
                 ]).draw();

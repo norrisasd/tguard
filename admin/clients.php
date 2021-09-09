@@ -102,7 +102,6 @@
                                     <th>Client</th>
                                     <th>Phone</th>
                                     <th>Email</th>
-                                    <th>Date Created</th>
                                     <th>No. of Tasks</th>
                                     <th>Status</th>
                                     <th></th>
@@ -118,7 +117,6 @@
                                     <th>Client</th>
                                     <th>Phone</th>
                                     <th>Email</th>
-                                    <th>Date Created</th>
                                     <th>No. of Tasks</th>
                                     <th>Status</th>
                                     <th></th>
