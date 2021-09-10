@@ -9,6 +9,8 @@ $(".mt-2 ul li:nth-child(3) ul li").removeClass("menu-open");
 $(".mt-2 ul li:nth-child(3) ul li a").removeClass("active");
 $(".mt-2 ul li:nth-child(4) ul li").removeClass("menu-open");
 $(".mt-2 ul li:nth-child(4) ul li a").removeClass("active");
+$(".mt-2 ul li:nth-child(5) ul li").removeClass("menu-open");
+$(".mt-2 ul li:nth-child(5) ul li a").removeClass("active");
 var defaultClient='asd';
 displayUpcomingTask();
 displayInProgress();

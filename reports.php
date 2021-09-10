@@ -4,7 +4,11 @@
   Agent Reports
     * Contain a report of all completed tasks with the flags
 -->
+
 <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="loaderB" id="logoloader" style="position:absolute;z-index:5;display:none">
+        <div class="loader" style="margin:20% 50%"></div>
+    </div>
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
@@ -367,7 +371,7 @@
     <script src="dist/js/adminlte.js"></script>
     <script src="./js/TaskListFunctions.js"></script>
     <script src="./js/Main.js"></script>
-    
+
     <script src="https://www.w3schools.com/lib/w3.js"></script>
 </body>
 
