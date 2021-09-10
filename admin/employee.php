@@ -38,21 +38,21 @@
                         <div class="row align-items-start">
                             <div class="col-sm-6">
                                 <label for="employeeName">Employee</label>
-                                <select id="employeeName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
-                                    <option value="" selected>Select Employee</option>
-                                    <?php displayAllAgents(); ?>
+                                <select id="employeeName" onchange="searchEmployee(this.value)" class="form-control" style="margin-right:0.5%;">
+                                    <option value="" selected>All</option>
+                                    <?php displayAllAgentsName(); ?>
                                 </select>
                             </div>
                             <div class="col-sm-6">
                                 <label for="status">Status</label>
-                                <select id="status" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
-                                    <option value="" selected hidden>Select Status</option>
-                                    <option value="">Active</option>
-                                    <option value="">Archive</option>
+                                <select id="status" onchange="searchStatus(this.value)" class="form-control" style="margin-right:0.5%;">
+                                    <option value="" selected>All</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Archive">Archive</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="row justify-content-end" style="margin-top:2%;">
+                        <!-- <div class="row justify-content-end" style="margin-top:2%;">
                             <div class="col-auto">
                                 <div class="btn-group dropleft">
                                     <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" style="width:auto" aria-expanded="false">
@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row align-items-start" style="margin-bottom: 1%; margin-top: 2.5%;">
                             <div class="col-auto" id="beforeLD" style="margin-right:1%;">
                                 <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Export All Data shown in the Table" aria-hidden="true"></i>
@@ -80,6 +80,11 @@
                                         Add
                                     </button>
                                 </div>
+                            </div>
+                            <div class="btn-group dropright">
+                                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#assignUser">
+                                    Assign to a User
+                                </button>
                             </div>
                             <div class="col"> </div>
                             <div class="col-auto">
@@ -255,14 +260,15 @@
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Status</label>
                         <select class="form-control" id="inputStatus">
-                            <option value="" selected>Active</option>
-                            <option value="">Archived</option>
+                            <option value="1" selected>Active</option>
+                            <option value="0">Archived</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-info mr-auto" id="btnArchive">Archive</button>
+                    <button type="button" class="btn btn-info mr-auto" id="btnActive" style="display:none">Activate</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
                 </div>
@@ -310,6 +316,49 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="assignUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Task Type</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" onsubmit="return assignUser();" autocomplete="off" id="assignUserForm">
+                        <div class="form-group">
+                            <label for="inputClient">Agent</label>
+                            <select class="form-control" onchange="setTaskTypeOptions(this.value)" id="assignAgent" required>
+                                <option value="" selected hidden>Select Agent</option>
+                                <?php displayAllAgents() ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="assignTaskType">Task Type</label>
+                            <select class="form-control" onchange="setInputClientView(this.value)" id="assignTaskType" required>
+                                <option value="" selected hidden>Select Task Type</option>
+                                <?php displayAllTaskType() ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="assignClient">Client</label>
+                            <select class="form-control" id="assignClient" disabled>
+                                <option value="" selected hidden>Select Client</option>
+                                <?php displayAllClientsValID() ?>
+                            </select>
+                        </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- jQuery -->
     <script src="../plugins/jquery/jquery.min.js"></script>
@@ -344,7 +393,13 @@
     <script src="../dist/js/adminlte.js"></script>
     <script src="./js/Main.js"></script>
     <script src="./js/EmployeeFunctions.js"></script>
-
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script>
+        function resetTaskTypeOption() {
+            $("#assignTaskType").html('<option value="" selected hidden>Select Task Type</option>' + '<?php echo displayAllTaskType() ?>');
+            $('#assignClient').val("");
+        }
+    </script>
 </body>
 
 </html>

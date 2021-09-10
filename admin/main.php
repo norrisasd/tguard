@@ -236,7 +236,7 @@
     }
 
     if(isset($_GET['getClientsJSON'])){
-        $query = "SELECT client.*,COUNT(tasktype.client_id) as tasktype_count FROM client LEFT JOIN tasktype ON tasktype.client_id = client.client_id GROUP BY client.client_id ORDER BY client.enabled;";
+        $query = "SELECT client.*,COUNT(tasktype.client_id) as tasktype_count FROM client LEFT JOIN tasktype ON tasktype.client_id = client.client_id GROUP BY client.client_id ORDER BY client.enabled DESC; ";
         $result = mysqli_query($dbConnection,$query);
         if($result){
             if(mysqli_num_rows($result)>0){
@@ -250,7 +250,7 @@
         }
     }
     if(isset($_GET['getAgentsJSON'])){
-        $query = "SELECT * FROM user where enabled = 1";
+        $query = "SELECT * FROM user";
         $result = mysqli_query($dbConnection,$query);
         if($result){
             if(mysqli_num_rows($result)>0){
@@ -265,7 +265,7 @@
     }
     
     if(isset($_GET['getTaskTypes'])){
-        $query="SELECT tasktype.tasktype_id,tasktype.type,client.* FROM tasktype INNER JOIN client ON client.client_id = tasktype.client_id";
+        $query="SELECT tasktype.tasktype_id,tasktype.notes,tasktype.type,client.* FROM tasktype INNER JOIN client ON client.client_id = tasktype.client_id ORDER BY client.enabled desc";
         $result = mysqli_query($dbConnection,$query);
         if($result){
             if(mysqli_num_rows($result)>0){
@@ -280,7 +280,7 @@
     }
 
     if(isset($_POST['addTaskType'])){
-        $query="INSERT INTO `tasktype`(`type`, `client_id`) VALUES ('".$_POST['tasktype']."',".$_POST['client'].")";
+        $query="INSERT INTO `tasktype`(`type`,`notes`, `client_id`) VALUES ('".$_POST['tasktype']."','".$_POST['notes']."',".$_POST['client'].")";
         $result = mysqli_query($dbConnection,$query);
         if($result){
             $result = "inserted";
@@ -361,7 +361,7 @@
     }
 
     if(isset($_POST['saveUser'])){
-        $query="UPDATE `user` SET `name`='".$_POST['fullname']."',`phone`=".$_POST['phone'].",`email`='".$_POST['email']."',`username`='".$_POST['username']."',`password`='".$_POST['password']."',`access`=".$_POST['access']." WHERE user_id =".$_POST['user_id'];
+        $query="UPDATE `user` SET `name`='".$_POST['fullname']."',`phone`=".$_POST['phone'].",`email`='".$_POST['email']."',`username`='".$_POST['username']."',`password`='".$_POST['password']."',`access`=".$_POST['access'].",`enabled`=".$_POST['enabled']." WHERE user_id =".$_POST['user_id'];
         $result=mysqli_query($dbConnection,$query);
         if($result){
             $result="updated";
@@ -388,8 +388,17 @@
             echo mysqli_error($dbConnection);
         }
     }
+    if(isset($_POST['activateEmployee'])){
+        $query ="UPDATE user set enabled = 1 WHERE user_id=".$_POST['activateEmployee'];
+        $result=mysqli_query($dbConnection,$query);
+        if($result){
+            $result="activated";
+        }else{
+            echo mysqli_error($dbConnection);
+        }
+    }
     if(isset($_POST['saveClient'])){
-        $query="UPDATE `client` SET `ClientName`='".$_POST['fullname']."',`phone`=".$_POST['phone'].",`email`='".$_POST['email']."' WHERE client_id =".$_POST['saveClient'];
+        $query="UPDATE `client` SET `ClientName`='".$_POST['fullname']."',`phone`=".$_POST['phone'].",`email`='".$_POST['email']."', `enabled`=".$_POST['enabled']." WHERE client_id =".$_POST['saveClient'];
         $result=mysqli_query($dbConnection,$query);
         if($result){
             $result="updated";
@@ -402,6 +411,15 @@
         $result=mysqli_query($dbConnection,$query);
         if($result){
             $result="archived";
+        }else{
+            echo mysqli_error($dbConnection);
+        }
+    }
+    if(isset($_POST['activateClient'])){
+        $query ="UPDATE client set enabled = 1 WHERE client_id=".$_POST['activateClient'];
+        $result=mysqli_query($dbConnection,$query);
+        if($result){
+            $result="activated";
         }else{
             echo mysqli_error($dbConnection);
         }
@@ -448,6 +466,16 @@
         $result = mysqli_query($dbConnection,$query);
         if($result){
             $result="revoked";
+        }else{
+            $result = mysqli_error($dbConnection);
+        }
+    }
+
+    if(isset($_POST['saveTasktype'])){
+        $query = "UPDATE `tasktype` SET `type`='".$_POST['tasktype']."',`notes`='".$_POST['notes']."',`client_id`=".$_POST['client']." WHERE tasktype_id=".$_POST['saveTasktype'];
+        $result = mysqli_query($dbConnection,$query);
+        if($result){
+            $result="updated";
         }else{
             $result = mysqli_error($dbConnection);
         }

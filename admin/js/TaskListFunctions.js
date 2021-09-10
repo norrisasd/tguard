@@ -17,6 +17,7 @@ var dt = $('#dataTable').DataTable({
         "className": "text-center select-checkbox",
     }, {
         "targets": 5,
+        "orderable": false,
         "className": "text-center",
     }],
     select: {
@@ -29,8 +30,45 @@ var dt = $('#dataTable').DataTable({
     "info": true,
     "autoWidth": false,
     "responsive": true,
+    "buttons": ["excel", "pdf", "print",],
+    // createdRow: function (row, data, index) {
+    //     //
+    //     // if the second column cell is blank apply special formatting
+    //     //
+    //     if (data[4] == "Archived") {
+    //         $(row).css('color', 'red');
+    //     }
+    // }
 });
-var cb = "";
+var cb ="";
+dt.buttons().container().appendTo('#beforeLD');
+new $.fn.dataTable.Buttons(dt, {
+    "buttons": [{
+        extend: 'excel',
+        text: 'Excel Selected',
+        exportOptions: {
+            modifier: {
+                selected: true
+            }
+        },
+    }, {
+        extend: 'pdf',
+        text: 'PDF Selected',
+        exportOptions: {
+            modifier: {
+                selected: true
+            }
+        },
+    }, {
+        extend: 'print',
+        text: 'Print Selected',
+        exportOptions: {
+            modifier: {
+                selected: true
+            }
+        },
+    }]
+}).container().appendTo('#beforeLD1');
 refreshTable();
 function refreshTable() {
     $.ajax({
@@ -43,17 +81,18 @@ function refreshTable() {
             data = JSON.parse(response);
             dt.clear().draw();
             for (var da in data) {
-                btn = `<button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" onclick='tasktypeInfo(` + JSON.stringify(data[da]) + `)' data-target="#viewTaskType"><i class="fas fa-eye"></i></button>`;
-                dt.row.add([
-                    cb,
-                    data[da].type,
-                    data[da].ClientName,
-                    data[da].email,
-                    data[da].phone,
-                    btn,
+                if (data[da].enabled == 1) {
+                    btn = `<button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" onclick='tasktypeInfo(` + JSON.stringify(data[da]) + `)' data-target="#viewTaskType"><i class="fas fa-eye"></i></button>`;
+                    dt.row.add([
+                        cb,
+                        data[da].type,
+                        data[da].ClientName,
+                        data[da].email,
+                        data[da].phone,
+                        btn,
+                    ]).draw();
+                }
 
-
-                ]).draw();
             }
         }
     })
@@ -62,17 +101,21 @@ function tasktypeInfo(data) {
     $("#viewType").val(data.type);
     $("#viewClient").val(data.client_id);
     $("#btnDelete").val(data.tasktype_id);
+    $("#btnSave").val(data.tasktype_id);
+    $("#viewNotes").val(data.notes);
 }
 function addTaskType() {
     client = $("#inputClient").val();
     tasktype = $("#inputTaskType").val();
+    notes = $("#inputNotes").val();
     $.ajax({
         type: 'post',
         url: './main.php',
         data: {
             addTaskType: true,
             client: client,
-            tasktype: tasktype
+            tasktype: tasktype,
+            notes: notes,
         },
         success: function (response) {
             if (response == "inserted") {
@@ -103,33 +146,33 @@ function setTaskTypeOptions(value) {
             } else {
                 data = JSON.parse(response);
                 for (var da in data) {
-                    if(data[da].tasktype_id !=0){
+                    if (data[da].tasktype_id != 0) {
                         $("#assignTaskType option[value='" + data[da].tasktype_id + "']").remove();
                     }
-                    
+
                 }
             }
 
         }
     });
 }
-function assignUser(){
-    user=$("#assignAgent").val();
-    tasktype=$("#assignTaskType").val();
+function assignUser() {
+    user = $("#assignAgent").val();
+    tasktype = $("#assignTaskType").val();
     $.ajax({
-        type:'post',
-        url:'./main.php',
-        data:{
-            assignUser:true,
-            user:user,
-            tasktype:tasktype
+        type: 'post',
+        url: './main.php',
+        data: {
+            assignUser: true,
+            user: user,
+            tasktype: tasktype
         },
-        success:function(response){
-            if(response == "assigned"){
+        success: function (response) {
+            if (response == "assigned") {
                 toastr.success("Assigned Successfully");
                 $(".modal").modal("hide");
                 document.getElementById("assignUserForm").reset();
-            }else{
+            } else {
                 toastr.error(response);
             }
         }
@@ -159,4 +202,30 @@ $("#btnDelete").click(function () {
         });
     }
 
+});
+$("#btnSave").click(function(){
+    client = $("#viewClient").val();
+    tasktype = $("#viewType").val();
+    notes=$("#viewNotes").val();
+    $.ajax({
+        type: 'post',
+        url: './main.php',
+        data: {
+            saveTasktype: this.value,
+            client: client,
+            tasktype: tasktype,
+            notes: notes,
+        },
+        success: function (response) {
+            if (response == "updated") {
+                toastr.success("Task Type updated");
+                refreshTable();
+                $(".modal").modal("hide");
+                getTaskTypes();
+            } else {
+                toastr.error(response);
+            }
+        }
+    });
+    return false;
 });

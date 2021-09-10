@@ -11,9 +11,29 @@
         
         
     }
+    function displayAllClientsEnabled(){
+        global $dbConnection;
+        $query="SELECT * FROM client WHERE enabled = 1";
+        $result=mysqli_query($dbConnection,$query);
+        if(mysqli_num_rows($result)>0){
+            while($data=mysqli_fetch_assoc($result)){
+                echo '<option value="'.$data['ClientName'].'">'.$data['ClientName'].'</option>';
+            }
+        }
+    }
+    function displayAllClientsEnabledValID(){
+        global $dbConnection;
+        $query="SELECT * FROM client WHERE enabled = 1";
+        $result=mysqli_query($dbConnection,$query);
+        if(mysqli_num_rows($result)>0){
+            while($data=mysqli_fetch_assoc($result)){
+                echo '<option value="'.$data['client_id'].'">'.$data['ClientName'].'</option>';
+            }
+        }
+    }
     function displayAllClients(){
         global $dbConnection;
-        $query="SELECT * FROM client WHERE enabled=1";
+        $query="SELECT * FROM client";
         $result=mysqli_query($dbConnection,$query);
         if(mysqli_num_rows($result)>0){
             while($data=mysqli_fetch_assoc($result)){
@@ -23,7 +43,7 @@
     }
     function displayAllClientsValID(){
         global $dbConnection;
-        $query="SELECT * FROM client where enabled =1";
+        $query="SELECT * FROM client";
         $result=mysqli_query($dbConnection,$query);
         if(mysqli_num_rows($result)>0){
             while($data=mysqli_fetch_assoc($result)){
@@ -38,6 +58,16 @@
         if(mysqli_num_rows($result)>0){
             while($data=mysqli_fetch_assoc($result)){
                 echo '<option value="'.$data['user_id'].'">'.$data['name'].'</option>';
+            }
+        }
+    }
+    function displayAllAgentsName(){
+        global $dbConnection;
+        $query="SELECT * FROM user";
+        $result=mysqli_query($dbConnection,$query);
+        if(mysqli_num_rows($result)>0){
+            while($data=mysqli_fetch_assoc($result)){
+                echo '<option value="'.$data['name'].'">'.$data['name'].'</option>';
             }
         }
     }
