@@ -52,6 +52,12 @@
                             <!-- <div class="col-auto" style="margin-top:1%">
                                 <input type="checkbox" value="" style="margin-left:10px;" id="selectAll" onclick="selectAll(this)"> Select All
                             </div> -->
+                            <div class="col-auto" id="beforeLD" style="margin-right:1%;">
+                                <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Export All Data shown in the Table" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-auto" id="beforeLD1" style="margin-right:1%;">
+                                <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Export Selected Data shown in the Table" aria-hidden="true"></i>
+                            </div>
                             <div class="col-auto">
                                 <div class="btn-group dropright">
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTaskType">
@@ -61,7 +67,7 @@
                             </div>
                             <div class="col-auto">
                                 <div class="btn-group dropright">
-                                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#assignUser">
+                                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#assignUser">
                                         Assign to a User
                                     </button>
                                 </div>
@@ -137,8 +143,12 @@
                             <label for="inputClient">Client</label>
                             <select class="form-control" id="inputClient" required>
                                 <option value="" selected hidden>Select Client</option>
-                                <?php displayAllClientsValID() ?>
+                                <?php displayAllClientsEnabledValID() ?>
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDescription2">Notes: </label>
+                            <textarea type="text" class="form-control" id="inputNotes"></textarea>
                         </div>
                         <!-- <div class="form-group">
                             <label for="exampleFormControlInput1">Email</label>
@@ -186,10 +196,14 @@
                                 <label for="viewClient">Client</label>
                                 <select class="form-control" id="viewClient" required>
                                     <option value="" selected hidden>Select Task Type</option>
-                                    <?php displayAllClientsValID() ?>
+                                    <?php displayAllClientsEnabledValID() ?>
                                 </select>
                             </div>
-<!-- 
+                            <div class="form-group">
+                                <label for="inputDescription2">Notes: </label>
+                                <textarea type="text" class="form-control" id="viewNotes"></textarea>
+                            </div>
+                            <!-- 
                             <div class="form-group">
                                 <label for="inputDescription2">Notes: </label>
                                 <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
@@ -208,7 +222,7 @@
                         </div>
                         <div class="modal-footer">
                             <!-- <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button> -->
-                            <button type="button" class="btn btn-info mr-auto" id="btnArchive">Archive</button>
+                            <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
                         </div>
@@ -237,7 +251,7 @@
                         </div>
                         <div class="form-group">
                             <label for="assignTaskType">Task Type</label>
-                            <select class="form-control" onchange="setInputClientView(this.value)"  id="assignTaskType" required>
+                            <select class="form-control" onchange="setInputClientView(this.value)" id="assignTaskType" required>
                                 <option value="" selected hidden>Select Task Type</option>
                                 <?php displayAllTaskType() ?>
                             </select>
@@ -249,8 +263,8 @@
                                 <?php displayAllClientsValID() ?>
                             </select>
                         </div>
-                        
-                        
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -296,8 +310,8 @@
     <script src="./js/TaskListFunctions.js"></script>
     <script src="./js/Main.js"></script>
     <script>
-        function resetTaskTypeOption(){
-            $("#assignTaskType").html('<option value="" selected hidden>Select Task Type</option>'+'<?php echo displayAllTaskType() ?>');
+        function resetTaskTypeOption() {
+            $("#assignTaskType").html('<option value="" selected hidden>Select Task Type</option>' + '<?php echo displayAllTaskType() ?>');
             $('#assignClient').val("");
         }
     </script>

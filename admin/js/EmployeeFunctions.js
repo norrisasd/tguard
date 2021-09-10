@@ -29,7 +29,15 @@ var dt = $('#dataTable').DataTable({
     "info": true,
     "autoWidth": false,
     "responsive": true,
-    "buttons": ["excel", "pdf", "print",]
+    "buttons": ["excel", "pdf", "print",],
+    createdRow: function (row, data, index) {
+        //
+        // if the second column cell is blank apply special formatting
+        //
+        if (data[7] == "Archived") {
+            $(row).css('color','red');
+        }
+    }
 });
 dt.buttons().container().appendTo('#beforeLD');
 new $.fn.dataTable.Buttons(dt, {
@@ -82,7 +90,7 @@ function refreshTable() {
                     data[da].password,
                     data[da].phone,
                     access,
-                    "status",
+                    data[da].enabled == 1?"Active":"Archived",
                     btn,
                     btnAccess
                 ]).draw();
@@ -138,7 +146,16 @@ function addUser() {
 }
 
 function taskInfo(data) {
-    $("#btnDelete").val(data.user_id);
+    if(data.enabled !=1){
+        w3.hide('#btnArchive');
+        w3.show('#btnActive')
+    }else{
+        w3.show('#btnArchive');
+        w3.hide('#btnActive')
+    }
+    $("#inputStatus").val(data.enabled);
+    $("#btnArchive").val(data.user_id);
+    $("#btnActive").val(data.user_id);
     $("#btnSave").val(data.user_id);
     $("#viewName").val(data.name);
     $("#viewUsername").val(data.username);
@@ -157,6 +174,7 @@ $("#btnSave").click(function () {
     email = $("#viewEmail").val();
     phone = $("#viewPhone").val();
     access = $('input[name="viewRadioBtnType"]:checked').val();
+    enabled = $("#inputStatus").val();
     user_id = $("#btnSave").val();
     $.ajax({
         type: 'post',
@@ -169,7 +187,8 @@ $("#btnSave").click(function () {
             email: email,
             phone: phone,
             access: access,
-            user_id: user_id
+            user_id: user_id,
+            enabled:enabled
 
         },
         success: function (response) {
@@ -187,7 +206,7 @@ $("#btnSave").click(function () {
     });
     return false;
 });
-$("#btnDelete").click(function () {
+$("#btnArchive").click(function () {
     if (confirm("Are you sure you want to archive this employee?")) {
         $.ajax({
             type: 'post',
@@ -198,6 +217,33 @@ $("#btnDelete").click(function () {
             success: function (response) {
                 if (response == 'archived') {
                     toastr.success("Employee has been Archived!");
+                    refreshTable();
+                    $(".modal").modal("hide");
+                } else {
+                    toastr.error(response);
+                }
+            }
+        });
+    }
+
+});
+function searchStatus(status){
+    dt.columns(7).search( status ).draw();
+}
+function searchEmployee(name){
+    dt.columns(1).search( name ).draw();
+}
+$("#btnActive").click(function () {
+    if (confirm("Are you sure you want to activate this employee?")) {
+        $.ajax({
+            type: 'post',
+            url: './main.php',
+            data: {
+                activateEmployee: this.value,
+            },
+            success: function (response) {
+                if (response == 'activated') {
+                    toastr.success("Employee has been Activated!");
                     refreshTable();
                     $(".modal").modal("hide");
                 } else {
@@ -251,6 +297,29 @@ function revokeAccess(id){
         });
         return false;
     }
+}
+function assignUser() {
+    user = $("#assignAgent").val();
+    tasktype = $("#assignTaskType").val();
+    $.ajax({
+        type: 'post',
+        url: './main.php',
+        data: {
+            assignUser: true,
+            user: user,
+            tasktype: tasktype
+        },
+        success: function (response) {
+            if (response == "assigned") {
+                toastr.success("Assigned Successfully");
+                $(".modal").modal("hide");
+                document.getElementById("assignUserForm").reset();
+            } else {
+                toastr.error(response);
+            }
+        }
+    });
+    return false;
 }
 
 

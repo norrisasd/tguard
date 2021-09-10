@@ -37,21 +37,21 @@
                         <div class="row align-items-start">
                             <div class="col-sm-6">
                                 <label for="clientName">Client</label>
-                                <select id="clientName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
-                                    <option value="" selected>Select Client</option>
+                                <select id="clientName" onchange="searchClient(this.value)" class="form-control" style="margin-right:0.5%;">
+                                    <option value="" selected>All</option>
                                     <?php displayAllClients(); ?>
                                 </select>
                             </div>
                             <div class="col-sm-6">
                                 <label for="status">Status</label>
-                                <select id="status" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
-                                    <option value="" selected hidden>Select Status</option>
-                                    <option value="">Active</option>
-                                    <option value="">Archive</option>
+                                <select id="status" onchange="searchStatus(this.value)" class="form-control" style="margin-right:0.5%;">
+                                    <option value="" selected>All</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Archive">Archive</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="row justify-content-end" style="margin-top:2%;">
+                        <!-- <div class="row justify-content-end" style="margin-top:2%;">
                             <div class="col-auto">
                                 <div class="btn-group dropleft">
                                     <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" style="width:auto" aria-expanded="false">
@@ -65,7 +65,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row align-items-start" style="margin-bottom: 1%; margin-top: 2.5%;">
                             <div class="col-auto" id="beforeLD" style="margin-right:1%;">
                                 <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Export All Data shown in the Table" aria-hidden="true"></i>
@@ -198,8 +198,8 @@
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Status</label>
                             <select class="form-control" id="inputStatus">
-                                <option value="" selected>Active</option>
-                                <option value="">Archived</option>
+                                <option value="1" selected>Active</option>
+                                <option value="0">Archived</option>
                             </select>
                         </div>
 
@@ -222,6 +222,7 @@
                 <div class="modal-footer">
                     <!-- <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button> -->
                     <button type="button" class="btn btn-info mr-auto" id="btnArchive">Archive</button>
+                    <button type="button" class="btn btn-info mr-auto" id="btnActive" style="display:none">Active</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
                 </div>
@@ -265,6 +266,7 @@
     <script src="./js/Main.js"></script>
 
     <script src="./js/ClientsFunctions.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
 
 </body>
 

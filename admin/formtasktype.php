@@ -34,43 +34,27 @@
                         <div class="row align-items-start">
                             <div class="col-sm-6">
                                 <label for="clientName">Client</label>
-                                <select id="clientName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
-                                    <option value="" selected>Select Client</option>
+                                <select id="clientName" onchange="searchClient(this.value)" class="form-control" style="margin-right:0.5%;">
+                                    <option value="" selected>All</option>
                                     <?php displayAllClients(); ?>
                                 </select>
                             </div>
                             <div class="col-sm-6">
                                 <label for="status">Status</label>
-                                <select id="status" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
-                                    <option value="" selected hidden>Select Status</option>
-                                    <option value="">Active</option>
-                                    <option value="">Archive</option>
+                                <select id="status" onchange="searchStatus(this.value)" class="form-control" style="margin-right:0.5%;">
+                                    <option value="" selected>All</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Archive">Archive</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="row justify-content-end" style="margin-top:2%;">
-                            <div class="col-auto">
-                                <div class="btn-group dropleft">
-                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" style="width:auto" aria-expanded="false">
-                                        Clear Search
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <button class="dropdown-item" type="button" onclick="clearSearch(6)">All</button>
-                                        <div class="dropdown-divider"></div>
-                                        <button class="dropdown-item" type="button" onclick="clearSearch(1)">Task Type</button>
-                                        <button class="dropdown-item" type="button" onclick="clearSearch(2)">Status</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                         <div class="row align-items-start" style="margin-bottom: 1%; margin-top: 2.5%;">
-                            <div class="col-auto" style="margin-top:1%">
-                                <input type="checkbox" value="" style="margin-left:10px;" id="selectAll" onclick="selectAll(this)"> Select All
+                            <div class="col-auto" id="beforeLD" style="margin-right:1%;">
+                                <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Export All Data shown in the Table" aria-hidden="true"></i>
                             </div>
-                            <div class="col-auto">
-                                <button type="button" class="btn btn-success">
-                                    Export
-                                </button>
+                            <div class="col-auto" id="beforeLD1" style="margin-right:1%;">
+                                <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Export Selected Data shown in the Table" aria-hidden="true"></i>
                             </div>
                             <div class="col-auto">
                                 <div class="btn-group dropright">
@@ -94,11 +78,16 @@
                         <table id="dataTable" class="table table-bordered table-hover" style="height:100%;background-color:white">
                             <thead>
                                 <tr>
-                                    <th class="text-center"></th>
+                                    <th class="text-center"><input type="checkbox" onchange="
+                                        if(this.checked)
+                                            dt.rows().select();
+                                        else
+                                            dt.rows().deselect();
+                                    "></th>
                                     <th>Task Type</th>
                                     <th>Client Name</th>
                                     <th>Email</th>
-                                    <th>Status</th>
+                                    <!-- <th>Status</th> -->
                                     <th></th>
                                 </tr>
                             </thead>
@@ -110,7 +99,7 @@
                                     <th>Task Type</th>
                                     <th>Client Name</th>
                                     <th>Email</th>
-                                    <th>Status</th>
+                                    <!-- <th>Status</th> -->
                                     <th></th>
                                 </tr>
                             </tfoot>
@@ -131,7 +120,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="get" id="viewTask" action="">
+                <form method="get" id="addTaskType" onsubmit="return addTaskType();" action="">
                     <div class="modal-body">
                         <div class="container-fluid">
 
@@ -145,13 +134,13 @@
                                 <label for="inputClient">Client</label>
                                 <select class="form-control" id="inputClient" required>
                                     <option value="" selected hidden>Select Task Type</option>
-                                    <?php displayAllClients() ?>
+                                    <?php displayAllClientsValID() ?>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="inputDescription2">Notes: </label>
-                                <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
+                                <textarea type="text" class="form-control" id="inputNotes"></textarea>
                             </div>
 
                             <!-- <div class="form-group">
@@ -168,7 +157,7 @@
                         <div class="modal-footer">
                             <!-- <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button> -->
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </div>
                 </form>
@@ -192,7 +181,7 @@
 
                             <div class="form-group">
                                 <label for="viewTaskType">Task Type</label>
-                                <input type="text" class="form-control" id="viewTaskType" placeholder="" required />
+                                <input type="text" class="form-control" id="viewType" placeholder="" required />
 
                             </div>
 
@@ -200,7 +189,7 @@
                                 <label for="viewClient">Client</label>
                                 <select class="form-control" id="viewClient" required>
                                     <option value="" selected hidden>Select Task Type</option>
-                                    <?php displayAllClients() ?>
+                                    <?php displayAllClientsValID() ?>
                                 </select>
                             </div>
 
@@ -208,13 +197,13 @@
                                 <label for="viewNotes">Notes: </label>
                                 <textarea type="text" class="form-control" id="viewNotes"></textarea>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="exampleFormControlInput1">Status</label>
                                 <select class="form-control" id="inputStatus">
                                     <option value="" selected>Active</option>
                                     <option value="">Archived</option>
                                 </select>
-                            </div>
+                            </div> -->
 
                             <!-- <div class="form-group">
                                 <label for="inputSubTasks">Sub-Tasks: </label>
@@ -228,7 +217,7 @@
                         </div>
                         <div class="modal-footer">
                             <!-- <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button> -->
-                            <button type="button" class="btn btn-info mr-auto" id="btnArchive">Archive</button>
+                            <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
                         </div>

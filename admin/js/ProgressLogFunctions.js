@@ -124,7 +124,7 @@ function searchTable() {
   let searchStartDate = document.getElementById("startDate").value;
   let searchEndDate = document.getElementById("endDate").value;
   let searchTaskType = document.getElementById("taskType").value;
-  let searchFlagType = document.getElementById("flagType").value;
+  // let searchFlagType = document.getElementById("flagType").value;
   cb = '';
   $.ajax({
     type: 'get',

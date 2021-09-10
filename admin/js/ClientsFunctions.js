@@ -36,7 +36,7 @@ var dt = $('#dataTable').DataTable({
         //
         // if the second column cell is blank apply special formatting
         //
-        if (data[4] == "0") {
+        if (data[5] == "Archived") {
             $(row).css('color','red');
         }
     }
@@ -69,7 +69,12 @@ new $.fn.dataTable.Buttons(dt, {
         },
     }]
 }).container().appendTo('#beforeLD1');
-
+function searchStatus(status){
+    dt.columns(5).search( status ).draw();
+}
+function searchClient(name){
+    dt.columns(1).search( name ).draw();
+}
 function refreshTable() {
     var cb = "";
     $.ajax({
@@ -89,7 +94,7 @@ function refreshTable() {
                     data[da].phone,
                     data[da].email,
                     data[da].tasktype_count,
-                    'status',
+                    data[da].enabled==1?"Active":"Archived",
                     btn,
                 ]).draw();
                 
@@ -125,7 +130,16 @@ function addClient() {
     return false;
 }
 function taskInfo(data) {
-    $("#btnDelete").val(data.client_id);
+    if(data.enabled !=1){
+        w3.hide('#btnArchive');
+        w3.show('#btnActive')
+    }else{
+        w3.show('#btnArchive');
+        w3.hide('#btnActive')
+    }
+    $("#inputStatus").val(data.enabled);
+    $("#btnArchive").val(data.client_id);
+    $("#btnActive").val(data.client_id);
     $("#btnSave").val(data.client_id);
     $("#viewName").val(data.ClientName);
     $("#viewEmail").val(data.email);
@@ -135,6 +149,7 @@ $("#btnSave").click(function () {
     fullname = $("#viewName").val();
     email = $("#viewEmail").val();
     phone = $("#viewPhone").val();
+    enabled=$("#inputStatus").val();
     $.ajax({
         type: 'post',
         url: './main.php',
@@ -143,6 +158,7 @@ $("#btnSave").click(function () {
             fullname: fullname,
             email: email,
             phone: phone,
+            enabled:enabled
 
         },
         success: function (response) {
@@ -173,6 +189,27 @@ $("#btnArchive").click(function () {
                     $(".modal").modal("hide");
                     getTaskTypes();
                 }else{
+                    toastr.error(response);
+                }
+            }
+        });
+    }
+
+});
+$("#btnActive").click(function () {
+    if (confirm("Are you sure you want to activate this Client?")) {
+        $.ajax({
+            type: 'post',
+            url: './main.php',
+            data: {
+                activateClient: this.value,
+            },
+            success: function (response) {
+                if (response == 'activated') {
+                    toastr.success("Client has been Activated!");
+                    refreshTable();
+                    $(".modal").modal("hide");
+                } else {
                     toastr.error(response);
                 }
             }
