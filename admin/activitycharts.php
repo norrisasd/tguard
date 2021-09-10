@@ -7,6 +7,9 @@
 
 
 <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="loaderB" id="logoloader" style="position:absolute;z-index:5;display:none">
+        <div class="loader" style="margin:20% 50%"></div>
+    </div>
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
