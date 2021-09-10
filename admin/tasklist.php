@@ -7,6 +7,9 @@
 
 
 <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="loaderB" id="logoloader" style="position:absolute;z-index:5;display:none">
+        <div class="loader" style="margin:20% 50%"></div>
+    </div>
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
@@ -189,7 +192,7 @@
                                     <?php displayAllClientsValID() ?>
                                 </select>
                             </div>
-<!-- 
+                            <!-- 
                             <div class="form-group">
                                 <label for="inputDescription2">Notes: </label>
                                 <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
@@ -237,7 +240,7 @@
                         </div>
                         <div class="form-group">
                             <label for="assignTaskType">Task Type</label>
-                            <select class="form-control" onchange="setInputClientView(this.value)"  id="assignTaskType" required>
+                            <select class="form-control" onchange="setInputClientView(this.value)" id="assignTaskType" required>
                                 <option value="" selected hidden>Select Task Type</option>
                                 <?php displayAllTaskType() ?>
                             </select>
@@ -249,8 +252,8 @@
                                 <?php displayAllClientsValID() ?>
                             </select>
                         </div>
-                        
-                        
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -296,8 +299,8 @@
     <script src="./js/TaskListFunctions.js"></script>
     <script src="./js/Main.js"></script>
     <script>
-        function resetTaskTypeOption(){
-            $("#assignTaskType").html('<option value="" selected hidden>Select Task Type</option>'+'<?php echo displayAllTaskType() ?>');
+        function resetTaskTypeOption() {
+            $("#assignTaskType").html('<option value="" selected hidden>Select Task Type</option>' + '<?php echo displayAllTaskType() ?>');
             $('#assignClient').val("");
         }
     </script>
