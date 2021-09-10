@@ -124,7 +124,7 @@ function searchTable() {
   let searchStartDate = document.getElementById("startDate").value;
   let searchEndDate = document.getElementById("endDate").value;
   let searchTaskType = document.getElementById("taskType").value;
-  let searchFlagType = document.getElementById("flagType").value;
+  // let searchFlagType = document.getElementById("flagType").value;
   cb = '';
   $.ajax({
     type: 'get',
@@ -260,7 +260,7 @@ function taskInfo(data) {
   $("#inputComments").val(data.comments);
   $("#modalAgent").html(data.name);
   $("#modalClient").html(data.client_name);
-  $("#modalDueDate").html(data.DueDate);
+  // $("#modalDueDate").html(data.DueDate);
   $("#inputClient").val(data.client_name);
   $("#inputTaskName").val(data.TaskName);
   $("#inputEmployee").val(data.user_id);
