@@ -67,7 +67,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <iframe src="./pages/TermsAndConditions" id="agreement" title="Terms And Conditions" style="height:500px;width:100%"></iframe>
+                    <!-- <iframe src="./pages/TermsAndConditions" id="agreement" title="Terms And Conditions" style="height:500px;width:100%"></iframe> -->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="acceptBtn">I Accept</button>

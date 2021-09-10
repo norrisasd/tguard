@@ -425,11 +425,11 @@
     });
 
     //Changing text label of the File attachments
-    document.querySelector('.custom-file-input').addEventListener('change', function(e) {
-      var fileName = document.getElementById("inputType").files[0].name;
-      var nextSibling = e.target.nextElementSibling
-      nextSibling.innerText = fileName
-    });
+    // document.querySelector('.custom-file-input').addEventListener('change', function(e) {
+    //   var fileName = document.getElementById("inputType").files[0].name;
+    //   var nextSibling = e.target.nextElementSibling
+    //   nextSibling.innerText = fileName
+    // });
 
     // Dropzone.autoDiscover = false;
     // var attachment = $("div#dropzone-example").dropzone({
