@@ -37,22 +37,12 @@
                         <div class="row align-items-start">
                             <div class="col-sm-6">
                                 <label for="clientName">Flag Types</label>
-                                <select id="clientName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
+                                <select id="clientName" onchange="dt.columns(1).search( this.value ).draw();" class="form-control" style="margin-right:0.5%;">
                                     <option value="" selected>Select Flag Types</option>
-                                    <?php displayAllClients(); ?>
+                                    <?php displayAllFlagType(); ?>
                                 </select>
                             </div>
 
-                        </div>
-                        <div class="row justify-content-end" style="margin-top:2%;">
-                            <div class="col-auto">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-danger" style="width:auto">
-                                        Clear Search
-                                    </button>
-
-                                </div>
-                            </div>
                         </div>
                         <div class="row align-items-start" style="margin-bottom: 1%; margin-top: 2.5%;">
                             <div class="col-auto">
@@ -129,7 +119,26 @@
                                 <label for="inputNotes">Notes: </label>
                                 <textarea type="text" class="form-control" id="inputNotes"></textarea>
                             </div>
+                            <div class="form-group">
+                                <label for="textColor">Text Color: </label>
+                                <div class="input-group my-colorpicker1">
+                                    <input type="text" class="form-control" id="textColor">
 
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fas fa-square"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="textColor">Background Color: </label>
+                                <div class="input-group my-colorpicker2">
+                                    <input type="text" class="form-control" id="backColor">
+
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fas fa-square"></i></span>
+                                    </div>
+                                </div>
+                            </div>
 
                             <!-- <div class="form-group">
                                 <label for="inputColor">Color </label>
@@ -155,7 +164,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </div>
                 </form>
@@ -188,7 +197,26 @@
                                 <label for="viewNotes">Notes: </label>
                                 <textarea type="text" class="form-control" id="viewNotes"></textarea>
                             </div>
+                            <div class="form-group">
+                                <label for="textColor">Text Color: </label>
+                                <div class="input-group my-colorpicker3">
+                                    <input type="text" class="form-control" id="viewTextColor">
 
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fas fa-square"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="textColor">Background Color: </label>
+                                <div class="input-group my-colorpicker4">
+                                    <input type="text" class="form-control" id="viewBackColor">
+
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fas fa-square"></i></span>
+                                    </div>
+                                </div>
+                            </div>
 
                             <!-- <div class="form-group">
                                 <label for="inputDescription2">Notes: </label>
@@ -207,7 +235,7 @@
                         </div>
                         <div class="modal-footer">
                             <!-- <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button> -->
-                            <button type="button" class="btn btn-info mr-auto" id="btnArchive">Archive</button>
+                            <button type="button" class="btn btn-danger mr-auto" id="btnDelete">Delete</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
                         </div>
@@ -248,6 +276,7 @@
     <script src="../plugins/toastr/toastr.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../dist/js/adminlte.js"></script>
+    <script src="../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
     <script src="./js/Main.js"></script>
     <script src="./js/FlagType.js"></script>
 

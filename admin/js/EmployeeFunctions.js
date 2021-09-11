@@ -321,5 +321,29 @@ function assignUser() {
     });
     return false;
 }
+function setTaskTypeOptions(value) {
+    resetTaskTypeOption();
+    $.ajax({
+        type: 'get',
+        url: './main.php',
+        data: {
+            getExistedTaskType: true,
+            user_id: value
+        },
+        success: function (response) {
+            if (response == "") {
+                return false;
+            } else {
+                data = JSON.parse(response);
+                for (var da in data) {
+                    if (data[da].tasktype_id != 0) {
+                        $("#assignTaskType option[value='" + data[da].tasktype_id + "']").remove();
+                    }
 
+                }
+            }
+
+        }
+    });
+}
 

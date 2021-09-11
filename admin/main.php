@@ -425,7 +425,7 @@
         }
     }
     if(isset($_POST['addFlagType'])){
-        $query="INSERT INTO `flagtype`(`flagtype`, `notes`) VALUES ('".$_POST['flagtype']."','".$_POST['notes']."')";
+        $query="INSERT INTO `flagtype`(`flagtype`, `notes`,`textcolor`,`bgcolor`) VALUES ('".$_POST['flagtype']."','".$_POST['notes']."','".$_POST['textcolor']."','".$_POST['bgcolor']."')";
         $result=mysqli_query($dbConnection,$query);
         if($result){
             $result="inserted";
@@ -476,6 +476,24 @@
         $result = mysqli_query($dbConnection,$query);
         if($result){
             $result="updated";
+        }else{
+            $result = mysqli_error($dbConnection);
+        }
+    }
+    if(isset($_POST['saveFlagType'])){
+        $query = "UPDATE `flagtype` SET `flagtype`='".$_POST['flagtype']."',`notes`='".$_POST['notes']."',`textcolor`='".$_POST['textcolor']."',`bgcolor`='".$_POST['bgcolor']."' WHERE flagtype_id=".$_POST['saveFlagType'];
+        $result = mysqli_query($dbConnection,$query);
+        if($result){
+            $result="updated";
+        }else{
+            $result = mysqli_error($dbConnection);
+        }
+    }
+    if(isset($_POST['deleteFlagType'])){
+        $query="DELETE FROM `flagtype` WHERE flagtype_id=".$_POST['deleteFlagType'];
+        $result = mysqli_query($dbConnection,$query);
+        if($result){
+            $result="deleted";
         }else{
             $result = mysqli_error($dbConnection);
         }

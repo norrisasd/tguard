@@ -113,5 +113,15 @@
         }
         return false;
     }
+    function displayAllFlagType(){
+        global $dbConnection;
+        $query="SELECT * FROM flagtype";
+        $result=mysqli_query($dbConnection,$query);
+        if(mysqli_num_rows($result)>0){
+            while($data=mysqli_fetch_assoc($result)){
+                echo '<option value="'.$data['flagtype'].'">'.$data['flagtype'].'</option>';
+            }
+        }
+    }
     // function
 ?>

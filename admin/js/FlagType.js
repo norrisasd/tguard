@@ -30,7 +30,7 @@ var dt = $('#dataTable').DataTable({
     "info": true,
     "autoWidth": false,
     "responsive": true,
-    "buttons": ["excel", "pdf", "print", ]
+    "buttons": ["excel", "pdf", "print",]
 });
 dt.buttons().container().appendTo('#beforeLD');
 new $.fn.dataTable.Buttons(dt, {
@@ -60,6 +60,31 @@ new $.fn.dataTable.Buttons(dt, {
         },
     }]
 }).container().appendTo('#beforeLD1');
+
+$('.my-colorpicker1').colorpicker();
+
+$('.my-colorpicker1').on('colorpickerChange', function (event) {
+    $('.my-colorpicker1 .fa-square').css('color', event.color.toString());
+    $('#textColor').css('color', event.color.toString());
+})
+$('.my-colorpicker2').colorpicker();
+
+$('.my-colorpicker2').on('colorpickerChange', function (event) {
+    $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+    $('#backColor').css('background-color', event.color.toString());
+})
+$('.my-colorpicker3').colorpicker();
+
+$('.my-colorpicker3').on('colorpickerChange', function (event) {
+    $('.my-colorpicker3 .fa-square').css('color', event.color.toString());
+    $('#viewTextColor').css('color', event.color.toString());
+})
+$('.my-colorpicker4').colorpicker();
+
+$('.my-colorpicker4').on('colorpickerChange', function (event) {
+    $('.my-colorpicker4 .fa-square').css('color', event.color.toString());
+    $('#viewBackColor').css('background-color', event.color.toString());
+})
 refreshTable();
 
 function refreshTable() {
@@ -70,7 +95,7 @@ function refreshTable() {
         data: {
             getFlagType: true
         },
-        success: function(response) {
+        success: function (response) {
             data = JSON.parse(response);
             dt.clear().draw();
             for (var da in data) {
@@ -89,15 +114,19 @@ function refreshTable() {
 function addFlagType() {
     flagtype = $("#inputFlagType").val();
     notes = $("#inputNotes").val();
+    textcolor=$("#textColor").val();
+    bgcolor=$("#backColor").val();
     $.ajax({
         type: 'post',
         url: './main.php',
         data: {
             addFlagType: true,
             flagtype: flagtype,
-            notes: notes
+            notes: notes,
+            textcolor:textcolor,
+            bgcolor:bgcolor,
         },
-        success: function(response) {
+        success: function (response) {
             if (response == "inserted") {
                 toastr.success("Flag Created");
                 refreshTable();
@@ -112,6 +141,59 @@ function addFlagType() {
 function taskInfo(data) {
     $("#viewFlagType").val(data.flagtype);
     $("#viewNotes").val(data.notes);
-  
-  }
-
+    $("#viewBackColor").val(data.bgcolor);
+    $("#viewTextColor").val(data.textcolor);
+    $('.my-colorpicker3 .fa-square').css('color', data.textcolor);
+    $('#viewTextColor').css('color', data.textcolor);
+    $('.my-colorpicker4 .fa-square').css('color', data.bgcolor);
+    $('#viewBackColor').css('background-color', data.bgcolor);
+    $('#btnSave').val(data.flagtype_id);
+    $('#btnDelete').val(data.flagtype_id);
+}
+$("#btnSave").click(function(){
+    flagtype = $("#viewFlagType").val();
+    notes = $("#viewNotes").val();
+    textcolor=$("#viewTextColor").val();
+    bgcolor=$("#viewBackColor").val();
+    $.ajax({
+        type: 'post',
+        url: './main.php',
+        data: {
+            saveFlagType: this.value,
+            flagtype: flagtype,
+            notes: notes,
+            textcolor:textcolor,
+            bgcolor:bgcolor,
+        },
+        success: function (response) {
+            if (response == "updated") {
+                toastr.success("Flag Updated");
+                refreshTable();
+                $(".modal").modal("hide");
+            }
+        }
+    });
+    return false;
+});
+$("#btnDelete").click(function(){
+    if(confirm("Are you sure you want to delete this flagtype?")){
+        $.ajax({
+            type: 'post',
+            url: './main.php',
+            data: {
+                deleteFlagType: this.value,
+            },
+            success: function (response) {
+                if (response == "deleted") {
+                    toastr.success("Flag deleted");
+                    refreshTable();
+                    $(".modal").modal("hide");
+                }else{
+                    toastr.error(response);
+                }
+            }
+        });
+        return false;
+    }
+    
+});
