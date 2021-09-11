@@ -1,6 +1,9 @@
 toastr.options.progressBar = true;
 toastr.options.preventDuplicates = true;
 toastr.options.closeButton = true;
+if (typeof myid === 'undefined'){
+  myid='';
+}
 $(".mt-2 ul li").removeClass("menu-open");
 $(".mt-2 ul li a").removeClass("active");
 $(".mt-2 ul li:nth-child(2)").addClass("menu-open");
@@ -106,12 +109,14 @@ function addTask() {
 
 function displayUpcomingTask() {
   let content = '';
+
   $.ajax({
     type: 'get',
     url: './main.php',
     data: {
       displayUpcoming: true,
-      tasktype_id:localStorage.getItem("tasktype_id")
+      tasktype_id:localStorage.getItem("tasktype_id"),
+      myid:myid,
     },
     success: function (response) {
       if (response == '') {
@@ -155,7 +160,8 @@ function displayInProgress() {
     url: './main.php',
     data: {
       displayProgress: true,
-      tasktype_id:localStorage.getItem("tasktype_id")
+      tasktype_id:localStorage.getItem("tasktype_id"),
+      myid:myid,
     },
     success: function (response) {
       if (response == '') {

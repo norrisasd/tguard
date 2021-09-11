@@ -137,7 +137,7 @@
                                 <label for="inputClient">Client</label>
                                 <select class="form-control" id="inputClient" required>
                                     <option value="" selected hidden>Select Task Type</option>
-                                    <?php displayAllClientsValID() ?>
+                                    <?php displayAllClientsEnabledValID() ?>
                                 </select>
                             </div>
 
@@ -192,7 +192,7 @@
                                 <label for="viewClient">Client</label>
                                 <select class="form-control" id="viewClient" required>
                                     <option value="" selected hidden>Select Task Type</option>
-                                    <?php displayAllClientsValID() ?>
+                                    <?php displayAllClientsEnabledValID() ?>
                                 </select>
                             </div>
 

@@ -101,7 +101,7 @@ function searchStatus(status){
     dt.columns(4).search( status ).draw();
 }
 function searchClient(name){
-    dt.columns(1).search( name ).draw();
+    dt.columns(2).search( name ).draw();
 }
 function addTaskType() {
     client = $("#inputClient").val();

@@ -156,7 +156,7 @@
               <label for="inputTaskType">Task Type</label>
               <select class="form-control" onchange="setInputClient(this.value)" id="inputTaskType" required>
                 <option value="" selected hidden>Select Task Type</option>
-                <?php displayAllTaskType() ?>
+                <?php displayAllTaskTypeEnabled() ?>
               </select>
             </div>
             <div class="form-group">
@@ -322,7 +322,7 @@
                     <label for="viewTaskType">Task Type</label>
                     <select class="form-control" onchange="setInputClientView(this.value)" id="viewTaskType" required>
                       <option value="" selected hidden>Select Task Type</option>
-                      <?php displayAllTaskType() ?>
+                      <?php displayAllTaskTypeEnabled() ?>
                     </select>
                   </div>
                 </div>
@@ -462,6 +462,9 @@
   <script src="../plugins/toastr/toastr.min.js"></script>
   <!-- AdminLTE App -->
   <script src="../dist/js/adminlte.js"></script>
+  <script>
+  var  myid='<?php echo $userinfo['user_id'] ?>';
+  </script>
   <script src="./js/DashboardFunctions.js"></script>
   <script src="./js/Main.js"></script>
   <script src="https://www.w3schools.com/lib/w3.js"></script>
@@ -487,7 +490,6 @@
         }
       });
     });
-
     //Changing text label of the File attachments
     // document.querySelector('.custom-file-input').addEventListener('change', function(e) {
     //   var fileName = document.getElementById("inputType").files[0].name;

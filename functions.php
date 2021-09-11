@@ -61,6 +61,16 @@
             }
         }
     }
+    function displayAllAgentsEnabled(){
+        global $dbConnection;
+        $query="SELECT * FROM user WHERE enabled =1";
+        $result=mysqli_query($dbConnection,$query);
+        if(mysqli_num_rows($result)>0){
+            while($data=mysqli_fetch_assoc($result)){
+                echo '<option value="'.$data['user_id'].'">'.$data['name'].'</option>';
+            }
+        }
+    }
     function displayAllAgentsName(){
         global $dbConnection;
         $query="SELECT * FROM user";
@@ -85,6 +95,16 @@
     function displayAllTaskType(){
         global $dbConnection;
         $query="SELECT * FROM tasktype";
+        $result=mysqli_query($dbConnection,$query);
+        if(mysqli_num_rows($result)>0){
+            while($data=mysqli_fetch_assoc($result)){
+                echo '<option value="'.$data['tasktype_id'].'" onchange="alert(this.value)">'.$data['type'].'</option>';
+            }
+        }
+    }
+    function displayAllTaskTypeEnabled(){
+        global $dbConnection;
+        $query="SELECT tasktype.* FROM tasktype INNER JOIN client ON client.client_id = tasktype.client_id WHERE client.enabled =1";
         $result=mysqli_query($dbConnection,$query);
         if(mysqli_num_rows($result)>0){
             while($data=mysqli_fetch_assoc($result)){
