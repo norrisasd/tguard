@@ -88,6 +88,9 @@ function refreshTable() {
       status: 1
     },
     success: function (response) {
+      if(response==""){
+        return false;
+      }
       data = JSON.parse(response);
       dt.clear().draw();
       for (var da in data) {

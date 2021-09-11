@@ -36,6 +36,8 @@
         if(mysqli_num_rows($result)>0){
             $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
             $result=json_encode($result);
+        }else{
+            $result='';
         }
     }
     
@@ -46,6 +48,8 @@
         if(mysqli_num_rows($result)>0){
             $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
             $result=json_encode($result);
+        }else{
+            $result="";
         }
     }
 
