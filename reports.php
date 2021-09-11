@@ -209,9 +209,18 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="form-row">
                                 <div class="col">
                                     <hr class="mt-2 mb-3" />
+                                    <div class="form-group">
+                                        <label for="flagoutput">Flag </label>
+                                        <input type="text" class="form-control" style="color: #FFFFFF; background-color: white; font-weight: bold;" id="flagoutput" value="Sample Text" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col">
                                     <div class="form-group">
                                         <label for="inputTask">Task Name</label>
                                         <input type="text" class="form-control" id="inputTaskName" placeholder="" required disabled />
@@ -360,7 +369,7 @@
     <script src="./plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <script src="./plugins/datatables-select/js/dataTables.select.min.js"></script>
     <!-- InputMask -->
-    <script src="./plugins/popper/popper.js"></script>
+    <script src="./plugins/popper/umd/popper.js"></script>
     <script src="./plugins/moment/moment.min.js"></script>
     <script src="./plugins/inputmask/jquery.inputmask.min.js"></script>
     <!-- date-range-picker -->
