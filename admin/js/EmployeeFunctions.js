@@ -292,6 +292,7 @@ function revokeAccess(id){
             success:function(response){
                 if(response =='revoked'){
                     toastr.info("Tasktype revoked");
+                    $(".modal").modal("hide");
                 }
             }
         });

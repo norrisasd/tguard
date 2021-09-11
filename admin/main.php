@@ -265,7 +265,7 @@
         }
     }
     if(isset($_GET['getAgentsJSON'])){
-        $query = "SELECT * FROM user";
+        $query = "SELECT * FROM user ORDER BY enabled desc";
         $result = mysqli_query($dbConnection,$query);
         if($result){
             if(mysqli_num_rows($result)>0){
