@@ -92,7 +92,15 @@ $('.my-colorpicker4').on('colorpickerChange', function (event) {
 
 $('.my-colorpicker3').on('colorpickerChange', function (event) {
     $('#output').css('color', event.color.toString());
+})
 
+
+$('.my-colorpicker2').on('colorpickerChange', function (event) {
+    $('#outputAdd').css('background-color', event.color.toString());
+})
+
+$('.my-colorpicker1').on('colorpickerChange', function (event) {
+    $('#outputAdd').css('color', event.color.toString());
 })
 
 
