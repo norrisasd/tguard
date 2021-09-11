@@ -213,7 +213,7 @@
 
                             <div class="form-group">
                                 <label for="output">Output </label>
-                                <input type="text" class="form-control" style="color: #FFFFFF; background-color: #FFFFF; font-weight: bold;" id="output" value="Sample Text" disabled>
+                                <input type="text" class="form-control" style="color: #FFFFFF; background-color: white; font-weight: bold;" id="output" value="Sample Text" disabled>
 
                             </div>
 
@@ -267,7 +267,7 @@
     <script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <script src="../plugins/datatables-select/js/dataTables.select.min.js"></script>
     <!-- InputMask -->
-    <script src="../plugins/popper/popper.js"></script>
+    <script src="../plugins/popper/umd/popper.js"></script>
     <script src="../plugins/moment/moment.min.js"></script>
     <script src="../plugins/inputmask/jquery.inputmask.min.js"></script>
     <!-- date-range-picker -->
