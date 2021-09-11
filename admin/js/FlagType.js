@@ -162,6 +162,8 @@ function taskInfo(data) {
     $('#viewTextColor').css('color', data.textcolor);
     $('#viewBackColor').css('background-color', data.bgcolor);
     $("#output").val(data.flagtype);
+    $('#output').css('color', data.textcolor);
+    $('#output').css('background-color', data.bgcolor);
 }
 $("#btnSave").click(function () {
     flagtype = $("#viewFlagType").val();

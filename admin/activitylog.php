@@ -78,7 +78,7 @@
             <div class="row" style="margin-top: 1%;">
               <div class="col-sm-6">
                 <label for="flagType">Flag Type</label>
-                <select id="flagType" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
+                <select id="flagType" onchange="dt.columns(1).search( this.value ).draw();" class="form-control" style="margin-right:0.5%;">
                   <option value="" selected>Select Flag</option>
                   <?php displayAllFlagType(); ?>
                 </select>
@@ -232,8 +232,8 @@
                   <div class="form-group">
                     <label for="inputFlagType">Flag Type</label>
                     <select class="form-control" id="inputFlagType" style="color: black; background-color: white; font-weight: bold;" required>
-                      <option value="" selected hidden>Select Flag Type</option>
-                      <?php displayAllFlagType() ?>
+                      <option value="" selected>No Flags Attached</option>
+                      <?php displayAllFlagTypeValID() ?>
                     </select>
                   </div>
                 </div>

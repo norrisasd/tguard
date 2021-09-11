@@ -213,8 +213,7 @@
 
                             <div class="form-group">
                                 <label for="output">Output </label>
-                                <input type="text" class="form-control" style="color: #FFFFFF; background-color: #FFFFF; font-weight: bold;" id="output" value="Sample Text" disabled>
-
+                                <input type="text" class="form-control" id="output" value="Sample Text" disabled>
                             </div>
 
 

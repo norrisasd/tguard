@@ -31,7 +31,7 @@
     //DISPLAY ALL TASK
     if(isset($_GET['getAllTask'])){
         $status = $_GET['status'];
-        $query="SELECT callback.*,user.name,callback_extend.sub_task,callback_extend.comments, tasktype.type FROM `callback` INNER JOIN timerecord on callback.callback_id=timerecord.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id INNER JOIN tasktype ON tasktype.tasktype_id = callback.tasktype_id WHERE callback.status = $status GROUP BY callback.callback_id ORDER BY callback.user_id;";
+        $query="SELECT flagtype.flagtype,flagtype.textcolor,flagtype.bgcolor,callback.*,user.name,callback_extend.sub_task,callback_extend.comments, tasktype.type FROM `callback` INNER JOIN timerecord on callback.callback_id=timerecord.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id INNER JOIN tasktype ON tasktype.tasktype_id = callback.tasktype_id LEFT JOIN flagtype ON flagtype.flagtype_id = callback.flagtype_id WHERE callback.status = $status GROUP BY callback.callback_id ORDER BY callback.user_id;";
         $result=mysqli_query($dbConnection,$query);
         if(mysqli_num_rows($result)>0){
             $result=mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -71,7 +71,7 @@
         $ttype= $ttype ==""?"":"AND callback.tasktype_id=$ttype";
         // $ddate = $ddate==""?"":"AND callback.DueDate='".$ddate."'";
         $betweenDate=$bsdate==''?'':"AND (('$bsdate' between DateStarted and DateEnded) or ('$bedate' between DateStarted and DateEnded) or ('$bsdate' <= DateStarted and '$bedate' >= DateEnded))";
-        $query="SELECT callback.*,ADDTIME(callback.TimeSpent,(Select SEC_TO_TIME(SUM(TIME_TO_SEC(SUBTIME(CURTIME(),timerecord.TimeStarted)))) FROM timerecord WHERE status = 0))AS current_time_spent,user.name,callback_extend.sub_task,callback_extend.comments, tasktype.type FROM `callback` INNER JOIN timerecord on callback.callback_id=timerecord.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id INNER JOIN tasktype ON tasktype.tasktype_id = callback.tasktype_id WHERE callback.status = $status $cname $aID $sdate $edate $betweenDate $ttype GROUP BY callback.callback_id ORDER BY callback.user_id;";
+        $query="SELECT flagtype.flagtype,flagtype.textcolor,flagtype.bgcolor,callback.*,ADDTIME(callback.TimeSpent,(Select SEC_TO_TIME(SUM(TIME_TO_SEC(SUBTIME(CURTIME(),timerecord.TimeStarted)))) FROM timerecord WHERE status = 0))AS current_time_spent,user.name,callback_extend.sub_task,callback_extend.comments, tasktype.type FROM `callback` INNER JOIN timerecord on callback.callback_id=timerecord.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id INNER JOIN tasktype ON tasktype.tasktype_id = callback.tasktype_id LEFT JOIN flagtype ON flagtype.flagtype_id = callback.flagtype_id WHERE callback.status = $status $cname $aID $sdate $edate $betweenDate $ttype GROUP BY callback.callback_id ORDER BY callback.user_id;";
         $result=mysqli_query($dbConnection,$query);
         if($result){
             if(mysqli_num_rows($result)>0){
@@ -223,7 +223,8 @@
         $tasktype=$_POST['tasktype'];
         $client=$_POST['client'];
         $employee=$_POST['employee'];
-        $query = "UPDATE `callback` SET  user_id=$employee,TaskName = '$taskname', client_name='$client' ,Notes = '$notes',tasktype_id=$tasktype WHERE callback_id = $cb_id";
+        $flagtype=$_POST['flagtype']==""?"NULL":$_POST['flagtype'];
+        $query = "UPDATE `callback` SET  user_id=$employee,TaskName = '$taskname', client_name='$client' ,Notes = '$notes',tasktype_id=$tasktype,flagtype_id=$flagtype WHERE callback_id = $cb_id";
         $result = mysqli_query($dbConnection,$query);
         if($result){
             $query = "UPDATE `callback_extend` SET sub_task = '$subtask', comments='$comments' WHERE callback_id = $cb_id";
