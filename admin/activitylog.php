@@ -80,7 +80,7 @@
                 <label for="flagType">Flag Type</label>
                 <select id="flagType" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
                   <option value="" selected>Select Flag</option>
-                  <?php displayAllAgents(); ?>
+                  <?php displayAllFlagType(); ?>
                 </select>
               </div>
 
@@ -231,9 +231,9 @@
                   <hr class="mt-2 mb-3" />
                   <div class="form-group">
                     <label for="inputFlagType">Flag Type</label>
-                    <select class="form-control" id="inputFlagType" required>
+                    <select class="form-control" id="inputFlagType" style="color: black; background-color: white; font-weight: bold;" required>
                       <option value="" selected hidden>Select Flag Type</option>
-                      <?php displayAllTaskType() ?>
+                      <?php displayAllFlagType() ?>
                     </select>
                   </div>
                 </div>

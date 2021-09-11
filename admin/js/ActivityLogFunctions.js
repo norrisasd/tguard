@@ -254,6 +254,14 @@ function taskInfo(data) {
   $("#inputTaskName").val(data.TaskName);
   $("#inputEmployee").val(data.user_id);
   $("#inputTaskType").val(data.tasktype_id);
+
+   // Colors 
+  //  $('.my-colorpicker3 .fa-square').css('color', data.textcolor);
+  //  $('.my-colorpicker4 .fa-square').css('color', data.bgcolor);
+  //  $('#viewTextColor').css('color', data.textcolor);
+  //  $('#viewBackColor').css('background-color', data.bgcolor);
+  //  $("#output").val(data.flagtype);
+
 }
 $("#btnSave").click(function () {
   notes = $("#inputDescription2").val();
