@@ -209,9 +209,18 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="form-row">
                                 <div class="col">
                                     <hr class="mt-2 mb-3" />
+                                    <div class="form-group">
+                                        <label for="flagoutput">Flag </label>
+                                        <input type="text" class="form-control" style="color: #FFFFFF; background-color: white; font-weight: bold;" id="flagoutput" value="Sample Text" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col">
                                     <div class="form-group">
                                         <label for="inputTask">Task Name</label>
                                         <input type="text" class="form-control" id="inputTaskName" placeholder="" required disabled />
