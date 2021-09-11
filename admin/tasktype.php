@@ -163,7 +163,7 @@
               <label for="inputAgent">Employee</label>
               <select class="form-control" id="inputAgentID" required>
                 <option value="" selected hidden>Select Employee</option>
-                <?php displayAllAgents()
+                <?php displayAllAgentsEnabled()
                 ?>
               </select>
             </div>
@@ -307,7 +307,7 @@
                     <label for="viewTaskType">Task Type</label>
                     <select class="form-control" onchange="setInputClientView(this.value)" id="viewTaskType" required>
                       <option value="" selected hidden>Select Task Type</option>
-                      <?php displayAllTaskType() ?>
+                      <?php displayAllTaskTypeEnabled() ?>
                     </select>
                   </div>
                 </div>
@@ -330,7 +330,7 @@
                     <label for="viewEmployee">Employee</label>
                     <select class="form-control" id="viewEmployee" disabled>
                       <option value="" selected hidden>Select Employee</option>
-                      <?php displayAllAgents() ?>
+                      <?php displayAllAgentsEnabled() ?>
                     </select>
                   </div>
                 </div>

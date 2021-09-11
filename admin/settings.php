@@ -60,30 +60,30 @@
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label class="form-label">Username</label>
-                                            <input type="text" class="form-control mb-1" value="<?php echo $userinfo['username'] ?>">
+                                            <input type="text" class="form-control mb-1" id="username" value="<?php echo $userinfo['username'] ?>">
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Name</label>
-                                            <input type="text" class="form-control" value="<?php echo $userinfo['name'] ?>">
+                                            <input type="text" class="form-control" id="name" value="<?php echo $userinfo['name'] ?>">
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">E-mail</label>
-                                            <input type="text" class="form-control mb-1" value="<?php echo $userinfo['email'] ?>">
+                                            <input type="text" class="form-control mb-1" id="email" value="<?php echo $userinfo['email'] ?>">
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Password</label>
-                                            <input type="password" class="form-control" value="<?php echo $userinfo['password'] ?>">
+                                            <input type="password" class="form-control" id="password" value="<?php echo $userinfo['password'] ?>">
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Access</label>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" <?php echo $userinfo['access'] == 1 ? "checked" : "" ?>>
+                                                <input class="form-check-input" value="1" type="radio" name="flexRadioDefault" id="flexRadioDefault1" <?php echo $userinfo['access'] == 1 ? "checked" : "" ?>>
                                                 <label class="form-check-label" for="flexRadioDefault1">
                                                     Admin
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" <?php echo $userinfo['access'] == 2 ? "checked" : "" ?>>
+                                                <input class="form-check-input" type="radio" value="2" name="flexRadioDefault" id="flexRadioDefault2" <?php echo $userinfo['access'] == 2 ? "checked" : "" ?>>
                                                 <label class="form-check-label" for="flexRadioDefault2">
                                                     Employee
                                                 </label>
@@ -100,8 +100,7 @@
                 </div>
 
                 <div class="text-right mt-3">
-                    <button type="button" class="btn btn-secondary">Cancel</button>
-                    <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+                    <button type="submit" class="btn btn-primary" value="<?php echo $userinfo['user_id'] ?>" id="btnSave">Save</button>
                 </div>
             </div>
         </section>
@@ -134,7 +133,6 @@
     <script src="../plugins/toastr/toastr.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../dist/js/adminlte.js"></script>
-    <script src="../js/DashboardFunctions.js"></script>
     <script src="./js/Main.js"></script>
 
     <script>
@@ -143,6 +141,14 @@
             var fileName = document.getElementById("customFile").files[0].name;
             var nextSibling = e.target.nextElementSibling
             nextSibling.innerText = fileName
+        });
+        $("#btnSave").click(function(){
+            username=$("#username").val();
+            name=$("#name").val();
+            email=$("#email").val();
+            password=$("#password").val();
+            access=$('input[name="flexRadioDefault"]:checked').val();
+            toastr.info(access);
         });
     </script>
 
