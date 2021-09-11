@@ -141,6 +141,12 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <label for="outputAdd">Output </label>
+                                <input type="text" class="form-control" id="outputAdd" value="Sample Text" disabled>
+                            </div>
+
+
 
 
                             <!--

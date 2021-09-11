@@ -339,7 +339,7 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="viewEmployee">Employee</label>
-                    <select class="form-control" id="viewEmployee" disabled>
+                    <select class="form-control" id="viewEmployee">
                       <option value="" selected hidden>Select Employee</option>
                       <?php displayAllAgents() ?>
                     </select>
@@ -351,7 +351,7 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="inputDescription2">Notes: </label>
-                    <textarea type="text" class="form-control" id="inputDescription2">Lorem Ipsum Lorem Ipsum</textarea>
+                    <textarea type="text" class="form-control" id="inputDescription2"></textarea>
                   </div>
                 </div>
               </div>
@@ -367,7 +367,7 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="inputComments">Comments: </label>
-                    <textarea type="text" class="form-control" id="inputComments">Lorem Ipsum Lorem Ipsum</textarea>
+                    <textarea type="text" class="form-control" id="inputComments"></textarea>
                   </div>
                 </div>
               </div>
