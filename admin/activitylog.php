@@ -388,7 +388,7 @@
   <script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
   <script src="../plugins/datatables-select/js/dataTables.select.min.js"></script>
   <!-- InputMask -->
-  <script src="../plugins/popper/umd/popper.js"></script>
+  <script src="../plugins/popper/umd/popper.min.js"></script>
   <script src="../plugins/moment/moment.min.js"></script>
   <script src="../plugins/inputmask/jquery.inputmask.min.js"></script>
   <!-- date-range-picker -->
@@ -403,26 +403,26 @@
   <script src="./js/Main.js"></script>
 
   <script>
-    //Hiding the div
-    $(".custom-file").hide();
-    $(".uploadBtn").hide();
+    // //Hiding the div
+    // $(".custom-file").hide();
+    // $(".uploadBtn").hide();
 
-    //Showing the div for the inputs
-    $(document).ready(function() {
-      $('.cases a').on('click', function() {
-        var txt = ($(this).attr('value'));
-        if (txt == 'file') {
-          $(".file").show();
-          $(".link").hide();
-          $(".uploadBtn").show();
-        }
-        if (txt == 'link') {
-          $(".link").show();
-          $(".file").hide();
-          $(".uploadBtn").hide();
-        }
-      });
-    });
+    // //Showing the div for the inputs
+    // $(document).ready(function() {
+    //   $('.cases a').on('click', function() {
+    //     var txt = ($(this).attr('value'));
+    //     if (txt == 'file') {
+    //       $(".file").show();
+    //       $(".link").hide();
+    //       $(".uploadBtn").show();
+    //     }
+    //     if (txt == 'link') {
+    //       $(".link").show();
+    //       $(".file").hide();
+    //       $(".uploadBtn").hide();
+    //     }
+    //   });
+    // });
 
     //Changing text label of the File attachments
     // document.querySelector('.custom-file-input').addEventListener('change', function(e) {
