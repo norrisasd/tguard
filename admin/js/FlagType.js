@@ -85,6 +85,17 @@ $('.my-colorpicker4').on('colorpickerChange', function (event) {
     $('.my-colorpicker4 .fa-square').css('color', event.color.toString());
     $('#viewBackColor').css('background-color', event.color.toString());
 })
+
+$('.my-colorpicker4').on('colorpickerChange', function (event) {
+    $('#output').css('background-color', event.color.toString());
+})
+
+$('.my-colorpicker3').on('colorpickerChange', function (event) {
+    $('#output').css('color', event.color.toString());
+
+})
+
+
 refreshTable();
 
 function refreshTable() {
@@ -114,8 +125,8 @@ function refreshTable() {
 function addFlagType() {
     flagtype = $("#inputFlagType").val();
     notes = $("#inputNotes").val();
-    textcolor=$("#textColor").val();
-    bgcolor=$("#backColor").val();
+    textcolor = $("#textColor").val();
+    bgcolor = $("#backColor").val();
     $.ajax({
         type: 'post',
         url: './main.php',
@@ -123,8 +134,8 @@ function addFlagType() {
             addFlagType: true,
             flagtype: flagtype,
             notes: notes,
-            textcolor:textcolor,
-            bgcolor:bgcolor,
+            textcolor: textcolor,
+            bgcolor: bgcolor,
         },
         success: function (response) {
             if (response == "inserted") {
@@ -143,18 +154,20 @@ function taskInfo(data) {
     $("#viewNotes").val(data.notes);
     $("#viewBackColor").val(data.bgcolor);
     $("#viewTextColor").val(data.textcolor);
-    $('.my-colorpicker3 .fa-square').css('color', data.textcolor);
-    $('#viewTextColor').css('color', data.textcolor);
-    $('.my-colorpicker4 .fa-square').css('color', data.bgcolor);
-    $('#viewBackColor').css('background-color', data.bgcolor);
     $('#btnSave').val(data.flagtype_id);
     $('#btnDelete').val(data.flagtype_id);
+    // Colors 
+    $('.my-colorpicker3 .fa-square').css('color', data.textcolor);
+    $('.my-colorpicker4 .fa-square').css('color', data.bgcolor);
+    $('#viewTextColor').css('color', data.textcolor);
+    $('#viewBackColor').css('background-color', data.bgcolor);
+    $("#output").val(data.flagtype);
 }
-$("#btnSave").click(function(){
+$("#btnSave").click(function () {
     flagtype = $("#viewFlagType").val();
     notes = $("#viewNotes").val();
-    textcolor=$("#viewTextColor").val();
-    bgcolor=$("#viewBackColor").val();
+    textcolor = $("#viewTextColor").val();
+    bgcolor = $("#viewBackColor").val();
     $.ajax({
         type: 'post',
         url: './main.php',
@@ -162,8 +175,8 @@ $("#btnSave").click(function(){
             saveFlagType: this.value,
             flagtype: flagtype,
             notes: notes,
-            textcolor:textcolor,
-            bgcolor:bgcolor,
+            textcolor: textcolor,
+            bgcolor: bgcolor,
         },
         success: function (response) {
             if (response == "updated") {
@@ -175,8 +188,8 @@ $("#btnSave").click(function(){
     });
     return false;
 });
-$("#btnDelete").click(function(){
-    if(confirm("Are you sure you want to delete this flagtype?")){
+$("#btnDelete").click(function () {
+    if (confirm("Are you sure you want to delete this flagtype?")) {
         $.ajax({
             type: 'post',
             url: './main.php',
@@ -188,12 +201,12 @@ $("#btnDelete").click(function(){
                     toastr.success("Flag deleted");
                     refreshTable();
                     $(".modal").modal("hide");
-                }else{
+                } else {
                     toastr.error(response);
                 }
             }
         });
         return false;
     }
-    
+
 });

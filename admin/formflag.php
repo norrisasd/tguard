@@ -129,6 +129,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="textColor">Background Color: </label>
                                 <div class="input-group my-colorpicker2">
@@ -140,15 +141,7 @@
                                 </div>
                             </div>
 
-                            <!-- <div class="form-group">
-                                <label for="inputColor">Color </label>
-                                <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#563d7c" title="Choose your color">
-                            </div>
 
-                            <div class="form-group">
-                                <label for="inputBG">Background Color </label>
-                                <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#fff" title="Choose your color">
-                            </div> -->
 
                             <!--
                             <div class="form-group">
@@ -217,6 +210,13 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label for="output">Output </label>
+                                <input type="text" class="form-control" style="color: #FFFFFF; background-color: #FFFFF; font-weight: bold;" id="output" value="Sample Text" disabled>
+
+                            </div>
+
 
                             <!-- <div class="form-group">
                                 <label for="inputDescription2">Notes: </label>
