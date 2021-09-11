@@ -19,7 +19,7 @@
         </div>
       </div>
       <li class="nav-item">
-        <a href="./" onclick="myid='<?php echo $userinfo['user_id'] ?>'" class="nav-link">
+        <a href="./" onclick="resetDisplay()" class="nav-link">
           <i class="nav-icon fas fa-tachometer-alt"></i>
           <p>
             Dashboard
