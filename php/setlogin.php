@@ -4,16 +4,20 @@
     $result =mysqli_query($dbConnection,$query);
     if(mysqli_num_rows($result)==1){
         $data = mysqli_fetch_assoc($result);
-        if($data['access']==1){
-            $result='admin';
+        if($data['enabled']==1){
+            if($data['access']==1){
+                $result='admin';
+            }else{
+                $result='agent';
+            }
+            $_SESSION['login']=true;
+            $_SESSION['userInfo'] = $data;
         }else{
-            $result='agent';
+            $result = false;
         }
-        $_SESSION['login']=true;
-        $_SESSION['userInfo'] = $data;
         
     }else{
-        $result = false;
+        $result = 'cred';
     };
     echo $result;
 ?>

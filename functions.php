@@ -2,14 +2,13 @@
     require_once 'Config.php';
     $userinfo = $_SESSION['userInfo'];
     $user_id = $userinfo['user_id'];
+    $image=$userinfo['image_file'];
     if(!isset($_SESSION['login'])){
         if(is_dir('admin')){
             header("Location: login");
         }else{
             header("Location: ../login");
         }
-        
-        
     }
     function displayAllClientsEnabled(){
         global $dbConnection;

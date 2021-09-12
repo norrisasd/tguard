@@ -120,6 +120,7 @@ function addTaskType() {
         success: function (response) {
             if (response == "inserted") {
                 toastr.success("Task Type Added");
+                $('#addTaskTypes').trigger("reset");
                 refreshTable();
                 $(".modal").modal("hide");
                 getTaskTypes();

@@ -66,7 +66,7 @@
                 <label for="clientName">Task Type</label>
                 <select id="taskType" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
                   <option value="" selected>Select Task Type</option>
-                  <?php displayAllTaskType(); ?>
+                  <?php displayAllTaskTypeEnabled(); ?>
                 </select>
               </div>
               <div class="col-sm-3">
@@ -78,7 +78,7 @@
             <div class="row" style="margin-top: 1%;">
               <div class="col-sm-6">
                 <label for="flagType">Flag Type</label>
-                <select id="flagType" onchange="dt.columns(1).search( this.value ).draw();" class="form-control" style="margin-right:0.5%;">
+                <select id="flagType" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
                   <option value="" selected>Select Flag</option>
                   <?php displayAllFlagType(); ?>
                 </select>

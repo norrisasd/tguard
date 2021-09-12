@@ -137,7 +137,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post" onsubmit="return addTaskType();" autocomplete="off" id="">
+                    <form action="" method="post" onsubmit="return addTaskType();" autocomplete="off" id="addTaskTypes">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Task Type</label>
                             <input type="text" class="form-control" name="name" id="inputTaskType" placeholder="" autocomplete="off" required>

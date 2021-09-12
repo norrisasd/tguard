@@ -67,7 +67,7 @@
                                 <label for="taskType">Task Type</label>
                                 <select id="taskType" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
                                     <option value="" selected>Select Task Type</option>
-                                    <?php displayAllTaskType(); ?>
+                                    <?php displayAllTaskTypeEnabled(); ?>
                                 </select>
                             </div>
                             <div class="col-sm-3">
