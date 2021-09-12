@@ -1,6 +1,9 @@
 <?php
 require_once './functions.php';
 $userinfo = $_SESSION['userInfo'];
+if($userinfo['access']==1){
+    header("Location: ./admin");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
