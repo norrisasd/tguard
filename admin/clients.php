@@ -161,7 +161,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Phone</label>
-                            <input type="number" class="form-control" id="clientphone" autocomplete="off" required>
+                            <input type="text" class="form-control" id="clientphone" autocomplete="off">
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -192,7 +192,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Phone</label>
-                            <input type="number" class="form-control" id="viewPhone" autocomplete="off" required>
+                            <input type="text" class="form-control" id="viewPhone" autocomplete="off">
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Email</label>

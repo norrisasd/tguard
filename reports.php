@@ -72,7 +72,7 @@
                                 <label for="flagType">Flag Type</label>
                                 <select id="flagType" class="form-control" onclick="searchTable()" style="margin-right:0.5%;">
                                     <option value="" selected>Select Flag Type</option>
-                                    <?php displayAllClients() ?>
+                                    <?php displayAllFlagType() ?>
                                 </select>
                             </div>
                         </div>

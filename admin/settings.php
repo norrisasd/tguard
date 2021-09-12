@@ -156,7 +156,6 @@
                 reader.readAsDataURL(input.files[0]);
             }
 
-
         }
 
         function updateSettings(data) {
