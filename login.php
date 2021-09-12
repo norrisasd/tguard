@@ -42,9 +42,6 @@
                                     <input name="remember" type="checkbox" value="Remember Me"> Remember Me
                                 </label>
                             </div>
-                            <div class="link forget-pass text-left mb-3">
-                                <a href="#" data-toggle="modal" data-target="#emailSending" style="color:#343a40">Forgot password?</a>
-                            </div>
                             <div class="form-group d-grid">
                                 <input class="form-control btn btn-primary btn-dark" type="submit" value="Login" name="login">
                             </div>
@@ -122,7 +119,7 @@
                         <input type="password" class="form-control" id="changePassw" placeholder="Enter Username">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Confrim Password</label>
+                        <label for="exampleInputEmail1">Confirm Password</label>
                         <input type="password" class="form-control" id="confirmChangePass" placeholder="Enter Username">
                     </div>
                 </div>
