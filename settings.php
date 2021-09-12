@@ -38,18 +38,16 @@
                 <div class="container light-style flex-grow-1 container-p-y" style="width: 70%;">
                     <div class="card overflow-hidden p-3">
                         <div class="row no-gutters row-bordered row-border-light ">
-
                             <div class="col">
                                 <div class="tab-content">
                                     <div class="tab-pane fade active show" id="account-general">
                                         <div class="card-body media align-items-center">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="d-block" style="width: 20%;">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="d-block" style="max-width: 200px; max-height: 200px">
                                             <div class="media-body ml-4">
                                                 <div class="custom-file w-75">
                                                     <input type="file" class="custom-file-input" id="customFile">
                                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                                 </div>
-                                                <button type="button" class="btn btn-default md-btn-flat">Reset</button>
                                                 <div class="small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
                                             </div>
                                         </div>
