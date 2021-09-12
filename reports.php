@@ -38,7 +38,7 @@
                                 <label for="clientName">Client</label>
                                 <select id="clientName" class="form-control" onclick="searchTable()" style="margin-right:0.5%;">
                                     <option value="" selected>Select</option>
-                                    <?php displayAllClients() ?>
+                                    <?php displayAllClientsEnabled() ?>
                                 </select>
                             </div>
                             <div class="col-sm-3">
@@ -65,7 +65,7 @@
                                 <label for="taskType">Task Type</label>
                                 <select id="taskType" class="form-control" onclick="searchTable()" style="margin-right:0.5%;">
                                     <option value="" selected>Select Task Type</option>
-                                    <?php displayAllTaskType() ?>
+                                    <?php displayAllTaskTypeEnabled() ?>
                                 </select>
                             </div>
                             <div class="col-sm-3">

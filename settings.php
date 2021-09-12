@@ -41,51 +41,54 @@
                             <div class="col">
                                 <div class="tab-content">
                                     <div class="tab-pane fade active show" id="account-general">
-                                        <div class="card-body media align-items-center">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="d-block" style="max-width: 200px; max-height: 200px">
-                                            <div class="media-body ml-4">
-                                                <div class="custom-file w-75">
-                                                    <input type="file" class="custom-file-input" id="customFile">
-                                                    <label class="custom-file-label" for="customFile">Choose file</label>
-                                                </div>
-                                                <div class="small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
-                                            </div>
-                                        </div>
-                                        <hr class="border-light m-0">
+                                        <form action="" method="post" onsubmit="return updateSettings(this);" enctype="multipart/form-data">
+                                            <div class="card-body media align-items-center">
+                                                <img src="./dist/profpic/<?php echo $image ?>" alt="" id="myPic" class="d-block" style="max-width: 200px; max-height: 200px">
+                                                <div class="media-body ml-4">
+                                                    <div class="custom-file w-75">
+                                                        <input type="file" onchange="readURL(this);" accept="image/png, image/gif, image/jpeg" name="image" class="custom-file-input" id="customFile">
 
-                                        <div class="card-body">
-                                            <div class="form-group">
-                                                <label class="form-label">Username</label>
-                                                <input type="text" class="form-control mb-1" value="<?php echo $userinfo['username'] ?>">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-label">Name</label>
-                                                <input type="text" class="form-control" value="<?php echo $userinfo['name'] ?>">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-label">E-mail</label>
-                                                <input type="text" class="form-control mb-1" value="<?php echo $userinfo['email'] ?>">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-label">Password</label>
-                                                <input type="password" class="form-control" value="<?php echo $userinfo['password'] ?>">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-label">Access</label>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" <?php echo $userinfo['access'] == 1 ? "checked" : "" ?> disabled>
-                                                    <label class="form-check-label" for="flexRadioDefault1">
-                                                        Admin
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" <?php echo $userinfo['access'] == 2 ? "checked" : "" ?> selected disabled>
-                                                    <label class="form-check-label" for="flexRadioDefault2">
-                                                        Employee
-                                                    </label>
+                                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                                    </div>
+                                                    <div class="small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
                                                 </div>
                                             </div>
-                                        </div>
+                                            <input type="text" name="title" id="title" style="display:none">
+                                            <hr class="border-light m-0">
+
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <label class="form-label">Username</label>
+                                                    <input type="text" class="form-control mb-1" name="uname" value="<?php echo $userinfo['username'] ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="form-label">Name</label>
+                                                    <input type="text" class="form-control" name="name" value="<?php echo $userinfo['name'] ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="form-label">E-mail</label>
+                                                    <input type="text" class="form-control mb-1" name="email" value="<?php echo $userinfo['email'] ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="form-label">Password</label>
+                                                    <input type="password" class="form-control" name="password" value="<?php echo $userinfo['password'] ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="form-label">Access</label>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" <?php echo $userinfo['access'] == 1 ? "checked" : "" ?> disabled>
+                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                            Admin
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" <?php echo $userinfo['access'] == 2 ? "checked" : "" ?> selected disabled>
+                                                        <label class="form-check-label" for="flexRadioDefault2">
+                                                            Employee
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
                                     </div>
                                 </div>
                             </div>
@@ -93,8 +96,9 @@
                     </div>
                     <div class="text-right mt-3">
                         <button type="button" class="btn btn-secondary">Cancel</button>
-                        <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+                        <button type="submit" class="btn btn-primary" value="<?php echo $userinfo['user_id'] ?>" id="btnSave">Save</button>
                     </div>
+                    </form>
                 </div>
             </section>
         </div>
@@ -143,6 +147,40 @@
             var nextSibling = e.target.nextElementSibling
             nextSibling.innerText = fileName
         });
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#myPic').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+
+        }
+
+        function updateSettings(data) {
+            var name = document.getElementById("customFile").value;
+            name = name.split("\\").pop();
+            document.getElementById("title").value=name;
+            title =document.getElementById("title").value;
+            $.ajax({
+                type: 'post',
+                url: './main.php',
+                data: new FormData(data),
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(response) {
+                    if(response == 'updated'){
+                        toastr.success("User Information Updated");
+                        $('#navPic').attr('src', './dist/profpic/'+title);
+                    }
+                }
+            });
+            return false;
+        }
     </script>
 
 </body>

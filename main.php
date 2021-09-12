@@ -352,4 +352,39 @@ if (isset($_GET['getAssignedTaskTypes'])) {
         }
     }
 }
+if (isset($_FILES['image'])) {
+    $title = $_POST["title"];
+    $username=$_POST['uname'];
+    $name=$_POST['name'];
+    $email=$_POST['email'];
+    $password=$_POST['password'];
+    #temporary file name to store file
+    $tname = $_FILES["image"]["tmp_name"];
+    $img_size = $_FILES['image']['size'];
+    $error = $_FILES['image']['error'];
+    #upload directory path
+    $uploads_dir = './dist/profpic';
+    #TO move the uploaded file to specific location
+    if ($error == 0) {
+
+        move_uploaded_file($tname, $uploads_dir . '/' . $title);
+        $title=",`image_file`='$title'";
+        
+    }
+        $sql = "UPDATE `user` SET `name`='$name',`email`='$email',`username`='$username',`password`='$password'$title WHERE `user_id`=$user_id";
+        if (mysqli_query($dbConnection, $sql)) {
+
+            
+            $query = "SELECT * FROM user WHERE user_id = $user_id";
+            $result =mysqli_query($dbConnection,$query);
+            if(mysqli_num_rows($result)==1){
+                $data = mysqli_fetch_assoc($result);
+                $_SESSION['userInfo'] = $data;
+                $result= "updated";
+                
+            }
+        } else {
+            $result= mysqli_error($dbConnection);
+        }
+}
 echo $result;

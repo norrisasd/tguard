@@ -12,7 +12,7 @@
                with font-awesome or any other icon font library -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="./dist/profpic/<?php echo $image ?>" id="navPic" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="settings.php" class="d-block side"  id="account"><?php echo $userinfo['name']?></a>
