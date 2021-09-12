@@ -105,7 +105,7 @@
                                     <th>Client</th>
                                     <th>Phone</th>
                                     <th>Email</th>
-                                    <th>No. of Tasks</th>
+                                    <th>No. of Task Types</th>
                                     <th>Status</th>
                                     <th></th>
                                 </tr>
@@ -120,7 +120,7 @@
                                     <th>Client</th>
                                     <th>Phone</th>
                                     <th>Email</th>
-                                    <th>No. of Tasks</th>
+                                    <th>No. of Task Types</th>
                                     <th>Status</th>
                                     <th></th>
                                 </tr>
@@ -161,7 +161,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Phone</label>
-                            <input type="text" class="form-control" id="clientphone" autocomplete="off" required>
+                            <input type="number" class="form-control" id="clientphone" autocomplete="off" required>
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -192,7 +192,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Phone</label>
-                            <input type="text" class="form-control" id="viewPhone" autocomplete="off" required>
+                            <input type="number" class="form-control" id="viewPhone" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Email</label>

@@ -136,6 +136,13 @@
     <script>
         $(".mt-2 ul li").removeClass("menu-open");
         $(".mt-2 ul li a").removeClass("active");
+
+        //Changing text label of the File attachments
+        document.querySelector('.custom-file-input').addEventListener('change', function(e) {
+            var fileName = document.getElementById("customFile").files[0].name;
+            var nextSibling = e.target.nextElementSibling
+            nextSibling.innerText = fileName
+        });
     </script>
 
 </body>
