@@ -45,7 +45,7 @@
                             <div class="tab-content">
                                 <div class="tab-pane fade active show" id="account-general">
                                     <div class="card-body media align-items-center">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" id="myPic" alt="" class="d-block" style="width: 20%;">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="d-block" style="max-width: 200px; max-height: 200px">
                                         <div class="media-body ml-4">
                                             <div class="custom-file w-75">
                                                 <input type="file" onchange="readURL(this);" class="custom-file-input" id="customFile">
