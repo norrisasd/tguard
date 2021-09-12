@@ -338,7 +338,7 @@
                             <label for="assignTaskType">Task Type</label>
                             <select class="form-control" onchange="setInputClientView(this.value)" id="assignTaskType" required>
                                 <option value="" selected hidden>Select Task Type</option>
-                                <?php displayAllTaskType() ?>
+                                <?php displayAllTaskTypeEnabled() ?>
                             </select>
                         </div>
                         <div class="form-group">
@@ -396,7 +396,7 @@
     <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script>
         function resetTaskTypeOption() {
-            $("#assignTaskType").html('<option value="" selected hidden>Select Task Type</option>' + '<?php echo displayAllTaskType() ?>');
+            $("#assignTaskType").html('<option value="" selected hidden>Select Task Type</option>' + '<?php echo displayAllTaskTypeEnabled() ?>');
             $('#assignClient').val("");
         }
     </script>

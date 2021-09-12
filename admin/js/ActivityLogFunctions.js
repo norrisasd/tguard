@@ -94,7 +94,7 @@ function refreshTable() {
       data = JSON.parse(response);
       dt.clear().draw();
       for (var da in data) {
-        flg = data[da].flagtype_id==null?"No Flag Attached":data[da].flagtype;
+        flg = data[da].flagtype_id==null || data[da].flagtype==null ?"No Flag Attached":data[da].flagtype;
         btn = `<button class="btn btn-success btn-sm waves-effect waves-light text-center" onclick='taskInfo(` + JSON.stringify(data[da]) + `)' data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="fas fa-eye"></i></button>`;
         flg=`<input type="text" class="form-control" style="color:`+data[da].textcolor+`;background-color:`+data[da].bgcolor+`" value="`+flg+`" disabled>`
         time = data[da].TimeSpent;
@@ -125,6 +125,7 @@ function searchTable() {
   let searchStartDate = document.getElementById("startDate").value;
   let searchEndDate = document.getElementById("endDate").value;
   let searchTaskType = document.getElementById("taskType").value;
+  let searchFlagType = document.getElementById("flagType").value;
   // let searchFlagType = document.getElementById("flagType").value; 
   // let searchDueDate=document.getElementById("dueDate").value;
   cb = '';
@@ -140,6 +141,7 @@ function searchTable() {
       startDate: startDate,
       endDate: endDate,
       searchTaskType: searchTaskType,
+      searchFlagType:searchFlagType,
       // searchDueDate:searchDueDate,
       status: 1
     },
@@ -148,7 +150,7 @@ function searchTable() {
         data = JSON.parse(response);
         dt.clear().draw();
         for (var da in data) {
-          flg = data[da].flagtype_id==null?"No Flag Attached":data[da].flagtype;
+          flg = data[da].flagtype_id==null || data[da].flagtype==null?"No Flag Attached":data[da].flagtype;
           btn = `<button class="btn btn-success btn-sm waves-effect waves-light text-center" onclick='taskInfo(` + JSON.stringify(data[da]) + `)' data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="fas fa-eye"></i></button>`;
           flg=`<input type="text" class="form-control" style="color:`+data[da].textcolor+`;background-color:`+data[da].bgcolor+`" value="`+flg+`" disabled>`;
           time = data[da].TimeSpent;
@@ -258,7 +260,7 @@ function taskInfo(data) {
   $("#inputTaskName").val(data.TaskName);
   $("#inputEmployee").val(data.user_id);
   $("#inputTaskType").val(data.tasktype_id);
-  $("#inputFlagType").val(data.flagtype_id);
+  $("#inputFlagType").val(data.flagtype==null?"":data[da].flagtype_id);
 
    // Colors 
   //  $('.my-colorpicker3 .fa-square').css('color', data.textcolor);

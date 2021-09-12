@@ -1,6 +1,9 @@
 <?php
 require_once '../functions.php';
 $userinfo = $_SESSION['userInfo'];
+if($userinfo['access']==2){
+    header("Location: ../");
+}
 ?>
 
 <!DOCTYPE html>

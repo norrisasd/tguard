@@ -123,7 +123,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="get" id="addTaskType" onsubmit="return addTaskType();" action="">
+                <form method="get" id="addTaskTypes" onsubmit="return addTaskType();" action="">
                     <div class="modal-body">
                         <div class="container-fluid">
 
