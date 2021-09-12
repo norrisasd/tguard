@@ -280,7 +280,7 @@
     }
     
     if(isset($_GET['getTaskTypes'])){
-        $query="SELECT tasktype.tasktype_id,tasktype.notes,tasktype.type,client.* FROM tasktype INNER JOIN client ON client.client_id = tasktype.client_id ORDER BY client.enabled desc";
+        $query="SELECT tasktype.tasktype_id,tasktype.notes,tasktype.type,client.* FROM tasktype INNER JOIN client ON client.client_id = tasktype.client_id ORDER BY tasktype.type asc";
         $result = mysqli_query($dbConnection,$query);
         if($result){
             if(mysqli_num_rows($result)>0){
