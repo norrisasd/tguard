@@ -77,9 +77,8 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="tasktype" class="nav-link">
-              <i class="nav-icon far fas fa-gavel"></i>
-              <p>Agrisoft</p>
+            <a href="#" class="nav-link">
+              <p>- No TaskType Created -</p>
             </a>
           </li>
         </ul>
