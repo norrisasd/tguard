@@ -36,18 +36,18 @@
                         <div class="row align-items-start">
                             <div class="col-sm-6">
                                 <label for="clientName">Client</label>
-                                <select id="clientName" class="form-control" onclick="searchTable()" style="margin-right:0.5%;">
+                                <select id="clientName" class="form-control" onchange="searchTable()" style="margin-right:0.5%;">
                                     <option value="" selected>Select</option>
-                                    <?php displayAllClientsEnabled() ?>
+                                    <?php displayAssignedClient() ?>
                                 </select>
                             </div>
                             <div class="col-sm-3">
                                 <label for="startDate">Start Date</label>
-                                <input type="date" class="form-control" id="startDate" onclick="searchTable()" value="" style="margin-right:0.5%;">
+                                <input type="date" class="form-control" id="startDate" onchange="searchTable()" value="" style="margin-right:0.5%;">
                             </div>
                             <div class="col-sm-3">
                                 <label for="endDate">End Date</label>
-                                <input type="date" class="form-control" id="endDate" onclick="searchTable()" value="" style="margin-right:0.5%;">
+                                <input type="date" class="form-control" id="endDate" onchange="searchTable()" value="" style="margin-right:0.5%;">
                             </div>
 
                         </div>
@@ -59,20 +59,20 @@
                             <div class="col-sm-6">
                                 <label for="actDate">Task Date (Date Range)</label>
                                 <!-- Start Date -->
-                                <input type="text" class="form-control" onclick="searchTable()" id="actDate" value="" style="margin-right:0.5%;background:white;" readonly>
+                                <input type="text" class="form-control" onchange="searchTable()" id="actDate" value="" style="margin-right:0.5%;background:white;" readonly>
                             </div>
                             <div class="col-sm-3">
                                 <label for="taskType">Task Type</label>
-                                <select id="taskType" class="form-control" onclick="searchTable()" style="margin-right:0.5%;">
+                                <select id="taskType" class="form-control" onchange="searchTable()" style="margin-right:0.5%;">
                                     <option value="" selected>Select Task Type</option>
-                                    <?php displayAllTaskTypeEnabled() ?>
+                                    <?php displayAssignedTaskType() ?>
                                 </select>
                             </div>
                             <div class="col-sm-3">
                                 <label for="flagType">Flag Type</label>
-                                <select id="flagType" class="form-control" onclick="searchTable()" style="margin-right:0.5%;">
+                                <select id="flagType" class="form-control" onchange="searchTable()" style="margin-right:0.5%;">
                                     <option value="" selected>Select Flag Type</option>
-                                    <?php displayAllFlagType() ?>
+                                    <?php displayAllFlagTypeValID() ?>
                                 </select>
                             </div>
                         </div>
@@ -215,7 +215,7 @@
                                     <hr class="mt-2 mb-3" />
                                     <div class="form-group">
                                         <label for="flagoutput">Flag </label>
-                                        <input type="text" class="form-control" style="color: #FFFFFF; background-color: white; font-weight: bold;" id="flagoutput" value="Sample Text" disabled>
+                                        <input type="text" class="form-control" style="background-color: white; font-weight: bold;" id="flagoutput" value="Sample Text" disabled>
                                     </div>
                                 </div>
                             </div>

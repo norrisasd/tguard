@@ -29,7 +29,7 @@ if (isset($_GET['taskname']) && isset($_GET['clientname']) && isset($_GET['notes
 
 //DISPLAY ALL TASK
 if (isset($_GET['getTaskByUser'])) {
-    $query = "SELECT callback.*,SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) as total_time FROM `callback`,timerecord WHERE callback.user_id=$user_id AND callback.callback_id=timerecord.callback_id AND callback.status =1 GROUP BY callback.callback_id;";
+    $query = "SELECT callback.*,tasktype.*,SEC_TO_TIME(SUM(TIME_TO_SEC(timerecord.TimeSpent))) as total_time,flagtype.flagtype,flagtype.textcolor,flagtype.bgcolor FROM callback INNER JOIN timerecord ON timerecord.callback_id= callback.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id INNER JOIN tasktype ON tasktype.tasktype_id = callback.tasktype_id LEFT JOIN flagtype ON flagtype.flagtype_id = callback.flagtype_id WHERE callback.user_id=$user_id AND callback.callback_id=timerecord.callback_id AND callback.tasktype_id=tasktype.tasktype_id AND callback.status =1 GROUP BY callback.callback_id;";
     $result = mysqli_query($dbConnection, $query);
     if (mysqli_num_rows($result) > 0) {
         $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -69,22 +69,25 @@ if (isset($_GET['searchClientName']) || isset($_GET['searchStartDate']) || isset
 // FILTERING
 if (isset($_GET['search'])) {
     $cname = $_GET['searchClientName'];
-    $aID = $_GET['searchAgentName'];
+    // $aID = $_GET['searchAgentName'];
     $sdate = $_GET['searchStartDate'];
     $edate = $_GET['searchEndDate'];
     // $ddate=$_GET['searchDueDate'];
+    $ftype = $_GET['searchFlagType'];
     $ttype = $_GET['searchTaskType'];
     $bsdate = $_GET['startDate'];
     $bedate = $_GET['endDate'];
     $status = $_GET['status'];
     $cname = $cname == "" ? "" : "AND callback.client_name ='" . $cname . "'";
-    $aID = $aID == "" ? "" : "AND callback.user_id =" . $aID . "";
+    // $aID = $aID == "" ? "" : "AND callback.user_id =" . $aID . "";
     $sdate = $sdate == "" ? "" : "AND callback.DateStarted='" . $sdate . "'";
     $edate = $edate == "" ? "" : "AND callback.DateEnded='" . $edate . "'";
     $ttype = $ttype == "" ? "" : "AND callback.tasktype_id=$ttype";
+    $ftype = $ftype == "" ? "" : "AND callback.flagtype_id=$ftype";
     // $ddate = $ddate==""?"":"AND callback.DueDate='".$ddate."'";
     $betweenDate = $bsdate == '' ? '' : "AND (('$bsdate' between DateStarted and DateEnded) or ('$bedate' between DateStarted and DateEnded) or ('$bsdate' <= DateStarted and '$bedate' >= DateEnded))";
-    $query = "SELECT callback.*,ADDTIME(callback.TimeSpent,(Select SEC_TO_TIME(SUM(TIME_TO_SEC(SUBTIME(CURTIME(),timerecord.TimeStarted)))) FROM timerecord WHERE status = 0))AS current_time_spent,user.name,callback_extend.sub_task,callback_extend.comments, tasktype.type FROM `callback` INNER JOIN timerecord on callback.callback_id=timerecord.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id INNER JOIN tasktype ON tasktype.tasktype_id = callback.tasktype_id WHERE callback.status = $status $cname $aID $sdate $edate $betweenDate $ttype GROUP BY callback.callback_id ORDER BY callback.user_id;";
+
+    $query = "SELECT flagtype.flagtype,flagtype.textcolor,flagtype.bgcolor,callback.*,ADDTIME(callback.TimeSpent,(Select SEC_TO_TIME(SUM(TIME_TO_SEC(SUBTIME(CURTIME(),timerecord.TimeStarted)))) FROM timerecord WHERE status = 0))AS current_time_spent,user.name,callback_extend.sub_task,callback_extend.comments, tasktype.type FROM `callback` INNER JOIN timerecord on callback.callback_id=timerecord.callback_id INNER JOIN user on callback.user_id = user.user_id INNER JOIN callback_extend ON callback_extend.callback_id = callback.callback_id INNER JOIN tasktype ON tasktype.tasktype_id = callback.tasktype_id LEFT JOIN flagtype ON flagtype.flagtype_id = callback.flagtype_id WHERE callback.user_id=$user_id AND callback.status = $status $cname $sdate $edate $betweenDate $ttype $ftype GROUP BY callback.callback_id ORDER BY callback.user_id;";
     $result = mysqli_query($dbConnection, $query);
     if ($result) {
         if (mysqli_num_rows($result) > 0) {

@@ -459,7 +459,7 @@ if (isset($_GET['getFlagType'])) {
     }
 }
 if (isset($_GET['displayEmployeeAccess'])) {
-    $query = "SELECT assigned_tasktype.assigned_tasktype_id,tasktype.type FROM `assigned_tasktype` INNER JOIN tasktype on tasktype.tasktype_id=assigned_tasktype.assigned_tasktype_id WHERE assigned_tasktype.user_id=" . $_GET['displayEmployeeAccess'];
+    $query = "SELECT assigned_tasktype.assigned_tasktype_id,tasktype.type FROM `assigned_tasktype` INNER JOIN tasktype on tasktype.tasktype_id=assigned_tasktype.tasktype_id WHERE assigned_tasktype.user_id=" . $_GET['displayEmployeeAccess'];
     $result = mysqli_query($dbConnection, $query);
     if ($result) {
         if (mysqli_num_rows($result) > 0) {
@@ -469,7 +469,7 @@ if (isset($_GET['displayEmployeeAccess'])) {
             $result = '';
         }
     } else {
-        $result = mysqli_error($dbConnection);
+        echo mysqli_error($dbConnection);
     }
 }
 if (isset($_POST['revokeAccess'])) {

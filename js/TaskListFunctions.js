@@ -80,6 +80,7 @@ function checkID(value) {
 }
 function refreshTable() {
   let cb = "";
+  let flg='';
   $.ajax({
     type: 'get',
     url: './main.php',
@@ -91,15 +92,17 @@ function refreshTable() {
       data = JSON.parse(response);
       dt.clear().draw();
       for (var da in data) {
+        flg = data[da].flagtype_id==null || data[da].flagtype==null?"No Flag Attached":data[da].flagtype;
         btn = `<button class="btn btn-success btn-sm waves-effect waves-light text-center" onclick='taskInfo(` + JSON.stringify(data[da]) + `)' data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="fas fa-eye"></i></button>`;
+        flg=`<input type="text" class="form-control" style="color:`+data[da].textcolor+`;background-color:`+data[da].bgcolor+`" value="`+flg+`" disabled>`;
         time = data[da].TimeSpent;
         const timeArr = time.split(":");
         time = timeArr[0] + "hrs " + timeArr[1] + "mins";
         dt.row.add([
           cb,
-          "WEW",
+          flg,
           data[da].TaskName,
-          data[da].tasktype_id,
+          data[da].type,
           data[da].client_name,
           data[da].Notes,
           data[da].DateStarted,
@@ -118,7 +121,8 @@ function searchTable() {
   let searchEndDate = document.getElementById("endDate").value;
   // let searchDueDate = document.getElementById("dueDate").value;
   let searchTaskType = document.getElementById("taskType").value;
-
+  let searchFlagType = document.getElementById("flagType").value;
+  let flg='';
   cb = '';
   $.ajax({
     type: 'get',
@@ -132,22 +136,26 @@ function searchTable() {
       // searchDueDate: searchDueDate,
       endDate: endDate,
       searchTaskType: searchTaskType,
+      searchFlagType:searchFlagType,
       status: 1
     },
     success: function (response) {
+      // toastr.info(response);
       if (response != "") {
         data = JSON.parse(response);
         dt.clear().draw();
         for (var da in data) {
+          flg = data[da].flagtype_id==null || data[da].flagtype==null?"No Flag Attached":data[da].flagtype;
           btn = `<button class="btn btn-success btn-sm waves-effect waves-light text-center" onclick='taskInfo(` + JSON.stringify(data[da]) + `)' data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="fas fa-eye"></i></button>`;
+          flg=`<input type="text" class="form-control" style="color:`+data[da].textcolor+`;background-color:`+data[da].bgcolor+`" value="`+flg+`" disabled>`;
           time = data[da].TimeSpent;
           const timeArr = time.split(":");
           time = timeArr[0] + "hrs " + timeArr[1] + "mins " + timeArr[2] + "sec";
           dt.row.add([
             cb,
-            "WEW",
+            flg,
             data[da].TaskName,
-            data[da].tasktype_id,
+            data[da].type,
             data[da].client_name,
             data[da].Notes,
             data[da].DateStarted,
@@ -236,7 +244,9 @@ function taskInfo(data) {
   $("#inputTaskName").val(data.TaskName);
   $("#inputEmployee").val(data.user_id);
   $("#inputTaskType").val(data.tasktype_id);
-
+  $("#flagoutput").val(data.flagtype==null?"No Flag Attached":data.flagtype);
+  $("#flagoutput").css('background-color',data.bgcolor==null?"":data.bgcolor);
+  $("#flagoutput").css('color',data.bgcolor==null?"":data.color);
 }
 $("#btnSave").click(function () {
   notes = $("#inputDescription2").val();

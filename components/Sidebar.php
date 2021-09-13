@@ -44,9 +44,8 @@
         </a>
         <ul class="nav nav-treeview" id="assignedTask">
           <li class="nav-item has-treeview">
-            <a href="progresslog" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>User Progress Log</p>
+            <a href="#" class="nav-link">
+              <p>- No Assigned Task -</p>
             </a>
           </li>
           <!-- <li class="nav-item has-treeview">

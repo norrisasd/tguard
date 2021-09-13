@@ -141,13 +141,24 @@
                 echo '<option value="'.$data['flagtype'].'">'.$data['flagtype'].'</option>';
             }
         }
-    }function displayAllFlagTypeValID(){
+    }
+    function displayAllFlagTypeValID(){
         global $dbConnection;
         $query="SELECT * FROM flagtype";
         $result=mysqli_query($dbConnection,$query);
         if(mysqli_num_rows($result)>0){
             while($data=mysqli_fetch_assoc($result)){
                 echo '<option value="'.$data['flagtype_id'].'">'.$data['flagtype'].'</option>';
+            }
+        }
+    }
+    function displayAssignedClient(){
+        global $dbConnection,$user_id;
+        $query="SELECT DISTINCT client.ClientName FROM assigned_tasktype INNER JOIN tasktype ON assigned_tasktype.tasktype_id = tasktype.tasktype_id INNER JOIN client ON client.client_id = tasktype.client_id WHERE assigned_tasktype.user_id = $user_id;";
+        $result=mysqli_query($dbConnection,$query);
+        if(mysqli_num_rows($result)>0){
+            while($data=mysqli_fetch_assoc($result)){
+                echo '<option value="'.$data['ClientName'].'" onchange="alert(this.value)">'.$data['ClientName'].'</option>';
             }
         }
     }

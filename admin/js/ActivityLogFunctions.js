@@ -260,7 +260,7 @@ function taskInfo(data) {
   $("#inputTaskName").val(data.TaskName);
   $("#inputEmployee").val(data.user_id);
   $("#inputTaskType").val(data.tasktype_id);
-  $("#inputFlagType").val(data.flagtype==null?"":data[da].flagtype_id);
+  $("#inputFlagType").val(data.flagtype==null?"":data.flagtype_id);
 
    // Colors 
   //  $('.my-colorpicker3 .fa-square').css('color', data.textcolor);
