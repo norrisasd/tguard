@@ -271,6 +271,8 @@ function taskInfo(data) {
 
 }
 $("#btnSave").click(function () {
+  $(".modal").modal("hide");
+  w3.show('#logoloader');
   notes = $("#inputDescription2").val();
   subtask = $("#inputSubTasks").val();
   comments = $("#inputComments").val();
@@ -297,13 +299,12 @@ $("#btnSave").click(function () {
     },
     success: function (response) {
       if (response == 'updated') {
-        $(".modal").modal("hide");
         toastr.success("Task Saved!");
         refreshTable();
       } else {
         toastr.error(response);
       }
-
+      w3.hide('#logoloader')
     }
   });
   return false;
@@ -314,6 +315,8 @@ $("#btnSearch").click(function () {
 });
 $("#btnDelete").click(function () {
   if (confirm("Are you sure you want to delete this task?")) {
+    $(".modal").modal("hide");
+    w3.show('#logoloader');
     $.ajax({
       type: 'get',
       url: './main.php',
@@ -323,13 +326,12 @@ $("#btnDelete").click(function () {
       },
       success: function (response) {
         if (response == 'deleted') {
-          $(".modal").modal("hide");
           toastr.success("Task Deleted");
           searchTable();
         } else {
           toastr.error("There was an error!");
         }
-
+        w3.hide('#logoloader');
       }
     });
   }

@@ -46,11 +46,11 @@
                                 <div class="tab-pane fade active show" id="account-general">
                                     <form action="" method="post" onsubmit="return updateSettings(this);" enctype="multipart/form-data">
                                         <div class="card-body media align-items-center">
-                                            <img src="../dist/profpic/<?php echo $image?>" alt="" id="myPic" class="d-block" style="max-width: 200px; max-height: 200px">
+                                            <img src="../dist/profpic/<?php echo $image ?>" alt="" id="myPic" class="d-block" style="max-width: 200px; max-height: 200px">
                                             <div class="media-body ml-4">
                                                 <div class="custom-file w-75">
                                                     <input type="file" onchange="readURL(this);" name="image" class="custom-file-input" id="customFile">
-                                                    
+
                                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                                 </div>
                                                 <div class="small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
@@ -137,6 +137,7 @@
     <!-- AdminLTE App -->
     <script src="../dist/js/adminlte.js"></script>
     <script src="./js/Main.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
 
     <script>
         //Changing text label of the File attachments
@@ -145,6 +146,7 @@
             var nextSibling = e.target.nextElementSibling
             nextSibling.innerText = fileName
         });
+
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -159,10 +161,11 @@
         }
 
         function updateSettings(data) {
+            w3.show('#logoloader');
             var name = document.getElementById("customFile").value;
             name = name.split("\\").pop();
-            document.getElementById("title").value=name;
-            title =document.getElementById("title").value;
+            document.getElementById("title").value = name;
+            title = document.getElementById("title").value;
             $.ajax({
                 type: 'post',
                 url: './main.php',
@@ -172,10 +175,11 @@
                 cache: false,
                 processData: false,
                 success: function(response) {
-                    if(response == 'updated'){
+                    if (response == 'updated') {
                         toastr.success("User Information Updated");
-                        $('#navPic').attr('src', '../dist/profpic/'+title);
+                        $('#navPic').attr('src', '../dist/profpic/' + title);
                     }
+                    w3.hide('#logoloader');
                 }
             });
             return false;

@@ -137,6 +137,7 @@
     <script src="dist/js/adminlte.js"></script>
     <script src="js/TaskListFunctions.js"></script>
     <script src="js/Main.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script>
         $(".mt-2 ul li").removeClass("menu-open");
         $(".mt-2 ul li a").removeClass("active");
@@ -161,6 +162,7 @@
         }
 
         function updateSettings(data) {
+            w3.show('#logoloader');
             var name = document.getElementById("customFile").value;
             name = name.split("\\").pop();
             document.getElementById("title").value=name;
@@ -175,8 +177,12 @@
                 success: function(response) {
                     if(response == 'updated'){
                         toastr.success("User Information Updated");
-                        $('#navPic').attr('src', './dist/profpic/'+title);
+                        if(title !=''){
+                            $('#navPic').attr('src', './dist/profpic/'+title);
+                        }
+                        
                     }
+                    w3.hide('#logoloader');
                 }
             });
             return false;

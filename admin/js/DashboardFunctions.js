@@ -73,6 +73,8 @@ function checkID(value) {
 // }
 
 function addTask() {
+  $(".modal").modal("hide");
+  w3.show('#logoloader');
   taskname = $("#inputTaskName").val();
   clientname = $("#inputClientID").val();
   notes = $("#inputNotes").val();
@@ -96,12 +98,12 @@ function addTask() {
       if (response == 'Task Created') {
         toastr.success(response);
         document.getElementById("addTaskForm").reset();
-        $(".modal").modal("hide");
         displayUpcomingTask();
       }
       else {
         toastr.error(response);
       }
+      w3.hide('#logoloader');
     }
   });
   return false;
@@ -265,6 +267,8 @@ function setButtonForProgress(cb_id) {
 
 }
 $("#btnPlay").click(function () {
+  $(".modal").modal("hide");
+  w3.show('#logoloader');
   $.ajax({
     type: 'get',
     url: './main.php',
@@ -274,18 +278,19 @@ $("#btnPlay").click(function () {
     },
     success: function (response) {
       if (response == 'updated') {
-        $(".modal").modal("hide");
         toastr.success("Task started");
         displayInProgress();
         displayUpcomingTask();
       } else {
         toastr.error("There was an error!");
       }
-
+      w3.hide('#logoloader');
     }
   });
 });
 $("#btnPause").click(function () {
+  $(".modal").modal("hide");
+  w3.show('#logoloader');
   $.ajax({
     type: 'get',
     url: './main.php',
@@ -295,19 +300,20 @@ $("#btnPause").click(function () {
     },
     success: function (response) {
       if (response == 'updated') {
-        $(".modal").modal("hide");
         toastr.success("Task Paused");
         displayInProgress();
         displayUpcomingTask();
       } else {
         toastr.error("There was an error!");
       }
-
+      w3.hide('#logoloader');
     }
   });
 });
 $("#btnStop").click(function () {
   if (confirm("Are you sure you want to stop and reset this task?")) {
+    $(".modal").modal("hide");
+  w3.show('#logoloader');
     $.ajax({
       type: 'get',
       url: './main.php',
@@ -317,20 +323,21 @@ $("#btnStop").click(function () {
       },
       success: function (response) {
         if (response == 'stopped') {
-          $(".modal").modal("hide");
           toastr.success("Task Stopped");
           displayInProgress();
           displayUpcomingTask();
         } else {
           toastr.error("There was an error!");
         }
-
+        w3.hide('#logoloader');
       }
     });
   }
 });
 $("#btnDelete").click(function () {
   if (confirm("Are you sure you want to delete this task?")) {
+    $(".modal").modal("hide");
+  w3.show('#logoloader');
     $.ajax({
       type: 'get',
       url: './main.php',
@@ -340,20 +347,21 @@ $("#btnDelete").click(function () {
       },
       success: function (response) {
         if (response == 'deleted') {
-          $(".modal").modal("hide");
           toastr.success("Task Deleted");
           displayInProgress();
           displayUpcomingTask();
         } else {
           toastr.error("There was an error!");
         }
-
+        w3.hide('#logoloader');
       }
     });
   }
 
 });
 $("#btnFinish").click(function () {
+  $(".modal").modal("hide");
+  w3.show('#logoloader');
   $.ajax({
     type: 'get',
     url: './main.php',
@@ -363,19 +371,20 @@ $("#btnFinish").click(function () {
     },
     success: function (response) {
       if (response == 'updated') {
-        $(".modal").modal("hide");
         toastr.success("Task Finish!");
         displayInProgress();
         displayUpcomingTask();
       } else {
         toastr.error(response);
       }
-
+      w3.hide('#logoloader');
     }
   });
 
 });
 $("#btnSave").click(function () {
+  $(".modal").modal("hide");
+  w3.show('#logoloader');
   notes = $("#inputDescription2").val();
   subtask = $("#inputSubTasks").val();
   comments = $("#inputComments").val();
@@ -400,14 +409,13 @@ $("#btnSave").click(function () {
     },
     success: function (response) {
       if (response == 'updated') {
-        $(".modal").modal("hide");
         toastr.success("Task Saved!");
         displayInProgress();
         displayUpcomingTask();
       } else {
         toastr.error(response);
       }
-
+      w3.hide('#logoloader');
     }
   });
   return false;

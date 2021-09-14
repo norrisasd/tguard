@@ -131,6 +131,8 @@ function refreshTable() {
 }
 
 function addFlagType() {
+    $(".modal").modal("hide");
+    w3.show('#logoloader');
     flagtype = $("#inputFlagType").val();
     notes = $("#inputNotes").val();
     textcolor = $("#textColor").val();
@@ -148,9 +150,10 @@ function addFlagType() {
         success: function (response) {
             if (response == "inserted") {
                 toastr.success("Flag Created");
+                document.getElementById("viewTask").reset();
                 refreshTable();
-                $(".modal").modal("hide");
             }
+            w3.hide('#logoloader');
         }
     });
     return false;
@@ -174,6 +177,8 @@ function taskInfo(data) {
     $('#output').css('background-color', data.bgcolor);
 }
 $("#btnSave").click(function () {
+    $(".modal").modal("hide");
+    w3.show('#logoloader');
     flagtype = $("#viewFlagType").val();
     notes = $("#viewNotes").val();
     textcolor = $("#viewTextColor").val();
@@ -192,14 +197,16 @@ $("#btnSave").click(function () {
             if (response == "updated") {
                 toastr.success("Flag Updated");
                 refreshTable();
-                $(".modal").modal("hide");
             }
+            w3.hide('#logoloader');
         }
     });
     return false;
 });
 $("#btnDelete").click(function () {
     if (confirm("Are you sure you want to delete this flagtype?")) {
+        $(".modal").modal("hide");
+        w3.show('#logoloader');
         $.ajax({
             type: 'post',
             url: './main.php',
@@ -210,10 +217,10 @@ $("#btnDelete").click(function () {
                 if (response == "deleted") {
                     toastr.success("Flag deleted");
                     refreshTable();
-                    $(".modal").modal("hide");
                 } else {
                     toastr.error(response);
                 }
+                w3.hide('#logoloader');
             }
         });
         return false;

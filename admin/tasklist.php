@@ -313,6 +313,7 @@
     <script src="../dist/js/adminlte.js"></script>
     <script src="./js/TaskListFunctions.js"></script>
     <script src="./js/Main.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script>
         function resetTaskTypeOption() {
             $("#assignTaskType").html('<option value="" selected hidden>Select Task Type</option>' + '<?php echo displayAllTaskType() ?>');

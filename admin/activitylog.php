@@ -40,14 +40,14 @@
                 <label for="clientName">Client</label>
                 <select id="clientName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
                   <option value="" selected>Select Client</option>
-                  <?php displayAllClients(); ?>
+                  <?php displayAllClientsEnabled(); ?>
                 </select>
               </div>
               <div class="col-sm-6">
                 <label for="agentName">Employee</label>
                 <select id="agentName" onchange="searchTable()" class="form-control" style="margin-right:0.5%;">
                   <option value="" selected>Select Employee</option>
-                  <?php displayAllAgents(); ?>
+                  <?php displayAllAgentsEnabled(); ?>
                 </select>
               </div>
             </div>
@@ -401,7 +401,7 @@
   <script src="../dist/js/adminlte.js"></script>
   <script src="./js/ActivityLogFunctions.js"></script>
   <script src="./js/Main.js"></script>
-
+  <script src="https://www.w3schools.com/lib/w3.js"></script>
   <script>
     // //Hiding the div
     // $(".custom-file").hide();

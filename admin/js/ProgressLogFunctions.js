@@ -217,6 +217,8 @@ function clearSearch(type) {
 }
 $("#btnDelete").click(function () {
   if (confirm("Are you sure you want to delete this task?")) {
+    $(".modal").modal("hide");
+    w3.show('#logoloader');
     $.ajax({
       type: 'get',
       url: './main.php',
@@ -226,13 +228,12 @@ $("#btnDelete").click(function () {
       },
       success: function (response) {
         if (response == 'deleted') {
-          $(".modal").modal("hide");
           toastr.success("Task Deleted");
           searchTable();
         } else {
           toastr.error("There was an error!");
         }
-
+        w3.hide('#logoloader');
       }
     });
   }
@@ -301,6 +302,8 @@ function setButtonForProgress(cb_id) {
 
 }
 $("#btnPlay").click(function () {
+  $(".modal").modal("hide");
+    w3.show('#logoloader');
   $.ajax({
     type: 'get',
     url: './main.php',
@@ -310,17 +313,18 @@ $("#btnPlay").click(function () {
     },
     success: function (response) {
       if (response == 'updated') {
-        $(".modal").modal("hide");
         toastr.success("Task started");
         refreshTable();
       } else {
         toastr.error("There was an error!");
       }
-
+      w3.hide('#logoloader');
     }
   });
 });
 $("#btnPause").click(function () {
+  $(".modal").modal("hide");
+    w3.show('#logoloader');
   $.ajax({
     type: 'get',
     url: './main.php',
@@ -330,18 +334,19 @@ $("#btnPause").click(function () {
     },
     success: function (response) {
       if (response == 'updated') {
-        $(".modal").modal("hide");
         toastr.success("Task Paused");
         refreshTable();
       } else {
         toastr.error("There was an error!");
       }
-
+      w3.hide('#logoloader');
     }
   });
 });
 $("#btnStop").click(function () {
   if (confirm("Are you sure you want to stop and reset this task?")) {
+    $(".modal").modal("hide");
+    w3.show('#logoloader');
     $.ajax({
       type: 'get',
       url: './main.php',
@@ -351,18 +356,19 @@ $("#btnStop").click(function () {
       },
       success: function (response) {
         if (response == 'stopped') {
-          $(".modal").modal("hide");
           toastr.success("Task Stopped");
           refreshTable();
         } else {
           toastr.error("There was an error!");
         }
-
+        w3.hide('#logoloader');
       }
     });
   }
 });
 $("#btnFinish").click(function () {
+  $(".modal").modal("hide");
+    w3.show('#logoloader');
   $.ajax({
     type: 'get',
     url: './main.php',
@@ -372,18 +378,19 @@ $("#btnFinish").click(function () {
     },
     success: function (response) {
       if (response == 'updated') {
-        $(".modal").modal("hide");
         toastr.success("Task Finish!");
         refreshTable();
       } else {
         toastr.error(response);
       }
-
+      w3.hide('#logoloader');
     }
   });
 
 });
 $("#btnSave").click(function () {
+  $(".modal").modal("hide");
+  w3.show('#logoloader');
   notes = $("#inputDescription2").val();
   subtask = $("#inputSubTasks").val();
   comments = $("#inputComments").val();
@@ -408,13 +415,12 @@ $("#btnSave").click(function () {
     },
     success: function (response) {
       if (response == 'updated') {
-        $(".modal").modal("hide");
         toastr.success("Task Saved!");
         refreshTable();
       } else {
         toastr.error(response);
       }
-
+      w3.hide('#logoloader');
     }
   });
   return false;

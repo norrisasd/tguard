@@ -39,15 +39,7 @@
                                 <label for="clientName">Client</label>
                                 <select id="clientName" onchange="searchClient(this.value)" class="form-control" style="margin-right:0.5%;">
                                     <option value="" selected>All</option>
-                                    <?php displayAllClients(); ?>
-                                </select>
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="status">Status</label>
-                                <select id="status" onchange="searchStatus(this.value)" class="form-control" style="margin-right:0.5%;">
-                                    <option value="" selected>All</option>
-                                    <option value="Active">Active</option>
-                                    <option value="Archive">Archive</option>
+                                    <?php displayAllClientsEnabled(); ?>
                                 </select>
                             </div>
                         </div>

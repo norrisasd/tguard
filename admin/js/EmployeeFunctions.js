@@ -35,7 +35,7 @@ var dt = $('#dataTable').DataTable({
         // if the second column cell is blank apply special formatting
         //
         if (data[7] == "Archived") {
-            $(row).css('color','red');
+            $(row).css('color', 'red');
         }
     }
 });
@@ -90,7 +90,7 @@ function refreshTable() {
                     data[da].password,
                     data[da].phone,
                     access,
-                    data[da].enabled == 1?"Active":"Archived",
+                    data[da].enabled == 1 ? "Active" : "Archived",
                     btn,
                     btnAccess
                 ]).draw();
@@ -100,6 +100,8 @@ function refreshTable() {
 }
 refreshTable();
 function addUser() {
+    $(".modal").modal("hide");
+    w3.show('#logoloader');
     fullname = $("#name").val();
     username = $("#username").val();
     password = $("#password").val();
@@ -132,13 +134,13 @@ function addUser() {
             if (response == "inserted") {
                 toastr.success("User Created");
                 refreshTable();
-                $(".modal").modal("hide");
                 document.getElementById("addUserModal").reset();
             } else if (response == "taken") {
                 toastr.error("Username Taken");
             } else {
                 toastr.error(response);
             }
+            w3.hide('#logoloader');
         }
 
     });
@@ -146,10 +148,10 @@ function addUser() {
 }
 
 function taskInfo(data) {
-    if(data.enabled !=1){
+    if (data.enabled != 1) {
         w3.hide('#btnArchive');
         w3.show('#btnActive')
-    }else{
+    } else {
         w3.show('#btnArchive');
         w3.hide('#btnActive')
     }
@@ -168,6 +170,8 @@ function taskInfo(data) {
         $("#viewAgentRadioBtn").prop("checked", true);
 }
 $("#btnSave").click(function () {
+    $(".modal").modal("hide");
+    w3.show('#logoloader');
     fullname = $("#viewName").val();
     username = $("#viewUsername").val();
     password = $("#viewPassword").val();
@@ -188,19 +192,19 @@ $("#btnSave").click(function () {
             phone: phone,
             access: access,
             user_id: user_id,
-            enabled:enabled
+            enabled: enabled
 
         },
         success: function (response) {
             if (response == "updated") {
                 toastr.success("User Updated");
                 refreshTable();
-                $(".modal").modal("hide");
             } else if (response == "taken") {
                 toastr.error("Username Taken");
             } else {
                 toastr.error(response);
             }
+            w3.hide('#logoloader');
         }
 
     });
@@ -208,6 +212,8 @@ $("#btnSave").click(function () {
 });
 $("#btnArchive").click(function () {
     if (confirm("Are you sure you want to archive this employee?")) {
+        $(".modal").modal("hide");
+        w3.show('#logoloader');
         $.ajax({
             type: 'post',
             url: './main.php',
@@ -218,23 +224,25 @@ $("#btnArchive").click(function () {
                 if (response == 'archived') {
                     toastr.success("Employee has been Archived!");
                     refreshTable();
-                    $(".modal").modal("hide");
                 } else {
                     toastr.error(response);
                 }
+                w3.hide('#logoloader');
             }
         });
     }
 
 });
-function searchStatus(status){
-    dt.columns(7).search( status ).draw();
+function searchStatus(status) {
+    dt.columns(7).search(status).draw();
 }
-function searchEmployee(name){
-    dt.columns(1).search( name ).draw();
+function searchEmployee(name) {
+    dt.columns(1).search(name).draw();
 }
 $("#btnActive").click(function () {
     if (confirm("Are you sure you want to activate this employee?")) {
+        $(".modal").modal("hide");
+        w3.show('#logoloader');
         $.ajax({
             type: 'post',
             url: './main.php',
@@ -245,10 +253,10 @@ $("#btnActive").click(function () {
                 if (response == 'activated') {
                     toastr.success("Employee has been Activated!");
                     refreshTable();
-                    $(".modal").modal("hide");
                 } else {
                     toastr.error(response);
                 }
+                w3.hide('#logoloader');
             }
         });
     }
@@ -264,42 +272,46 @@ function displayTaskTypeAccess(id) {
         },
         success: function (response) {
             if (response == "") {
-                
+
             } else {
                 data = JSON.parse(response);
                 for (var da in data) {
                     str += `<tr>
-                    <td>`+data[da].type+`</td>
-                    <td> <button type="button" class="btn btn-outline-danger" onclick='revokeAccess(`+data[da].assigned_tasktype_id+`)'>Revoke</button>
+                    <td>`+ data[da].type + `</td>
+                    <td> <button type="button" class="btn btn-outline-danger" onclick='revokeAccess(`+ data[da].assigned_tasktype_id + `)'>Revoke</button>
                     </td>
                 </tr>`;
                 }
-                
+
             }
             $("#accessBody").html(str);
 
         }
     });
 }
-function revokeAccess(id){
-    if(confirm("Are you sure you want to revoke this tasktype from this user?")){
+function revokeAccess(id) {
+    if (confirm("Are you sure you want to revoke this tasktype from this user?")) {
+        $(".modal").modal("hide");
+        w3.show('#logoloader');
         $.ajax({
-            type:'post',
-            url:'./main.php',
-            data:{
-                revokeAccess:id,
+            type: 'post',
+            url: './main.php',
+            data: {
+                revokeAccess: id,
             },
-            success:function(response){
-                if(response =='revoked'){
+            success: function (response) {
+                if (response == 'revoked') {
                     toastr.info("Tasktype revoked");
-                    $(".modal").modal("hide");
                 }
+                w3.hide('#logoloader');
             }
         });
         return false;
     }
 }
 function assignUser() {
+    $(".modal").modal("hide");
+    w3.show('#logoloader');
     user = $("#assignAgent").val();
     tasktype = $("#assignTaskType").val();
     $.ajax({
@@ -313,11 +325,11 @@ function assignUser() {
         success: function (response) {
             if (response == "assigned") {
                 toastr.success("Assigned Successfully");
-                $(".modal").modal("hide");
                 document.getElementById("assignUserForm").reset();
             } else {
                 toastr.error(response);
             }
+            w3.hide('#logoloader');
         }
     });
     return false;

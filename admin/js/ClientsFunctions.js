@@ -105,6 +105,8 @@ function refreshTable() {
 refreshTable();
 
 function addClient() {
+    $(".modal").modal("hide");
+    w3.show('#logoloader');
     name = $("#clientname").val();
     phone = $("#clientphone").val();
     email = $("#clientemail").val();
@@ -120,16 +122,18 @@ function addClient() {
         success: function (response) {
             if (response == "inserted") {
                 toastr.success("Client Created");
+                document.getElementById("clientForm").reset();
                 refreshTable();
-                $(".modal").modal("hide");
             } else {
                 toastr.error(response);
             }
+            w3.hide('#logoloader');
         }
     });
     return false;
 }
 function taskInfo(data) {
+    w3.show('#logoloader');
     if(data.enabled !=1){
         w3.hide('#btnArchive');
         w3.show('#btnActive')
@@ -144,8 +148,11 @@ function taskInfo(data) {
     $("#viewName").val(data.ClientName);
     $("#viewEmail").val(data.email);
     $("#viewPhone").val(data.phone);
+    w3.hide('#logoloader');
 }
 $("#btnSave").click(function () {
+    $(".modal").modal("hide");
+    w3.show('#logoloader');
     fullname = $("#viewName").val();
     email = $("#viewEmail").val();
     phone = $("#viewPhone").val();
@@ -165,10 +172,10 @@ $("#btnSave").click(function () {
             if (response == "updated") {
                 toastr.success("Client Updated");
                 refreshTable();
-                $(".modal").modal("hide");
             }else {
                 toastr.error(response);
             }
+            w3.hide('#logoloader');
         }
 
     });
@@ -176,6 +183,8 @@ $("#btnSave").click(function () {
 });
 $("#btnArchive").click(function () {
     if(confirm("Are you sure you want to archive this employee?")){
+        $(".modal").modal("hide");
+        w3.show('#logoloader');
         $.ajax({
             type:'post',
             url:'./main.php',
@@ -186,11 +195,11 @@ $("#btnArchive").click(function () {
                 if(response == 'archived'){
                     toastr.success("Client has been Archived!");
                     refreshTable();
-                    $(".modal").modal("hide");
                     getTaskTypes();
                 }else{
                     toastr.error(response);
                 }
+                w3.hide('#logoloader');
             }
         });
     }
@@ -198,6 +207,8 @@ $("#btnArchive").click(function () {
 });
 $("#btnActive").click(function () {
     if (confirm("Are you sure you want to activate this Client?")) {
+        $(".modal").modal("hide");
+        w3.show('#logoloader');
         $.ajax({
             type: 'post',
             url: './main.php',
@@ -208,10 +219,10 @@ $("#btnActive").click(function () {
                 if (response == 'activated') {
                     toastr.success("Client has been Activated!");
                     refreshTable();
-                    $(".modal").modal("hide");
                 } else {
                     toastr.error(response);
                 }
+                w3.hide('#logoloader');
             }
         });
     }

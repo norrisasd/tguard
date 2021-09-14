@@ -181,7 +181,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="get" id="viewTask" action="">
+                <form method="get" action="">
                     <div class="modal-body">
                         <div class="container-fluid">
 
@@ -284,7 +284,7 @@
     <script src="../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
     <script src="./js/Main.js"></script>
     <script src="./js/FlagType.js"></script>
-
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
 
     <script>
 

@@ -104,6 +104,8 @@ function searchClient(name){
     dt.columns(2).search( name ).draw();
 }
 function addTaskType() {
+    $(".modal").modal("hide");
+  w3.show('#logoloader');
     client = $("#inputClient").val();
     tasktype = $("#inputTaskType").val();
     notes=$("#inputNotes").val();
@@ -121,17 +123,19 @@ function addTaskType() {
                 toastr.success("Task Type Added");
                 refreshTable();
                 $('#addTaskTypes').trigger("reset");
-                $(".modal").modal("hide");
                 getTaskTypes();
 
             } else {
                 toastr.error(response);
             }
+            w3.hide('#logoloader');
         }
     });
     return false;
 }
 $("#btnSave").click(function(){
+    $(".modal").modal("hide");
+    w3.show('#logoloader');
     client = $("#viewClient").val();
     tasktype = $("#viewType").val();
     notes=$("#viewNotes").val();
@@ -148,11 +152,11 @@ $("#btnSave").click(function(){
             if (response == "updated") {
                 toastr.success("Task Type updated");
                 refreshTable();
-                $(".modal").modal("hide");
                 getTaskTypes();
             } else {
                 toastr.error(response);
             }
+            w3.hide('#logoloader');
         }
     });
     return false;
@@ -166,6 +170,8 @@ function tasktypeInfo(data) {
 }
 $("#btnDelete").click(function () {
     if (confirm("Are you sure you want to delete this tasktype?")) {
+        $(".modal").modal("hide");
+        w3.show('#logoloader');
         $.ajax({
             type: 'post',
             url: './main.php',
@@ -175,14 +181,13 @@ $("#btnDelete").click(function () {
             },
             success: function (response) {
                 if (response == 'deleted') {
-                    $(".modal").modal("hide");
                     toastr.success("Task Deleted");
                     refreshTable();
                     getTaskTypes();
                 } else {
                     toastr.error("There was an error!");
                 }
-
+                w3.hide('#logoloader');
             }
         });
     }

@@ -150,7 +150,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post" onsubmit="return addClient();" autocomplete="off" id="">
+                    <form action="" method="post" onsubmit="return addClient();" autocomplete="off" id="clientForm">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Client Name</label>
                             <input type="text" class="form-control" id="clientname" placeholder="" autocomplete="off" required>

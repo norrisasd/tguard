@@ -105,6 +105,8 @@ function tasktypeInfo(data) {
     $("#viewNotes").val(data.notes);
 }
 function addTaskType() {
+    $(".modal").modal("hide");
+  w3.show('#logoloader');
     client = $("#inputClient").val();
     tasktype = $("#inputTaskType").val();
     notes = $("#inputNotes").val();
@@ -122,12 +124,12 @@ function addTaskType() {
                 toastr.success("Task Type Added");
                 $('#addTaskTypes').trigger("reset");
                 refreshTable();
-                $(".modal").modal("hide");
                 getTaskTypes();
 
             } else {
                 toastr.error(response);
             }
+            w3.hide('#logoloader');
         }
     });
     return false;
@@ -158,6 +160,8 @@ function setTaskTypeOptions(value) {
     });
 }
 function assignUser() {
+    $(".modal").modal("hide");
+  w3.show('#logoloader');
     user = $("#assignAgent").val();
     tasktype = $("#assignTaskType").val();
     $.ajax({
@@ -171,17 +175,19 @@ function assignUser() {
         success: function (response) {
             if (response == "assigned") {
                 toastr.success("Assigned Successfully");
-                $(".modal").modal("hide");
                 document.getElementById("assignUserForm").reset();
             } else {
                 toastr.error(response);
             }
+            w3.hide('#logoloader');
         }
     });
     return false;
 }
 $("#btnDelete").click(function () {
     if (confirm("Are you sure you want to delete this tasktype?")) {
+        $(".modal").modal("hide");
+  w3.show('#logoloader');
         $.ajax({
             type: 'post',
             url: './main.php',
@@ -191,20 +197,21 @@ $("#btnDelete").click(function () {
             },
             success: function (response) {
                 if (response == 'deleted') {
-                    $(".modal").modal("hide");
                     toastr.success("Task Deleted");
                     refreshTable();
                     getTaskTypes();
                 } else {
                     toastr.error("There was an error!");
                 }
-
+                w3.hide('#logoloader');
             }
         });
     }
 
 });
 $("#btnSave").click(function(){
+    $(".modal").modal("hide");
+  w3.show('#logoloader');
     client = $("#viewClient").val();
     tasktype = $("#viewType").val();
     notes=$("#viewNotes").val();
@@ -221,11 +228,11 @@ $("#btnSave").click(function(){
             if (response == "updated") {
                 toastr.success("Task Type updated");
                 refreshTable();
-                $(".modal").modal("hide");
                 getTaskTypes();
             } else {
                 toastr.error(response);
             }
+            w3.hide('#logoloader');
         }
     });
     return false;
